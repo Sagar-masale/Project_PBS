@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { useRef } from "react";
 import './AdminAcc.css'
 
 
+
 function AdminAcc() {
+  
+  const ShowEditOpt =()=>{
+    document.querySelector('.Setting-Opt-Box').classList.toggle('Setting-Opt-Box-Show');
+  }
+  const onClickAddItemsButton=()=>{
+    
+    document.querySelector('.AddItems-Container').classList.toggle('AddItems-Container-Show');
+  }
+
+  const fileInputRef = useRef(null);
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    
+    if (file) {
+      console.log("Selected file:", file.name);
+      
+      setAddImg(file.name);
+      // Perform any action with the selected file here
+    }
+  };
+
+
 
   
- 
-    
- 
 
+ 
+  
 
   const admin = {
     name: 'Admin',
@@ -18,10 +45,11 @@ function AdminAcc() {
   };
 
   return (
-    <div className='pl-5 pt-5 pr-5 w-full h-full flex   justify-center Admin-Main-Container'>
-    <div className="max-w-full pl-10 pr-10 gap-48 flex flex-row justify-center">
+    <>
+    <div className='pl-5 pt-5 pr-5 w-full  flex   justify-center Admin-Main-Container'>
+    <div className="max-w-full h-full pl-10 pr-10 gap-48 flex flex-row justify-center">
       {/* Left Side */}
-      <div className=" w-full flex flex-col items-center justify-center">
+      <div className=" w-full flex flex-col items-center">
       <div className="ImageBox ">
       <img
           src={admin.profilePicture}
@@ -37,8 +65,8 @@ function AdminAcc() {
       {/* Right Side */}
       <div className=" flex flex-col Right-Side-Admin-Block w-full">
       <div class="lg:flex lg:items-center lg:justify-between">
-  <div class="min-w-0 flex-1">
-    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Site Settings</h2>
+  <div class="w-full  ">
+    <h2 class="text-2xl font-bold leading-7 text-gray-900   ">Settings</h2>
     <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
 
@@ -52,7 +80,7 @@ function AdminAcc() {
   </div>
   <div class="mt-5 flex lg:ml-4 lg:mt-0">
     <span class="hidden sm:block">
-      <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+      <button type="button" onClick={ShowEditOpt} class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
         <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
         </svg>
@@ -60,15 +88,7 @@ function AdminAcc() {
       </button>
     </span>
 
-    <span class="ml-3 hidden sm:block">
-      <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-        <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
-          <path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />
-        </svg>
-        View
-      </button>
-    </span>
+
 
     <span class="sm:ml-3">
       <button type="button" class="inline-flex items-center rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -101,78 +121,79 @@ function AdminAcc() {
 
 
 
-  <div class="Setting-Opt-Box absolute left-1/2 z-10 mt-5 flex  -translate-x-1/2 px-4 overflow-hidden ">
-    <div class="Setting-Otp-Container w-screen max-w-md flex-auto   bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-      <div class="p-4">
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+  <div class="Setting-Opt-Box absolute left-1/2 z-10 mt-5   -translate-x-1/2 px-4 overflow-hidden ml-5">
+    <div  class="Setting-Otp-Container w-screen max-w-md flex-auto   bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 pb-5">
+      <div  class="p-4">
+        <div onClick={onClickAddItemsButton} class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
           <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Analytics
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Get a better understanding of your traffic</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Engagement
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Speak directly to your customers</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Security
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Your customers&#039; data will be safe and secure</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="h-6 w-6 text-gray-600 group-hover:text-red-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
             </svg>
           </div>
           <div>
             <a href="#" class="font-semibold text-gray-900">
-              Integrations
+              Add items
               <span class="absolute inset-0"></span>
             </a>
-            <p class="mt-1 text-gray-600">Connect with third-party tools</p>
+            <p class="mt-1 text-gray-600">Add images and dec in Category</p>
           </div>
         </div>
         <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
           <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
+            
+            <span class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
+             delete
+            </span>
+            
           </div>
-    <div>
+          <div>
             <a href="#" class="font-semibold text-gray-900">
-              Automations
+              Delete items 
               <span class="absolute inset-0"></span>
             </a>
-            <p class="mt-1 text-gray-600">Build strategic funnels that will convert</p>
+            <p class="mt-1 text-gray-600">Delete Items any Category</p>
+          </div>
+        </div>
+        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+          <span class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
+           update
+          </span>
+          </div>
+          <div>
+            <a href="#" class="font-semibold text-gray-900">
+              Update
+              <span class="absolute inset-0"></span>
+            </a>
+            <p class="mt-1 text-gray-600">Update category and data</p>
+          </div>
+        </div>
+        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+          <span class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
+             person
+            </span>
+          </div>
+          <div>
+            <a href="#" class="font-semibold text-gray-900">
+              Users 
+              <span class="absolute inset-0"></span>
+            </a>
+            <p class="mt-1 text-gray-600">show all users </p>
+          </div>
+        </div>
+        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+          <span class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
+           deployed_code
+          </span>
+          </div>
+          <div>
+            <a href="#" class="font-semibold text-gray-900">
+              Orders
+              <span class="absolute inset-0"></span>
+            </a>
+            <p class="mt-1 text-gray-600">Checkout orders</p>
           </div>
         </div>
       </div>
@@ -193,13 +214,32 @@ function AdminAcc() {
     </div>
   </div>
 </div>
-        {/* Add more content or components here */}
+        
       </div>
     </div>
 
-
- 
     </div>
+        <div className="AddItems-Container w-full  ">
+          <div className="SubContainer-AddItems">
+          <div onClick={handleIconClick} className="AddItems-Box bg-gray-200 hover:bg-gray-300 flex items-center justify-center rounded-lg cursor-pointer">
+        <span class="material-symbols-outlined Add_Logo">
+         add
+        </span>
+        </div>
+    
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileChange}   
+        />
+          </div>
+      </div>
+
+
+   
+      </>
   )
 }
 
