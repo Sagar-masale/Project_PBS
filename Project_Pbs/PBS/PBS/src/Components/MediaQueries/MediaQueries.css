@@ -1,0 +1,440 @@
+
+@media screen and (max-width:1052px  ) {
+    .swipe-L ,.swipe-R{
+        display: none;
+       
+    }
+
+    .LeftSide-Block-Login{
+        width: 60%;
+    }
+    .RightSide-Block-Login{
+        display: none;
+    }
+
+    
+    }
+
+    @media screen and (max-width:768px  ) {
+        .AccountContainer{
+            display: none;
+        }
+
+        .AccountShow {
+            display: none;
+        }
+        .Slider-Bar{
+            display: block;
+        }
+       
+        .Navcontainer,.nav-item-name{
+            display:flex;
+        }
+        .Navcontainer{
+            flex-wrap: wrap;
+            height: fit-content;
+            width: 100%;
+        }
+        .custome-bar{
+            display: block;
+            width: fit-content;
+            height: fit-content;
+            margin-left: 2.5%;
+            margin-top: 2.5%;
+        }
+        .menu-items{
+            border-radius: 5px;
+            font-size: 32px;
+            color: #832729;;
+        }
+        .Logo-Shop {
+            margin-top: 2.5%;
+            margin-left: -2%;
+        }
+        .contact-top-logo{
+            display: none;
+        }
+
+        .search-container-two{
+            margin-bottom: 10px;
+            height: 50px;
+            display: flex;
+            position: relative;
+        }
+        .Search_Feald{
+            display: none;
+        }
+        .nav-link-logos {
+            gap: 11%;
+            width: 180px;
+            margin-right: 20px;
+            margin-top: 2%;
+            margin-left: auto;
+        }
+        .top-logo {
+            font-size: 30px;
+        }
+        .logo-name {
+            display: none;
+        }
+        .img-slide {
+            margin-top: 3%;
+        }   
+
+        .Category-List-First-Move{
+            margin-left: -720px;
+        }
+        .list-items {
+            height: 240px;
+            width: 230px;
+            margin: 0.5%;
+        }
+
+        .nav-item {
+            margin-top: 100px;
+        }
+        .shop-c {
+            font-size: 18px;
+        }
+        .instruction {
+            font-size: 14px;
+            margin-top: -1%;
+        }
+        .Switch-Category{
+            display: block;
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+            margin-left: 83%;
+            margin-top: 3%;
+        
+        }
+        .switch-Items{
+            font-size: 23px;
+            color: #832729;
+            transition: 1s;
+            /* rotate: 140deg; */
+        }
+        .rotate-moved{
+            rotate: 180deg;
+        }
+        .Gender-images{
+            border-radius: 5%;
+        }
+        .Gender-List {
+            border-radius: 5%;
+        }
+        /* .image-lists {
+            width: 93%;
+           
+        } */
+        .title-arrow {
+            left: 73%;
+        }
+        /* .kid-arrow{
+            left: 81%;
+        } */
+        .The-Party-Name{
+            width: fit-content;
+        }
+        .shope-now-Coccasion-Everdy{
+            width: fit-content;
+        }
+        .shope-now-G-kid{
+            font-size: 13px;
+            left: 10%;
+        }
+        .title-arrow-theParty{
+            left: 22%;
+        }
+        .title-name-Gender {
+            font-size: 16px;
+        }
+
+        .fit-info-box {
+            width: 92%;
+            margin-top: 8%;
+        }
+        .info-box {
+            border-bottom: 1px solid gray;
+            /* border: 1px solid black; */
+            flex:none;
+            width: 100%;
+        }
+        .End-category {
+            margin-top: 9%;
+            height: 72vh;
+            background-color: #f2e9e9;
+        }
+        .link-Head-Width{
+            width: fit-content;
+        }
+        .Scroll-Links-Add{
+            display: block;
+            width: fit-content;
+            height: fit-content;
+            color:#832729;
+            font-size: 20px;
+            font-weight: 100;
+            margin-left: auto;
+            margin-top: -5.5%;
+            text-decoration: none;
+            font-family: none;
+            background-color: none;
+        }
+        .Scroll-Links-Remove{
+            width: fit-content;
+            height: fit-content;
+            color:#832729;
+            font-size: 20px;
+            font-weight: 100;
+            margin-left: auto;
+            margin-top: -6.2%;
+            margin-right: 1.5px;
+            text-decoration: none;
+            font-family: system-ui;
+            background-color: none;
+        }
+        .Track-Your-Order {
+            margin-top: 3%;
+        }
+        .Go-info-link {
+            width: fit-content;
+            font-size: .9em;
+            margin-top: 3%;
+            margin-left: 2%;
+            /* display: none; */
+            
+        }
+        .menu-items-Name-Color{
+            color: #832729;
+        }
+        .Bold-View{
+            color: black;
+            text-decoration: underline;
+        }
+        .Show-First-Box {
+            width: 100%;
+            height: 100%;
+            border:none;
+            /* border: 2px solid red; */
+            display: none;
+        }
+        .Show-First-Box-Clicked{
+            display: flex;
+        }
+        .Show-Second-Box{
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* border: 2px solid red; */
+            display: none;
+        }
+        .Show-Second-Box-Clicked{
+            display: flex;
+        }
+        .Show-Third-Box{
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* border: 2px solid red; */
+            display: none;
+        }
+        .Show-Third-Box-Clicked{
+            display: flex;
+        }
+
+
+
+
+
+      
+        .information-link-head {
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 3.5;
+        }
+        .Bold-Name{
+            font-weight: bold;
+        }
+        /* .Track-Your-Order {
+            display: block;
+        } */
+        .Go-FaceBook {
+            font-size: 30px;
+            margin-left: 0%;
+        }
+        .Go-InstaGram {
+            margin-left: 1%;
+        }
+        .Follow-Us{
+            margin-top: 0%;
+        }
+        .info-box4{
+            border: none;
+        }
+        .store-timing {
+            margin-top: 0%;
+        }
+        .row-Pbs-page-bottom {
+            width: 99%;
+            border-top: 1px solid gray;
+            /* padding-bottom: 35px; */
+        }
+        .First-Add-Remove{
+            display: none
+        }
+        .First-Remove-Add{
+            display: block;
+        }
+        /* .First-Add-Remove-Add{
+            display: block;
+        } */
+
+    }
+    @media screen and (max-width:680px  ){
+
+        .list-items {
+            height: 234px;
+            width: 197px;
+            /* margin: 0.3%; */
+        }
+    } 
+    /* @media screen and (max-width:640px  ){
+        .AccountShow{
+            margin-right: 10px;
+        }
+    }  */
+    @media screen and (max-width:500px  ){
+        .Slider-Bar-Exit {
+            margin-left: 90%;
+        }
+    }
+    @media screen and (max-width:425px  ){
+        .top-logo {
+            font-size: 26px;
+        }
+        .nav-link-logos{
+            gap: 10%;
+            width: 145px;
+    
+        }
+        .AccountContainer{
+            display: none;
+        }
+        .img-slide{
+            height: 200px;
+            margin-top: -10px;
+        }
+        .instruction {
+            width: 75%;
+        }
+
+
+        .list-items {
+            height: 159px;
+            width: 122px;
+        }
+        .card-title-name {
+            font-size: 80%;
+        }
+        .title-shope-now {
+            font-size: 80%;
+        }
+        .The-P-Shop{
+            font-size: 10px;
+          
+        }
+        .Res-Gender-List{
+            /* transition: 1s; */
+            /* border: 1px solid rgba(182, 182, 182, 0.46);
+            height: fit-content; */
+            flex: 0 1 103px;
+            /* text-decoration: none;
+            color: black; */
+        }
+        .title-name-Gender {
+            font-size: 60%;
+        }
+        /* .shope-now-G {
+            font-size: 55%;
+        } */
+        .Gender-Shop-Name{
+            font-size: 51%;
+            margin-right: -1px;
+            margin-left: -23%;
+        }
+        .Gender-Shop-Kid-Name{
+            font-size: 51%;
+            margin-left: 29%;
+            margin-right: -56%;
+        }
+        .Gender-Title-Arrow{
+            margin-left: -2%;
+            font-size: 12px;
+            display: none;
+        }
+        .Scroll-Links-Add {
+            margin-top: -6.5%;
+            margin-bottom: 4%;
+        }
+        .Scroll-Links-Remove {
+            margin-top: -7.5%;
+        }
+        .information-link-head {
+            line-height: 2;
+        }
+        .End-info {
+            margin-bottom: auto;
+            background-color: #f2e9e9;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: fit-content;
+            margin-top: 9%;
+        }
+        .Slider-Bar-Exit {
+            margin-left: 86%;
+        }
+        .Go-info-link:hover {
+            text-decoration: none;
+        }
+        .SetPadding{
+            padding-bottom: 15px;
+        }
+    }
+    @media screen and (max-width:330px  ){
+        .shop-c {
+            letter-spacing: 0.5px;
+            font-size: 17px;
+        }
+        .instruction {
+            font-size: 80%;
+            line-height: 1.875em;
+        }
+
+        .Res-Gender-List3{
+            margin-top: 1.8%;
+        }
+        .list-items {
+            height: 134px;
+            width: 100px;
+        }
+        .card-title-name {
+            font-size: 74%;
+        }
+        .title-shope-now {
+            font-family: monospace;
+            font-size: 89%;
+        }
+        .bx-chevron-right:before {
+            content: "\ea50";
+        }
+        .items-arrow {
+            font-size: 14px;
+        }
+        .Slider-Bar-Exit {
+            margin-left: 87%;
+        }
+    }

@@ -1,0 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.Country-Code-Box{
+    width: 90px;
+    height: 50px;
+    background-color: rgba(206, 206, 206, 0.819);
+}

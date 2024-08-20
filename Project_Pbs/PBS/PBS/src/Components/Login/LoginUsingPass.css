@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.Close-Login-Box-Arrow-Pass {
+    top: 7.5%;
+    right: 27%;
+}
+.Close-Login-Box-Arrow-Pass:hover{
+    top: 7.5%;
+    right: 27%;
+}
+/* .TypeLogin1{
+    font-weight: 400;
+    color: rgb(130, 130, 130);
+    border-bottom: 2px solid rgb(143, 142, 142);
+} */
+
+.TypeLogin2-Pass{
+    font-weight: 600;
+    color: #a23335;
+    border-bottom: 2px solid #a23335;
+}
+.RightSide-Block-Login{
+    height: 100%;
+}

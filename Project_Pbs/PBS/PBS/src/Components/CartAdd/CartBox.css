@@ -1,0 +1,24 @@
+.Main-Img{
+    position: relative;
+    /* padding: 10px; */
+    transition: .2s;
+    background: none;
+    z-index: 1;
+}
+.Main-Img:hover{
+    transform: scale(2);
+    transform-origin: 11% 22%;
+    transition: .2s;
+
+}
+.Mimg:hover{
+    box-shadow: 5px 2px 12px rgb(255, 161, 135);
+}
+@media screen and (max-width:680px  ){
+    .Cover{
+        overflow: hidden;
+    }
+    .Main-Img:hover{
+        transform-origin: 49% 10%;
+    }
+} 

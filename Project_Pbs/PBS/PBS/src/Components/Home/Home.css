@@ -1,0 +1,437 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.Images-Size{
+    height: 100vh;
+}
+.txt-Color{
+    color: #832729;
+}
+.bg-white{
+    background-color: #832729;
+}
+.bg-white\/50{
+    background-color: rgb(181, 181, 181);
+}
+
+.img-slide{
+    /* border: 2px solid green; */
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+    /* overflow:auto; */
+}
+/* .md\:h-96{
+    height: 100vh;
+} */
+
+  
+
+
+
+/* arrow style */
+.swipe-L{
+    font-weight: 0px;
+    position: absolute;
+    color: rgb(151, 45, 0);
+    text-align: center;
+    font-size: 30px;
+    padding: 0.9%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.601);
+    
+    
+}
+.swipe-R{
+    font-weight: 0px;
+    position: absolute;
+    color: rgb(151, 45, 0);
+    text-align: center;
+    font-size: 30px;
+    padding: 0.9%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.601);
+}
+.swipe-L:hover, .swipe-R:hover{
+    color: white;
+    background-color: #832729ae;
+}
+
+.swipe-L{
+    left: 0.5%;
+    top: 60%;
+}
+.swipe-R{
+    right: 0.5%;
+    top: 60%;
+}
+/* second-page */
+.shop-category{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    /* border: 2px solid rgb(208, 0, 255); */
+}  
+.shop-c{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 5.5%;
+    color: #832729;
+}
+.shop-G{
+    margin-top: 5.5%;
+}
+.instruction{
+    text-align: center;
+    color:black;
+    font-size: 13px;
+}
+.line{
+    width: 91%;
+    height: 100%;
+    margin-top: -1%;
+}
+.image-lists{
+    /* border: 1px solid red; */
+    width:100%;
+    
+    display: flex;
+    align-content: center;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 24px;
+    gap: 20px;
+    padding: 20px 70px 20px;
+    /* margin-top: -2%; */
+    /* flex-wrap: wrap; */
+    transition: 1s;
+    overflow: auto;
+}
+
+.list-items{
+    /* border: 1px solid rgba(176, 176, 176, 0.548); */
+    color: black;
+    width: 100%;
+    height: 100%;
+    /* margin: 1.8%; */
+    /* flex: 1 1 100px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+    scroll-snap-align: start;
+    transition: 1s;
+    border-radius: 2%;
+}
+
+.items-background{
+    border: 1px solid #ff6a80;
+ 
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid rgba(255, 186, 186, 0.533); */
+    /* background-color: black; */
+    /* border-radius: 50%; */
+    transition: .5s;
+
+}
+.shop-category-images{
+    width: 100%;
+    border-radius: 50%;
+    /* height: 100%; */
+    background-repeat: no-repeat;
+    /* box-shadow: 0px 3px 4px #ffa7a892; */
+}
+.shop-category-images:hover{
+    box-shadow: 1px 0px 20px -1px #ffa7a892;
+}
+.card-title{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: auto;
+   
+}
+.card-title-name{
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    color: black;
+    font-size: 18px;
+   
+}
+/* .card-title-name:hover{
+    text-align: left;
+} */
+.title-shope-now{
+    text-align: center;
+    font-size: 13px;
+    margin-top: 8%;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.Now{
+    margin-right: 20%;
+}
+.items-arrow{
+    font-size: 17px;
+  position: relative;
+  left: 4%;
+  transition: 0.3s;
+}
+/* Shop by gender */
+
+.image-lists-Gender{
+    margin-top: -1%;
+    width: 87%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5%;
+    transition: 1s;
+
+}
+.Gender-List{
+    transition: 1s;
+    border: 1px solid rgba(182, 182, 182, 0.46);
+    height: fit-content;
+    flex: 1 1 300px;
+    text-decoration: none;
+    color: black;
+   
+    /* margin: 1%; */
+
+    /* display: inline-grid; */
+}
+.Gender-List:hover{
+    box-shadow: 0px 3px 4px #ffa7a892;
+}
+.Gender-category{
+    height: auto;
+}
+.Gender-images{
+    width: 100%;
+   
+}
+.Gender-name{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 5vh;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 1s;
+}
+.title-name-Gender{
+    width: fit-content;
+    color: #832729;
+    font-size: 18px;
+    float: left;
+    margin-left: 3.5%;
+    transition: 1s;
+}
+.shope-now-G{
+    font-size: 10px;
+    margin-left: auto;
+    margin-right: 1.5%;
+    transition: 1s;
+}
+.title-arrow{
+    font-size: 18px;
+    transition: 1s;
+}
+/* fourth page */
+/* Occasion-style */
+.Occasion-category{
+    overflow: hidden;
+    height: fit-content;
+}
+.Occasion-name{
+    background-color: white;
+}
+/* .title-name-Occasion{
+    width: fit-content;
+}
+.shope-now-Coccasion{
+    left: 0%;
+} */
+
+.Occasion-List{
+width: 100%;
+}
+/* End */
+.End-category{
+    /* border: 1px solid red; */
+    height: fit-content;
+    margin-top: 5.5%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    overflow: hidden;
+}
+.End-info{
+    background-color: #f2e9e9;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+.fit-info-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2%;
+    margin-top: 5%;
+    /* border: 1px solid rgb(89, 0, 255); */
+    width: 100%;
+    height: 92%;
+    /* border: 1px solid black; */
+    width: 87%;
+    height: fit-content;
+}
+.info-box {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    flex: 1 1 200px;
+}
+.information-link-head{
+    color: #832729;
+    font-size: 21px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Track-Your-Order{
+    margin-top: 13%;
+}
+.Go-info-link{
+    font-size: 18px;
+    color: black;
+    margin-top: 12%;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.Go-info-link:hover{
+    text-decoration: underline;
+    transition: 0.5s;
+}
+.Track-Your-Order{
+    margin-top: 13%;
+}
+.Follow-Us{
+    color: black;
+    font-size: 17px;
+    margin-top:0%;
+}
+
+.Go-FaceBook,.Go-InstaGram{
+    font-size: 32px;
+    color: black;
+   
+}
+.Go-FaceBook:hover,.Go-InstaGram:hover{
+    filter: drop-shadow(0px 3px 4px #ff696ce9);
+    /* box-shadow: 0px 3px 4px #ffa7a892; */
+}
+.Go-FaceBook{
+    margin-left: 17%;
+}
+.Go-InstaGram{
+    margin-left: 5%;
+}
+
+.store-timing{
+    margin-top: 6%;
+    font-size: 17px;
+}
+.row-Pbs-page-bottom{
+    width: 100%;
+    border-top: 1px solid black;
+    margin-top: 4%;
+}
+.End-Intro{
+    /* border: 1px solid black; */
+    margin-top: 5%;
+    margin-bottom: 29px;
+    width: 100%;
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 14px;
+}
+.important-instructions{
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+ 
+}
+.important-instructions:hover{
+    color: rgba(0, 123, 255, 0.677);
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+}
+@media screen and (max-width:1200px  ) {
+    .items-background{
+        width: 125px;
+        height: 125px;
+    }  
+    }
+    @media screen and (max-width:910px  ) {
+        .shop-c{
+            width: 100%;
+            font-size: 25px;
+        
+        }
+        .items-background{
+            width: 80px;
+            height: 80px;
+        }  
+        .card-title-name{
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        .image-lists {
+            gap: 10px;
+            margin-top: -5%;
+        }
+        .instruction {
+
+            width: 100%;
+        }
+        }
+@media screen and (max-width:425px  ){
+    .img-slide{
+        height: 200px;
+        margin-top: -10px;
+    }
+    .shop-c{
+        font-size: 20px;
+    }
+    .items-background{
+        width: 75px;
+        height: 75px;
+    }  
+}

@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+}
+/* Cart Style */
+.CartBox{
+
+    display: none;
+}
+.CartBox-Show{
+    display: flex;
+}
+.ResComponent{
+    width: 100%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+.container {
+    z-index: 2;
+}
+
+.First-Item-J{
+    margin-left: 7.5%;
+}
+.First-Item-P{
+    margin-left: 10.4%;
+}
+.Ring-Items-Nav{
+    margin-top: 0;
+    margin-left: 0;
+    gap: 4%;
+    box-shadow: 0px 3px 8px #cccccc92;
+}
+.Ring-Item-Names{
+   
+    color: #832729;
+}
+.Ring-Arrows{
+    color: #832729;
+    margin-left: -3.5%;
+    margin-bottom: 2px;
+    font-size: 22px;
+}
+.Ring-Container{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: fit-content;
+}
+.Go-To-Container{
+    /* border: 1px solid black; */
+    width: fit-content;
+    margin-left: 7.5%;
+    margin-top: 13px;
+    display: flex;
+    gap: 6px;
+
+}
+.Go-Home-Page-Logo{
+    color: black;
+    text-decoration: none;
+}
+.Go-Ring-Page-Logo{
+    color: #832729;
+    text-decoration: none;
+}
+.Between-Line{
+    color: black;
+    font-size: smaller;
+    font-weight: 700;
+}
+.Ring-Type-Box{
+    /* border: 1px solid rgba(255, 0, 0, 0.34); */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1.5%;
+    margin-left: 7.5%;
+    height: 10%;
+    gap: 8px;
+
+}
+.Ring-Name,.Between-Line-Type-Box,.Count-Designs{
+    width: fit-content;
+    font-size: 20px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Ring-Name{
+    font-size: 25px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Between-Line-Type-Box{
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Compare-Type-Box{
+    /* border: 1px solid green; */
+    margin-left: 7.5%;
+}
+.Compare-Box{
+    border: 1px solid rgba(128, 128, 128, 0.763);
+    /* margin-left: 7.5%; */
+    width: 12rem;
+    height: 60px;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    float: left;
+    border-radius: 5px;
+}
+.BEST-SELLER-BOX{
+    /* float: right; */
+    border: 1px solid #832729;
+    margin-left:auto;
+    margin-right:6.2%;
+    width: 15rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+.SELLER-Arrow{
+    color: #832729e3;
+    font-size: 30px;
+    
+}
+.Compare-Box:hover{
+    cursor: no-drop;
+}
+.Compare-Title{
+    color: rgba(128, 128, 128, 0.832);
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.Seller-Title{
+    color: #a63335;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    /* width: 100%; */
+}
+.Compare-Arrow{
+    color: #832729;
+    width: 23px;
+    height: 23px;
+    border: 1px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Show-Rings-Box {
+    /* border: 1px solid pink; */
+    flex: 1 1 300px;
+    /* margin-top: 3%; */
+
+
+  
+}
+.Ring-Box{
+    border: 1px solid rgba(215, 215, 215, 0.599);
+    flex: 1 1 150px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    /* width: 20%;
+    height: 60Svh; */
+
+}
+.Ring-Box:hover{
+        box-shadow: 0 2px 18px rgba(255, 199, 199, 0.867);
+
+}
+.Ring-Img-Box{
+    /* border: 1px solid green; */
+    width: 100%;
+    height:68% ;
+    
+}
+.Compare-Img-Box{
+    /* border: 1px solid yellow; */
+    margin-left: .5%;
+    margin-top: .5%;
+    position: absolute;
+    width: 37px;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+.Add-Img-Box{
+    border: 1px solid rgb(34, 255, 0);
+    position: absolute;
+    width: 37px;
+    height: 5%;
+    margin-left: 17.2%;
+    z-index: 1;
+}
+.Finger-Style{
+    width: 100%;
+    height: 100%;
+}
+.Finger-Style:hover{
+    filter: blur(2px);
+}
+.Compare-Arrow-Img{
+    color: #832729;
+    width: 22px;
+    height: 22px;
+    border: 1px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.Img-Info-Box{
+    border-top: 1px solid rgba(154, 154, 154, 0.911);
+    width: 100%;
+    /* height: 110px; */
+    height: 180px;
+    padding: 8px;
+}
+.Itm-Stock{
+    /* border: 1px solid red; */
+    width: fit-content;
+    margin-top: 2%;
+    margin-left: 3%;
+}
+.Title-Stock{
+    color: rgb(235, 0, 0);
+    font-size: 12px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.Card-Title{
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    margin-left: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    /* white-space: nowrap; */
+}
+.Card-Price{
+    margin-bottom: 2%;
+    margin-left: 3%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.Doller,.Price-Rate{
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    
+}
+.Gender-Name{
+    font-size: 12.5px;
+    margin-left: 3%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Type-Of-Ring{
+    font-size: 12.5px;
+    margin-left: 3%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;     
+}
+.Between-Line-Gender{
+    margin-left: 1%;
+    /* margin-top: 2.7%; */
+}
+.Explore-Box{
+    border: 1px solid black;
+    width: 93%;
+    height: 40px;
+    color: black;
+    font-size: 13px;
+    margin-left: 3%;
+    margin-top: 2.7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;     
+}
+.Explore-Box:hover{
+    transition: .3s;
+    background-color: #832729;
+    color: white;
+}
+/* .Quick-View-Box{
+    position:absolute;
+    border: 1px solid red;
+    z-index: 1;
+    
+} */
+.Add-Img-Box{
+    display: none;
+}
+@media screen and (max-width:1490px  ) {
+    .Show-Rings-Box {
+        flex: 1 1 260px;
+    }
+    
+    }
+    @media screen and (max-width:1280px  ) {
+        .Show-Rings-Box {
+            flex: 1 1 210px;
+        }
+        
+        }
+@media screen and (max-width:1025px  ) {
+   
+    .container,.nav-item-name{
+        display: flex;
+    }
+
+}
+@media screen and (max-width:768px  ) {
+   
+
+    .Img-Info-Box{
+        border-top: 1px solid rgba(154, 154, 154, 0.911);
+        width: 100%;
+        /* height: 110px; */
+        /* height: 160px; */
+        height: fit-content;
+    }
+    /* .Explore-Box,.Gender-Name,.Type-Of-Ring{
+        display: none;
+    } */
+ 
+
+    .nav-item-name{
+        display: none;
+    }
+    .Ring-Container {
+        margin-top: 128px;
+    }
+    .Card-Title{
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 115px;
+        height: 1.2em;
+        white-space: nowrap;
+    }
+    .Card-Price {
+        margin-bottom: 7%;
+    }
+    .Compare-Box,.BEST-SELLER-BOX {
+    
+        display: none;
+    }
+    .Explore-Box{
+        display: none;
+    }
+/* .Ring-Items-Nav{
+    display: none;
+} */
+}
+@media screen and (max-width:581px  ) {
+    .Title-Stock{
+        display: none;
+    }
+    .Show-Rings-Box {
+        flex: 1 1 155px;
+    }
+    
+    }
+@media screen and (max-width:501px  ) {
+    .Show-Rings-Box {
+        gap: 5%;
+    }
+    .Ring-Box{
+        flex: 1 1 145px;
+        margin-top: 6%;
+        /* width: 20%;
+        height: 60Svh; */
+    
+    }
+    .Compare-Arrow-Img {
+        font-size: 13px;
+        width: 19px;
+        height: 19px;
+    }
+    .Card-Title ,.Price-Rate,.Doller{
+        font-weight: 500;
+    }
+}
+@media screen and (max-width:501px  ) {
+    .Show-Rings-Box {
+        gap: 6.5%;
+    }
+}
+@media screen and (max-width:425px  ) {
+    .Show-Rings-Box {
+        flex: 1 1 100px;
+    }
+    
+    }
+    @media screen and (max-width:380px  ) {
+        .Show-Rings-Box {
+            flex: 1 1 1px;
+        }
+        
+        }
+@media screen and (max-width:357px  ) {
+     
+    .Ring-Box{
+        flex: 1 1 90px;
+        margin-top: 7%;
+        /* width: 20%;
+        height: 60Svh; */
+    
+    }
+    
+}
