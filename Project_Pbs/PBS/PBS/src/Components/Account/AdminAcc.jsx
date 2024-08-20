@@ -6,7 +6,7 @@ function AdminAcc() {
   return (
     <div>
       <h1>
-        Admin Page
+        This is Admin Page....
       </h1>
     </div>
   )
