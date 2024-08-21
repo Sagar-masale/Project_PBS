@@ -1,10 +1,50 @@
 import React, { useRef } from "react";
+import { useState } from "react";
 import './AdminAcc.css'
 
 
 
 function AdminAcc() {
-  
+  // Get Items Image
+  const fileInputRef = useRef(null);
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+
+
+
+
+  // Get Data about Items
+  const [formData, setFormData] = useState({
+    newimage: "",
+    category: "",
+    title: "",
+    price: "",
+    description: "",
+    about: ""
+  });
+
+  const handleChange = (e) => {
+
+    
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+  };
+
+
+
+
+
   const ShowEditOpt =()=>{
     document.querySelector('.Setting-Opt-Box').classList.toggle('Setting-Opt-Box-Show');
   }
@@ -13,22 +53,6 @@ function AdminAcc() {
     document.querySelector('.AddItems-Container').classList.toggle('AddItems-Container-Show');
   }
 
-  const fileInputRef = useRef(null);
-
-  const handleIconClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    
-    if (file) {
-      console.log("Selected file:", file.name);
-      
-      setAddImg(file.name);
-      // Perform any action with the selected file here
-    }
-  };
 
 
 
