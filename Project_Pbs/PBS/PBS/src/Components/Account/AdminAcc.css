@@ -1,0 +1,63 @@
+.Admin-Main-Container{
+    height: 65vh;
+    position: relative;
+    z-index: 1;
+}
+.ImageBox{
+    /* border: 1px solid red; */
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Image-Admin{
+    width:100%;
+}
+.Right-Side-Admin-Block{
+   
+    /* border: 1px solid red; */
+    align-items: center;
+}
+.Setting-Opt-Box{
+    /* border: 1px solid red; */
+    display: flex;
+    height: 250px;
+    display: none;
+}
+.Setting-Opt-Box-Show{
+    display: flex;
+}
+.Setting-Otp-Container{
+   
+    overflow: auto; /* Allows scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+/* Add items */
+.AddItems-Container{
+    position: relative;
+    border: 1px solid red;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    display: none;
+}
+.AddItems-Container-Show{
+    display: flex;
+}
+.AddItems-Box{
+    margin-top: 70%;
+    margin-left: 100%;
+    width: 200px;
+    height: 200px;
+    
+}
+.Add_Logo{
+    color: rgba(255, 255, 255, 0.667);
+    font-size: 70px;
+}
