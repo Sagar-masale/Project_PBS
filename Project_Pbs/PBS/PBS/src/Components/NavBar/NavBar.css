@@ -43,16 +43,15 @@ body {
     width: 80%;
     height: 100vh;
     position: fixed;
+    display: flex;
+    justify-content: start;
     right: 100%;
     top: 0;
     z-index: 2;
     transition: 1s;
-    background-color: #f2e9e9;
-    background-image: url(index_img/SlideBarImg.webp);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: cover;
-    overflow: auto;
+    background-color: #ffffff;
+    
+ 
     /* border: 2px solid red; */
     display: none;
 }
@@ -61,20 +60,16 @@ body {
 }
 .Slider-Bar-Exit{
     font-size: 28px;
-    margin-left: 94%;
-    margin-top: 2%;
+   
+    margin-top: 1%;
     color: #832729;
 }
 .Login-SignUp-Box{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: -13px;
-    height: 10%;
+    width: 100%;
+    height: 117px;
+    background-color: #f2e9e9;
     /* border: 1px solid black; */
-
-    display: flex;
-    justify-content: end;
-    align-items: center;
+   
 }
 .Login-Box{
     width: fit-content;
@@ -91,26 +86,10 @@ body {
     font-size: 14px;
     font-family: 'Lato', sans-serif;
 }
-.In-Login-Box{
-    width: 100%;
-    /* height: 63%; */
-    /* border: 1px solid whitesmoke; */
-    background-color: rgba(255, 255, 255, 0.956);
-}
-.In-Login-Box-For-Slide-Menue-Bar{
-    display: flex;
-    flex-direction: column;
-    gap: 4%;
-}
-.In-Login-Box-Info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: fit-content;
-    flex: 1 1 44px;
-    
-}
-.Show-InBox-Info{
+
+
+
+/* .Show-InBox-Info{
     display: block;
     width: fit-content;
     height: fit-content;
@@ -118,42 +97,18 @@ body {
     font-size: 19px;
     margin-left: auto;
     margin-right: 3%;
-    /* margin-top: -5.5%; */
+    margin-top: -5.5%;
     text-decoration: none;
     background-color: none;
     transition: .2s;
 }
 .Rotate-Arrow{
     rotate: 90deg;
-}
-.Login-Names-In-Box{
-    margin-left: 3.2%;
-    
-}
+} */
 
 
-.Show-Login-Box1,.Show-Login-Box2{
-    display: flex;
-    flex-direction: column;
-    margin-top: -1.5%;
-    margin-bottom: 1%;
-    margin-left: 3.2%;
-    transition: 1s;
-    /* display: none;
-    /* display: flex;
-    flex-direction: column;
-    margin-top: -3.5%;
-    margin-left: 3.2%;
-    transition: 1s;
-     display: none; */
-     
-    
-}
-.Show-Jewellery-Opt,.Show-Gold-Opt,.Show-Diamond-Opt,.Show-Wedding-Opt,.Show-Gifting-Opt,.Show-Collections-Opt{
-    transition: 1s;
-    display: none;
-    
-}
+
+
 
 /* .Show-Gold-Opt{
     display: none;

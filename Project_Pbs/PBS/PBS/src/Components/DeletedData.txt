@@ -1,0 +1,24 @@
+          <SlideBarInfo 
+          
+          Title='Gold'
+          InfoOne='Rings'
+          InfoTwo='Earrings'
+          InfoThree='Pendants'
+          InfoFour='Mangalsutra'
+          InfoFive='Bangles'
+          InfoSix='Chains'
+          />
+          {/* <SlideBarInfo 
+          Title='Diamond'
+          InfoOne='Rings'
+          InfoTwo='Earrings'
+          InfoThree='Pendants'
+          InfoFour='Mangalsutra'
+          InfoFive='Bangles'
+          InfoSix='Chains'
+          /> */}
+
+           <div className="Login-Box">
+            <span className="Login-Names" onClick={ShowUserLogin}>LOGIN</span>
+            <span className="Login-Names" onClick={ShowSignUpBox}>SIGNUP</span>
+          </div>

@@ -12,7 +12,7 @@ import LineImg from '../images/line.png';
 import MangalSutraImg from '../images/Mangalsutra.jpg';
 import BanglesImg from '../images/Bangles.jpg';
 import ChainsImg from '../images/Chains.jpg';
-import FirstPageData from './HomeData';
+
 
 
 function Home({
@@ -30,6 +30,35 @@ function Home({
         { url: MainPage2nd},
         { url: MainPage3rd},
       ];
+
+
+      const callouts = [
+        {
+          namCollectionImgTitle: 'Ring of Elegance',
+          description: 'Perfect for Every Occasion',
+          CollectionImgs: './HomeImgs/CategoryImg1.png',
+          imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
+          href: '#',
+        },
+        {
+          namCollectionImgTitle: 'Golden Glamour',
+          description: 'Classic gold earrings for timeless elegance.',
+          CollectionImgs: './HomeImgs/CategoryImg2.png',
+          imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
+          href: '#',
+        },
+        {
+          namCollectionImgTitle : 'Diamond Dreams',
+          description: 'A modern silver necklace with a contemporary diamond design',
+          CollectionImgs: './HomeImgs/Demo.jpg',
+          imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+          href: '#',
+        },
+        
+        
+      ]
+      
+      
     return(
         <>
 
@@ -68,40 +97,35 @@ function Home({
 <img src={LineImg} className="line"/>
 </div>
 
-<div className="shop-category Occasion-category">
-    <h2 className="shop-c shop-Occasion">Shop By Occasion</h2><br/>
-    <p className="instruction">Whatever the occasion, we've got a beatiful piece of jewellery for you.</p><br/>
-    <div className="bg-white">
-      <div className="mx-auto w-100 px-4  sm:px-6  lg:max-w-7xl lg:px-8">
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {FirstPageData.map((product) => (
-            <div key={product.id} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                <img
-                
-                  src={product.MainImg}
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.MainImgTitle}
-                    
-                  </h3>
-                  
+{/* Collection */}
+    <div className="bg-white pl-14 pr-14">
+      <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
+        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+          <h2 className="text-2xl font-bold text-red-900"> PBS Collections</h2>
+
+          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+            {callouts.map((callout) => (
+              <div key={callout.CollectionImgTitle} className="group relative">
+                <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                  <img
+                    alt={callout.imageAlt}
+                    src={callout.CollectionImgs}
+                    className="h-full w-full object-cover object-center"
+                  />
                 </div>
-                <p className="text-sm font-medium text-gray-900">{product.MainImgNow}</p>
+                <h3 className="mt-6 text-sm text-gray-500">
+                  <a href={callout.href}>
+                    <span className="absolute inset-0" />
+                    {callout.namCollectionImgTitle}
+                  </a>
+                </h3>
+                <p className="text-base font-semibold text-gray-900">{callout.description}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-      <img src={LineImg} className="front-img1"/>
     </div>
 
         </>

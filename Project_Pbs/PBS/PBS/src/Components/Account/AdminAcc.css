@@ -3,6 +3,9 @@
     position: relative;
     z-index: 1;
 }
+.AdminAccount-Container{
+  width: 100%;
+}
 .ImageBox{
     /* border: 1px solid red; */
     width: 170px;
@@ -17,11 +20,7 @@
 .Image-Admin{
     width:100%;
 }
-.Right-Side-Admin-Block{
-   
-    /* border: 1px solid red; */
-    align-items: center;
-}
+
 .Setting-Opt-Box{
     /* border: 1px solid red; */
     display: flex;
@@ -36,10 +35,18 @@
 .Setting-Otp-Container{
    
     overflow: auto; /* Allows scrolling */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+  
 }
-
+.Edit-Box{
+  height: 25vh;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow: auto;
+  display: none;
+}
+.Edit-Box-Show{
+  display: flex;
+}
 /* Add items */
 .AddItems-Container{
     position: relative;
@@ -47,10 +54,18 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    justify-content: center;
     display: none;
 }
 .AddItems-Container-Show{
     display: flex;
+}
+.SubContainer-AddItems{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
 }
 .AddItems-Box{
 
@@ -62,3 +77,113 @@
     color: rgba(255, 255, 255, 0.667);
     font-size: 70px;
 }
+.FormFeilds-AddItems{
+    margin-left: auto;
+    width: 50%;
+    border: 1px solid red;
+    padding: 20px;
+    border-radius: 8px;
+
+  
+}
+.SetCssFeild{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+  .Form-Section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .Heading-LabelFor-AddItems {
+    display: block;
+    margin-bottom: 5px;
+    
+  }
+
+  .Select-Category-Name{
+    display: none;
+  }
+  .SelectCategory-Items{
+    border: 1px solid rgb(255, 255, 255);
+  }
+  .SelectCategory-Items:focus,.InfoAccess-Input-Feild:fo {
+    border: 1px solid rgb(108, 108, 108);
+
+    outline:none;
+    }
+  .SelectItems-Name{
+    font-size: 18px;
+    margin: 10%
+  }
+  
+  .SelectCategory-Items, .InfoAccess-Input-Feild{
+    border: 1px solid rgb(255, 255, 255);
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .AddItems-Submit-Buttom{
+      transition: .1s;
+    }
+    .AddItems-Submit-Buttom:hover{
+      color: rgba(255, 255, 255, 0.874);
+
+  }
+
+  
+  /* Delete Items */
+  .DeleteItems-Container{
+    border: 1px solid red;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+    /* Update Items */
+    .UpdateItems-Container{
+      border: 1px solid red;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    /* Users Block */
+    .Users-Container{
+      border: 1px solid red;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+      /* Orders Block */
+      .Orders-Container{
+        border: 1px solid red;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .DeleteItems-Container,.UpdateItems-Container,.Users-Container,.Orders-Container{
+        display: none;
+      }
+
+      .DeleteItems-Container-Show,.UpdateItems-Container-Show,.Users-Container-Show,.Orders-Container-Show{
+        display: flex;
+      }
+  
+      

@@ -1,4 +1,5 @@
 import React from 'react';
+import SliderBarForPhn from './SliderBarForPhn';
 import AdminLogin from '../Login/AdminLogin';
 import LoginShow from '../Login/LoginShow';
 import SignupUser from '../Login/SignUpUser';
@@ -29,17 +30,8 @@ function NavBar() {
    
   };
 
-  const ShowJewelleryOPT = () => {
-    // Logic for ShowJewelleryOPT
-    document.getElementById("Login-Jewellery-Info").classList.toggle("Show-Jewellery-Opt");
-    document.getElementById("rotate-arrow-List").classList.toggle("Rotate-Arrow");
-  };
   
-  const ShowGoldOPT = () => {
-    // Logic for ShowGoldOPT
-    document.getElementById("Login-Gold-Info").classList.toggle("Show-Gold-Opt");
-    document.getElementById("rotate-arrow-List-Gold").classList.toggle("Rotate-Arrow");
-  };
+  
 
   const ShowDiamondOPT = () => {
     // Logic for ShowDiamondOPT
@@ -79,134 +71,11 @@ function NavBar() {
 
     <div className="Navheader Navcontainer">
       <div className="Slider-Bar " id="SliderBar">
-        <span className="material-symbols-outlined Slider-Bar-Exit mt-4 " onClick={SliderMove}>
-          arrow_back
-        </span>
-        <div className="Login-SignUp-Box  h-24">
-          <div className="Login-Box ">
-            <span className="Login-Names" onClick={ShowUserLogin}>LOGIN</span>
-            <span className="Login-Names" onClick={ShowSignUpBox}>SIGNUP</span>
-          </div>
+        
+        <div className="Login-SignUp-Box">
+         <SliderBarForPhn/>
         </div>
-        <div className="In-Login-Box In-Login-Box-For-Slide-Menue-Bar">
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Jewellery-Name" style={{ lineHeight: 'normal', marginTop: '2%', fontSize: '0.9rem', color: '#af5254' }}>
-              Jewellery
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List" onClick={ShowJewelleryOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Jewellery-Opt Show-Login-Box1" id="Login-Jewellery-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Metal and Stone</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Category</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Curated Shops</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Shop For</a>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Gold-Name" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Gold
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List-Gold" onClick={ShowGoldOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Gold-Opt Show-Login-Box2" id="Login-Gold-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Bangle</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Earrings</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Gold Chains</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Pendants</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Finger Rings</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Necklace Set</a>
-            <a href="#Track Your Order" className="Go-info-link Bold-View">View All</a>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Diamond-Name" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Diamond
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List-Diamond" onClick={ShowDiamondOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Diamond-Opt Show-Login-Box2" id="Login-Diamond-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Bangle</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Earrings</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Gold Chains</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Pendants</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Finger Rings</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Necklace Set</a>
-            <a href="#Track Your Order" className="Go-info-link Bold-View">View All</a>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Earrings
-            </h6>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Rings
-            </h6>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Necklace Set
-            </h6>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Wedding-Name" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Wedding
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List-Wedding" onClick={ShowWeddingOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Wedding-Opt Show-Login-Box1" id="Login-Wedding-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Jewellery</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Engagement</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Shop For</a>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Gifting-Name" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Gifting
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List-Gifting" onClick={ShowGiftingOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Gifting-Opt Show-Login-Box1" id="Login-Gifting-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Below 500 USD</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">500 - 1000 USD</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">1000 - 2000 USD</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">2000 - 5000 USD</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Above 5000 USD</a>
-          </div>
-          <div className="In-Login-Box-Info">
-            <h6 className="information-link-head link-Head-Width Login-Names-In-Box" id="Collections-Name" style={{ lineHeight: 'normal', fontSize: '0.9rem', color: '#af5254' }}>
-              Collections
-            </h6>
-            <span className="material-symbols-outlined Show-InBox-Info" id="rotate-arrow-List-Collections" onClick={ShowCollectionsOPT}>
-              arrow_forward_ios
-            </span>
-          </div>
-          <div className="Show-Login-Box Show-Collections-Opt Show-Login-Box1" id="Login-Collections-Info">
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">Dharohar</a>
-            <a href="#Track Your Order" className="Track-Your-Order Go-info-link menu-items-Name-Color">kakatiya</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Aarambh</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Akshayam</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Aaheli</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Aveer</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Devyani</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Utsaah</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Mangalam</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Ekatvam</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Nyusha</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Utsava</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Swayahm</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Shagun</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Udayam</a>
-            <a href="#Track Your Order" className="Go-info-link menu-items-Name-Color">Little Big Moments</a>
-          </div>
-        </div>
+       
       </div>
 
       <div className="custome-bar" onClick={SliderMove}>
@@ -218,7 +87,7 @@ function NavBar() {
         <p className="logo">PBS</p>
       </div>
       <form action="#" className='w-3/5   Search_Feald'>
-      <input type="text" className='text-sm search focus:ring-0' placeholder="Search for Gold Jewellery, Diamond Jewellery and more... " />
+      <input type="search" className='text-sm search focus:ring-0' placeholder="Search for Gold Jewellery, Diamond Jewellery and more... " />
       <div className="Search-Icon-Box flex justify-center items-center">
       <button>
         <span class="material-symbols-outlined mt-1 text-red-900 text-3xl">

@@ -18,7 +18,7 @@ function AdminLogin() {
       console.log(user_Num_Email,userPassword,Remember);
       
       if (user_Num_Email=='Sagar' && userPassword=='Sag@123') {
-        alert("Correct");
+        // alert("Correct");
         toggleClass('.AdminLoginBox','AdminLoginBoxShow');
         toggleClass('.AccountContainer','AccountContainer-Show');
         toggleClass('.Admin-Block','Admin-Block-Show');
