@@ -36,21 +36,21 @@ function Home({
         {
           namCollectionImgTitle: 'Ring of Elegance',
           description: 'Perfect for Every Occasion',
-          CollectionImgs: './HomeImgs/CategoryImg1.png',
+          CollectionImgs: './HomeImgs/CollectionImg1.jpg',
           imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
           href: '#',
         },
         {
           namCollectionImgTitle: 'Golden Glamour',
           description: 'Classic gold earrings for timeless elegance.',
-          CollectionImgs: './HomeImgs/CategoryImg2.png',
+          CollectionImgs: './HomeImgs/CollectionImg2.jpg',
           imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
           href: '#',
         },
         {
           namCollectionImgTitle : 'Diamond Dreams',
           description: 'A modern silver necklace with a contemporary diamond design',
-          CollectionImgs: './HomeImgs/Demo.jpg',
+          CollectionImgs: './HomeImgs/CollectionImg3.jpg',
           imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
           href: '#',
         },
@@ -99,7 +99,7 @@ function Home({
 
 
 {/* Collection */}
-    <div className="bg-white pl-14 pr-14">
+    <div className="bg-white">
       <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
           <h2 className="text-2xl font-bold text-red-900"> PBS Collections</h2>
