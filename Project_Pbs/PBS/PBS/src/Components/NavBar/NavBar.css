@@ -48,7 +48,7 @@ body {
     right: 100%;
     top: 0;
     z-index: 2;
-    transition: 1s;
+    transition: .5s;
     background-color: #ffffff;
     
  
@@ -61,14 +61,14 @@ body {
 .Slider-Bar-Exit{
     font-size: 28px;
    
-    margin-top: 1%;
+    margin-top: -5%;
     color: #832729;
 }
 .Login-SignUp-Box{
     width: 100%;
-    height: 117px;
-    background-color: #f2e9e9;
-    /* border: 1px solid black; */
+    height: 100%;
+    
+    
    
 }
 .Login-Box{

@@ -94,6 +94,7 @@ const BanglesData =[
         "price":29850,
         "dec":"The design of this ring features two thin silver bands twisted together to form a single band. The twist adds a stylish and modern element to the ring, making it stand out."
     },
+   
 
 
 

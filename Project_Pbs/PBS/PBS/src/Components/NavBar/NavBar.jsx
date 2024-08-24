@@ -181,7 +181,7 @@ function NavBar() {
       <a href="#J" className="nav-item-name one-item">JEWELLERY</a>
       <a href="#C" className="nav-item-name">COLLECTIONS</a>
       <a href="#W" className="nav-item-name">WEDDING</a>
-      <a href="#B" className="nav-item-name">BLOG</a>
+      <a href="#B" className="nav-item-name">REVIEWS</a>
       <a href="#G" className="nav-item-name">GIFTING</a>
       <a href="#M" className="nav-item-name">MORE</a>
     </div>
