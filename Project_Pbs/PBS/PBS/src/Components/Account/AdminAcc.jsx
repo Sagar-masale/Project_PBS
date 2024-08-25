@@ -6,11 +6,11 @@ import './AdminAcc.css'
 
 function AdminAcc() {
   // Get Items Image
-  const fileInputRef = useRef(null);
+  // const fileInputRef = useRef(null);
 
-  const handleIconClick = () => {
-    fileInputRef.current.click();
-  };
+  // const handleIconClick = () => {
+  //   fileInputRef.current.click();
+  // };
 
   const ShowEditBox=()=>{
     document.querySelector('.Edit-Box').classList.toggle('Edit-Box-Show');
@@ -21,30 +21,30 @@ function AdminAcc() {
 
 
 
-  // Get Data about Items
-  const [formData, setFormData] = useState({
-    newimage: "",
-    category: "",
-    title: "",
-    price: "",
-    description: "",
-    about: ""
-  });
+  // // Get Data about Items
+  // const [formData, setFormData] = useState({
+  //   newimage: "",
+  //   category: "",
+  //   title: "",
+  //   price: "",
+  //   description: "",
+  //   about: ""
+  // });
 
-  const handleChange = (e) => {
+  // const handleChange = (e) => {
 
     
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    console.log(formData);
-  };
+  //   console.log(formData);
+  // };
 
 
 
@@ -71,10 +71,7 @@ function AdminAcc() {
     
     document.querySelector('.Users-Container').classList.toggle('Users-Container-Show');
   }
-  const onClickOrdersButton=()=>{
-    
-    document.querySelector('.Orders-Container').classList.toggle('Orders-Container-Show');
-  }
+
 
 
 
@@ -84,12 +81,6 @@ function AdminAcc() {
  
   
 
-  const admin = {
-    name: 'Admin',
-
-    bio: 'Admin of the platform. Managing user accounts, content, and site settings.',
-    profilePicture: 'data:image/jpeg;base64,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', // Placeholder image
-  };
 
   return (
     <>
@@ -233,104 +224,57 @@ We're excited to inform you about the implementation of a new security protocol 
     </div>
         <div className="AddItems-Container w-full  ">
           <div className="SubContainer-AddItems">
-          <div onClick={handleIconClick} className="AddItems-Box bg-gray-200 hover:bg-gray-300 flex items-center justify-center rounded-lg cursor-pointer">
-        <span class="material-symbols-outlined Add_Logo">
-         add
-        </span>
-
-        </div>
-        {/* <p className="AddName">
-          Add Image
-        </p> */}
-
-      <input
-        className="InfoAccess-Input-Feild"
-        type="file"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        value={formData.newimage}
-        onChange={handleChange}
-        // onChange={handleFileChange}   
-        />
-
-        {/* Form Add items details */}
-        <div className="FormFeilds-AddItems">
-        <form onSubmit={handleSubmit}>
-      <div className="Form-Section">
-        <label className="category text-black font-bold">Category:</label>
-        <select
-          className="SelectCategory-Items focus:ring-0"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        >
-          <option className="SelectItems-Name Select-Category-Name" value="">Select Category</option>
-          <option className="SelectItems-Name  " value="Finger Rings">Finger Rings</option>
-          <option className="SelectItems-Name" value="Earrings">Earrings</option>
-          <option className="SelectItems-Name" value="Pendants">Pendants</option>
-          <option className="SelectItems-Name" value="mangalsutra">mangalsutra</option>
-          <option className="SelectItems-Name" value="Bangles">Bangles</option>
-          <option className="SelectItems-Name" value="Chains">Chains</option>
-          {/* Add more categories as needed */}
-        </select>
+          <p className="form-title text-start ml-4 text-gray-500">Add items </p>
+          <form className="form">
+          <label className="custum-file-upload" for="file" required >
+          <div className="icon">
+          <span className="material-symbols-outlined text-6xl text-gray-500">
+           upload_file
+          </span>
+          </div>
+          <div className="text">
+          <span>Click to upload image</span>
+          </div>
+          <input type="file" id="file"/>
+        </label>
 
 
-
-
-
-
-
-
+  
+     
+      <div className="input-container mt-10">
+        <p className="AddItems-Title">
+          Enter Stocks
+        </p>
+        <input type="text" placeholder="Stocks" required className="focus:ring-0"  />
       </div>
-      <div className="SetCssFeild">
-      <div >
-        <label className="Heading-LabelFor-AddItems">Title:</label>
-        <input
-          className="InfoAccess-Input-Feild  focus:ring-0"
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
+      <div className="input-container">
+        <p className="AddItems-Title">
+          Enter Title
+        </p>
+        <input type="text" placeholder="Title" required className="focus:ring-0" />
       </div>
-
-      <div>
-        <label className="Heading-LabelFor-AddItems ">Price:</label>
-        <input
-          className="InfoAccess-Input-Feild  focus:ring-0"
-          type="text"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-        />
+      <div className="input-container">
+        <p className="AddItems-Title">
+          Enter Price
+        </p>
+        <input type="text" placeholder="Price" required className="focus:ring-0" />
       </div>
-
-      <div>
-        <label className="Heading-LabelFor-AddItems">Description:</label>
-        <input
-          className="InfoAccess-Input-Feild  focus:ring-0"
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
+      <div className="input-container">
+        <p className="AddItems-Title">
+          Enter Gender
+        </p>
+        <input type="text" placeholder="Gender" required className="focus:ring-0" />
       </div>
-
-      <div>
-        <label className="Heading-LabelFor-AddItems">About:</label>
-        <input
-          className="InfoAccess-Input-Feild  focus:ring-0"
-          type="text"
-          name="about"
-          value={formData.about}
-          onChange={handleChange}
-        />
+      <div className="SubmitBox w-full flex justify-end">
+      <button type="submit" className="submit">
+        Submit
+      </button>
       </div>
-
-      <button type="submit" className="AddItems-Submit-Buttom w-full h-12 rounded-md text-white bg-red-900 hover:bg-red-800 ">Submit</button>
-      </div>
+   
     </form>
-        </div>
+ 
+
+
           </div>
       </div>
 
