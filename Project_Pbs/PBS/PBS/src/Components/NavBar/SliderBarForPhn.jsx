@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SliderBarForPhn.css';
 function SliderBarForPhn() {
+	const SlideBarValue =(e)=>{
+		e.preventDefault()
+		console.log(userSlideSearchValue);
+	}
     const SliderMove = () => {
         // Logic for SliderMove
         document.getElementById("SliderBar").classList.toggle("Slider-Bar-In");
        
+	   
       };
+	  const [userSlideSearchValue, setUserSlideSearchValue]=useState('');	
   return (
     <>
 <div className="flex flex-col h-full  dark:bg-gray-50 dark:text-gray-800">
@@ -19,6 +25,7 @@ function SliderBarForPhn() {
 			
 		
 		</div>
+		<form action="#" onSubmit={SlideBarValue}  className="SlideBar">
 		<div className="relative ">
 			<span className="absolute inset-y-0 left-0 flex items-center py-4">
 				<button type="submit" className="p-2">
@@ -27,8 +34,9 @@ function SliderBarForPhn() {
                 </span>
 				</button>
 			</span>
-			<input type="search" name="Search" placeholder="Search..." className="search focus:ring-0 w-full py-2 pl-10 text-sm dark:border- rounded-md focus:outline-none  dark:text-gray-800 " />
+			<input type="search" onChange={(e)=>setUserSlideSearchValue(e.target.value)}  name="Search" placeholder="Search..." className="search focus:ring-0 w-full py-2 pl-10 text-sm dark:border- rounded-md focus:outline-none  dark:text-gray-800 " />
 		</div>
+		</form>
 	 </div>
 		<div className="flex-1 pl-2">
 			<ul className="pt-2   space-y-1 text-sm flex flex-col gap-3">

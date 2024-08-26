@@ -1,87 +1,39 @@
-import React, { useRef } from "react";
-import { useState } from "react";
+import React from "react";
 import './AdminAcc.css'
 
 
 
 function AdminAcc() {
-  // Get Items Image
-  // const fileInputRef = useRef(null);
-
-  // const handleIconClick = () => {
-  //   fileInputRef.current.click();
-  // };
-
-  const ShowEditBox=()=>{
-    document.querySelector('.Edit-Box').classList.toggle('Edit-Box-Show');
-    console.log("Cli");
-    
+  const AddItemsData=(e)=>{
+    e.preventDefault()
   }
+  const toggleClass = (selector, className) => {
+    document.querySelector(selector).classList.toggle(className);
+  };
+
+  const ShowEditBox = () => {
+    toggleClass('.Edit-Box', 'Edit-Box-Show');
+  };
+  const onClickAddItemsButton = () => {
+    toggleClass('.Edit-Box', 'Edit-Box-Show');
+    toggleClass('.AddItems-Container', 'AddItems-Container-Show');
+  };
+  const onClickDeleteItemsButton = () => {
+    toggleClass('.Edit-Box', 'Edit-Box-Show');
+    toggleClass('.DeleteItems-Container', 'DeleteItems-Container-Show');
+  };
+  const onClickUpdateItemsButton = () => {
+    toggleClass('.Edit-Box', 'Edit-Box-Show');
+    toggleClass('.UpdateItems-Container', 'UpdateItems-Container-Show');
+  };
+  const onClickUsersButton = () => {
+    toggleClass('.Edit-Box', 'Edit-Box-Show');
+    toggleClass('.Users-Container', 'Users-Container-Show');
+  };
 
 
-
-
-  // // Get Data about Items
-  // const [formData, setFormData] = useState({
-  //   newimage: "",
-  //   category: "",
-  //   title: "",
-  //   price: "",
-  //   description: "",
-  //   about: ""
-  // });
-
-  // const handleChange = (e) => {
-
-    
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   console.log(formData);
-  // };
-
-
-
-
-
-  const ShowEditOpt =()=>{
-    document.querySelector('.Setting-Opt-Box').classList.toggle('Setting-Opt-Box-Show');
-  }
-
-  const onClickAddItemsButton=()=>{
-    
-    document.querySelector('.AddItems-Container').classList.toggle('AddItems-Container-Show');
-  }
-
-  const onClickDeleteItemsButton=()=>{
-    
-    document.querySelector('.DeleteItems-Container').classList.toggle('DeleteItems-Container-Show');
-  }
-  const onClickUpdateItemsButton=()=>{
-    
-    document.querySelector('.UpdateItems-Container').classList.toggle('UpdateItems-Container-Show');
-  }
-  const onClickUsersButton=()=>{
-    
-    document.querySelector('.Users-Container').classList.toggle('Users-Container-Show');
-  }
-
-
-
-
-
-  
 
  
-  
-
-
   return (
     <>
     <div className=' pt-5 w-full h-full  flex   justify-center Admin-Main-Container'>
@@ -94,7 +46,7 @@ function AdminAcc() {
 			<h4 className="text-lg font-semibold text-center md:text-left">Hello Sagar</h4>
 			<p className="text-gray-400">Dear Admins,<br /><br />
 
-We're excited to inform you about the implementation of a new security protocol that will significantly enhance the protection of our system and user data. </p>
+      We're excited to inform you about the implementation of a new security protocol that will significantly enhance the protection of our system and user data. </p>
 		</div>
 	</div>
 	<div className="flex justify-center pt-4 space-x-4 align-center">
@@ -225,8 +177,8 @@ We're excited to inform you about the implementation of a new security protocol 
         <div className="AddItems-Container w-full  ">
           <div className="SubContainer-AddItems">
           <p className="form-title text-start ml-4 text-gray-500">Add items </p>
-          <form className="form">
-          <label className="custum-file-upload" for="file" required >
+          <form className="form" onSubmit={AddItemsData}>
+          <label className="custum-file-upload" for="file"  >
           <div className="icon">
           <span className="material-symbols-outlined text-6xl text-gray-500">
            upload_file
@@ -245,25 +197,25 @@ We're excited to inform you about the implementation of a new security protocol 
         <p className="AddItems-Title">
           Enter Stocks
         </p>
-        <input type="text" placeholder="Stocks" required className="focus:ring-0"  />
+        <input type="text" placeholder="Stocks"  className="focus:ring-0"  />
       </div>
       <div className="input-container">
         <p className="AddItems-Title">
           Enter Title
         </p>
-        <input type="text" placeholder="Title" required className="focus:ring-0" />
+        <input type="text" placeholder="Title"  className="focus:ring-0" />
       </div>
       <div className="input-container">
         <p className="AddItems-Title">
           Enter Price
         </p>
-        <input type="text" placeholder="Price" required className="focus:ring-0" />
+        <input type="text" placeholder="Price"  className="focus:ring-0" />
       </div>
       <div className="input-container">
         <p className="AddItems-Title">
           Enter Gender
         </p>
-        <input type="text" placeholder="Gender" required className="focus:ring-0" />
+        <input type="text" placeholder="Gender"  className="focus:ring-0" />
       </div>
       <div className="SubmitBox w-full flex justify-end">
       <button type="submit" className="submit">
@@ -298,13 +250,6 @@ We're excited to inform you about the implementation of a new security protocol 
            {/* User Block */}
       <div className="Users-Container w-full ">
         <h1>User block</h1>
-      </div>
-
-
-      
-           {/* Orders Block */}
-      <div className="Orders-Container w-full ">
-        <h1>Order block</h1>
       </div>
 
 
