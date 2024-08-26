@@ -10,3 +10,13 @@
     justify-content: center;
     background-color: #f2e9e9;
 }
+.User-LogOunt{
+    display: none;
+}
+.Profile-Box{
+
+    /* border: 1px solid red; */
+    position:absolute;
+    bottom: 5%;
+    
+}

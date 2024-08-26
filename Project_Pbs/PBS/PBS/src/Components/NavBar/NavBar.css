@@ -41,7 +41,7 @@ body {
 }
 .Slider-Bar{
     width: 80%;
-    height: 100vh;
+    height: 100%;
     position: fixed;
     display: flex;
     justify-content: start;
