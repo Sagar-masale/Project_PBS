@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SliderBarForPhn.css';
 function SliderBarForPhn() {
+	const toggleClass = (selector, className) => {
+	  document.querySelector(selector).classList.toggle(className);
+	};
 	const SlideBarValue =(e)=>{
 		e.preventDefault()
 		console.log(userSlideSearchValue);
 	}
     const SliderMove = () => {
         // Logic for SliderMove
-        document.getElementById("SliderBar").classList.toggle("Slider-Bar-In");
-       
-	   
-      };
+        toggleClass('#SliderBar','Slider-Bar-In');
+    };
+	const ShowLoginPassBox = () => {
+		toggleClass('#SliderBar','Slider-Bar-In');
+		toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
+	};
 	  const [userSlideSearchValue, setUserSlideSearchValue]=useState('');	
   return (
     <>
@@ -93,7 +98,7 @@ function SliderBarForPhn() {
 						<span>Settings</span>
 					</button>
 				</li>
-				<li className="rounded-sm User-LogIn">
+				<li className="rounded-sm User-LogIn" onClick={ShowLoginPassBox}>
 					<button className="flex items-center p-2 space-x-3 rounded-md">
 					<span class="material-symbols-outlined  text-red-900">
                      login

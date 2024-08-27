@@ -82,9 +82,15 @@ function LoginUsingOtp() {
     <div className="Login-Main-Container">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white">
+        <span
+            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
+            onClick={CloseLoginBox}
+          >
+            close
+          </span>
           <h1 className="LoginName text-3xl text-red-800">Login</h1>
 
-          <div className="Top-Side mt-8 w-full">
+          <div className="Top-Side mt-8 ">
             <span className="TypeLogin1 TypeLogin1-Otp">
               <span className="UseOtp cursor-pointer">Using OTP</span>
             </span>
@@ -93,7 +99,7 @@ function LoginUsingOtp() {
             </span>
           </div>
 
-          <div className="Input-Username mt-8">
+          <div className="Input-Username flex justify-center mt-8">
             <form action="#" className="FormUser">
               <input
                 type="text"
@@ -146,9 +152,10 @@ function LoginUsingOtp() {
               Sign Up Now
             </span>
           </span>
+    
         </div>
 
-        <div className="RightSide-Block-Login block justify-center align-middle">
+        <div className="RightSide-Block-Login  justify-center align-middle">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
             onClick={CloseLoginBox}

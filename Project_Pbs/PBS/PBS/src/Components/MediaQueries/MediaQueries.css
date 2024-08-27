@@ -8,9 +8,7 @@
     .LeftSide-Block-Login{
         width: 60%;
     }
-    .RightSide-Block-Login{
-        display: none;
-    }
+
 
     
     }
@@ -293,6 +291,28 @@
 
     }
     @media screen and (max-width:680px  ){
+        .Login-Pass-Container{
+            width: 100%;
+        }
+        .LeftSide-Block-Login{
+            width: 100%;
+            margin-left: 4%;
+            margin-right: 4%;
+            border-top-right-radius:0.5rem;
+            border-bottom-right-radius:0.5rem;
+        }
+        .LoginName{
+            margin-top: 10%;
+        }
+        .Close-Login-Box-Arrow-Phn{
+            color: #832729;
+            margin-left: auto;
+            font-size: 30px;
+            display: block;
+        }
+        .RightSide-Block-Login{
+            display: none;
+        }
 
         .list-items {
             height: 234px;
@@ -309,6 +329,19 @@
      
     }
     @media screen and (max-width:425px  ){
+        .LoginName{
+            margin-top: 2%;
+        }
+        .Top-Side{
+            width: 90%;
+        }
+        .FormUser {
+            width: 90%;
+            font-size: 16px;
+        }
+        .Remember{
+            font-size: 17px;
+        }
         .top-logo {
             font-size: 26px;
         }

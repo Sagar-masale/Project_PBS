@@ -52,6 +52,7 @@
 .Top-Side{
     width: 100%;
     display: flex;   
+    justify-content: center;
     flex-direction: row;
 }
 .TypeLogin1,.TypeLogin2{
@@ -104,6 +105,7 @@
     border: 1px solid gray;
 }
 .RightSide-Block-Login{
+    display:block;
     width: 240px;
     height: 80vh;
 }
@@ -122,6 +124,8 @@
 .NewUser{
     margin-top: 10%;
 }
-
+.Close-Login-Box-Arrow-Phn{
+    display: none;
+}
 
 
