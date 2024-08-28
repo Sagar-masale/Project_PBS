@@ -9,10 +9,13 @@
 }
 .LoginOtpBox,.LoginPassBox,.SignUpBox,.AdminLoginBox{
     top: 0;
+    padding-top: 15%;
+    padding-bottom: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    border: 1px solid red;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.519) ;
     display: none;

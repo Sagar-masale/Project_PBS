@@ -291,6 +291,7 @@
 
     }
     @media screen and (max-width:680px  ){
+   
         .Login-Pass-Container{
             width: 100%;
         }
@@ -329,6 +330,9 @@
      
     }
     @media screen and (max-width:425px  ){
+        .Login-Main-Container{
+            margin-bottom: 15%;
+        }
         .LoginName{
             margin-top: 2%;
         }
@@ -340,10 +344,18 @@
             font-size: 16px;
         }
         .Remember{
-            font-size: 17px;
+            font-size: 16px;
+        }
+        .UseOtp{
+            font-size: 15px;
         }
         .top-logo {
             font-size: 26px;
+        }
+        .Button-Submit{
+            font-size: 14px;
+            width: 150px;
+            height: 40px;
         }
         .nav-link-logos{
             gap: 10%;

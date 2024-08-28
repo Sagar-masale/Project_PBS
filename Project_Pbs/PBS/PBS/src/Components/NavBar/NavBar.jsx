@@ -172,16 +172,16 @@ function NavBar() {
         <a href="#M" className="nav-item-name">MORE</a>
       </div>
 
-      <div className="AdminLoginBox fixed z-20 w-full">
+      <div className="AdminLoginBox fixed z-20 w-full  overflow-auto">
         <AdminLogin />
       </div>
-      <div className="SignUpBox fixed z-20 w-full">
+      <div className="SignUpBox fixed z-20 w-full overflow-auto">
         <SignupUser />
       </div>
       <div className="LoginOtpBox fixed z-20 overflow-auto">
         <LoginUsingOtp />
       </div>
-      <div className="LoginPassBox fixed z-20 w-full">
+      <div className="LoginPassBox fixed z-20 w-full  overflow-auto">
         <LoginUsingPass />
       </div>
     </>

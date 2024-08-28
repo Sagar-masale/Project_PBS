@@ -85,6 +85,12 @@ function LoginUsingPass() {
     <div className="Login-Main-Container">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
+        <span
+            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
+            onClick={CloseLoginBox}
+          >
+            close
+          </span>
           <h1 className="LoginName text-3xl text-red-800 mt-6">Login</h1>
 
           <div className="Top-Side mt-8">
@@ -96,7 +102,7 @@ function LoginUsingPass() {
             </span>
           </div>
 
-          <div className="Input-Username mt-8">
+          <div className="Input-Username flex justify-center mt-8">
             <form action="#" className="FormUser">
               <input
                 type="text"
@@ -110,7 +116,7 @@ function LoginUsingPass() {
                 name="Password"
                 required
                 placeholder="Enter Password"
-                className="Input-User focus:ring-0 mt-9"
+                className="Input-User  focus:ring-0 mt-9"
               />
               <div className="CheckBoxes mt-10 flex flex-col gap-2">
                 <span className="CheckBox-Gap flex items-center gap-3">
@@ -142,7 +148,7 @@ function LoginUsingPass() {
               <input
                 type="submit"
                 value="Submit"
-                className="mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200"
+                className="mt-10 text-white bg-red-800  rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
               />
             </form>
           </div>
@@ -158,13 +164,14 @@ function LoginUsingPass() {
           </span>
         </div>
 
-        <div className="RightSide-Block-Login block justify-center align-middle w-64">
+        <div className="RightSide-Block-Login  justify-center align-middle w-64">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
             onClick={CloseLoginBox}
           >
             close
           </span>
+          
           <img
             src="./LoginImgs/LoginImg1.png"
             alt="Login visual"

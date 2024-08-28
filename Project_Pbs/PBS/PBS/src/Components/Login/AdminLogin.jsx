@@ -39,6 +39,12 @@ function AdminLogin() {
       
     <div className="Login-Pass-Container">
       <div className="LeftSide-Block-Login rounded-l-lg bg-white h-full">
+      <span
+            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
+            onClick={CloseLoginBox}
+          >
+            close
+          </span>
         <h1 className="LoginName text-3xl text-red-800">Admin</h1>
         <div className="Top-Side mt-8">
           <span className="TypeLogin1 AdminLogin-TypeOtp">
@@ -95,7 +101,7 @@ function AdminLogin() {
  
       </div>
 
-      <div className="RightSide-Block-Login block justify-center align-middle w-64">
+      <div className="RightSide-Block-Login  justify-center align-middle w-64">
         <span
           className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
           onClick={CloseLoginBox}

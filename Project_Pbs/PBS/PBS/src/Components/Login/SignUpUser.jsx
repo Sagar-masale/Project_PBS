@@ -75,12 +75,18 @@ function SignUpUser() {
   };
 
   return (
-    <div className="Login-Main-Container">
+    <div className="Login-Main-Container ">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
+        <span
+            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
+            onClick={CloseLoginBox}
+          >
+            close
+          </span>
           <h1 className="LoginName text-3xl text-red-800 mt-5">Sign Up</h1>
 
-          <div className="Input-Username mt-5">
+          <div className="Input-Username flex justify-center mt-5">
             <form action="#" className="FormUser">
               <div className="SetInput-Position w-full flex flex-col gap-8">
                 <input
@@ -141,7 +147,7 @@ function SignUpUser() {
               <input
                 type="submit"
                 value="Continue"
-                className="mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200"
+                className="mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
               />
             </form>
           </div>
@@ -157,7 +163,7 @@ function SignUpUser() {
           </span>
         </div>
 
-        <div className="RightSide-Block-Login block justify-center align-middle w-64">
+        <div className="RightSide-Block-Login  justify-center align-middle w-64">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
             onClick={CloseLoginBox}
