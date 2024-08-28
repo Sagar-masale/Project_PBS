@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-  
+    
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.519) ;
     display: none;
@@ -258,6 +258,71 @@ body {
     margin-left: 9.8%;
 }
 
+/* From Uiverse.io by shadowmurphy */ 
+.input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-right: 7%;
+    width: 300px;
+   
+    background-color: #fffffffd;
+    justify-content: center;
+    border-radius: 5px;
+   
+  }
+  .NavMore-Items{
+    display: none;
+  }
+  .NavMore-Items-Show{
+    display: flex;
+  }
+  
+  .value {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: #000;
+    display: flex;
+    position: relative;
+    gap: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .value:not(:active):hover,
+  .value:focus {
+    background-color: #f6f6f6aa;
+  }
+  
+  .value:focus,
+  .value:active {
+    
+    background-color: #f6f6f6aa;
+    outline: none;
+  }
+  
+  .value::before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -10px;
+    width: 5px;
+    height: 80%;
+    background-color:#832729;
+    border-radius: 5px;
+    opacity: 0;
+    border-bottom: 1px solid red;
+  }
+  
+  .value:focus::before,
+  .value:active::before {
+    opacity: 1;
+  }
+  
+  .value svg {
+    width: 15px
+  }
 
 
 

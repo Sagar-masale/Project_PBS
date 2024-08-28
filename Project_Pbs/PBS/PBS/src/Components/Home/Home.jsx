@@ -1,11 +1,12 @@
 import React from 'react';
-import SimpleImageSlider from "react-simple-image-slider";
+
 import '../NavBar/NavBar';
 import './Home.css';
 
 import '../MediaQueries/MediaQueries.css';
 import { Link } from 'react-router-dom';
 import MainPage from '../images/Home.jpg';
+
 import MainPage2nd from '../images/Products.jpg';
 import MainPage3rd from '../images/Product2.jpg';
 import LineImg from '../images/line.png';
@@ -25,11 +26,6 @@ function Home({
 }){
 
   
-    const images = [
-        { url: MainPage},
-        { url: MainPage2nd},
-        { url: MainPage3rd},
-      ];
 
 
       const callouts = [
@@ -64,22 +60,31 @@ function Home({
 
  <div className="img-slide">
 
-        <div>
-      <SimpleImageSlider
-        width={"100%"}
-        height={"100%"}
-        images={images}
-        // showBullets={true}
-        // showNavs={true}
-        slideDuration={1}
-        autoPlay={true}
-        autoPlayDelay={4}
-        navStyle={1}
-        navSize={40}
-        
-      />
+
+
+ <div id="carouselExampleAutoplaying" className="SlideImagesBox carousel slide " data-bs-ride="ride">
+  <div className="carousel-inner ImageSlide-Carousel-Inner">
+    <div className="carousel-item active">
+      <img src={MainPage}className="d-block w-100" alt="..."/>
     </div>
-   
+    <div className="carousel-item">
+      <img src={MainPage2nd}className="d-block w-100" alt="..."/>
+    </div>
+    <div className="carousel-item">
+      <img src={MainPage3rd}className="d-block w-100" alt="..."/>
+    </div>
+  </div>
+  <button className="carousel-control-prev w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+  <span className="material-symbols-outlined Carousel-Arrows">
+   arrow_back_ios_new
+  </span>
+  </button>
+  <button className="carousel-control-next w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+  <span className="material-symbols-outlined Carousel-Arrows">
+   arrow_forward_ios
+  </span>
+  </button>
+</div>
    </div>
    <div className="shop-category Category-List-First-Box">
 <h2 className="shop-c">Shop By Category</h2><br/>
