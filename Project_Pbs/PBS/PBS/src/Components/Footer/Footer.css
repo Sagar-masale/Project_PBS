@@ -1,32 +1,26 @@
+
+.FooterInformation-Box{
+    
+    display: flex;
+    flex-direction: column;
+    
+}
+.info-box {
+    gap: 15px;
+}
 @media screen and (max-width:768px  ) {
-    .Show-First-Box {
+    .Show-First-Box,.Show-Second-Box,  .Show-Third-Box {
         width: 100%;
         height: 100%;
         border:none;
-        /* border: 2px solid red; */
+   
+        
         display: none;
     }
-    .Show-First-Box-Clicked{
+    .Show-First-Box-Clicked,   .Show-Second-Box-Clicked,.Show-Third-Box-Clicked{
         display: flex;
     }
-    .Show-Second-Box{
-        width: 100%;
-        height: 100%;
-        border: none;
-        /* border: 2px solid red; */
-        display: none;
-    }
-    .Show-Second-Box-Clicked{
-        display: flex;
-    }
-    .Show-Third-Box{
-        width: 100%;
-        height: 100%;
-        border: none;
-        /* border: 2px solid red; */
-        display: none;
-    }
-    .Show-Third-Box-Clicked{
-        display: flex;
-    }
+    
+
+
 }

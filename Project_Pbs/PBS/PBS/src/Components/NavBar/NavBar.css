@@ -128,7 +128,7 @@ body {
     align-items: center;
     flex-direction: row;
     background-color: #f2e9e9;
-    z-index: 2;
+    z-index: 9999;
 }
 .custome-bar{
     display: none;

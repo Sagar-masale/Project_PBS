@@ -49,40 +49,39 @@ function Footer() {
       <div className="Occasion-category End-category">
         <div className="End-info">
           <div className="fit-info-box">
-            <div className="info-box info-box1">
+            <div className="info-box   FooterInformation-Box">
               <h6 className="information-link-head link-Head-Width">Quick links</h6>
               <span className="Scroll-Links-Add" id="Scroll-first-Add">+</span>
               <span className="Scroll-Links-Remove" id="Scroll-First-remove">-</span>
-              <div className="Show-First-Box info-box info-box1 " id="Clicked-One">
-                <a href="#Track Your Order" className="Track-Your-Order Go-info-link Go-info-link-On-Click-One ">Customer Reviews</a>
-                <a href="#Return" className="Track-Your-Order Go-info-link Go-info-link-On-Click-One ">Store Locator</a>
-                <a href="#Shipments" className="Go-info-link Go-info-link-On-Click-One ">Jewellery Care</a>
-                {/* <a href="#Encircle Program" className="Go-info-link Go-info-link-On-Click-One ">Encircle Program</a> */}
-                <a href="#Find a Store" className="Go-info-link Go-info-link-On-Click-One SetPadding">Find a Store</a>
+              <div className="Show-First-Box info-box  " id="Clicked-One">
+                <a href="#Track Your Order" className="FooterInformations   ">Customer Reviews</a>
+                <a href="#Return" className="FooterInformations  ">Store Locator</a>
+                <a href="#Shipments" className="FooterInformations">Jewellery Care</a>
+                <a href="#Find a Store" className="  SetPadding">Find a Store</a>
               </div>
             </div>
-            <div className="info-box info-box2">
+            <div className="info-box  info-box2 FooterInformation-Box">
               <h6 className="information-link-head link-Head-Width">Info</h6>
               <span className="Scroll-Links-Add" id="Scroll-Second-Add">+</span>
               <span className="Scroll-Links-Remove" id="Scroll-Second-remove">-</span>
-              <div className="Show-Second-Box info-box info-box1" id="Clicked-Two">
-                <a href="#Diamond Guide" className="Track-Your-Order Go-info-link Go-info-link-On-Click-Two">Shipping & Returns</a>
-                <a href="#Blog" className="Go-info-link Go-info-link-On-Click-Two">Privacy Policy</a>
-                <a href="#Gemstone Guide" className="Go-info-link Go-info-link-On-Click-Two">International Shipping</a>
-                <a href="#Metal Guide" className="Go-info-link Go-info-link-On-Click-Two">FAQs & Support</a>
-                <a href="#About PBS" className="Go-info-link Go-info-link-On-Click-Two SetPadding">About PBS</a>
+              <div className="Show-Second-Box info-box " id="Clicked-Two">
+                <a href="#Diamond Guide" className="FooterInformations  ">Shipping & Returns</a>
+                <a href="#Blog" className=" ">Privacy Policy</a>
+                <a href="#Gemstone Guide" className=" ">International Shipping</a>
+                <a href="#Metal Guide" className=" ">FAQs & Support</a>
+                <a href="#About PBS" className="  SetPadding">About PBS</a>
               </div>
             </div>
-            <div className="info-box info-box3">
+            <div className="info-box  info-box3 FooterInformation-Box">
               <h6 className="information-link-head link-Head-Width">Contact us</h6>
               <span className="Scroll-Links-Add" id="Scroll-Third-Add">+</span>
               <span className="Scroll-Links-Remove" id="Scroll-Third-remove">-</span>
-              <div className="Show-Third-Box info-box info-box1" id="Clicked-Three">
-                <a href="#Track Your Order" className="Track-Your-Order Go-info-link Go-info-link-On-Click-Third">PBSsupport@Goldcompany.com</a>
-                <span className="contact-info Track-Your-Order Go-info-link Go-info-link-On-Click-Third SetPadding">For any suggestions, queries or complaints please contact us :<a href="#Track Your Order" className="Track-Your-Order Go-info-link Go-info-link-On-Click-Third">9999999999</a></span>
+              <div className="Show-Third-Box info-box " id="Clicked-Three">
+                <a href="#Track Your Order" className="FooterInformations  ">PBSsupport@Goldcompany.com</a>
+                <span className="contact-info FooterInformations   SetPadding">For any suggestions, queries or complaints please contact us :<a href="#Track Your Order" className="FooterInformations  ">9999999999</a></span>
               </div>
             </div>
-            <div className="info-box info-box4">
+            <div className="info-box  info-box4 FooterInformation-Box">
               <h6 className="information-link-head Follow-Us">Follow Us On
                 <a href="#face" className="Go-FaceBook"><i className='bx bxl-facebook'></i></a>
                 <a href="https://instagram.com/p.b.salegaon_jewellers_?igshid=NzZlODBkYWE4Ng==" className="Go-InstaGram"><i className='bx bxl-instagram'></i></a>

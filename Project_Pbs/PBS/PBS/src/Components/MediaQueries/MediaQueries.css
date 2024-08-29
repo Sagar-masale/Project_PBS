@@ -122,6 +122,9 @@
         .Gender-List {
             border-radius: 5%;
         }
+        .carousel-control-prev,.carousel-control-next{
+            display: none;
+        }
         /* .image-lists {
             width: 93%;
            
@@ -250,7 +253,7 @@
         .information-link-head {
             font-weight: 400;
             font-size: 1rem;
-            line-height: 3.5;
+            line-height: 1.5;
         }
         .Bold-Name{
             font-weight: bold;
@@ -365,10 +368,7 @@
         .AccountContainer{
             display: none;
         }
-        .img-slide{
-            height: 200px;
-            margin-top: -10px;
-        }
+      
         .instruction {
             width: 75%;
         }
@@ -424,9 +424,7 @@
         .Scroll-Links-Remove {
             margin-top: -7.5%;
         }
-        .information-link-head {
-            line-height: 2;
-        }
+       
         .End-info {
             margin-bottom: auto;
             background-color: #f2e9e9;

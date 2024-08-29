@@ -28,7 +28,7 @@ function Home({
   
 
 
-      const callouts = [
+      const Collections = [
         {
           namCollectionImgTitle: 'Ring of Elegance',
           description: 'Perfect for Every Occasion',
@@ -53,7 +53,7 @@ function Home({
         
         
       ]
-      
+    
       
     return(
         <>
@@ -65,7 +65,7 @@ function Home({
  <div id="carouselExampleAutoplaying" className="SlideImagesBox carousel slide " data-bs-ride="ride">
   <div className="carousel-inner ImageSlide-Carousel-Inner">
     <div className="carousel-item active">
-      <img src={MainPage}className="d-block w-100" alt="..."/>
+      <img  src={MainPage}className="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
       <img src={MainPage2nd}className="d-block w-100" alt="..."/>
@@ -75,22 +75,22 @@ function Home({
     </div>
   </div>
   <button className="carousel-control-prev w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-  <span className="material-symbols-outlined Carousel-Arrows">
-   arrow_back_ios_new
+  <span className="material-symbols-outlined Carousel-Arrows ">
+  chevron_left
   </span>
   </button>
   <button className="carousel-control-next w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
   <span className="material-symbols-outlined Carousel-Arrows">
-   arrow_forward_ios
+  chevron_right
   </span>
   </button>
 </div>
    </div>
-   <div className="shop-category Category-List-First-Box">
+   <div className="shop-category Category-List-First-Box  flex flex-col justify-center items-center">
 <h2 className="shop-c">Shop By Category</h2><br/>
 <p className="instruction">Browse through your favourite categories. We've got them all!</p><br/>
 
-<div className="image-lists Category-List-First " id="Category-Move">
+<div className="image-lists Category-List-First" id="Category-Move">
      <Link to="/Ring-Page" className="list-items items1"><div className="list-item1" ><div className="items-background"><img src='./RingImgs/imgR2.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle1}</h6></div> </div></Link> 
      <Link to="/Earrings-Page" className="list-items items2"><div className="list-item2" ><div className="items-background"><img src='./Erraings/imgR3.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle2}</h6></div> </div></Link> 
      <Link to="/Pendants-Page" className="list-items items3"><div className="list-item3" ><div className="items-background"><img src='./Pendants/MainPendant.webp' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle3}</h6></div> </div></Link> 
@@ -104,34 +104,41 @@ function Home({
 
 
 {/* Collection */}
-    <div className="bg-white">
+    <div className="bg-white ">
       <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
-        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32 ">
           <h2 className="Collection-Name text-2xl font-bold text-red-900">Collections</h2>
 
-          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-            {callouts.map((callout) => (
-              <div key={callout.CollectionImgTitle} className="group relative">
+          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0 ">
+            {Collections.map((Collections) => (
+              <div key={Collections.CollectionImgTitle} className="group relative">
                 <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
                   <img
-                    alt={callout.imageAlt}
-                    src={callout.CollectionImgs}
+                    alt={Collections.imageAlt}
+                    src={Collections.CollectionImgs}
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
                 <h3 className="mt-6 text-sm text-gray-500">
-                  <a href={callout.href}>
+                  <a href={Collections.href}>
                     <span className="absolute inset-0" />
-                    {callout.namCollectionImgTitle}
+                    {Collections.namCollectionImgTitle}
                   </a>
                 </h3>
-                <p className="text-base font-semibold text-gray-900">{callout.description}</p>
+                <p className="text-base font-semibold text-gray-900">{Collections.description}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
     </div>
+
+    {/* Wedding Section */}
+    
+    <div className="bg-white ">
+     
+    </div>
+    
 
         </>
     )
