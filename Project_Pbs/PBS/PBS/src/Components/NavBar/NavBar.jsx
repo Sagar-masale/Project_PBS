@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
+import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
 import AdminLogin from '../Login/AdminLogin';
@@ -34,6 +35,51 @@ function NavBar() {
     toggleClass('.AccountShow', 'AccountShowBlock');
   };
 
+  const navigate = useNavigate();
+  const navItemsLinks=[
+    {
+      id : 1,
+      name: 'STORE',
+      slug: '/Store-Deatils',
+      logo: 'add_business',
+      active: true,
+    } ,
+    {
+      id : 2,
+      name: 'ACCOUNT',
+      slug: '/',
+      logo: 'person ',
+      active: true,
+    } ,
+    {
+      id : 3,
+      name: 'DIAMONDS',
+      slug: '/Diamond-Details',
+      logo: 'diamond',
+      active: true,
+    } ,
+    {
+      id : 4,
+      name: 'WISHLIST',
+      slug: '/WishList-Deatils',
+      logo: 'favorite',
+      active: true,
+    } ,
+    {
+      id : 5,
+      name: 'CART',
+      slug: '/Cart-Deatils',
+      logo: 'shopping_cart',
+      active: true,
+    } ,
+    
+    
+  ]
+  
+    // if (navigate.item.id == 2){
+    // NavAccount();
+    // }
+  
   return (
     <>
       <div className="Navheader Navcontainer">
@@ -69,8 +115,22 @@ function NavBar() {
           </div>
         </form>
 
-        <div className="nav-link-logos flex align-middle">
-          <NavLink
+        <div className="navItems-Links-Block">
+          <ul className='nav-link-logos flex align-middle'>
+          {navItemsLinks.map((item)=>
+            item.active ? (
+              <li key={item.id} onClick={()=>  navigate(item.slug)}>
+              <span className="material-symbols-outlined top-logo flex flex-col text-center text-red-900 cursor-pointer"
+              
+              >
+              {item.logo}
+              <span className="logo-name"> {item.name} </span>
+            </span>
+              </li>
+            ) : null
+          )}
+          </ul>
+          {/* <NavLink
             to="/Store-Deatils"
             className={({ isActive }) =>
               isActive ? 'text-red-900 brightness-200' : 'text-red-900'
@@ -80,23 +140,13 @@ function NavBar() {
               add_business
               <span className="logo-name">STORE</span>
             </span>
-          </NavLink>
+          </NavLink> */}
 
           <div className="AccountContainer">
-            <NavLink
-              to="#"
-              className="text-red-900"
-              onClick={NavAccount}
-            >
-              <span className="material-symbols-outlined top-logo flex flex-col text-center">
-                person
-                <span className="logo-name">ACCOUNT</span>
-              </span>
-            </NavLink>
             <LoginShow />
           </div>
 
-          <div className="Admin-Block">
+         {/*  <div className="Admin-Block">
             <NavLink
               to="/AdminAcc"
               className={({ isActive }) =>
@@ -144,7 +194,7 @@ function NavBar() {
               shopping_cart
               <span className="logo-name">CART</span>
             </span>
-          </NavLink>
+          </NavLink> */}
         </div>
 
         <form
@@ -228,16 +278,16 @@ function NavBar() {
   </span>
   </Link>
 </div>
-      <div className="AdminLoginBox fixed z-20 w-full  overflow-auto">
+      <div className="AdminLoginBox fixed  w-full  overflow-auto">
         <AdminLogin />
       </div>
-      <div className="SignUpBox fixed z-20 w-full overflow-auto">
+      <div className="SignUpBox fixed  w-full overflow-auto">
         <SignupUser />
       </div>
-      <div className="LoginOtpBox fixed z-20 overflow-auto">
+      <div className="LoginOtpBox fixed  overflow-auto">
         <LoginUsingOtp />
       </div>
-      <div className="LoginPassBox fixed z-20 w-full  overflow-auto">
+      <div className="LoginPassBox fixed  w-full  overflow-auto">
         <LoginUsingPass />
       </div>
 

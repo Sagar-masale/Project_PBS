@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    
+    z-index: 9999;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.519) ;
     display: none;
@@ -193,9 +193,16 @@ body {
 .top-logo:hover{
     font-size: 30px;
 }
+.navItems-Links-Block{
+    /* border: 1px solid red; */
+    margin-right:20px;
+    width: 40%;
+    margin-left: auto;
+}
 .nav-link-logos {
     /* border: 1px solid red; */
-    width: 780px;
+    
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
