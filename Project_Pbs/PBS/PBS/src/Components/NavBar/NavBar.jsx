@@ -79,6 +79,18 @@ function NavBar() {
     // if (navigate.item.id == 2){
     // NavAccount();
     // }
+
+    const handleClick = (item) => {
+      if (item.id===2){
+        NavAccount()
+      }else{
+
+        navigate(item.slug)
+      }
+      
+
+
+    }
   
   return (
     <>
@@ -119,7 +131,7 @@ function NavBar() {
           <ul className='nav-link-logos flex align-middle'>
           {navItemsLinks.map((item)=>
             item.active ? (
-              <li key={item.id} onClick={()=>  navigate(item.slug)}>
+              <li key={item.id} onClick={()=>  handleClick(item)}>
               <span className="material-symbols-outlined top-logo flex flex-col text-center text-red-900 cursor-pointer"
               
               >
