@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 
 import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
@@ -14,6 +14,17 @@ import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   const [UserSearchValue, setUserSearchValue] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const UserSearch = (e) => {
     e.preventDefault();
@@ -91,6 +102,10 @@ function NavBar() {
 
 
     }
+    const AccountIcon = {
+      display:"none"
+    };
+  
   
   return (
     <>
@@ -131,7 +146,14 @@ function NavBar() {
           <ul className='nav-link-logos flex align-middle'>
           {navItemsLinks.map((item)=>
             item.active ? (
-              <li key={item.id} onClick={()=>  handleClick(item)}>
+              <li key={item.id} onClick={()=>  handleClick(item)}
+              style={
+                item.name === 'ACCOUNT' && isMobile
+                  ? { display: 'none' }
+                  : {}
+              }
+    
+              >
               <span className="material-symbols-outlined top-logo flex flex-col text-center text-red-900 cursor-pointer"
               
               >
