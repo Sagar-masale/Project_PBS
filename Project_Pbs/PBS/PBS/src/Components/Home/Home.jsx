@@ -30,21 +30,24 @@ function Home({
 
       const Collections = [
         {
-          namCollectionImgTitle: 'Ring of Elegance',
+          id:1,
+          nameCollectionImgTitle: 'Ring of Elegance',
           description: 'Perfect for Every Occasion',
           CollectionImgs: './HomeImgs/CollectionImg1.jpg',
           imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
           href: '#',
         },
         {
-          namCollectionImgTitle: 'Golden Glamour',
+          id:2,
+          nameCollectionImgTitle: 'Golden Glamour',
           description: 'Classic gold earrings for timeless elegance.',
           CollectionImgs: './HomeImgs/CollectionImg2.jpg',
           imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
           href: '#',
         },
         {
-          namCollectionImgTitle : 'Diamond Dreams',
+          id:3,
+          nameCollectionImgTitle : 'Diamond Dreams',
           description: 'A modern silver necklace with a contemporary diamond design',
           CollectionImgs: './HomeImgs/CollectionImg3.jpg',
           imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
@@ -111,7 +114,7 @@ function Home({
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0 ">
             {Collections.map((Collections) => (
-              <div key={Collections.CollectionImgTitle} className="group relative">
+              <div key={Collections.id} className="group relative">
                 <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
                   <img
                     alt={Collections.imageAlt}
@@ -122,7 +125,7 @@ function Home({
                 <h3 className="mt-6 text-sm text-gray-500">
                   <a href={Collections.href}>
                     <span className="absolute inset-0" />
-                    {Collections.namCollectionImgTitle}
+                    {Collections.nameCollectionImgTitle}
                   </a>
                 </h3>
                 <p className="text-base font-semibold text-gray-900">{Collections.description}</p>

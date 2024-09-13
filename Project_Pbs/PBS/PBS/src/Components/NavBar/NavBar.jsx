@@ -102,9 +102,9 @@ function NavBar() {
 
 
     }
-    const AccountIcon = {
-      display:"none"
-    };
+    // const AccountIcon = {
+    //   display:"none"
+    // };
   
   
   return (
@@ -164,71 +164,13 @@ function NavBar() {
             ) : null
           )}
           </ul>
-          {/* <NavLink
-            to="/Store-Deatils"
-            className={({ isActive }) =>
-              isActive ? 'text-red-900 brightness-200' : 'text-red-900'
-            }
-          >
-            <span className="material-symbols-outlined top-logo flex flex-col text-center">
-              add_business
-              <span className="logo-name">STORE</span>
-            </span>
-          </NavLink> */}
+  
 
           <div className="AccountContainer">
             <LoginShow />
           </div>
 
-         {/*  <div className="Admin-Block">
-            <NavLink
-              to="/AdminAcc"
-              className={({ isActive }) =>
-                isActive ? 'text-red-900' : 'text-red-900'
-              }
-            >
-              <span className="material-symbols-outlined top-logo flex flex-col text-center Admin_Settings">
-                manage_accounts
-                <span className="logo-name">Admin</span>
-              </span>
-            </NavLink>
-          </div>
-
-          <NavLink
-            to="/Diamond-Details"
-            className={({ isActive }) =>
-              isActive ? 'text-red-900 brightness-200' : 'text-red-900'
-            }
-          >
-            <span className="material-symbols-outlined top-logo flex flex-col text-center">
-              diamond
-              <span className="logo-name">DIAMONDS</span>
-            </span>
-          </NavLink>
-
-          <NavLink
-            to="/WishList-Deatils"
-            className={({ isActive }) =>
-              isActive ? 'text-red-900 brightness-200' : 'text-red-900'
-            }
-          >
-            <span className="material-symbols-outlined top-logo flex flex-col text-center">
-              favorite
-              <span className="logo-name">WISHLIST</span>
-            </span>
-          </NavLink>
-
-          <NavLink
-            to="/Cart-Deatils"
-            className={({ isActive }) =>
-              isActive ? 'text-red-900 brightness-200' : 'text-red-900'
-            }
-          >
-            <span className="material-symbols-outlined top-logo flex flex-col text-center">
-              shopping_cart
-              <span className="logo-name">CART</span>
-            </span>
-          </NavLink> */}
+    
         </div>
 
         <form
@@ -265,7 +207,7 @@ function NavBar() {
       <div className="input NavMore-Items absolute right-0 z-2">
 <Link to="/" onClick={ShowNavMoreSec}>
 <span  className="value">
-  <span class="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined text-red-900 font-bold">
    home
   </span>
     Home
@@ -273,7 +215,7 @@ function NavBar() {
 </Link>
 <Link>
 <span className="value">
-  <span class="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined text-red-900 font-bold">
   mode_comment
   </span>
     Chat
@@ -281,7 +223,7 @@ function NavBar() {
 </Link>
 <Link>
 <span className="value">
-<span class="material-symbols-outlined text-red-900 font-bold">
+<span className="material-symbols-outlined text-red-900 font-bold">
   orders
   </span>
     Orders
@@ -289,7 +231,7 @@ function NavBar() {
 </Link>
  <Link>
  <span className="value">
- <span class="material-symbols-outlined text-red-900 font-bold">
+ <span className="material-symbols-outlined text-red-900 font-bold">
   favorite
   </span>
     Wishlist
@@ -297,7 +239,7 @@ function NavBar() {
  </Link>
 <Link>
 <span className="value">
-<span class="material-symbols-outlined text-red-900 font-bold">
+<span className="material-symbols-outlined text-red-900 font-bold">
   Notifications
   </span>
     Notifications
@@ -305,7 +247,7 @@ function NavBar() {
 </Link>
   <Link>
   <span className="value">
-  <span class="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined text-red-900 font-bold">
   account_circle
   </span>
     Account

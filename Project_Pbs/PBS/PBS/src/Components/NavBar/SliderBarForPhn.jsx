@@ -35,7 +35,7 @@ function SliderBarForPhn() {
 		<div className="relative ">
 			<span className="absolute inset-y-0 left-0 flex items-center py-4">
 				<button type="submit" className="p-2">
-				<span class="material-symbols-outlined  text-red-900 text-3xl">
+				<span className="material-symbols-outlined  text-red-900 text-3xl">
                  search
                 </span>
 				</button>
@@ -50,7 +50,7 @@ function SliderBarForPhn() {
 				<li className="rounded-sm " onClick={SliderMove}>
 					<span className='flex items-center p-2 space-x-3 rounded-md'>
 						
-						<span class="material-symbols-outlined text-red-900 font-bold">
+						<span className="material-symbols-outlined text-red-900 font-bold">
                          home
                         </span>
 						
@@ -60,7 +60,7 @@ function SliderBarForPhn() {
 				</Link>
 				<li className="rounded-sm">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      search
                     </span>
 						<span>Search</span>
@@ -68,7 +68,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      chat
                     </span>
 						<span>Chat</span>
@@ -76,7 +76,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      orders
                     </span>
 						<span>Orders</span>
@@ -84,7 +84,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm  dark:text-gray-900">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      favorite
                     </span>
 						<span>Wishlist</span>
@@ -92,7 +92,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      settings
                     </span>
 						<span>Settings</span>
@@ -100,7 +100,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm User-LogIn" onClick={ShowLoginPassBox}>
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined  text-red-900 font-bold">
+					<span className="material-symbols-outlined  text-red-900 font-bold">
                      login
                     </span>
 						<span>Log In</span>
@@ -108,7 +108,7 @@ function SliderBarForPhn() {
 				</li>
 				<li className="rounded-sm User-LogOunt">
 					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span class="material-symbols-outlined text-red-900 font-bold">
+					<span className="material-symbols-outlined text-red-900 font-bold">
                      logout
                     </span>
 						<span>Logout</span>
