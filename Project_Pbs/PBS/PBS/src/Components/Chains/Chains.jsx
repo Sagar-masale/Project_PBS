@@ -27,18 +27,19 @@ const Chains=()=>{
     />
 <div className="ResComponent">
     {
-      ChainsData.map((curEle, index)=>{
+      ChainsData.map((curEle)=>{
         // console.log(curEle);
 
         return(
           
           <div className="Show-Rings-Box">
-          <div className="Ring-Box R-Box1 Box-one" onClick={()=>GetInfo(curEle)} >
+          <div className="Ring-Box R-Box1 Box-one" onClick={()=>GetInfo(curEle)} key={curEle.id} >
               <div className="Ring-Img-Box"><div className="Compare-Img-Box">
                   <i className='bx bx-git-compare Compare-Arrow-Img'></i>
               </div>
               <div className="Add-Img-Box">
-               </div><img src={curEle.img}className="Finger-Style" key={index}/>
+               </div>
+               <img loading='lazy' src={curEle.img} className="Finger-Style" />
           </div>
           <div className="Img-Info-Box">
               <div className="Itm-Stock">

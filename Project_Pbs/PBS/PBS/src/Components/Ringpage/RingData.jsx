@@ -339,9 +339,6 @@
         "price":122699,
         "dec":"Connect with the beauty of nature through our organic gold rings. Featuring designs inspired by flora and fauna, these rings capture the essence of natural beauty and grace."
     },
-
-
-
  ]
 export default Ringsdata
 // export default FirstPageData

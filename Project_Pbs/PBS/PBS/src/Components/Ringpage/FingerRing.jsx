@@ -30,18 +30,19 @@ const FingerRings=()=>{
     />
 <div className="ResComponent">
     {
-      Ringsdata.map((curEle, index)=>{
-        console.log(curEle.img);
+      Ringsdata.map((curEle)=>{
+        
 
         return(
           
-          <div className="Show-Rings-Box">
-          <div className="Ring-Box R-Box1 Box-one" onClick={()=>GetInfo(curEle)} >
+          <div className="Show-Rings-Box ">
+          <div className="Ring-Box R-Box1 Box-one" onClick={()=>GetInfo(curEle)} key={curEle.id} >
               <div className="Ring-Img-Box"><div className="Compare-Img-Box">
                   <i className='bx bx-git-compare Compare-Arrow-Img'></i>
               </div>
               <div className="Add-Img-Box">
-               </div><img src={curEle.img}className="Finger-Style" loading='lazy' key={index}/>
+               </div>
+               <img loading='lazy' src={curEle.img}className="Finger-Style" />
           </div>
           <div className="Img-Info-Box">
               <div className="Itm-Stock">
@@ -59,6 +60,7 @@ const FingerRings=()=>{
                           </div>
                       </div>
            </div>
+           
            </div>
         )
      
