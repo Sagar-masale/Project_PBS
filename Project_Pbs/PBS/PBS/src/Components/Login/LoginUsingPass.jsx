@@ -103,17 +103,17 @@ function LoginUsingPass() {
           </div>
 
           <div className="Input-Username flex justify-center mt-8">
-            <form action="#" className="FormUser">
+            <form action="http://localhost:8000/api/v1/users/login?email=sagar@.com&password=sag@123&userName=one" className="FormUser" method='post'>
               <input
                 type="text"
-                name="Username"
+                name="email"
                 required
                 placeholder="Enter Your Mobile Number / Email"
                 className="Input-User focus:ring-0"
               />
               <input
                 type="password"
-                name="Password"
+                name="password"
                 required
                 placeholder="Enter Password"
                 className="Input-User  focus:ring-0 mt-9"
