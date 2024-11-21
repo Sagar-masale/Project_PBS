@@ -8,18 +8,45 @@ function SignUpUser() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pbsCondition, setPbsCondition] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/api/v1/users/register', {
-      fullName,
-      phoneNumber,
-      email,
-      password,
-      pbsCondition,
-    })
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err));
+    setIsLoading(true); // Disable button while making the API call
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/users/register', {
+        fullName,
+        phoneNumber,
+        email,
+        password,
+        pbsCondition,
+      });
+
+      if (response.data.success) {
+        alert("Registration successful!");
+      } else {
+        alert(response.data.message || "Registration failed. Please try again.");
+      }
+    } catch (err) {
+      if (err.response) {
+        const errorMessage = err.response.data?.data || "Something went wrong!";
+        if (errorMessage.includes("email")) {
+          alert("This email or phone number is already registered.");
+        }else {
+          alert(errorMessage);
+        }
+        console.error("Server Response Error:", err.response.data);
+      } else if (err.request) {
+        alert("No response from server. Please check your network connection.");
+        console.error("No Server Response:", err.request);
+      } else {
+        alert("An error occurred. Please try again.");
+        console.error("Request Setup Error:", err.message);
+      }
+    } finally {
+      setIsLoading(false); // Re-enable the button
+    }
   };
 
   const toggleClass = (selector, className) => {
@@ -110,11 +137,15 @@ function SignUpUser() {
                 </span>
               </div>
 
-              <input
+              <button
                 type="submit"
-                value="Continue"
-                className="mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
-              />
+                className={`mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit ${
+                  isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                disabled={isLoading}
+              >
+                {isLoading ? "Submitting..." : "Continue"}
+              </button>
             </form>
           </div>
 

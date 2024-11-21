@@ -4,28 +4,45 @@ import './LoginUsingPass.css';
 import axios from 'axios';
 
 function LoginUsingPass() {
+  const [emailOrPhone, setEmailOrPhone] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [accessToken, setAccessToken] = useState()
-  const [refreshToken, setRefreshToken] = useState()
+  const userLogin = (e) => {
+    e.preventDefault();
 
-  const userLogin = (e) =>{
-    e.preventDefault()
-    axios.post('http://localhost:8000/api/v1/users/login?email=sagar@.com&password=sag@123&userName=one',{ accessToken, refreshToken})
-    .then(result => console.log(result))
-    .catch(err => console.log(err));
-    
-    
-  }
+    // Regular expression to validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let payload = {};
 
+    if (emailRegex.test(emailOrPhone)) {
+      payload.email = emailOrPhone; // If it's a valid email
+    } else if (/^\d{10}$/.test(emailOrPhone)) {
+      payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
+    } else {
+      alert('Please enter a valid email or phone number.');
+      return;
+    }
 
+    // Include password in the payload
+    payload.password = password;
 
-
-
-
-
-
-
-
+    axios
+      .post('http://localhost:8000/api/v1/users/login', payload)
+      .then((result) => {
+        if (result.data.success) {
+          alert('Login successful!');
+          console.log('Response:', result.data);
+        } else {
+          alert(result.data.message || 'Login failed. Please try again.');
+        }
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        alert(
+          err.response?.data?.message || 'Something went wrong. Please try again.'
+        );
+      });
+  };
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -49,7 +66,7 @@ function LoginUsingPass() {
     <div className="Login-Main-Container">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
-        <span
+          <span
             className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
             onClick={CloseLoginBox}
           >
@@ -67,23 +84,22 @@ function LoginUsingPass() {
           </div>
 
           <div className="Input-Username flex justify-center mt-8">
-            <form 
-            onSubmit={userLogin}
-            className="FormUser" 
-            >
+            <form onSubmit={userLogin} className="FormUser">
               <input
                 type="text"
-                name="email"
+                name="emailOrNum"
                 required
                 placeholder="Enter Your Mobile Number / Email"
                 className="Input-User focus:ring-0"
+                onChange={(e) => setEmailOrPhone(e.target.value)}
               />
               <input
                 type="password"
                 name="password"
                 required
                 placeholder="Enter Password"
-                className="Input-User  focus:ring-0 mt-9"
+                className="Input-User focus:ring-0 mt-9"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className="CheckBoxes mt-10 flex flex-col gap-2">
                 <span className="CheckBox-Gap flex items-center gap-3">
@@ -115,7 +131,7 @@ function LoginUsingPass() {
               <input
                 type="submit"
                 value="Submit"
-                className="mt-10 text-white bg-red-800  rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
+                className="mt-10 text-white bg-red-800 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
               />
             </form>
           </div>
@@ -131,14 +147,13 @@ function LoginUsingPass() {
           </span>
         </div>
 
-        <div className="RightSide-Block-Login  justify-center align-middle w-64">
+        <div className="RightSide-Block-Login justify-center align-middle w-64">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
             onClick={CloseLoginBox}
           >
             close
           </span>
-          
           <img
             src="./LoginImgs/LoginImg1.png"
             alt="Login visual"
