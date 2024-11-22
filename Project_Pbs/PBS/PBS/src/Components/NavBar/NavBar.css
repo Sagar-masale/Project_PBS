@@ -20,6 +20,9 @@
     background-color: rgba(0, 0, 0, 0.519) ;
     display: none;
 }
+.successSignUpBox{
+    display: none;
+}
 .LoginOtpBoxShow,.LoginPassBoxShow,.SignUpBoxShow,.AdminLoginBoxShow{
     display: flex;
 }

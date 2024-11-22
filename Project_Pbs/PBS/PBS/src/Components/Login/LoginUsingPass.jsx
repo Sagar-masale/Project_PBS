@@ -7,42 +7,83 @@ function LoginUsingPass() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
 
-  const userLogin = (e) => {
-    e.preventDefault();
+  // const userLogin = (e) => {
+  //   e.preventDefault();
 
-    // Regular expression to validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let payload = {};
+  //   // Regular expression to validate email
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   let payload = {};
 
-    if (emailRegex.test(emailOrPhone)) {
-      payload.email = emailOrPhone; // If it's a valid email
-    } else if (/^\d{10}$/.test(emailOrPhone)) {
-      payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
+  //   if (emailRegex.test(emailOrPhone)) {
+  //     payload.email = emailOrPhone; // If it's a valid email
+  //   } else if (/^\d{10}$/.test(emailOrPhone)) {
+  //     payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
+  //   } else {
+  //     alert('Please enter a valid email or phone number.');
+  //     return;
+  //   }
+
+  //   // Include password in the payload
+  //   payload.password = password;
+
+  //   axios
+  //     .post('http://localhost:8000/api/v1/users/login', payload)
+  //     .then((result) => {
+  //       if (result.data.success) {
+  //         alert('Login successful!');
+  //         console.log('Response:', result.data);
+  //       } else {
+  //         alert(result.data.message || 'Login failed. Please try again.');
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error('Error:', err);
+  //       alert(
+  //         err.response?.data?.message || 'Something went wrong. Please try again.'
+  //       );
+  //     });
+  // };
+
+
+  const userLogin = async (e) => {
+  e.preventDefault();
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let payload = {};
+
+  if (emailRegex.test(emailOrPhone)) {
+    payload.email = emailOrPhone; // If it's a valid email
+  } else if (/^\d{10}$/.test(emailOrPhone)) {
+    payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
+  } else {
+    alert('Please enter a valid email or phone number.');
+    return;
+  }
+
+  payload.password = password;
+
+  try {
+    const response = await axios.post('http://localhost:8000/api/v1/users/login', payload);
+
+    if (response.data.success) {
+      const { accessToken, refreshToken } = response.data.data;
+
+      // Store tokens securely
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      alert('Login successful!');
+      console.log('Response:', response.data);
     } else {
-      alert('Please enter a valid email or phone number.');
-      return;
+      alert(response.data.message || 'Login failed. Please try again.');
     }
-
-    // Include password in the payload
-    payload.password = password;
-
-    axios
-      .post('http://localhost:8000/api/v1/users/login', payload)
-      .then((result) => {
-        if (result.data.success) {
-          alert('Login successful!');
-          console.log('Response:', result.data);
-        } else {
-          alert(result.data.message || 'Login failed. Please try again.');
-        }
-      })
-      .catch((err) => {
-        console.error('Error:', err);
-        alert(
-          err.response?.data?.message || 'Something went wrong. Please try again.'
-        );
-      });
-  };
+  } catch (err) {
+    console.error('Error:', err);
+    alert(
+      err.response?.data?.message || 'Something went wrong. Please try again.'
+    );
+  }
+};
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);

@@ -64,7 +64,6 @@ function Home({
  <div className="img-slide">
 
 
-
  <div id="carouselExampleAutoplaying" className="SlideImagesBox carousel slide " data-bs-ride="ride">
   <div className="carousel-inner ImageSlide-Carousel-Inner">
     <div className="carousel-item active">
@@ -142,7 +141,7 @@ function Home({
      
     </div>
     
-
+ 
         </>
     )
     

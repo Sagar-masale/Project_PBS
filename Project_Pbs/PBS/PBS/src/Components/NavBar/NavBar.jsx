@@ -1,20 +1,38 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useContext } from 'react';
 
+import RegisterMessage from '../Notifications/RegisterMessage';
 import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
 import AdminLogin from '../Login/AdminLogin';
 import LoginShow from '../Login/LoginShow';
 import SignupUser from '../Login/SignUpUser';
+// Context provider
+import RegisterContext from '../Context/RegisterContext';
+
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
 import './NavBar.css';
 import '../MediaQueries/MediaQueries.css';
-import { NavLink } from 'react-router-dom';
+
 
 function NavBar() {
   const [UserSearchValue, setUserSearchValue] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // registerContext
+  const {registerStatus} = useContext(RegisterContext)
+  const [showSuccess, setShowSuccess] = useState(false);
+  useEffect(() => {
+    if (registerStatus) {
+      setShowSuccess(true);
+      // Remove the class after 5 seconds
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer); // Cleanup the timer
+    }
+  }, [registerStatus]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,6 +127,7 @@ function NavBar() {
   
   return (
     <>
+       <RegisterMessage/>
       <div className="Navheader Navcontainer">
         <div className="Slider-Bar" id="SliderBar">
           <div className="Login-SignUp-Box">
@@ -257,7 +276,7 @@ function NavBar() {
       <div className="AdminLoginBox fixed  w-full  overflow-auto">
         <AdminLogin />
       </div>
-      <div className="SignUpBox fixed  w-full overflow-auto">
+      <div className={`SignUpBox fixed  w-full overflow-auto ${showSuccess ? 'successSignUpBox' : ''}`}>
         <SignupUser />
       </div>
       <div className="LoginOtpBox fixed  overflow-auto">
