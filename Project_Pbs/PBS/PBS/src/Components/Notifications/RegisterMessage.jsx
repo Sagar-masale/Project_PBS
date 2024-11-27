@@ -4,6 +4,8 @@ import '../Notifications/RegisterMessage.css';
 import RegisterContext from '../Context/RegisterContext';
 function RegisterMessage() {
   const {registerStatus} = useContext(RegisterContext)
+  console.log("register sts", registerStatus);
+  
   const [showSuccess, setShowSuccess] = useState(false);
   useEffect(() => {
     if (registerStatus) {
@@ -15,12 +17,7 @@ function RegisterMessage() {
       return () => clearTimeout(timer); // Cleanup the timer
     }
   }, [registerStatus]);
-  if (!registerStatus) console.log("register status null");
-  else{
-    console.log("Status", registerStatus);
-    
-  }
-  
+
   
   return (
     <>

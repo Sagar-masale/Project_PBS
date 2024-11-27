@@ -1,14 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-
-.card {
+.cardErr {
     width: 330px;
     height: 80px;
     right: 0;
     margin-right: -500px;
-   
     transition: .5s;
     
     border-radius: 8px;
@@ -25,54 +19,54 @@
     gap: 15px;
     z-index: 11;
   }
-  .card-success {
-    margin-right: 0;  /* Adjust this value as needed */
+  .cardErr-Unsuccess{
+    margin-right: 0;
   }
-  .wave {
+  .waveErr {
     position: absolute;
     transform: rotate(90deg);
     left: -31px;
     top: 32px;
     width: 80px;
-    fill: #04e4003a;
+    fill: #fc0c0c3a;
   }
-  .icon-container {
+  .icon-containerErr {
     width: 35px;
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #04e40048;
+    background-color: #fc0c0c48;
     border-radius: 50%;
     margin-left: 8px;
   }
-  .icon {
+  .iconErr {
     width: 17px;
     height: 17px;
-    color:#00a100;
+    color: #d10d0d;
   }
-  .message-text-container {
+  .message-text-containerErr {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     flex-grow: 1;
   }
-  .message-text,
-  .sub-text {
+  .message-textErr,
+  .sub-textErr {
     margin: 0;
     cursor: default;
   }
-  .message-text {
-    color: #00a100;
+  .message-textErr {
+    color: #d10d0d;
     font-size: 17px;
     font-weight: 700;
   }
-  .sub-text {
+  .sub-textErr {
     font-size: 14px;
     color: #555;
   }
-  .cross-icon {
+  .cross-iconErr {
     width: 18px;
     height: 18px;
     color: #555;

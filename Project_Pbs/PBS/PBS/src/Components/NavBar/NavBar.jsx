@@ -1,6 +1,7 @@
 import React, { useState , useEffect, useContext } from 'react';
 
 import RegisterMessage from '../Notifications/RegisterMessage';
+import RegisterErr from '../Notifications/RegisterErr';
 import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
@@ -128,6 +129,7 @@ function NavBar() {
   return (
     <>
        <RegisterMessage/>
+       <RegisterErr/>
       <div className="Navheader Navcontainer">
         <div className="Slider-Bar" id="SliderBar">
           <div className="Login-SignUp-Box">

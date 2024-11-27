@@ -3,8 +3,9 @@ import RegisterContext from "./RegisterContext";
 
 const RegisterContextProvider = ({children}) => {
     const [registerStatus, setRegisterStatus] = useState(null)
+    const [registerErrStatus, setRegisterErrStatus] = useState(null)
     return(
-        <RegisterContext.Provider value={{registerStatus, setRegisterStatus}}>
+        <RegisterContext.Provider value={{registerStatus, setRegisterStatus, registerErrStatus, setRegisterErrStatus}}>
             {children}
         </RegisterContext.Provider>
     )

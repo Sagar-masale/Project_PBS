@@ -13,6 +13,7 @@ function SignUpUser() {
   const [isLoading, setIsLoading] = useState(false);
 
   const {setRegisterStatus} = useContext(RegisterContext)
+  const {setRegisterErrStatus} = useContext(RegisterContext)
 
 
 
@@ -79,8 +80,7 @@ function SignUpUser() {
        
           alert("Registration successful!");
           setRegisterStatus(response.data.success)
-          
-          
+          console.log("rds",response.data.success);
           
           // Optionally redirect to login or show a success message
         } else {
@@ -91,18 +91,18 @@ function SignUpUser() {
         
       })
       .catch((err) => {
-      
+        
         if (err.response) {
           const errorMessage = err.response.data?.data || "This email or phone number is already registered.!";
-          console.log("err res",err.response.data);
+          setRegisterErrStatus(err.response)
+          console.log("err res",err);
           
           if (errorMessage.includes("email")) {
             alert("This email or phone number is already registered.");
           } else {
             alert(errorMessage);
           }
-          var registerErrStatus = err.response.data.success;
-          console.log(registerErrStatus);
+          
          
           
           //console.error("Server Response Error:", err.response.data);
