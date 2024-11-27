@@ -14,49 +14,9 @@ function SignUpUser() {
 
   const {setRegisterStatus} = useContext(RegisterContext)
   const {setRegisterErrStatus} = useContext(RegisterContext)
+  const {setNetworkErrStatus}= useContext(RegisterContext)
 
 
-
-  // const registerUser = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true); // Disable button while making the API call
-
-  //   try {
-  //     const response = await axios.post('http://localhost:8000/api/v1/users/register', {
-  //       fullName,
-  //       phoneNumber,
-  //       email,
-  //       password,
-  //       pbsCondition,
-  //     });
-   
-      
-  //     if (response.data.success) {
-  //       alert("Registration successful!");
-  //     } else {
-  //       alert(response.data.message || "Registration failed. Please try again.");
-  //     }
-  //   } catch (err) {
-  //     if (err.response) {
-  //       const errorMessage = err.response.data?.data || "Something went wrong!";
-  //       if (errorMessage.includes("email")) {
-  //         alert("This email or phone number is already registered.");
-  //       }else {
-  //         alert(errorMessage);
-  //       }
-  //       console.error("Server Response Error:", err.response.data);
-  //     } else if (err.request) {
-  //       alert("No response from server. Please check your network connection.");
-  //       console.error("No Server Response:", err.request);
-  //     } else {
-  //       alert("An error occurred. Please try again.");
-  //       console.error("Request Setup Error:", err.message);
-  //     }
-  //   } finally {
-  //     setIsLoading(false); // Re-enable the button
-  //   }
-    
-  // };
 
 
   const registerUser = (e) => {
@@ -78,36 +38,33 @@ function SignUpUser() {
         
         if (response.data.success) {
        
-          alert("Registration successful!");
+          // alert("Registration successful!");
           setRegisterStatus(response.data.success)
-          console.log("rds",response.data.success);
+          // console.log("rds",response.data.success);
           
           // Optionally redirect to login or show a success message
         } else {
-        
           alert(response.data.message || "Registration failed. Please try again.");
         }
-        
-        
       })
       .catch((err) => {
-        
         if (err.response) {
-          const errorMessage = err.response.data?.data || "This email or phone number is already registered.!";
+          // const errorMessage = err.response.data?.data || "This email or phone number is already registered.!";
           setRegisterErrStatus(err.response)
-          console.log("err res",err);
+          // console.log("err res",err);
           
-          if (errorMessage.includes("email")) {
-            alert("This email or phone number is already registered.");
-          } else {
-            alert(errorMessage);
-          }
+          // if (errorMessage.includes("email")) {
+          //   alert("This email or phone number is already registered.");
+          // } else {
+          //   alert(errorMessage);
+          // }
           
          
           
           //console.error("Server Response Error:", err.response.data);
         } else if (err.request) {
-          alert("No response from server. Please check your network connection.");
+          // alert("No response from server. Please check your network connection.");
+          setNetworkErrStatus(err.request)
           //console.error("No Server Response:", err.request);
         } else {
           alert("An error occurred. Please try again.");

@@ -1,7 +1,10 @@
 import React, { useState , useEffect, useContext } from 'react';
-
+// Notifications
 import RegisterMessage from '../Notifications/RegisterMessage';
 import RegisterErr from '../Notifications/RegisterErr';
+import NetworkErr from '../Notifications/NetworkErr';
+
+
 import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
@@ -34,6 +37,42 @@ function NavBar() {
       return () => clearTimeout(timer); // Cleanup the timer
     }
   }, [registerStatus]);
+  // registerErrContext
+  const { registerErrStatus } = useContext(RegisterContext);
+  console.log("Err status", registerErrStatus);
+
+  const [showUnSuccess, setShowUnSuccess] = useState(false);
+
+  useEffect(() => {
+    if (registerErrStatus) {
+      setShowUnSuccess(true);
+
+      const timer = setTimeout(() => {
+        setShowUnSuccess(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [registerErrStatus]);
+
+  // NetWork Congtext
+  const { networkErrStatus } = useContext(RegisterContext);
+  console.log("netWork : ", networkErrStatus);
+
+  const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
+
+  useEffect(() => {
+      if (networkErrStatus) { 
+        setShowNetErrSuccess(true);
+    
+        const timer = setTimeout(() => {
+          setShowNetErrSuccess(false);
+        }, 5000);
+    
+        return () => clearTimeout(timer);
+      }
+    }, [networkErrStatus]);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -128,15 +167,17 @@ function NavBar() {
   
   return (
     <>
-       <RegisterMessage/>
-       <RegisterErr/>
+      
+       
       <div className="Navheader Navcontainer">
         <div className="Slider-Bar" id="SliderBar">
           <div className="Login-SignUp-Box">
             <SliderBarForPhn />
           </div>
         </div>
-
+        <RegisterMessage/>
+        <RegisterErr/>
+        <NetworkErr/>
         <div className="custome-bar" onClick={SliderMove}>
           <span className="material-symbols-outlined menu-items">menu</span>
         </div>
@@ -278,7 +319,7 @@ function NavBar() {
       <div className="AdminLoginBox fixed  w-full  overflow-auto">
         <AdminLogin />
       </div>
-      <div className={`SignUpBox fixed  w-full overflow-auto ${showSuccess ? 'successSignUpBox' : ''}`}>
+      <div className={`SignUpBox fixed  w-full overflow-auto ${showSuccess ? 'successSignUpBox' : ''},${showUnSuccess ? 'successSignUpBox' : ''},${showNetErrSuccess ? 'successSignUpBox' : ''}`}>
         <SignupUser />
       </div>
       <div className="LoginOtpBox fixed  overflow-auto">
