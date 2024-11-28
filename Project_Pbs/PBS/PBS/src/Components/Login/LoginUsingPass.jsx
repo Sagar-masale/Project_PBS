@@ -1,89 +1,133 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './LoginUsingOtp.css';
 import './LoginUsingPass.css';
-import axios from 'axios';
 
 function LoginUsingPass() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
-  // const userLogin = (e) => {
-  //   e.preventDefault();
+  // State to store user data
+  const [userProfile, setUserProfile] = useState(null);  // State for storing user data
 
-  //   // Regular expression to validate email
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   let payload = {};
-
-  //   if (emailRegex.test(emailOrPhone)) {
-  //     payload.email = emailOrPhone; // If it's a valid email
-  //   } else if (/^\d{10}$/.test(emailOrPhone)) {
-  //     payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
-  //   } else {
-  //     alert('Please enter a valid email or phone number.');
-  //     return;
-  //   }
-
-  //   // Include password in the payload
-  //   payload.password = password;
-
-  //   axios
-  //     .post('http://localhost:8000/api/v1/users/login', payload)
-  //     .then((result) => {
-  //       if (result.data.success) {
-  //         alert('Login successful!');
-  //         console.log('Response:', result.data);
-  //       } else {
-  //         alert(result.data.message || 'Login failed. Please try again.');
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error('Error:', err);
-  //       alert(
-  //         err.response?.data?.message || 'Something went wrong. Please try again.'
-  //       );
-  //     });
-  // };
-
+  // Check for access token when the component mounts
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem('accessToken');
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
+    }
+  }, []);  // Empty dependency array ensures this runs only once when the component mounts
 
   const userLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  let payload = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let payload = {};
 
-  if (emailRegex.test(emailOrPhone)) {
-    payload.email = emailOrPhone; // If it's a valid email
-  } else if (/^\d{10}$/.test(emailOrPhone)) {
-    payload.phoneNumber = emailOrPhone; // If it's a valid phone number (10 digits)
-  } else {
-    alert('Please enter a valid email or phone number.');
-    return;
-  }
-
-  payload.password = password;
-
-  try {
-    const response = await axios.post('http://localhost:8000/api/v1/users/login', payload);
-
-    if (response.data.success) {
-      const { accessToken, refreshToken } = response.data.data;
-
-      // Store tokens securely
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-
-      alert('Login successful!');
-      console.log('Response:', response.data);
+    if (emailRegex.test(emailOrPhone)) {
+      payload.email = emailOrPhone; // Valid email
+    } else if (/^\d{10}$/.test(emailOrPhone)) {
+      payload.phoneNumber = emailOrPhone; // Valid phone number
     } else {
-      alert(response.data.message || 'Login failed. Please try again.');
+      alert('Please enter a valid email or phone number.');
+      return;
     }
-  } catch (err) {
-    console.error('Error:', err);
-    alert(
-      err.response?.data?.message || 'Something went wrong. Please try again.'
-    );
-  }
-};
+
+    payload.password = password;
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/users/login', payload);
+
+      if (response.data.success) {
+        const { accessToken, refreshToken } = response.data.data;
+
+        // Store tokens in localStorage
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        
+        setAccessToken(accessToken);  // Update state
+
+        alert('Login successful!');
+      } else {
+        alert(response.data.message || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert(err.response?.data?.message || 'Something went wrong. Please try again.');
+    }
+  };
+
+    const fetchUserProfile = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          throw new Error('No access token found. Please log in again.');
+        }
+  
+        // Make the API request with the Authorization header
+        const response = await axios.get('http://localhost:8000/api/v1/users/current-user', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+  
+        // Log the user data
+        console.log('User Profile:', response.data);
+  
+        // Update state with fetched data
+        setUserProfile(response.data.data.fullName);
+  
+      } catch (error) {
+        if (error.response?.status === 401) {
+          console.warn('Access token expired. Attempting to refresh...');
+          const success = await refreshAccessToken();
+          if (success) {
+            fetchUserProfile();  // Retry after refreshing
+          } else {
+            alert('Session expired. Please log in again.');
+          }
+        } else {
+          console.error('Error fetching profile:', error);
+          alert('Failed to fetch user data. Please try again.');
+        }
+      }
+    };
+  
+    // Fetch user data when the component mounts
+    useEffect(() => {
+      fetchUserProfile();
+    }, []);
+  
+  const refreshAccessToken = async () => {
+    try {
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (!refreshToken) throw new Error('No refresh token found');
+
+      const response = await axios.post('http://localhost:8000/api/v1/users/refresh-token', { refreshToken });
+      if (response.data.success) {
+        const { accessToken, refreshToken: newRefreshToken } = response.data.data;
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', newRefreshToken);
+        setAccessToken(accessToken);  // Update state
+
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+      localStorage.clear();  // Clear tokens on error
+      setAccessToken('');    // Reset state
+      return false;
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();  // Clear stored tokens
+    setAccessToken('');     // Reset state
+    alert('You have been logged out.');
+  };
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -104,7 +148,9 @@ function LoginUsingPass() {
   };
 
   return (
-    <div className="Login-Main-Container">
+   <>{accessToken?
+   <h1 onClick={handleLogout}>welcome {userProfile}</h1>:
+   <div className="Login-Main-Container">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
           <span
@@ -203,6 +249,8 @@ function LoginUsingPass() {
         </div>
       </div>
     </div>
+}
+   </>
   );
 }
 
