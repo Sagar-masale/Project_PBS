@@ -13,6 +13,7 @@ import LoginShow from '../Login/LoginShow';
 import SignupUser from '../Login/SignUpUser';
 // Context provider
 import RegisterContext from '../Context/RegisterContext';
+import ProfileContext from '../Context/ProfileContext';
 
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
@@ -27,6 +28,8 @@ function NavBar() {
   // registerContext
   const {registerStatus} = useContext(RegisterContext)
   const [showSuccess, setShowSuccess] = useState(false);
+
+  
   useEffect(() => {
     if (registerStatus) {
       setShowSuccess(true);
@@ -40,40 +43,42 @@ function NavBar() {
   // registerErrContext
   const { registerErrStatus } = useContext(RegisterContext);
   console.log("Err status", registerErrStatus);
-
+  
   const [showUnSuccess, setShowUnSuccess] = useState(false);
-
+  
   useEffect(() => {
     if (registerErrStatus) {
       setShowUnSuccess(true);
-
+      
       const timer = setTimeout(() => {
         setShowUnSuccess(false);
       }, 5000);
-
+      
       return () => clearTimeout(timer);
     }
   }, [registerErrStatus]);
-
+  
   // NetWork Congtext
   const { networkErrStatus } = useContext(RegisterContext);
   console.log("netWork : ", networkErrStatus);
-
+  
   const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
-
+  
   useEffect(() => {
-      if (networkErrStatus) { 
-        setShowNetErrSuccess(true);
-    
-        const timer = setTimeout(() => {
-          setShowNetErrSuccess(false);
-        }, 5000);
-    
-        return () => clearTimeout(timer);
-      }
-    }, [networkErrStatus]);
+    if (networkErrStatus) { 
+      setShowNetErrSuccess(true);
+      
+      const timer = setTimeout(() => {
+        setShowNetErrSuccess(false);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [networkErrStatus]);
+  
 
-
+  
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -83,7 +88,7 @@ function NavBar() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
+  
   const UserSearch = (e) => {
     e.preventDefault();
     console.log(UserSearchValue);
@@ -103,6 +108,15 @@ function NavBar() {
   const NavAccount = () => {
     toggleClass('.AccountShow', 'AccountShowBlock');
   };
+  
+  // profileContext
+  const {userData} = useContext(ProfileContext)
+  const [accLogoName, setAccLogoName] = useState(''); 
+  useEffect(() => {
+    if (userData && userData.fullName) {
+      setAccLogoName(userData.fullName.split(' ')[0]); // Extract first name
+    }
+  }, [userData]);
 
   const navigate = useNavigate();
   const navItemsLinks=[
@@ -114,12 +128,12 @@ function NavBar() {
       active: true,
     } ,
     {
-      id : 2,
-      name: 'ACCOUNT',
-      slug: '/',
-      logo: 'person ',
-      active: true,
-    } ,
+      id: 2,
+      name: accLogoName ? accLogoName.toUpperCase() : 'ACCOUNT',
+      slug: accLogoName ? `/UserAcc` : '/',
+      logo: 'person',
+      active: isMobile ? false : true, // Hide ACCOUNT on mobile
+    },
     {
       id : 3,
       name: 'DIAMONDS',
@@ -150,20 +164,17 @@ function NavBar() {
     // }
 
     const handleClick = (item) => {
-      if (item.id===2){
-        NavAccount()
-      }else{
-
-        navigate(item.slug)
+      if (item.id === 2) {
+        if (!accLogoName) {
+            NavAccount()
+        }else{
+          navigate(item.slug);
+        }
+      } else {
+        navigate(item.slug);
       }
-      
+    };
 
-
-    }
-    // const AccountIcon = {
-    //   display:"none"
-    // };
-  
   
   return (
     <>
@@ -209,7 +220,7 @@ function NavBar() {
           {navItemsLinks.map((item)=>
             item.active ? (
               <li key={item.id} onClick={()=>  handleClick(item)}
-              style={
+              style={ 
                 item.name === 'ACCOUNT' && isMobile
                   ? { display: 'none' }
                   : {}
@@ -307,7 +318,7 @@ function NavBar() {
     Notifications
   </span>
 </Link>
-  <Link>
+  <Link to="/UserAcc" onClick={ShowNavMoreSec}>
   <span className="value">
   <span className="material-symbols-outlined text-red-900 font-bold">
   account_circle

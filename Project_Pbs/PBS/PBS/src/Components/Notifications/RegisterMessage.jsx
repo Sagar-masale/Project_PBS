@@ -1,24 +1,40 @@
-import React, { useState, useEffect, useContext } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react';
 import '../Notifications/RegisterMessage.css';
 import RegisterContext from '../Context/RegisterContext';
+
 function RegisterMessage() {
-  const {registerStatus} = useContext(RegisterContext)
-  console.log("register sts", registerStatus);
-  
+  const [notifyTitle, setNotifyTitle] = useState('');
+  const [notifyMessage, setNotifyMessage] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+
+  // Context 
+  const { registerStatus, loginNotify, setRegisterStatus, setLoginNotify } = useContext(RegisterContext); // Ensure setters are available in context
+
   useEffect(() => {
     if (registerStatus) {
+      setNotifyTitle("Registered Successfully!");
+      setNotifyMessage("Go to Login");
       setShowSuccess(true);
-      // Remove the class after 5 seconds
-      const timer = setTimeout(() => {
-        setShowSuccess(false);
-      }, 5000);
-      return () => clearTimeout(timer); // Cleanup the timer
+      setRegisterStatus(false); // Reset after displaying notification
+    } else if (loginNotify) {
+      setNotifyTitle("Login Successfully!");
+      setNotifyMessage("Welcome to PBS Jewellers");
+      setShowSuccess(true);
+      setLoginNotify(false); // Reset after displaying notification
     }
-  }, [registerStatus]);
 
-  
+    // Remove the class after 5 seconds
+    const timer = setTimeout(() => {
+      setShowSuccess(false);
+      setNotifyTitle('');
+      setNotifyMessage('');
+    }, 5000);
+    return () => clearTimeout(timer); // Cleanup the timer
+
+  }, [registerStatus, loginNotify, setRegisterStatus, setLoginNotify]); // Add setters to dependencies
+
+
+
   return (
     <>
     <div className={`card ${showSuccess ? 'card-success' : ''}`}>
@@ -44,8 +60,8 @@ function RegisterMessage() {
     </svg>
   </div>
   <div className="message-text-container">
-    <p className="message-text">Registered Successfully!</p>
-    <p className="sub-text">Go to Login</p>
+    <p className="message-text">{notifyTitle}</p>
+    <p className="sub-text"> {notifyMessage} </p>
   </div>
   <svg
     xmlns="http://www.w3.org/2000/svg"

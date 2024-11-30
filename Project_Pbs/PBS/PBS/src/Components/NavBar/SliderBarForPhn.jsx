@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+// Context
+import ProfileContext from '../Context/ProfileContext';
+import RegisterContext from '../Context/RegisterContext';
 import './SliderBarForPhn.css';
 function SliderBarForPhn() {
+	const [loginLogoutTitle, setLoginLogoutTitle] = useState('')
+	const [userName, setUserName] = useState('')
+	const {userData} = useContext(ProfileContext)
+	const {setLogout} = useContext(RegisterContext)
+
+	useEffect(() => {
+		if (userData) {
+			setLoginLogoutTitle("Logout")
+			setUserName(userData.fullName?.split(' ')[0])
+		}
+	  }, [userData]);
+	
 	const toggleClass = (selector, className) => {
 	  document.querySelector(selector).classList.toggle(className);
 	};
@@ -18,6 +33,75 @@ function SliderBarForPhn() {
 		toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
 	};
 	  const [userSlideSearchValue, setUserSlideSearchValue]=useState('');	
+
+	  const navigate = useNavigate();
+	  
+
+	  const menuLinks=[
+		{
+		  id : 1,
+		  name: 'Home',
+		  slug: '/',
+		  logo: 'home',
+		  active: true,
+		} ,
+		{
+			id : 2,
+			name: 'Search',
+			slug: '/',
+			logo: 'search',
+			active: true,
+		} ,
+		{
+			id : 3,
+			name: 'Chat',
+			slug: '/',
+			logo: 'chat',
+			active: true,
+		},
+		{
+			id : 4,
+			name: 'Orders',
+			slug: '/',
+			logo: 'orders',
+			active: true,
+		} ,
+		{
+			id : 5,
+			name: 'Wishlist',
+			slug: '/WishList-Deatils',
+			logo: 'favorite',
+			active: true,
+		} ,
+		{
+			id : 6,
+			name: 'Settings',
+			slug: '/',
+			logo: 'settings',
+			active: true,
+		} ,
+		{
+			id : 7,
+			name: loginLogoutTitle,
+			slug: '/',
+			logo: 'login',
+			active: true,
+		} , 
+	]
+
+	const menuLinkClick = (item) => {
+		if (item.name === "Logout") {
+		  setLogout(true);
+		  console.log('Logged out:', item);
+		  // Redirect to login page or homepage after logout
+		  navigate('/');
+		} else {
+		  navigate(item.slug);
+		}
+	  };
+	  
+
+
   return (
     <>
 <div className="flex flex-col h-full  dark:bg-red-40 dark:text-gray-800">
@@ -44,88 +128,42 @@ function SliderBarForPhn() {
 		</div>
 		</form>
 	 </div>
+
+	 {/* menuItems */}
 		<div className="flex-1 pl-2">
 			<ul className="pt-2   space-y-1 text-sm flex flex-col gap-3">
-				<Link to='/'>
-				<li className="rounded-sm " onClick={SliderMove}>
+				{menuLinks.map((item) =>
+				item.active? (
+					<li className="rounded-sm " onClick={ ()=> menuLinkClick(item)}>
 					<span className='flex items-center p-2 space-x-3 rounded-md'>
 						
 						<span className="material-symbols-outlined text-red-900 font-bold">
-                         home
+                         {item.logo}
                         </span>
 						
-						<span>Home</span>
+						<span> {item.name} </span>
 					</span>
 				</li>
-				</Link>
-				<li className="rounded-sm">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     search
-                    </span>
-						<span>Search</span>
-					</button>
-				</li>
-				<li className="rounded-sm">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     chat
-                    </span>
-						<span>Chat</span>
-					</button>
-				</li>
-				<li className="rounded-sm">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     orders
-                    </span>
-						<span>Orders</span>
-					</button>
-				</li>
-				<li className="rounded-sm  dark:text-gray-900">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     favorite
-                    </span>
-						<span>Wishlist</span>
-					</button>
-				</li>
-				<li className="rounded-sm">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     settings
-                    </span>
-						<span>Settings</span>
-					</button>
-				</li>
-				<li className="rounded-sm User-LogIn" onClick={ShowLoginPassBox}>
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined  text-red-900 font-bold">
-                     login
-                    </span>
-						<span>Log In</span>
-					</button>
-				</li>
-				<li className="rounded-sm User-LogOunt">
-					<button className="flex items-center p-2 space-x-3 rounded-md">
-					<span className="material-symbols-outlined text-red-900 font-bold">
-                     logout
-                    </span>
-						<span>Logout</span>
-					</button>
-				</li>
+				) : null
+				)}
+			
+				
+
 			</ul>
 		</div>
+		
 	</div>
-	<div className="flex items-center pl-2  mt-5 space-x-4 justify-self-end Profile-Box">
+	<Link to='/UserAcc' onClick={SliderMove}>
+	<div className="flex items-center pl-2  space-x-4 justify-self-end Profile-Box">
 		<img src="https://www.pngitem.com/pimgs/m/130-1300253_female-user-icon-png-download-user-image-color.png" alt="" className="w-12 h-12 rounded-lg dark:bg-gray-500" />
 		<div> 
-			<h2 className="text-lg font-semibold">Hi Oggey </h2>
+			<h2 className="text-lg font-semibold">Hi {userName} </h2>
 			<span className="flex items-center space-x-1">
 				<button className="text-xs hover:underline dark:text-gray-600">View profile</button>
 			</span>
 		</div>
 	</div>
+	</Link>
 </div>
     </>
   )

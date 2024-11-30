@@ -4,18 +4,21 @@ import ProfileContext from '../Context/ProfileContext'
 import axios from 'axios';
 import './LoginUsingOtp.css';
 import './LoginUsingPass.css';
+import RegisterContext from '../Context/RegisterContext';
 
 
 function LoginUsingPass() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [accessToken, setAccessToken] = useState('');
+  
 
   // setProfile Context
   const {setUserData} = useContext(ProfileContext)
-
+  const {setLoginNotify, logout} = useContext(RegisterContext)
+ 
+  
   // State to store user data
-  const [userProfile, setUserProfile] = useState(null);  // State for storing user data
   const  fetchUserProfile = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -35,7 +38,7 @@ function LoginUsingPass() {
       
 
       // Update state with fetched data
-      setUserProfile(response.data.data.fullName);
+      
       setUserData(response.data.data)
       
       
@@ -122,7 +125,7 @@ const refreshAccessToken = async () => {
         
         setAccessToken(accessToken);  // Update state
 
-        alert('Login successful!');
+        setLoginNotify(response.data.data)
         fetchUserProfile();
         
       } else {
@@ -136,12 +139,15 @@ const refreshAccessToken = async () => {
 
  
 
+  // Logout
   const handleLogout = () => {
     localStorage.clear();  // Clear stored tokens
     setAccessToken('');     // Reset state
     
     alert('You have been logged out.');
   };
+
+
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -162,8 +168,7 @@ const refreshAccessToken = async () => {
   };
 
   return (
-   <>{accessToken?
-   <h1 onClick={handleLogout}>welcome {userProfile}</h1>:
+   <>
    <div className="Login-Main-Container">
       <div className="Login-Pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
@@ -263,7 +268,7 @@ const refreshAccessToken = async () => {
         </div>
       </div>
     </div>
-}
+
    </>
   );
 }
