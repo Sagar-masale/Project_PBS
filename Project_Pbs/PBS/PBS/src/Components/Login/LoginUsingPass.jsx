@@ -15,7 +15,7 @@ function LoginUsingPass() {
 
   // setProfile Context
   const {setUserData} = useContext(ProfileContext)
-  const {setLoginNotify, logout} = useContext(RegisterContext)
+  const {setLoginNotify} = useContext(RegisterContext)
  
   
   // State to store user data
@@ -139,13 +139,20 @@ const refreshAccessToken = async () => {
 
  
 
-  // Logout
-  const handleLogout = () => {
-    localStorage.clear();  // Clear stored tokens
-    setAccessToken('');     // Reset state
+  // // Logout
+  // const handleLogout = () => {
+  //   localStorage.clear();  // Clear stored tokens
+  //   setAccessToken('');     // Reset state
     
-    alert('You have been logged out.');
-  };
+  //   alert('You have been logged out.');
+  // };
+
+  // // UseEffect to watch for `logout` changes and trigger handleLogout
+  // useEffect(() => {
+  //   if (logout) {
+  //     handleLogout();
+  //   }
+  // }, [logout]); // Run only when `logout` changes
 
 
 

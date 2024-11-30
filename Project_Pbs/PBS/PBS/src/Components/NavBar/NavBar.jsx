@@ -26,43 +26,26 @@ function NavBar() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // registerContext
-  const {registerStatus} = useContext(RegisterContext)
+  const {registerStatus, registerErrStatus, networkErrStatus} = useContext(RegisterContext)
+
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showUnSuccess, setShowUnSuccess] = useState(false);
+  const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
 
   
   useEffect(() => {
-    if (registerStatus) {
-      setShowSuccess(true);
-      // Remove the class after 5 seconds
+    if (registerStatus || registerErrStatus || networkErrStatus) {
       const timer = setTimeout(() => {
         setShowSuccess(false);
-      }, 5000);
-      return () => clearTimeout(timer); // Cleanup the timer
-    }
-  }, [registerStatus]);
-  // registerErrContext
-  const { registerErrStatus } = useContext(RegisterContext);
-  console.log("Err status", registerErrStatus);
-  
-  const [showUnSuccess, setShowUnSuccess] = useState(false);
-  
-  useEffect(() => {
-    if (registerErrStatus) {
-      setShowUnSuccess(true);
-      
-      const timer = setTimeout(() => {
         setShowUnSuccess(false);
+        setShowNetErrSuccess(false);
       }, 5000);
-      
       return () => clearTimeout(timer);
     }
-  }, [registerErrStatus]);
+  }, [registerStatus, registerErrStatus, networkErrStatus]);
+
   
-  // NetWork Congtext
-  const { networkErrStatus } = useContext(RegisterContext);
-  console.log("netWork : ", networkErrStatus);
-  
-  const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
+ 
   
   useEffect(() => {
     if (networkErrStatus) { 
@@ -113,10 +96,13 @@ function NavBar() {
   const {userData} = useContext(ProfileContext)
   const [accLogoName, setAccLogoName] = useState(''); 
   useEffect(() => {
+    console.log("userData updated: ", userData);
     if (userData && userData.fullName) {
-      setAccLogoName(userData.fullName.split(' ')[0]); // Extract first name
+        setAccLogoName(userData.fullName.split(' ')[0]);
+    } else {
+        setAccLogoName('');
     }
-  }, [userData]);
+}, [userData]);
 
   const navigate = useNavigate();
   const navItemsLinks=[
@@ -159,21 +145,20 @@ function NavBar() {
     
   ]
   
-    // if (navigate.item.id == 2){
-    // NavAccount();
-    // }
+
 
     const handleClick = (item) => {
       if (item.id === 2) {
-        if (!accLogoName) {
-            NavAccount()
-        }else{
-          navigate(item.slug);
+        if (accLogoName) {
+          navigate(item.slug);   // Go to user account if logged in
+        } else {
+          NavAccount();          // Show account login modal if logged out
         }
       } else {
-        navigate(item.slug);
+        navigate(item.slug);     // Navigate normally for other items
       }
     };
+    
 
   
   return (
@@ -330,7 +315,8 @@ function NavBar() {
       <div className="AdminLoginBox fixed  w-full  overflow-auto">
         <AdminLogin />
       </div>
-      <div className={`SignUpBox fixed  w-full overflow-auto ${showSuccess ? 'successSignUpBox' : ''},${showUnSuccess ? 'successSignUpBox' : ''},${showNetErrSuccess ? 'successSignUpBox' : ''}`}>
+      <div className={`SignUpBox fixed w-full overflow-auto ${showSuccess || showUnSuccess || showNetErrSuccess ? 'successSignUpBox' : ''}`}>
+
         <SignupUser />
       </div>
       <div className="LoginOtpBox fixed  overflow-auto">
