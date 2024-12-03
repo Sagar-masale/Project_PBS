@@ -1,23 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './FingerRings.css';
 
 import Ringsdata from './RingData.jsx';
 import CartBox from '../CartAdd/CartBox.jsx';
 import CartContext from "../Context/CartContext.js"
 
-// CartContext
-const {cartData,setCartData} = useContext(CartContext)
+
 
 const FingerRings=()=>{
+  // CartContext
+  const { setCartItems } = useContext(CartContext);
   const [cart, setCart]= useState('')
   const GetInfo=(curEle)=>{
     // console.log(curEle);
+    setCartItems(curEle)
     setCart(curEle)
-    setCartData(curEle)
     document.querySelector('.CartBox').classList.toggle('CartBox-Show')
  
   }
-console.log('cartData',cartData);
 
 
   return (
@@ -27,7 +27,9 @@ console.log('cartData',cartData);
     Title={cart.title}
     Price={cart.price}
     Dec={cart.dec}
-    ring={Ringsdata[0]} 
+    ImgM1={cart.imgM1}
+    ImgM2={cart.imgM2}
+    ImgM3={cart.imgM3}
     
     />
 <div className="ResComponent">

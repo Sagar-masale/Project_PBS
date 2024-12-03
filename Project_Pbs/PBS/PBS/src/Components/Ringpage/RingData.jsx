@@ -101,7 +101,7 @@ const Ringsdata = [
     {
         id: 12,
         img: "./RingImgs/imgR12.jpg",
-        moreImages: ["./RingImgs/imgR12M1.jpg", "./RingImgs/imgR12M2.jpg", "./RingImgs/imgR12M3.jpg"],
+        moreImages: ["./RingImgs/imgR12.jpg", "./RingImgs/imgR12M2.jpg", "./RingImgs/imgR12M1.jpg"],
         stocks: "Available",
         title: "Celtic Knot Ring",
         price: 49999,
