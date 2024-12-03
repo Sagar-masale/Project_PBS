@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../Context/ProfileContext';
 import RegisterContext from '../Context/RegisterContext';
 import './SliderBarForPhn.css';
+import '../Login/LoginUsingPass.css';
+import '../Login/LoginUsingOtp.css';
 
 function SliderBarForPhn() {
   const [loginLogoutTitle, setLoginLogoutTitle] = useState('');
@@ -18,21 +20,27 @@ function SliderBarForPhn() {
       setUserName(userData.fullName?.split(' ')[0] || 'Guest');
     } else {
       setLoginLogoutTitle("Login");
+      setUserName('Guest');  // Explicitly set to 'Guest' when no user data
     }
   }, [userData]);
+  
 
   // Handle menu click actions
   const menuLinkClick = (item) => {
     if (item.name === "Logout") {
       handleLogout();
-    } else {
+    } 
+    else if (item.name === "Login"){
+      CloseLoginBox()
+    }
+    else {
       navigate(item.slug);
     }
   };
 
   // Logout logic
   const handleLogout = () => {
-    setUserData(null);        // Clear user data in context
+    setUserData("");        // Clear user data in context
     localStorage.clear();      // Clear stored tokens and data
     setLogout(true);           // Update logout state in context
     navigate('/');             // Redirect to homepage or login page
@@ -49,7 +57,7 @@ function SliderBarForPhn() {
 	{ 
 		id: 7, 
 		name: loginLogoutTitle, // Dynamically set based on userData
-		slug: userData ? '/' : '/login',     // Redirect to login if logged out
+		slug: userData ? '/' : '/',     // Redirect to login if logged out
 		logo: 'login', 
 		active: true 
 	  },
@@ -60,6 +68,9 @@ function SliderBarForPhn() {
   // Slider toggle
   const toggleClass = (selector, className) => {
     document.querySelector(selector)?.classList.toggle(className);
+  };
+  const CloseLoginBox = () => {
+    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
   };
 
   return (
@@ -107,7 +118,7 @@ function SliderBarForPhn() {
         </div>
 
         {/* User Profile */}
-        <Link to='/user-profile' onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
+        <Link to='/UserAcc' onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
           <div className="flex items-center pl-2 space-x-4 Profile-Box">
             <img
               src="https://www.pngitem.com/pimgs/m/130-1300253_female-user-icon-png-download-user-image-color.png"

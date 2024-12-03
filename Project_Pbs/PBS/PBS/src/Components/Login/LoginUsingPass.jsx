@@ -38,7 +38,7 @@ function LoginUsingPass() {
       
 
       // Update state with fetched data
-      
+      CloseLoginBox()
       setUserData(response.data.data)
       
       
@@ -50,11 +50,11 @@ function LoginUsingPass() {
         if (success) {
           fetchUserProfile();  // Retry after refreshing
         } else {
-          alert('Session expired. Please log in again.');
+         // alert('Session expired. Please log in again.');
         }
       } else {
         console.error('Error fetching profile:', error);
-        alert('Failed to fetch user data. Please try again.');
+        //alert('Failed to fetch user data. Please try again.');
       }
     }
   };
@@ -168,7 +168,7 @@ const refreshAccessToken = async () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
     toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
   };
-
+  
   const ShowSignUpBox = () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
     toggleClass('.SignUpBox', 'SignUpBoxShow');
