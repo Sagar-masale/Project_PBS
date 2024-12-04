@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import '../Ringpage/FingerRings.css';
 
 import BanglesData from './BanglesData.jsx';
-import CartBox from '../CartAdd/CartBox.jsx';
+import CartContext from '../Context/CartContext.js';
 
 
 
 const BanGles=()=>{
-  const [cart, setCart]= useState('')
+  const {setCartItems} = useContext(CartContext);
   const GetInfo=(curEle)=>{
-    console.log(curEle);
-    setCart(curEle)
+    // console.log(curEle);
+    setCartItems(curEle)
     document.querySelector('.CartBox').classList.toggle('CartBox-Show')
   }
   return (
     <>
-    <CartBox
-    Img={cart.img}
-    Title={cart.title}
-    Price={cart.price}
-    Dec={cart.dec}
-    ImgM1={cart.imgM1}
-    ImgM2={cart.imgM2}
-    ImgM3={cart.imgM3}
-    />
 <div className="ResComponent">
     {
       BanglesData.map((curEle)=>{

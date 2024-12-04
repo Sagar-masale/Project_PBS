@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import '../Ringpage/FingerRings.css';
 
 import ChainsData from './ChainsData.jsx';
-import CartBox from '../CartAdd/CartBox.jsx';
+import CartContext from '../Context/CartContext.js';
 
 
 
 const Chains=()=>{
-  const [cart, setCart]= useState('')
+  const {setCartItems} = useContext(CartContext);
   const GetInfo=(curEle)=>{
     console.log(curEle);
-    setCart(curEle)
+    setCartItems(curEle)
     document.querySelector('.CartBox').classList.toggle('CartBox-Show')
   }
   return (
     <>
-    <CartBox
-    Img={cart.img}
-    Title={cart.title}
-    Price={cart.price}
-    Dec={cart.dec}
-    ImgM1={cart.imgM1}
-    ImgM2={cart.imgM2}
-    ImgM3={cart.imgM3}
-    />
 <div className="ResComponent">
     {
       ChainsData.map((curEle)=>{

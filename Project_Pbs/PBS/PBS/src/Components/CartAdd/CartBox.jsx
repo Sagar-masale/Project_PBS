@@ -3,6 +3,8 @@ import CartContext from '../Context/CartContext';
 
 function CartBox({ closeCart }) {  // Receive closeCart function as a prop
   const { cartItems } = useContext(CartContext);  // Access context
+
+  const { addToCart } = useContext(CartContext);
   
   // Handle current image display, initialize with main image or default
   const [currentImage, setCurrentImage] = useState(cartItems?.img || '');
@@ -75,7 +77,9 @@ function CartBox({ closeCart }) {  // Receive closeCart function as a prop
                       <p className="mt-4">{cartItems.dec}</p>
                     </section>
 
-                    <button type="submit" className="mt-6 w-full rounded-md px-8 py-3 text-base font-medium text-white hover:bg-black-700 focus:outline-none" style={{ backgroundColor: "#832729" }}>
+                    <button
+                      onClick={() => addToCart(cartItems)}
+                    type="submit" className="mt-6 w-full rounded-md px-8 py-3 text-base font-medium text-white hover:bg-black-700 focus:outline-none" style={{ backgroundColor: "#832729" }}>
                       Add to Cart
                     </button>
                   </div>

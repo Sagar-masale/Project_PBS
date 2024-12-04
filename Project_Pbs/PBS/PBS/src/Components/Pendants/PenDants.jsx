@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
-
+import React, { useContext } from 'react';
+import CartContext from '../Context/CartContext.js';
 import '../Ringpage/FingerRings.css';
 
 import PandentsData from './PenDantsData.jsx';
-import CartBox from '../CartAdd/CartBox.jsx';
 
 
 
 const PenDants=()=>{
-  const [cart, setCart]= useState('')
-  const GetInfo=(curEle)=>{
-    console.log(curEle);
-    setCart(curEle)
-    document.querySelector('.CartBox').classList.toggle('CartBox-Show')
-  }
+ // CartContext
+ const { setCartItems } = useContext(CartContext);
+
+ const GetInfo=(curEle)=>{
+   // console.log(curEle);
+   setCartItems(curEle)
+   document.querySelector('.CartBox').classList.toggle('CartBox-Show')
+
+ }
   return (
     <>
-    <CartBox
-    Img={cart.img}
-    Title={cart.title}
-    Price={cart.price}
-    Dec={cart.dec}
-    ImgM1={cart.imgM1}
-    ImgM2={cart.imgM2}
-    ImgM3={cart.imgM3}
-    />
 <div className="ResComponent">
     {
       PandentsData.map((curEle)=>{
@@ -39,7 +32,7 @@ const PenDants=()=>{
               </div>
               <div className="Add-Img-Box">
                </div>
-               <img loading='lazy' src={curEle.img}className="Finger-Style" key={index}/>
+               <img loading='lazy' src={curEle.img}className="Finger-Style"/>
           </div>
           <div className="Img-Info-Box">
               <div className="Itm-Stock">

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import CartBox from './Components/CartAdd/CartBox.jsx';
 import NavBar from "./Components/NavBar/NavBar.jsx";
 import Home from './Components/Home/Home.jsx';
 import Footer from './Components/Footer/Footer.jsx';
@@ -30,6 +30,7 @@ function App() {
     element: 
     <>
     <NavBar/>
+    
     <Home 
     CatTitle1="Finger Rings" 
     CatTitle2="Earrings" 
@@ -50,6 +51,7 @@ function App() {
       <ItemsInfo 
       title="Rings"
       />
+      <CartBox/>
       <FingerRings/>
       <Footer/>
       </>
@@ -62,6 +64,7 @@ function App() {
       <ItemsInfo 
       title="Earrings"
       />
+      <CartBox/>
       <Earrings/>
       <Footer/>
       </>
@@ -74,6 +77,7 @@ function App() {
       <ItemsInfo 
       title="Pendants"
       />
+      <CartBox/>
       <PenDants/>
       <Footer/>
       </>
@@ -86,6 +90,7 @@ function App() {
       <ItemsInfo 
       title="Mangalsutra"
       />
+      <CartBox/>
       <MangalSutra/>
       <Footer/>
       </>
@@ -98,6 +103,7 @@ function App() {
       <ItemsInfo 
       title="Bangles"
       />
+      <CartBox/>
       <BanGles/>
       <Footer/>
       </>
@@ -110,6 +116,7 @@ function App() {
       <ItemsInfo 
       title="Chains"
       />
+      <CartBox/>
       <Chains/>
       <Footer/>
       </>
