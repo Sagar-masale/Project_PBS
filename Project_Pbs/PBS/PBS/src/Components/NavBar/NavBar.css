@@ -7,6 +7,34 @@
     padding: 0;
     /* border: 1px solid; */
 }
+.cartCountBox {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+    border-radius: 50%;
+    position: absolute;
+   
+    margin-left: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.5s ease, height 0.5s ease; /* Smooth transition */
+    animation: shrinkAnimation .3s forwards; /* Apply the animation */
+}
+
+@keyframes shrinkAnimation {
+    0% {
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+    }
+    100% {
+        width: 15px;
+        height: 15px;
+        margin-top: -9px;
+    }
+}
+
 .LoginOtpBox,.LoginPassBox,.SignUpBox,.AdminLoginBox{
     top: 0;
     padding-top: 15%;

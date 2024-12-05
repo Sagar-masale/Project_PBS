@@ -15,15 +15,24 @@ import SignupUser from '../Login/SignUpUser';
 import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
 
+
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
 import './NavBar.css';
 import '../MediaQueries/MediaQueries.css';
+import CartContext from '../Context/CartContext';
 
 
 function NavBar() {
   const [UserSearchValue, setUserSearchValue] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // cartLemgth
+  const { cart } = useContext(CartContext);
+  const [cartLength, setCartLength] = useState(0);
+  useEffect(() => {
+       setCartLength(cart.length);
+      }, [cart]);
+      console.log("cartlength",cartLength);
 
   // registerContext
   const {registerStatus, registerErrStatus, networkErrStatus} = useContext(RegisterContext)
@@ -139,6 +148,7 @@ function NavBar() {
       name: 'CART',
       slug: '/Cart-Deatils',
       logo: 'shopping_cart',
+      itemCount: cartLength,
       active: true,
     } ,
     
@@ -212,6 +222,13 @@ function NavBar() {
               }
     
               >
+                {/* <span className='cartLengthCount absolute  bottom-14'> {item.itemCount} </span> */}
+                {item.itemCount > 0 && (
+                  <div className="cartCountBox bg-red-900 text-white">
+                    {item.itemCount}
+                  </div>
+                )}
+
               <span className="material-symbols-outlined top-logo flex flex-col text-center text-red-900 cursor-pointer"
               
               >
