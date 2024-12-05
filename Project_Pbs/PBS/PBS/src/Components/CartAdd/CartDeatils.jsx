@@ -3,24 +3,28 @@ import CartContext from '../Context/CartContext';
 import './CartDetails.css'
 import ClearCartConfirm from './ClearCartConfirm';
 
+
 function CartDeatils() {
-  const { cart, incrementQuantity, decrementQuantity, removeFromCart, clearCart } = useContext(CartContext);
+  const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
 
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
+   
   const handleClearCart = () => {
-    setisClearCartVisible(false)
+    setisClearCartVisible(false);  // Hide confirmation modal
+  };
+  
 
-  }
   
   return (
     <>
+   
  <div className="cart-container">
   {cart.length === 0 ? (
     <p>Your cart is empty.</p>
   ) : (
     
-    <div className=" cart-md-container h-auto bg-white-100  ">
+    <div className=" cart-md-container bg-white-100  ">
 
       <div className="mx-auto  px-4 sm:px-6 lg:px-8">
         <div className="flex ">
@@ -33,6 +37,7 @@ function CartDeatils() {
           onCancel={() => setisClearCartVisible(false)}
         />
       )}
+         
         <div className="mx-auto mt-8 max-w-26 md:mt-12">
           <div className="bg-white shadow">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
