@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import CartContext from '../Context/CartContext';
 import './CartDetails.css'
+import ClearCartConfirm from './ClearCartConfirm';
 
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  
+  const [isClearCartVisible, setisClearCartVisible] = useState(false);
+  const handleClearCart = () => {
+    setisClearCartVisible(false)
+
+  }
   
   return (
     <>
@@ -14,12 +19,20 @@ function CartDeatils() {
   {cart.length === 0 ? (
     <p>Your cart is empty.</p>
   ) : (
-    <div className=" cart-md-container h-screen bg-white-100  ">
+    
+    <div className=" cart-md-container h-auto bg-white-100  ">
+
       <div className="mx-auto  px-4 sm:px-6 lg:px-8">
         <div className="flex ">
           <h1 className="text-2xl mt-0 font-semibold text-red-900">Your Cart</h1>
+          <button onClick={ () => setisClearCartVisible(true) } className="clearCartAll rounded-lg hover:bg-red-800 mt-0 ml-auto bg-red-900 font-semibold text-white">Clear All</button>
         </div>
-
+        {isClearCartVisible && (
+        <ClearCartConfirm
+          onConfirm={handleClearCart}
+          onCancel={() => setisClearCartVisible(false)}
+        />
+      )}
         <div className="mx-auto mt-8 max-w-26 md:mt-12">
           <div className="bg-white shadow">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
