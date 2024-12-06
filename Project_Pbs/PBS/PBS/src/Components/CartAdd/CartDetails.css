@@ -1,3 +1,11 @@
+.empty-cart-img-box{
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+}
+.empty-cart-img{
+    width: 400%;
+}
 .cart-md-container{
 padding: 20px;
 height: 100%;
@@ -9,4 +17,15 @@ height: 100%;
 .clearCartAll{
     font-size: 14px;
     padding: 5px 10px;
+}
+.cartButtons{
+    width: 17%;
+    height: 55px;
+    /* box-shadow: 0 4px 25px #832729b3; */
+}
+.cartButtons:hover{
+    box-shadow: 0 4px 25px #832729b3;
+}
+.login-cart-button:hover{
+    border: 1px solid whitesmoke;
 }

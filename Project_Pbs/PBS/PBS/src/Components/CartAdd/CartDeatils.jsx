@@ -21,7 +21,25 @@ function CartDeatils() {
    
  <div className="cart-container">
   {cart.length === 0 ? (
-    <p>Your cart is empty.</p>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+        {/* Bag Icon */}
+        <div className="empty-cart-img-box flex items-center justify-center bg-red-100 rounded-full mb-4">
+          <img src="./Cart/empty-cart.png" alt="empty cart" className='empty-cart-img bg-red-500' />
+        </div>
+  
+        {/* Message */}
+        <h1 className="text-3xl font-semibold text-red-900 mb-6">YOUR CART IS EMPTY</h1>
+  
+        {/* Buttons */}
+        <div className="flex space-x-4 w-full  justify-center">
+          <button className="px-6 py-2 cartButtons  border-1 border-red-900 text-red-900 rounded-md hover:red-gray-50 transition-shadow">
+            Continue Shopping
+          </button>
+          <button className="px-6 py-2 cartButtons login-cart-button bg-red-900 border-none text-white rounded-md  transition-shadow">
+            Login To View Your Cart
+          </button>
+        </div>
+      </div>
   ) : (
     
     <div className=" cart-md-container bg-white-100  ">
