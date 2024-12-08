@@ -1,10 +1,11 @@
 .empty-cart-img-box{
     width: 170px;
     height: 170px;
+    background-color: rgba(228, 228, 228, 0.711);
     overflow: hidden;
 }
 .empty-cart-img{
-    width: 400%;
+    min-width: 240px;
 }
 .cart-md-container{
 padding: 20px;

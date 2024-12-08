@@ -63,7 +63,7 @@ function SliderBarForPhn() {
 	  },
   ];
 
-  console.log('udata',userData);
+  // console.log('udata',userData);
   
   // Slider toggle
   const toggleClass = (selector, className) => {

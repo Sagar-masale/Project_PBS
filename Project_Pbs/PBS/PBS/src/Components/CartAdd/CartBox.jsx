@@ -6,6 +6,9 @@ function CartBox({ closeCart }) {  // Receive closeCart function as a prop
 
   const { addToCart } = useContext(CartContext);
  
+ 
+
+
   
   
   // Handle current image display, initialize with main image or default

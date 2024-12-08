@@ -2,13 +2,21 @@
     margin: 0;
     padding: 0;
 }
-.Close-Login-Box-Arrow-Pass {
-    top: 7.5%;
-    right: 27%;
+.pass-Container{
+    width:800px;
+    height: 90vh;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
-.Close-Login-Box-Arrow-Pass:hover{
-    top: 7.5%;
-    right: 27%;
+.Close-Login-Box-Arrow-pass{
+    margin-top: 8px;
+    margin-left: 220px;
+    font-size: 40px;
+    color: #693F23;
+    transition: all linear .2s;
 }
 /* .TypeLogin1{
     font-weight: 400;

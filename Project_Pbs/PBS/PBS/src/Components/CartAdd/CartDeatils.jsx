@@ -7,12 +7,16 @@ import ClearCartConfirm from './ClearCartConfirm';
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
 
+
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
    
   const handleClearCart = () => {
     setisClearCartVisible(false);  // Hide confirmation modal
+    
+    
   };
+  
   
 
   
@@ -23,8 +27,8 @@ function CartDeatils() {
   {cart.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
         {/* Bag Icon */}
-        <div className="empty-cart-img-box flex items-center justify-center bg-red-100 rounded-full mb-4">
-          <img src="./Cart/empty-cart.png" alt="empty cart" className='empty-cart-img bg-red-500' />
+        <div className="empty-cart-img-box flex items-center justify-center  rounded-full mb-4">
+          <img src="./Cart/empty-cart.png" alt="empty-cart" className='empty-cart-img ' />
         </div>
   
         {/* Message */}

@@ -34,7 +34,7 @@ function LoginUsingPass() {
       });
       
       // Log the user data
-      console.log('User Profile:', response.data);
+      // console.log('User Profile:', response.data);
       
 
       // Update state with fetched data
@@ -177,8 +177,8 @@ const refreshAccessToken = async () => {
   return (
    <>
    <div className="Login-Main-Container">
-      <div className="Login-Pass-Container">
-        <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
+      <div className=" pass-Container">
+        <div className="LeftSide-Block-Login rounded-l-lg bg-white">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
             onClick={CloseLoginBox}
@@ -260,9 +260,9 @@ const refreshAccessToken = async () => {
           </span>
         </div>
 
-        <div className="RightSide-Block-Login justify-center align-middle w-64">
+        <div className="RightSide-Block-Login justify-center align-middle ">
           <span
-            className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
+            className="material-symbols-outlined Close-Login-Box-Arrow-pass absolute cursor-pointer"
             onClick={CloseLoginBox}
           >
             close
@@ -270,7 +270,7 @@ const refreshAccessToken = async () => {
           <img
             src="./LoginImgs/LoginImg1.png"
             alt="Login visual"
-            className="w-full h-full rounded-r-lg"
+            className="w-full loginImage rounded-r-lg"
           />
         </div>
       </div>

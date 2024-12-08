@@ -170,6 +170,7 @@ function SignUpUser() {
                   isLoading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 disabled={isLoading}
+                onClick={CloseLoginBox}
               >
                 {isLoading ? "Submitting..." : "Continue"}
               </button>

@@ -32,7 +32,7 @@ function NavBar() {
   useEffect(() => {
        setCartLength(cart.length);
       }, [cart]);
-      console.log("cartlength",cartLength);
+      // console.log("cartlength",cartLength);
 
   // registerContext
   const {registerStatus, registerErrStatus, networkErrStatus} = useContext(RegisterContext)
@@ -83,7 +83,7 @@ function NavBar() {
   
   const UserSearch = (e) => {
     e.preventDefault();
-    console.log(UserSearchValue);
+    // console.log(UserSearchValue);
   };
 
   const toggleClass = (selector, className) => {
@@ -105,7 +105,7 @@ function NavBar() {
   const {userData} = useContext(ProfileContext)
   const [accLogoName, setAccLogoName] = useState(''); 
   useEffect(() => {
-    console.log("userData updated: ", userData);
+    // console.log("userData updated: ", userData);
     if (userData && userData.fullName) {
         setAccLogoName(userData.fullName.split(' ')[0]);
     } else {

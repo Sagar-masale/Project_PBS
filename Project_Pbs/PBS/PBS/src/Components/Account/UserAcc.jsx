@@ -5,7 +5,7 @@ import ProfileContext from '../Context/ProfileContext';
 
 function UserAcc() {
   const {userData} = useContext(ProfileContext)
-  console.log('profileeee dataa', userData);
+  // console.log('profileeee dataa', userData);
   
 
 
