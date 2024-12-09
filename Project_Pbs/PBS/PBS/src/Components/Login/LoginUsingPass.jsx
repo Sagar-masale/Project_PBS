@@ -7,6 +7,7 @@ import './LoginUsingPass.css';
 import RegisterContext from '../Context/RegisterContext';
 
 
+
 function LoginUsingPass() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -14,8 +15,10 @@ function LoginUsingPass() {
   
 
   // setProfile Context
-  const {setUserData} = useContext(ProfileContext)
-  const {setLoginNotify} = useContext(RegisterContext)
+  const {setRegisterErrStatus} = useContext(RegisterContext)
+  const {setUserData, setLoginNotify} = useContext(ProfileContext)
+ 
+
  
   
   // State to store user data
@@ -132,8 +135,17 @@ const refreshAccessToken = async () => {
         alert(response.data.message || 'Login failed. Please try again.');
       }
     } catch (err) {
-      console.error('Error:', err);
-      alert(err.response?.data?.message || 'Something went wrong. Please try again.');
+      CloseLoginBox()
+      
+      if (err.response && err.response.status === 404) {
+        console.error('Error:', err.response.data.message); // Logs "User does not exist"
+        alert(err.response.data.message); // Show error message to the user
+        setRegisterErrStatus(err.response.data.message)
+    } else {
+        console.error('Unexpected error:', err.response.data.message);
+        setRegisterErrStatus(err.response.data.message)
+        alert('An unexpected error occurred.');
+    }
     }
   };
 
@@ -191,7 +203,7 @@ const refreshAccessToken = async () => {
             <span className="TypeLogin1" onClick={ShowLoginOtpBox}>
               <span className="UseOtp cursor-pointer">Using OTP</span>
             </span>
-            <span className="TypeLogin2 TypeLogin2-Pass">
+            <span className="TypeLogin2 TypeLogin1-Otp   TypeLogin2-Pass">
               <span className="UseOtp cursor-pointer">Using Password</span>
             </span>
           </div>

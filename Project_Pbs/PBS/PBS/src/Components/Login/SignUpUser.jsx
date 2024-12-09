@@ -31,6 +31,7 @@ function SignUpUser() {
         email,
         password,
         pbsCondition,
+        
       })
       .then((response) => {
         
@@ -39,6 +40,7 @@ function SignUpUser() {
         if (response.data.success) {
        
           // alert("Registration successful!");
+          
           setRegisterStatus(response.data.success)
           // console.log("rds",response.data.success);
           
@@ -49,17 +51,10 @@ function SignUpUser() {
       })
       .catch((err) => {
         if (err.response) {
-          // const errorMessage = err.response.data?.data || "This email or phone number is already registered.!";
-          setRegisterErrStatus(err.response)
-          // console.log("err res",err);
-          
-          // if (errorMessage.includes("email")) {
-          //   alert("This email or phone number is already registered.");
-          // } else {
-          //   alert(errorMessage);
-          // }
-          
-         
+        console.log(err.response.data.message);
+        
+          setRegisterErrStatus(err.response.data.message)
+      
           
           //console.error("Server Response Error:", err.response.data);
         } else if (err.request) {
@@ -91,15 +86,15 @@ function SignUpUser() {
 
   return (
     <div className="Login-Main-Container">
-      <div className="Login-Pass-Container">
-        <div className="LeftSide-Block-Login rounded-l-lg bg-white h-auto">
+      <div className="SignUp-Pass-Container justify-center ">
+        <div className="LeftSide-Block-SignUp rounded-l-lg bg-white h-auto">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
             onClick={CloseLoginBox}
           >
             close
           </span>
-          <h1 className="LoginName text-3xl text-red-800 mt-5">Sign Up</h1>
+          <h1 className="LoginName text-3xl text-red-800 mt-0">Sign Up</h1>
 
           <div className="Input-Username flex justify-center mt-5">
             <form onSubmit={registerUser} className="FormUser">
@@ -188,7 +183,7 @@ function SignUpUser() {
           </span>
         </div>
 
-        <div className="RightSide-Block-Login justify-center align-middle w-64">
+        <div className="RightSide-Block-SignUp object-cover">
           <span
             className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
             onClick={CloseLoginBox}
@@ -198,7 +193,7 @@ function SignUpUser() {
           <img
             src="./LoginImgs/LoginImg1.png"
             alt="Login visual"
-            className="w-full h-full rounded-r-lg"
+            className="rounded-r-lg  "
           />
         </div>
       </div>

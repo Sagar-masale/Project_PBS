@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+
 import './UserAcc.css'; // Custom styles for better design
 import ProfileContext from '../Context/ProfileContext';
 
@@ -34,15 +34,13 @@ function UserAcc() {
             <span className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"> {userData.phoneNumber || ''} </span>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <h3 className="text-sm/6 font-medium text-gray-900">Salary expectation</h3>
-            <span className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">$120,000</span>
+            <h3 className="text-sm/6 font-medium text-gray-900">address</h3>
+            <span className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">...</span>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <h3 className="text-sm/6 font-medium text-gray-900">About</h3>
             <span className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-              qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-              pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero dicta labore suscipit at itaque nulla dolores commodi laudantium deleniti consequatur?
             </span>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

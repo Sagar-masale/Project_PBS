@@ -7,3 +7,28 @@
     height: 50px;
     background-color: rgba(206, 206, 206, 0.819);
 }
+.SignUp-Pass-Container{
+    display: flex;
+    /* border: 1px solid red; */
+}
+.LeftSide-Block-SignUp{
+    width: 38%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 4%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    overflow: hidden;
+}
+.RightSide-Block-SignUp{
+    width: 18%;
+    /* border: 1px solid red; */
+}
+.RightSide-Block-SignUp img {
+    height: 100%;
+    object-fit:fill; 
+  }

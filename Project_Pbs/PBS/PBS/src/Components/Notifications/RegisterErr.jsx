@@ -3,10 +3,21 @@ import RegisterContext from '../Context/RegisterContext';
 import '../Notifications/RegisterErr.css';
 
 function RegisterErr() {
-  const { registerErrStatus } = useContext(RegisterContext);
-  console.log("Err status", registerErrStatus);
+  const { registerErrStatus , setRegisterErrStatus } = useContext(RegisterContext);
+  // console.log("Errrr status", registerErrStatus);
 
+  const [errMessage, setErrMessage] = useState('');
   const [showUnSuccess, setShowUnSuccess] = useState(false);
+
+  useEffect(() => {
+    if (registerErrStatus) {
+        setErrMessage(registerErrStatus);
+    } else  {
+        setErrMessage("");
+    }
+}, [registerErrStatus]);
+
+
 
   useEffect(() => {
     if (registerErrStatus) {
@@ -14,6 +25,7 @@ function RegisterErr() {
 
       const timer = setTimeout(() => {
         setShowUnSuccess(false); // Hide the message after 5 seconds
+        setRegisterErrStatus(null)
       }, 5000);
 
       return () => clearTimeout(timer); // Cleanup to prevent memory leaks
@@ -46,7 +58,7 @@ function RegisterErr() {
   </div>
   <div className="message-text-containerErr">
     <p className="message-textErr">Error</p>
-    <p className="sub-textErr">This email or phone number is already registered.</p>
+    <p className="sub-textErr">{errMessage}</p>
   </div>
   <svg
     xmlns="http://www.w3.org/2000/svg"

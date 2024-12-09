@@ -5,6 +5,7 @@ import RegisterContext from '../Context/RegisterContext';
 import './SliderBarForPhn.css';
 import '../Login/LoginUsingPass.css';
 import '../Login/LoginUsingOtp.css';
+import axios from 'axios';
 
 function SliderBarForPhn() {
   const [loginLogoutTitle, setLoginLogoutTitle] = useState('');
@@ -45,6 +46,8 @@ function SliderBarForPhn() {
     setLogout(true);           // Update logout state in context
     navigate('/');             // Redirect to homepage or login page
   };
+
+
 
   // Menu items configuration
   const menuLinks = [

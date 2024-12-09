@@ -5,7 +5,7 @@
        
     }
 
-    .LeftSide-Block-Login{
+    .LeftSide-Block-Login,.LeftSide-Block-SignUp{
         width: 60%;
     }
 
