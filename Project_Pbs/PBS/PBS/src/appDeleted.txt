@@ -1,0 +1,189 @@
+import React from 'react';
+import CartBox from './Components/CartAdd/CartBox.jsx';
+import NavBar from "./Components/NavBar/NavBar.jsx";
+import Home from './Components/Home/Home.jsx';
+import Footer from './Components/Footer/Footer.jsx';
+import FingerRings from "./Components/Ringpage/FingerRing"
+import Earrings from './Components/Earrings/Earrings.jsx';
+import PenDants from './Components/Pendants/PenDants.jsx';
+import MangalSutra from './Components/Mangalsutra/MangalSutra.jsx';
+import BanGles from './Components/Bangles/BanGles.jsx';
+import Chains from './Components/Chains/Chains.jsx';
+import Diamond from './Components/DiamondDetails/Diamond.jsx';
+import CartDeatils from './Components/CartAdd/CartDeatils.jsx';
+import ItemsInfo from './Components/ItemsInfo/ItemsInfo.jsx';
+import StoreDetails from './Components/StoreDetails/StoreDetails.jsx';
+import UserAcc from './Components/Account/UserAcc.jsx';
+import AdminAcc from './Components/Account/AdminAcc.jsx';
+import WishList from './Components/WishList/WishList.jsx';
+import { createBrowserRouter, Routes, Route,RouterProvider } from "react-router-dom";
+
+function App() {
+  // fetch("https://api.github.com/users/sagar-masale")
+  // .then(Response => Response.json())
+  // .then(data=>{
+  //   alert(data.name);
+  // })
+  const router=createBrowserRouter([
+    {
+    path: "/",
+    element: 
+    <>
+    
+    
+    <Home 
+    CatTitle1="Finger Rings" 
+    CatTitle2="Earrings" 
+    CatTitle3="Pendants" 
+    CatTitle4="Mangalsutra" 
+    CatTitle5="Bangles" 
+    CatTitle6="Chains"
+    />
+    
+    </>
+    },
+    
+    {
+      path: "/Ring-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Rings"
+      />
+      <CartBox/>
+      <FingerRings/>
+      
+      </>
+    },
+    {
+      path: "/Earrings-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Earrings"
+      />
+      <CartBox/>
+      <Earrings/>
+      
+      </>
+    },
+    {
+      path: "/Pendants-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Pendants"
+      />
+      <CartBox/>
+      <PenDants/>
+      
+      </>
+    },
+    {
+      path: "/Mangalsutra-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Mangalsutra"
+      />
+      <CartBox/>
+      <MangalSutra/>
+      
+      </>
+    },
+    {
+      path: "/Bangles-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Bangles"
+      />
+      <CartBox/>
+      <BanGles/>
+      
+      </>
+    },
+    {
+      path: "/Chains-Page",
+      element: 
+      <>
+      
+      <ItemsInfo 
+      title="Chains"
+      />
+      <CartBox/>
+      <Chains/>
+      
+      </>
+    },
+    {
+      path:"/Store-Deatils",
+      element:
+      <>
+      
+      <StoreDetails/>
+      
+      </>
+    },
+    {
+      path:"/Diamond-Details",
+      element:
+      <>
+      
+      <Diamond/>
+      
+      </>
+    },
+    {
+      path:"/WishList-Deatils",
+      element:
+      <>
+      
+      <WishList />
+      
+      </>
+    },
+    {
+      path: "/Cart-Deatils",
+      element: 
+      <>
+      
+      <CartDeatils/>
+      
+      </>
+    },
+
+    {
+      path: "/UserAcc",
+      element:
+      <>
+      
+      <UserAcc/>
+      
+      </>
+    },
+    {
+      path: "/AdminAcc",
+      element:
+      <>
+      
+      <AdminAcc/>
+      
+      </>
+    }
+  ])
+  return (
+    <>
+    
+    <RouterProvider router={router}/>
+   
+    </>
+  )
+}
+
+export default App

@@ -15,8 +15,8 @@ function LoginUsingPass() {
   
 
   // setProfile Context
-  const {setRegisterErrStatus} = useContext(RegisterContext)
-  const {setUserData, setLoginNotify} = useContext(ProfileContext)
+  const {setRegisterErrStatus, setLoginNotify} = useContext(RegisterContext)
+  const {setUserData} = useContext(ProfileContext)
  
 
  
@@ -73,8 +73,8 @@ const refreshAccessToken = async () => {
     if (!refreshToken) throw new Error('No refresh token found');
 
     const response = await axios.post('http://localhost:8000/api/v1/users/refresh-token', { refreshToken });
-    if (response.data.success) {
-      const { accessToken, refreshToken: newRefreshToken } = response.data.data;
+    if (response.data?.success) {
+      const { accessToken, refreshToken: newRefreshToken } = response.data.data || {};
 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', newRefreshToken);
@@ -129,24 +129,26 @@ const refreshAccessToken = async () => {
         setAccessToken(accessToken);  // Update state
 
         setLoginNotify(response.data.data)
+        // setUserData(response.data.data); 
         fetchUserProfile();
         
       } else {
         alert(response.data.message || 'Login failed. Please try again.');
       }
-    } catch (err) {
-      CloseLoginBox()
-      
-      if (err.response && err.response.status === 404) {
-        console.error('Error:', err.response.data.message); // Logs "User does not exist"
-        alert(err.response.data.message); // Show error message to the user
-        setRegisterErrStatus(err.response.data.message)
-    } else {
-        console.error('Unexpected error:', err.response.data.message);
-        setRegisterErrStatus(err.response.data.message)
-        alert('An unexpected error occurred.');
+    }catch (err) {
+      CloseLoginBox();
+    
+      if (err.response) {
+        console.error('Error:', err.response.data?.message || 'An error occurred');
+        alert(err.response.data?.message || 'Login failed.');
+        setRegisterErrStatus(err.response.data?.message || 'An error occurred');
+      } else {
+        console.error('Unexpected Error:', err.message);
+        alert('An unexpected error occurred. Please try again.');
+        setRegisterErrStatus('An unexpected error occurred.');
+      }
     }
-    }
+    
   };
 
  

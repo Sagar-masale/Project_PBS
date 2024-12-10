@@ -103,6 +103,8 @@ function NavBar() {
   
   // profileContext
   const {userData} = useContext(ProfileContext)
+  console.log("userData", userData._id);
+  
   const [accLogoName, setAccLogoName] = useState(''); 
   useEffect(() => {
     // console.log("userData updated: ", userData);

@@ -5,7 +5,6 @@ const RegisterContextProvider = ({children}) => {
     const [registerStatus, setRegisterStatus] = useState(null)
     const [registerErrStatus, setRegisterErrStatus] = useState(null)
     const [loginNotify, setLoginNotify] = useState(null)
-    const [userNotExist, setUserNotExist] = useState(null)
     const [logout, setLogout] = useState(null)
     const [networkErrStatus, setNetworkErrStatus] = useState(null)
     return(
@@ -15,7 +14,6 @@ const RegisterContextProvider = ({children}) => {
             registerErrStatus, setRegisterErrStatus, 
             networkErrStatus, setNetworkErrStatus,
             loginNotify, setLoginNotify,
-            userNotExist, setUserNotExist,
             logout, setLogout
             }
             }>

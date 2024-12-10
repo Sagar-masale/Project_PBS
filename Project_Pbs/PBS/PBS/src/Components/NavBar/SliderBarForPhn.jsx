@@ -42,7 +42,8 @@ function SliderBarForPhn() {
   // Logout logic
   const handleLogout = () => {
     setUserData("");        // Clear user data in context
-    localStorage.clear();      // Clear stored tokens and data
+    localStorage.removeItem("accessToken"); // Clear stored tokens and data
+    localStorage.removeItem("refreshToken");     
     setLogout(true);           // Update logout state in context
     navigate('/');             // Redirect to homepage or login page
   };

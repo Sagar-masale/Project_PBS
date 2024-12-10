@@ -1,0 +1,15 @@
+.OrderSummary-MainContainer{
+    width: 30%;
+    
+    height: fit-content;
+    background-color: #F4F3F3;
+}
+.Coupon-Text{
+    width: 50%;
+    border: 1px solid rgb(53, 53, 53);
+    background-color: #F4F3F3;
+}
+.coupon-Apply-Button:hover{
+    
+    background-color: rgb(90, 1, 1);
+}
