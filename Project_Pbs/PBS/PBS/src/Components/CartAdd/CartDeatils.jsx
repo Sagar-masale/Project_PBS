@@ -19,8 +19,12 @@ function CartDeatils() {
     
     
   };
-  
-  
+  const toggleClass = (selector, className) => {
+    document.querySelector(selector).classList.toggle(className);
+  };
+  const CloseLoginBox = () => {
+    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
+  };
 
   
   return (
@@ -35,14 +39,16 @@ function CartDeatils() {
         </div>
   
         {/* Message */}
-        <h1 className="text-3xl font-semibold text-red-900 mb-6">YOUR CART IS EMPTY</h1>
+        <h1 className="text-3xl font-semibold  mb-6" style={{color:"#4f3267"}}>YOUR CART IS EMPTY</h1>
   
         {/* Buttons */}
         <div className="flex space-x-4 w-full  justify-center">
-          <button className="px-6 py-2 cartButtons  border-1 border-red-900 text-red-900 rounded-md hover:red-gray-50 transition-shadow">
+          <button className="px-6 py-2 cartButtons  border-1 border-purple-900  rounded-md  transition-shadow">
             Continue Shopping
           </button>
-          <button className="px-6 py-2 cartButtons login-cart-button bg-red-900 border-none text-white rounded-md  transition-shadow">
+          <button
+           onClick={CloseLoginBox}
+           className="px-6 py-2 cartButtons-Login login-cart-button  border-none text-white rounded-md  transition-shadow">
             Login To View Your Cart
           </button>
         </div>

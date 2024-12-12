@@ -32,3 +32,9 @@
     height: 100%;
     object-fit:fill; 
   }
+.Register-submit-Button{
+background-color: #4f3267;
+}
+.Register-submit-Button:hover{
+background-color: #432a58;
+}

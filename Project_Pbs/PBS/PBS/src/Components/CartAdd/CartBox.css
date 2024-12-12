@@ -11,8 +11,12 @@
     transition: .2s;
 
 }
+.Add-to-cart-Button{
+    background: #6c478b;
+}
+
 .Mimg:hover{
-    box-shadow: 5px 2px 12px rgb(255, 161, 135);
+    box-shadow: 5px 2px 12px #4f3267;
 }
 @media screen and (max-width:680px  ){
     .Cover{

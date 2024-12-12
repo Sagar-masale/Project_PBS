@@ -82,7 +82,7 @@ function SliderBarForPhn() {
       <div className="space-y-3">
         <div className="SliderBar-Color-Box w-full">
           <div className="flex items-center justify-between">
-            <h2 className='text-red-900'>PBS</h2>
+            <h2 className='SliderBar-PbsLogo'>PBS</h2>
             <span className="material-symbols-outlined Slider-Bar-Exit" onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
               arrow_back
             </span>
@@ -93,7 +93,7 @@ function SliderBarForPhn() {
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center py-4">
                 <button type="submit" className="p-2">
-                  <span className="material-symbols-outlined text-red-900 text-3xl">search</span>
+                  <span className="material-symbols-outlined Slider-Bar-Search text-3xl">search</span>
                 </button>
               </span>
               <input
@@ -113,7 +113,7 @@ function SliderBarForPhn() {
             {menuLinks.map((item) => item.active && (
               <li key={item.id} className="rounded-sm" onClick={() => menuLinkClick(item)}>
                 <span className='flex items-center p-2 space-x-3 rounded-md'>
-                  <span className="material-symbols-outlined text-red-900 font-bold">{item.logo}</span>
+                  <span className="material-symbols-outlined sliderBar-Logos font-bold">{item.logo}</span>
                   <span>{item.name}</span>
                 </span>
               </li>

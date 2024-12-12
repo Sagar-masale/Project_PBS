@@ -5,11 +5,10 @@ import './Home.css';
 
 import '../MediaQueries/MediaQueries.css';
 import { Link } from 'react-router-dom';
-import MainPage from '../images/Home.jpg';
+import MainPage from '../images/Home.png';
 
 import MainPage2nd from '../images/Products.jpg';
 import MainPage3rd from '../images/Product2.jpg';
-import LineImg from '../images/line.png';
 import MangalSutraImg from '../images/Mangalsutra.jpg';
 import BanglesImg from '../images/Bangles.jpg';
 import ChainsImg from '../images/Chains.jpg';
@@ -101,7 +100,7 @@ function Home({
      <Link to="/Chains-Page" className="list-items items6"><div className="list-item6" ><div className="items-background"><img src={ChainsImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle6}</h6></div> </div></Link> 
      
 </div>
-<img src={LineImg} className="line"/>
+{/* <img src={LineImg} className="line"/> */}
 </div>
 
 
@@ -109,7 +108,7 @@ function Home({
     <div className="bg-white ">
       <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32 ">
-          <h2 className="Collection-Name text-2xl font-bold text-red-900">Collections</h2>
+          <h2 className="Collection-Name text-2xl font-bold text-purple-900">Collections</h2>
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0 ">
             {Collections.map((Collections) => (

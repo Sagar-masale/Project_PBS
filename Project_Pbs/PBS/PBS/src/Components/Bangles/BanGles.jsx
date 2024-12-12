@@ -34,7 +34,19 @@ const BanGles=()=>{
           </div>
           <div className="Img-Info-Box">
               <div className="Itm-Stock">
-                  <span className="Title-Stock">{curEle.stocks}</span>
+              <div className="flex justify-between items-center">
+                  <span
+                  style={{ color: curEle.stocksQty > 5 ? "black" : curEle.stocksQty > 0 ? "red" : "gray" }}
+                  className="font-bold Title-Stock"
+                >
+                  {curEle.stocksQty > 5
+                    ? "Available"
+                    : curEle.stocksQty > 0
+                    ? `ONLY ${curEle.stocksQty} LEFT IN STOCK`
+                    : "Not Available"}
+                </span>
+     
+    </div>
               </div>
                   <h4 className="Card-Title">{curEle.title}</h4>
                   <div className="Card-Price">

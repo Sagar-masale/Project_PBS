@@ -199,7 +199,7 @@ const refreshAccessToken = async () => {
           >
             close
           </span>
-          <h1 className="LoginName text-3xl text-red-800 mt-6">Login</h1>
+          <h1 className="LoginName text-3xl mt-6">Login</h1>
 
           <div className="Top-Side mt-8">
             <span className="TypeLogin1" onClick={ShowLoginOtpBox}>
@@ -232,7 +232,7 @@ const refreshAccessToken = async () => {
                 <span className="CheckBox-Gap flex items-center gap-3">
                   <input
                     type="checkbox"
-                    className="checkbox text-red-900 focus:ring-0 w-5 h-5"
+                    className="checkbox  focus:ring-0 w-5 h-5"
                   />
                   <span className="Remember">Remember Me</span>
                 </span>
@@ -240,15 +240,15 @@ const refreshAccessToken = async () => {
                   <input
                     type="checkbox"
                     required
-                    className="checkbox text-red-900 focus:ring-0 w-5 h-5"
+                    className="checkbox  focus:ring-0 w-5 h-5"
                   />
                   <span className="Remember text-wrap text focus:ring-0">
                     By continuing, I agree to{' '}
-                    <span className="Conditions text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Conditions font-bold border-b-2 cursor-pointer">
                       Terms & Conditions
                     </span>{' '}
                     &{' '}
-                    <span className="Policy text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Policy  font-bold border-b-2 cursor-pointer">
                       Privacy Policy
                     </span>
                   </span>
@@ -257,8 +257,8 @@ const refreshAccessToken = async () => {
 
               <input
                 type="submit"
-                value="Submit"
-                className="mt-10 text-white bg-red-800 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
+                value="Login"
+                className="Login-Button mt-10 text-white rounded-md cursor-pointer duration-200 Button-Submit"
               />
             </form>
           </div>
@@ -267,7 +267,7 @@ const refreshAccessToken = async () => {
             New User?{' '}
             <span
               onClick={ShowSignUpBox}
-              className="New-SignUp underline cursor-pointer text-red-900"
+              className="New-SignUp underline cursor-pointer"
             >
               Sign Up Now
             </span>

@@ -51,10 +51,16 @@
 .cartButtons{
     width: 17%;
     height: 55px;
+}
+.cartButtons-Login{
+    width: 17%;
+    height: 55px;
+    color: white;
+    background-color: #4f3267;
     /* box-shadow: 0 4px 25px #832729b3; */
 }
-.cartButtons:hover{
-    box-shadow: 0 4px 25px #832729b3;
+.cartButtons-Login:hover, .cartButtons:hover{
+    box-shadow: 0 4px 25px #4f3267;
 }
 .login-cart-button:hover{
     border: 1px solid whitesmoke;

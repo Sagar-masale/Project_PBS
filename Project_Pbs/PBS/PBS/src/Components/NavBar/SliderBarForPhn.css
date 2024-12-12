@@ -1,5 +1,7 @@
 
-
+.SliderBar-,.Slider-Bar-Search{
+    color:#4F3267;
+}
 .SliderBar-Color-Box{
     /* border: 1px solid red; */
     width: 100%;
@@ -8,7 +10,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f2e9e9;
+    background-color: rgb(246, 239, 246);
+}
+.sliderBar-Logos{
+    color: #4F3267;
 }
 .User-LogOunt{
     display: none;

@@ -33,7 +33,7 @@ function LoginUsingOtp() {
           >
             close
           </span>
-          <h1 className="LoginName text-3xl text-red-800">Login</h1>
+          <h1 className="LoginName text-3xl">Login</h1>
 
           <div className="Top-Side mt-8 ">
             <span className="TypeLogin1 TypeLogin1-Otp">
@@ -57,7 +57,7 @@ function LoginUsingOtp() {
                 <span className="CheckBox-Gap flex items-center gap-3">
                   <input
                     type="checkbox"
-                    className="checkbox text-red-900 focus:ring-0"
+                    className="checkbox text-purple-900 focus:ring-0"
                   />
                   <span className="Remember">Remember Me</span>
                 </span>
@@ -65,15 +65,15 @@ function LoginUsingOtp() {
                   <input
                     type="checkbox"
                     required
-                    className="checkbox text-red-900 focus:ring-0"
+                    className="checkbox text-purple-900 focus:ring-0"
                   />
                   <span className="Remember text-wrap text focus:ring-0">
                     By continuing, I agree to{' '}
-                    <span className="Conditions text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Conditions  font-bold border-b-2 cursor-pointer">
                       Terms & Conditions
                     </span>{' '}
                     &{' '}
-                    <span className="Policy text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Policy  font-bold border-b-2 cursor-pointer">
                       Privacy Policy
                     </span>
                   </span>
@@ -83,7 +83,7 @@ function LoginUsingOtp() {
               <input
                 type="submit"
                 value="Request OTP"
-                className=" text-white bg-red-800  rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit"
+                className="request-Otp-Button text-white  rounded-md cursor-pointer  duration-200 Button-Submit"
               />
             </form>
           </div>
@@ -92,7 +92,7 @@ function LoginUsingOtp() {
             New User?{' '}
             <span
               onClick={ShowSignUpBox}
-              className="New-SignUp underline cursor-pointer text-red-900"
+              className="New-SignUp underline cursor-pointer"
             >
               Sign Up Now
             </span>

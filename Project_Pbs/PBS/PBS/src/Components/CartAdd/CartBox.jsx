@@ -6,7 +6,7 @@ function CartBox({ closeCart }) {  // Receive closeCart function as a prop
 
   const { addToCart } = useContext(CartContext);
  
- 
+  const [hover, setHover] = useState(false);
 
 
   
@@ -83,8 +83,16 @@ function CartBox({ closeCart }) {  // Receive closeCart function as a prop
                     </section>
 
                     <button
-                      onClick={() => addToCart(cartItems)}
-                    type="submit" className="mt-6 w-full rounded-md px-8 py-3 text-base font-medium text-white hover:bg-black-700 focus:outline-none" style={{ backgroundColor: "#832729" }}>
+                    onClick={() => addToCart(cartItems)}
+                    type="submit" 
+                    className=" mt-6 w-full rounded-md px-8 py-3 text-base font-medium text-white focus:outline-none Add-to-cart-Button"
+                    style={{
+                      backgroundColor: hover ? "#6c478b" : "#4f3267",
+                      transition: "background-color 0.3s ease",
+                    }}
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                    >
                       Add to Cart
                     </button>
                   </div>

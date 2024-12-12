@@ -203,11 +203,11 @@ function NavBar() {
             type="search"
             onChange={(e) => setUserSearchValue(e.target.value)}
             className="text-sm search focus:ring-0"
-            placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
+            placeholder="Search for rings, earrings, bangles, chains..."
           />
           <div className="Search-Icon-Box flex justify-center items-center">
             <button>
-              <span className="material-symbols-outlined mt-1 text-red-900 text-3xl">search</span>
+              <span className="material-symbols-outlined mt-1 text-purple-900 text-3xl">search</span>
             </button>
           </div>
         </form>
@@ -231,7 +231,7 @@ function NavBar() {
                   </div>
                 )}
 
-              <span className="material-symbols-outlined top-logo flex flex-col text-center text-red-900 cursor-pointer"
+              <span className="material-symbols-outlined top-logo nav-Logos flex flex-col text-center cursor-pointer"
               
               >
               {item.logo}
@@ -260,11 +260,11 @@ function NavBar() {
               type="text"
               onChange={(e) => setUserSearchValue(e.target.value)}
               className="search focus:ring-0 text-gray-600"
-              placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
+              placeholder="Search for rings, earrings, bangles, chains..."
             />
             <div className="Search-Icon-Box flex justify-center items-center">
               <button>
-                <span className="material-symbols-outlined mt-1 text-red-900 text-3xl">search</span>
+                <span className="material-symbols-outlined mt-1 searchLogo text-3xl">search</span>
               </button>
             </div>
           </div>

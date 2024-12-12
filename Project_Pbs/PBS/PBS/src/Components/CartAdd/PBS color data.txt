@@ -1,0 +1,4 @@
+PBS color data
+color = #4f3267
+hover = #432a58
+background = rgb(246, 239, 246)

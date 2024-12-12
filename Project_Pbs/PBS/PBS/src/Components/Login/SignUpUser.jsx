@@ -94,7 +94,7 @@ function SignUpUser() {
           >
             close
           </span>
-          <h1 className="LoginName text-3xl text-red-800 mt-0">Sign Up</h1>
+          <h1 className="LoginName text-3xl mt-0">Sign Up</h1>
 
           <div className="Input-Username flex justify-center mt-5">
             <form onSubmit={registerUser} className="FormUser">
@@ -143,16 +143,16 @@ function SignUpUser() {
                   <input
                     type="checkbox"
                     required
-                    className="checkbox text-red-900 focus:ring-0 w-5 h-5"
+                    className="checkbox  focus:ring-0 w-5 h-5"
                     onChange={(e) => setPbsCondition(e.target.checked)}
                   />
                   <span className="Remember text-wrap text focus:ring-0">
                     By continuing, I agree to{' '}
-                    <span className="Conditions text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Conditions font-bold border-b-2 cursor-pointer">
                       Terms & Conditions
                     </span>{' '}
                     &{' '}
-                    <span className="Policy text-red-800 font-bold border-b-2 cursor-pointer">
+                    <span className="Policy  font-bold border-b-2 cursor-pointer">
                       Privacy Policy
                     </span>
                   </span>
@@ -161,7 +161,7 @@ function SignUpUser() {
 
               <button
                 type="submit"
-                className={`mt-10 text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200 Button-Submit ${
+                className={`mt-10 Register-submit-Button text-white  w-44 h-12 rounded-md cursor-pointer  duration-200 Button-Submit ${
                   isLoading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 disabled={isLoading}
@@ -176,7 +176,7 @@ function SignUpUser() {
             Already a User?{' '}
             <span
               onClick={ShowLoginBox}
-              className="New-SignUp underline cursor-pointer text-red-900"
+              className="New-SignUp underline cursor-pointer"
             >
               Login
             </span>

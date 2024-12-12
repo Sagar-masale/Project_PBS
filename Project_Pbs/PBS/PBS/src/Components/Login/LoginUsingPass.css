@@ -15,8 +15,12 @@
     margin-top: 8px;
     margin-left: 220px;
     font-size: 40px;
-    color: #693F23;
+    color: #432a58;
     transition: all linear .2s;
+}
+.Close-Login-Box-Arrow-pass:hover{
+    color: #4f3267;
+    font-size: 38px;
 }
 /* .TypeLogin1{
     font-weight: 400;
@@ -24,11 +28,13 @@
     border-bottom: 2px solid rgb(143, 142, 142);
 } */
 
-.TypeLogin2-Pass{
-    font-weight: 600;
-    color: #a23335;
-    border-bottom: 2px solid #a23335;
-}
+
 .RightSide-Block-Login{
     height: 100%;
+}
+.Login-Button{
+    background-color: #4f3267;
+}
+.Login-Button:hover{
+    background-color: #432a58;
 }

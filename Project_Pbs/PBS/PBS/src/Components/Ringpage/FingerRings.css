@@ -43,10 +43,10 @@
 }
 .Ring-Item-Names{
    
-    color: #832729;
+    color: #0d0c0c;
 }
 .Ring-Arrows{
-    color: #832729;
+    color: #4F3267;
     margin-left: -3.5%;
     margin-bottom: 2px;
     font-size: 22px;
@@ -70,7 +70,7 @@
     text-decoration: none;
 }
 .Go-Ring-Page-Logo{
-    color: #832729;
+    color: #4F3267;
     text-decoration: none;
 }
 .Between-Line{
@@ -127,7 +127,7 @@
 }
 .BEST-SELLER-BOX{
     /* float: right; */
-    border: 1px solid #832729;
+    border: 1px solid #4F3267;
     margin-left:auto;
     margin-right:6.2%;
     width: 15rem;
@@ -139,7 +139,7 @@
     border-radius: 5px;
 }
 .SELLER-Arrow{
-    color: #832729e3;
+    color: #4F3267;
     font-size: 30px;
     
 }
@@ -154,7 +154,7 @@
     font-style: normal;
 }
 .Seller-Title{
-    color: #a63335;
+    color: #4F3267;
     font-size: 14px;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
@@ -162,7 +162,7 @@
     /* width: 100%; */
 }
 .Compare-Arrow{
-    color: #832729;
+    color: #4F3267;
     width: 23px;
     height: 23px;
     border: 1px solid;
@@ -189,7 +189,7 @@
 
 }
 .Ring-Box:hover{
-        box-shadow: 0 2px 18px rgba(255, 199, 199, 0.867);
+        box-shadow: 0 2px 18px #8f50c38e;
 
 }
 .Ring-Img-Box{
@@ -226,7 +226,7 @@
     filter: blur(2px);
 }
 .Compare-Arrow-Img{
-    color: #832729;
+    color: #4F3267;
     width: 22px;
     height: 22px;
     border: 1px solid;
@@ -322,7 +322,7 @@
 }
 .Explore-Box:hover{
     transition: .3s;
-    background-color: #832729;
+    background-color: #4F3267;
     color: white;
 }
 /* .Quick-View-Box{

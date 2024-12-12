@@ -4,6 +4,7 @@
     padding: 0;
 }
 .LoginName{
+    color: #4f3267;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -30,12 +31,12 @@
     margin-top: 8px;
     margin-left: 200px;
     font-size: 40px;
-    color: #693F23;
+    color: #4f3267;
     transition: all linear .2s;
 }
 .Close-Login-Box-Arrow:hover{
     font-size: 38px;
-    color: #693f2381;
+    color: #6c478b;
 }
 .LeftSide-Block-Login{
     width: 80%;
@@ -67,8 +68,8 @@
 }
 .TypeLogin1-Otp{
     font-weight: 600;
-    color: #a23335;
-    border-bottom: 2px solid #a23335;
+    color: #4f3267;
+    border-bottom: 2px solid #6c478b;
 }
 
 .FormUser{
@@ -133,8 +134,15 @@
 .Close-Login-Box-Arrow-Phn{
     display: none;
 }
-
-
+.Conditions, .Policy, .New-SignUp{
+    color: #4f3267;
+}
+.request-Otp-Button{
+    background-color: #4f3267;
+}
+.request-Otp-Button:hover{
+    background-color: #432a58;
+}
 
 
 

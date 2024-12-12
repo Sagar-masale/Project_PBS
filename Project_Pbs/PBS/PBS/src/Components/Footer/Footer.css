@@ -5,6 +5,10 @@
     flex-direction: column;
     
 }
+.End-info{
+    background-color: #6d4c7b;
+}
+
 .info-box {
     gap: 15px;
 }
