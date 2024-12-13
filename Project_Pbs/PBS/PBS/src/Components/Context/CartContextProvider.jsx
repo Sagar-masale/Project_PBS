@@ -7,6 +7,7 @@ const CartContextProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]); // State to manage the cart
 
     const [cart, setCart] = useState([]);
+    const [discount, setDiscount] = useState(0);
 
 
           // Load cart from localStorage on component mount
@@ -26,6 +27,7 @@ const CartContextProvider = ({children}) => {
               localStorage.setItem(`cart_${userData._id}`, JSON.stringify(cart));
             }
           }, [cart]);
+
 
           const addToCart = (product) => {
             if (!userData?._id) {
@@ -78,8 +80,30 @@ const CartContextProvider = ({children}) => {
     };
     
 
+    const calculateCartSummary = () => {
+      const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    
+      const discount = totalPrice > 60000 ? totalPrice *  0.01   : 0;
+    
+      const itemBasedDiscount = cart.reduce((discountSum, item) => {
+        if (item.quantity > 2) {
+          return discountSum + 50; // Example: ₹50 discount per item if quantity > 2
+        }
+        return discountSum;
+      }, 0);
+    
+      const totalDiscount = discount + itemBasedDiscount;
+      const discountedTotal = totalPrice - totalDiscount;
+    
+      return { totalPrice, totalDiscount, discountedTotal };
+    };
+
+
+
     return (
-        <CartContext.Provider value={{ cartItems, setCartItems, cart, addToCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart }}>
+        <CartContext.Provider value={{
+           cartItems, setCartItems, cart, addToCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart,calculateCartSummary
+           }}>
           {children}
         </CartContext.Provider>
       );

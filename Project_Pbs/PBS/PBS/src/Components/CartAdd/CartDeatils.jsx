@@ -73,7 +73,7 @@ function CartDeatils() {
     <div className="">
       <div className="px-4 py-6 sm:px-8 sm:py-10 ">
         <div className="flow-root ">
-<ul className="-my-8">
+<ul className="-my-20 ul-cartDatas">
   {cart.map(item => (
      <li key={item.id} className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
      <div className="shrink-0 cart-Image-Box">
@@ -89,6 +89,7 @@ function CartDeatils() {
            <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.title}</p>
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
            <p className="cart-Price text-2xl text-black mt-2">₹ {item.price}</p>
+          
             <span className="remove-WishList-Box flex mt-2">
             <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item.id)}>
             <span class="material-symbols-outlined" style={{color:"#4f3267"}}>delete</span>
@@ -128,14 +129,17 @@ function CartDeatils() {
      
 
         </div>
+        <button className='p-3 rounded-lg text-white mt-12 checkOutBtn'>
+          CheckOut
+        </button>
     </div>
   </div>
 </div>
 </div>
-  <OrderSummary 
-  subTotal={totalPrice}
-  />
+  <OrderSummary/>
+ 
     </div>
+    
   )}
 </div>
 

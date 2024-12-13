@@ -16,7 +16,11 @@ function UserAcc() {
     <>
         <div className='profile-container'>
       <div className="px-4 sm:px-0">
-        <h3 className="text-2xl font-semibold text-gray-900">Welcome {userData.fullName?.split(' ')[0] || 'Guest'}</h3>
+        <h3 className="text-2xl font-semibold text-gray-900 flex gap-2">
+          Welcome
+          <span className="WelcomeUser"
+          style={{color: "#4f3267"}}
+        > {userData.fullName?.split(' ')[0] || 'Guest'}</span></h3>
         <p className="mt-1 max-w-2xl text-sm/6 text-gray-500"></p>
       </div>
       <div className="mt-6 border-t border-gray-100">
