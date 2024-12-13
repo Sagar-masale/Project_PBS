@@ -59,8 +59,8 @@ function CartDeatils() {
 
 <div className="cart-md-container-items px-4 sm:px-6 lg:px-8">
   <div className="flex ">
-    <h1 className="text-2xl mt-0 font-semibold text-red-900">Your Cart</h1>
-    <button onClick={ () => setisClearCartVisible(true) } className="clearCartAll rounded-lg hover:bg-red-800 mt-0 ml-auto bg-red-900 font-semibold text-white">Clear All</button>
+    <h1 className="text-2xl mt-0 font-semibold Your-Cart ">Your Cart</h1>
+    <button onClick={ () => setisClearCartVisible(true) } className="clearCartAll rounded-lg mt-0 ml-auto  font-semibold text-white">Clear All</button>
   </div>
   {isClearCartVisible && (
   <ClearCartConfirm
@@ -86,19 +86,19 @@ function CartDeatils() {
      <div className="relative flex flex-1  flex-col justify-between">
        <div className="sm:col-gap-5 sm:grid ml-10 sm:grid-cols-2">
          <div className="pr-8 sm:pr-5">
-           <p className="text-xl font-semibold text-red-900">{item.title}</p>
+           <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.title}</p>
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
            <p className="cart-Price text-2xl text-black mt-2">₹ {item.price}</p>
             <span className="remove-WishList-Box flex mt-2">
             <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item.id)}>
-            <span class="material-symbols-outlined text-red-900">delete</span>
+            <span class="material-symbols-outlined" style={{color:"#4f3267"}}>delete</span>
             <p className="cart-Price text-sm text-black ml-1"> Remove</p>  
             </span> 
 
             <span className="remove-wishlist-middle ml-3 text-xl font-light">|</span>
 
             <span className="add-WishList-Block flex cursor-pointer">
-            <span class="material-symbols-outlined ml-2 text-red-900">favorite</span>
+            <span class="material-symbols-outlined ml-2" style={{color:"#4f3267"}}>favorite</span>
             <p className="cart-Price text-sm text-black ml-1"> Move to Wishlist</p> 
 
             </span>
@@ -110,9 +110,9 @@ function CartDeatils() {
 
            <div className="sm:order-1">
              <div className="mx-auto flex h-8 items-stretch text-gray-600">
-               <button onClick={() => decrementQuantity(item.id)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-red-800 hover:text-white">-</button>
+               <button onClick={() => decrementQuantity(item.id)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">-</button>
                <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item.quantity}</div>
-               <button onClick={() => incrementQuantity(item.id)}  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-red-800 hover:text-white">+</button>
+               <button onClick={() => incrementQuantity(item.id)}  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">+</button>
              </div>
            </div>
          </div>

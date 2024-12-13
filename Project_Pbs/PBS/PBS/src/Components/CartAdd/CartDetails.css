@@ -1,5 +1,5 @@
 .Cart-Main-Container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     display: flex;
 }
@@ -11,6 +11,21 @@
 }
 .empty-cart-img{
     min-width: 240px;
+}
+.Your-Cart{
+    color: #4f3267;
+}
+.clearCartAll{
+    background-color: #4f3267;
+}
+.clearCartAll:hover, .incrementCart-DecCart:hover{
+    background-color: #432a58;
+}
+.on-Confirm-Button{
+    background-color: #4f3267;
+}
+.on-Confirm-Button:hover{
+    background-color: #432a58;
 }
 .cart-md-container{
     padding: 20px;

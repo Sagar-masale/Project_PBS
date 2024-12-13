@@ -40,12 +40,12 @@ function AdminLogin() {
     <div className="Login-Pass-Container">
       <div className="LeftSide-Block-Login rounded-l-lg bg-white h-full">
       <span
-            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
+            className="material-symbols-outlined Close-Login-Box-Arrow-Phn  relative cursor-pointer"
             onClick={CloseLoginBox}
           >
             close
           </span>
-        <h1 className="LoginName text-3xl text-red-800">Admin</h1>
+        <h1 className="LoginName text-3xl">Admin</h1>
         <div className="Top-Side mt-8">
           <span className="TypeLogin1 AdminLogin-TypeOtp">
             <span className="UseOtp cursor-not-allowed">Using OTP</span>
@@ -80,7 +80,7 @@ function AdminLogin() {
                 <input
                   onChange={(e)=>setRemember(e.target.checked)}
                   type="checkbox"
-                  className="checkbox text-red-900 focus:ring-0 w-5 h-5"
+                  className="checkbox focus:ring-0 w-5 h-5"
                 />
                 <span className="Remember">Remember Me</span>
               </span>
@@ -91,7 +91,7 @@ function AdminLogin() {
 
             <button
               type='submit'  
-              className=" text-white bg-red-800 w-44 h-12 rounded-md cursor-pointer hover:bg-red-950 duration-200 mt-10"
+              className="Login-Button text-white  w-44 h-12 rounded-md cursor-pointer  duration-200 mt-10"
             >
                 Login
             </button>
@@ -103,7 +103,7 @@ function AdminLogin() {
 
       <div className="RightSide-Block-Login  justify-center align-middle w-64">
         <span
-          className="material-symbols-outlined Close-Login-Box-Arrow absolute cursor-pointer"
+          className="material-symbols-outlined Close-Login-Box-Arrow-Admin absolute cursor-pointer"
           onClick={CloseLoginBox}
         >
           close

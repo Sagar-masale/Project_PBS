@@ -105,6 +105,12 @@ body {
     
    
 }
+.cartCountBox{
+    background-color: #4F3267;
+}
+.MoreOpt-Logos{
+    color: #4F3267;
+}
 .Login-Box{
     width: fit-content;
     height: fit-content;

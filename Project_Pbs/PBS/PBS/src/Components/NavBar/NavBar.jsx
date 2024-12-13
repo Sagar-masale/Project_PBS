@@ -226,7 +226,7 @@ function NavBar() {
               >
                 {/* <span className='cartLengthCount absolute  bottom-14'> {item.itemCount} </span> */}
                 {item.itemCount > 0 && (
-                  <div className="cartCountBox bg-red-900 text-white">
+                  <div className="cartCountBox  text-white">
                     {item.itemCount}
                   </div>
                 )}
@@ -284,7 +284,7 @@ function NavBar() {
       <div className="input NavMore-Items absolute right-0 z-2">
 <Link to="/" onClick={ShowNavMoreSec}>
 <span  className="value">
-  <span className="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
    home
   </span>
     Home
@@ -292,7 +292,7 @@ function NavBar() {
 </Link>
 <Link>
 <span className="value">
-  <span className="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   mode_comment
   </span>
     Chat
@@ -300,7 +300,7 @@ function NavBar() {
 </Link>
 <Link>
 <span className="value">
-<span className="material-symbols-outlined text-red-900 font-bold">
+<span className="material-symbols-outlined MoreOpt-Logos font-bold">
   orders
   </span>
     Orders
@@ -308,7 +308,7 @@ function NavBar() {
 </Link>
  <Link>
  <span className="value">
- <span className="material-symbols-outlined text-red-900 font-bold">
+ <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   favorite
   </span>
     Wishlist
@@ -316,7 +316,7 @@ function NavBar() {
  </Link>
 <Link>
 <span className="value">
-<span className="material-symbols-outlined text-red-900 font-bold">
+<span className="material-symbols-outlined MoreOpt-Logos font-bold">
   Notifications
   </span>
     Notifications
@@ -324,7 +324,7 @@ function NavBar() {
 </Link>
   <Link to="/UserAcc" onClick={ShowNavMoreSec}>
   <span className="value">
-  <span className="material-symbols-outlined text-red-900 font-bold">
+  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   account_circle
   </span>
     Account

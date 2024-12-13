@@ -15,9 +15,9 @@ function OrderSummary({subTotal = "0"}) {
           <input
             type="text"
             placeholder="Enter Coupon Code"
-            className="Coupon-Text flex-grow  rounded-l-md rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="Coupon-Text flex-grow  rounded-l-md rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-800"
           />
-          <button className="bg-red-900 coupon-Apply-Button text-white px-4 py-2 rounded-md ">
+          <button className="coupon-Apply-Button text-white px-4 py-2 rounded-md ">
             Apply
           </button>
         </div>
@@ -32,11 +32,11 @@ function OrderSummary({subTotal = "0"}) {
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Discount</span>
-          <span className="text-red-600 font-medium">- ₹ {discount}</span>
+          <span className="discount font-medium">- ₹ {discount}</span>
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Delivery Charge</span>
-          <span className="text-green-600 font-medium">
+          <span className="text-green-800 font-medium">
             {deliveryCharge === 0 ? "FREE" : `₹ ${deliveryCharge}`}
           </span>
         </div>
@@ -48,8 +48,8 @@ function OrderSummary({subTotal = "0"}) {
 
       <div className="border-t mt-4 pt-4">
         <div className="flex justify-between">
-          <span className="text-green-600 font-bold text-lg">YOU SAVE</span>
-          <span className="text-green-600 font-bold text-lg">+ ₹ {youSave}</span>
+          <span className="text-green-800 font-bold text-lg">YOU SAVE</span>
+          <span className="text-green-800 font-bold text-lg">+ ₹ {youSave}</span>
         </div>
       </div>
     </div>

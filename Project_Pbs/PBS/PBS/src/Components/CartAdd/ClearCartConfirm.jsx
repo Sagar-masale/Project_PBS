@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import CartContext from '../Context/CartContext';
 import Loading from '../PageLoader/Loading';
+import './CartDetails.css'
 
 function ClearCartConfirm({ onConfirm, onCancel }) {
     const { clearCart } = useContext(CartContext);
@@ -38,7 +39,8 @@ function ClearCartConfirm({ onConfirm, onCancel }) {
         <div className="flex justify-around">
           <button
             onClick={onConfirm}
-            className="bg-red-900 text-white px-4 py-2 rounded hover:bg-red-800 transition"
+            
+            className="on-Confirm-Button text-white px-4 py-2 rounded transition"
           >
             Yes, Clear Cart
           </button>
