@@ -85,7 +85,8 @@ const CartContextProvider = ({children}) => {
     const calculateCartSummary = () => {
       const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     
-      const discount = totalPrice > 60000 ? totalPrice *  0.01   : 0;
+      // Apply ₹400 discount if totalPrice > 60000
+      const discount = totalPrice > 100000 ? 400 : 0;
     
       const itemBasedDiscount = cart.reduce((discountSum, item) => {
         if (item.quantity > 2) {
@@ -99,6 +100,7 @@ const CartContextProvider = ({children}) => {
     
       return { totalPrice, totalDiscount, discountedTotal };
     };
+    
 
 
 

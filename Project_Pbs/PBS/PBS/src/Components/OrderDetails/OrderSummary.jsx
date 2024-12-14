@@ -1,17 +1,28 @@
 import React from 'react'
 import './OrderSummary.css'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CartContext from '../Context/CartContext';
 
 function OrderSummary({subTotal = "0"}) {
   const { calculateCartSummary } = useContext(CartContext);
   const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
-  console.log("dess",calculateCartSummary);
-  
-    const discount = 0;
+  // console.log("dess",calculateCartSummary);
+
+  const [couponCode, setCouponCode] = useState('');
+  const [extraDiscount, setExtraDiscount] = useState(0);
+
+
+  const handleApplyCoupon = () => {
+    
+    
+    if (couponCode === 'welcomepbs') {
+      setExtraDiscount(500)
+      // console.log(extraDiscount);
+    } else {
+      setExtraDiscount(0)
+    }
+  };
     const deliveryCharge = 0; // FREE
-    const taxIncludedTotal = subTotal - discount + deliveryCharge;
-    const youSave = discount;
   return (
     <>
      <div className="p-6 mr-28 relative OrderSummary-MainContainer rounded-md ">
@@ -21,9 +32,13 @@ function OrderSummary({subTotal = "0"}) {
           <input
             type="text"
             placeholder="Enter Coupon Code"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
             className="Coupon-Text flex-grow  rounded-l-md rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-800"
           />
-          <button className="coupon-Apply-Button text-white px-4 py-2 rounded-md ">
+          <button 
+          onClick={handleApplyCoupon}
+          className="coupon-Apply-Button text-white px-4 py-2 rounded-md ">
             Apply
           </button>
         </div>
@@ -38,7 +53,7 @@ function OrderSummary({subTotal = "0"}) {
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Discount</span>
-          <span className="discount font-medium">- ₹ {totalDiscount.toFixed(2)}</span>
+          <span className="discount font-medium">- ₹ {(totalDiscount + extraDiscount).toFixed(2)}</span>
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Delivery Charge</span>

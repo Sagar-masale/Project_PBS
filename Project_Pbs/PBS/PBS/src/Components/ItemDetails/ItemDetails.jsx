@@ -15,11 +15,45 @@ function ItemDetails() {
         }
     }, [productItems, navigate]);
  
-
+    const reviewsData = [
+      {
+        id: 1,
+        author: "Veeraj M",
+        date: "May 16, 2021",
+        reviewStar: 3,
+        title: "Beautiful and Perfect!",
+        content:
+        "I bought this gold ring for a special day, and it is perfect! The design is beautiful, and it shines so nicely. It feels strong but is very comfortable to wear. Everyone keeps asking me where I got it. I love it!"
+      },
+      {
+        id: 2,
+        author: "Mayur P",
+        date: "April 6, 2021",
+        reviewStar: 5,
+        title: "Elegant and Classic",
+        content:
+        "The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy!The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy! This gold ring looks simple but very elegant. It shines bright and feels like good quality. I bought it as a gift, and they loved it! The packaging was also very nice. I would definitely buy it again."  
+      },
+      {
+        id: 3,
+        author: "Prajwal P",
+        date: "February 24, 2021",
+        reviewStar: 4,
+        title: "Good Ring, But Be Careful",
+        content:
+        "The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy!"   
+      },
+    ];
+    
+    
+      // Function to render star ratings dynamically
+      const renderStars = (count) => {
+        return "★".repeat(count) + "☆".repeat(5 - count);
+      };
     
   return (
     <>
-     <div className="ItemDetails-Container  rounded-lg shadow-lg">
+     <div className="ItemDetails-Container  rounded-lg ">
       {/* Product Content */}
       <div className="gap-8 Left-Side-Product-Details">
         {/* Left Side: Product Image */}
@@ -27,14 +61,14 @@ function ItemDetails() {
           <img
             src={productItems.img} // Replace with actual image URL
             alt="ProductImage"
-            className="ProductMain-Image rounded-lg mb-4"
+            className="ProductMain-Image mb-4"
           />
           {/* Thumbnail images */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-4">
               {productItems.moreImages?.map((thumb, index) => (
                 <div
                   key={index}
-                  className="ProductMore-Images border hover:border-blue-500 cursor-pointer"
+                  className="ProductMore-Images  hover:border-blue-500 cursor-pointer"
                 >
                   <img
                     src={thumb} // Replace with actual thumbnail URLs
@@ -106,7 +140,7 @@ function ItemDetails() {
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
       <div className="button-AddToCart" data-tooltip={"₹"+productItems.price}>
-  <div onClick={() => addToCart(productItems)} className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center">
+     <div onClick={() => addToCart(productItems)} className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center">
     
     <div className="text-AddCart-Feild flex flex-row gap-2">   
         <span className="material-symbols-outlined">
@@ -128,6 +162,33 @@ function ItemDetails() {
 
         </div>
       </div>
+
+      <div className="reviews-container w-full">
+        <div className="review-WriteReview flex flex-row ">
+        <h2 className="reviews-title">Recent Reviews</h2>
+        <button className="Customer-Write-Review bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg flex items-center">
+          WRITE A REVIEW
+        </button>
+
+        </div>
+      {reviewsData.map((review) => (
+        <div key={review.id} className="review">
+          <div className="review-header">
+           <div className="review-Auther-Time flex flex-col">
+           <span className="review-author">{review.author}</span>
+           <span className="review-date">{review.date}</span>
+           </div>
+            
+          </div>
+          <div className="review-stars flex">{renderStars(review.reviewStar)}</div>
+          <div className="reviewTitle-txt">
+          <h3 className="review-title">{review.title}</h3>
+          <p className="review-content flex flex-col">{review.content}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  
     
     </>
   )

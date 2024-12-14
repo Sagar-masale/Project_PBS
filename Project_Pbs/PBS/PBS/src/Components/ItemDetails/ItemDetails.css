@@ -35,7 +35,7 @@
 }
 .ProductPrice{
     color: #4f3267;
-    font-family: initial;
+    font-family: 'Roboto';
 }
 .Product-Weight{
     color: #4f3267;
@@ -175,5 +175,79 @@
   
   .button-AddToCart:hover:before {
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+  }
+  
+
+  .reviews-container {
+    width: 100%;
+    /* border: 1px solid red; */
+    padding: 3%;
+    background-color: rgb(246, 239, 246);
+    /* max-width: 800px; */
+    margin: 2rem auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .reviews-title {
+    font-size: 20px;
+    font-weight: bold;
+    color:#4f3267;
+    margin-bottom: 1rem;
+  }
+  .review-WriteReview{
+    width: auto;
+    font-size: 14px;
+    margin-bottom: 15px;
+    justify-content: space-between;
+  }
+  .review {
+    border-top: 1px solid #ddd;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 1rem 0;
+  }
+  .reviewTitle-txt{
+    width: 700px;
+  }
+  .review-header {
+    display: flex;
+    justify-content:left;
+    align-items: self-start;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-author {
+    width: 100px;
+    /* border: 1px solid red; */
+    font-weight: bold;
+    color:#4f3267;
+  }
+  
+  .review-date {
+    width: 100px;
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .review-stars {
+    /* border: 1px solid red; */
+    height: fit-content;
+    color: #ffcc00; /* Gold color */
+    font-size: 25px;
+  }
+  
+  .review-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color:#4f3267;
+  }
+  
+  .review-content {
+    margin-top: 0.5rem;
+    white-space: pre-line; /* Preserves line breaks */
+    color: #555;
   }
   
