@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import CartContext from '../Context/CartContext';
 
 function CartBox({ closeCart }) {  // Receive closeCart function as a prop
-  const { cartItems } = useContext(CartContext);  // Access context
 
-  const { addToCart } = useContext(CartContext);
+
+  const { addToCart, cartItems } = useContext(CartContext);
  
   const [hover, setHover] = useState(false);
 
@@ -93,7 +93,7 @@ function CartBox({ closeCart }) {  // Receive closeCart function as a prop
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
                     >
-                      Add to Cart
+                      Add Item
                     </button>
                   </div>
                 </div>

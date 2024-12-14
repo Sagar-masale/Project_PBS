@@ -88,16 +88,16 @@ function Home({
 </div>
    </div>
    <div className="shop-category Category-List-First-Box  flex flex-col justify-center items-center">
-<h2 className="shop-c">Shop By Category</h2><br/>
-<p className="instruction">Browse through your favourite categories. We've got them all!</p><br/>
+<h2 className="shop-c">Choose Your Category</h2><br/>
+<p className="instruction">Find Your Favorites – We’ve Got Every Category Covered!</p><br/>
 
 <div className="image-lists Category-List-First" id="Category-Move">
-     <Link to="/Ring-Page" className="list-items items1"><div className="list-item1" ><div className="items-background"><img src='./RingImgs/imgR2.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle1}</h6></div> </div></Link> 
-     <Link to="/Earrings-Page" className="list-items items2"><div className="list-item2" ><div className="items-background"><img src='./Erraings/imgR3.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle2}</h6></div> </div></Link> 
-     <Link to="/Pendants-Page" className="list-items items3"><div className="list-item3" ><div className="items-background"><img src='./Pendants/MainPendant.webp' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle3}</h6></div> </div></Link> 
-     <Link to="/Mangalsutra-Page" className="list-items items4"><div className="list-item4" ><div className="items-background"><img src={MangalSutraImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle4}</h6></div> </div></Link> 
-     <Link to="/Bangles-Page" className="list-items items5"><div className="list-item5" ><div className="items-background"><img src={BanglesImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle5}</h6></div> </div></Link> 
-     <Link to="/Chains-Page" className="list-items items6"><div className="list-item6" ><div className="items-background"><img src={ChainsImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle6}</h6></div> </div></Link> 
+     <Link to="/Ring-Page" className="list-items items1"><div className="list-item1 HomeList-Items" ><div className="items-background"><img src='./RingImgs/imgR2.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle1}</h6></div> </div></Link> 
+     <Link to="/Earrings-Page" className="list-items items2"><div className="list-item2 HomeList-Items" ><div className="items-background"><img src='./Erraings/imgR3.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle2}</h6></div> </div></Link> 
+     <Link to="/Pendants-Page" className="list-items items3"><div className="list-item3 HomeList-Items" ><div className="items-background"><img src='./Pendants/MainPendant.webp' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle3}</h6></div> </div></Link> 
+     <Link to="/Mangalsutra-Page" className="list-items items4"><div className="list-item4 HomeList-Items" ><div className="items-background"><img src={MangalSutraImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle4}</h6></div> </div></Link> 
+     <Link to="/Bangles-Page" className="list-items items5"><div className="list-item5 HomeList-Items" ><div className="items-background"><img src={BanglesImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle5}</h6></div> </div></Link> 
+     <Link to="/Chains-Page" className="list-items items6"><div className="list-item6 HomeList-Items" ><div className="items-background"><img src={ChainsImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle6}</h6></div> </div></Link> 
      
 </div>
 {/* <img src={LineImg} className="line"/> */}

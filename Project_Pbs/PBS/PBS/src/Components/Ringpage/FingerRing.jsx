@@ -1,21 +1,29 @@
 import React, { useContext } from 'react';
 import './FingerRings.css';
-
+import { useNavigate, useLocation  } from 'react-router-dom';
 import Ringsdata from './RingData.jsx';
 import CartContext from "../Context/CartContext.js"
 
 
 
 const FingerRings=()=>{
+  const navigate = useNavigate();
+  const location = useLocation();
   // CartContext
   const { setCartItems } = useContext(CartContext);
+  const { setProductItems } = useContext(CartContext);
 
   const GetInfo=(curEle)=>{
-    // console.log(curEle);
     setCartItems(curEle)
     document.querySelector('.CartBox').classList.toggle('CartBox-Show')
- 
   }
+  
+  const GetProductDetails = (curEle) => {
+    setProductItems(curEle)
+    navigate(`${location.pathname=''}/ItemDetails`);
+    
+  }
+
 
 
   return (
@@ -29,7 +37,7 @@ const FingerRings=()=>{
         return(
           
           <div className="Show-Rings-Box ">
-          <div className="Ring-Box R-Box1 Box-one" onClick={()=>GetInfo(curEle)} key={curEle.id} >
+          <div className="Ring-Box R-Box1 Box-one" onClick={() => GetProductDetails(curEle)}  key={curEle.id} >
               <div className="Ring-Img-Box"><div className="Compare-Img-Box">
                   <i className='bx bx-git-compare Compare-Arrow-Img'></i>
               </div>
@@ -61,8 +69,8 @@ const FingerRings=()=>{
                   </div>
                       <span className="Gender-Name">Women <span className="Between-Line-Gender">|</span></span>
                       <span className="Type-Of-Ring">Finger Ring</span>
-                      <div className="Explore-Box">
-                          <h3 className="Explore-Name">Explore Now</h3>
+                      <div className="Explore-Box" onClick={()=>GetInfo(curEle)}>
+                          <h3 className="Explore-Name">Add to Cart</h3>
                           </div>
                       </div>
            </div>

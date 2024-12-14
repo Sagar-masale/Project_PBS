@@ -18,6 +18,7 @@ import AdminAcc from './Components/Account/AdminAcc.jsx';
 import WishList from './Components/WishList/WishList.jsx';
 import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
+import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 
 const App = () => {
   return (
@@ -25,12 +26,12 @@ const App = () => {
       <Routes>  {/* Define routes here */}
         <Route path="/" element={  
         <Home 
-        CatTitle1="Finger Rings" 
-        CatTitle2="Earrings" 
-        CatTitle3="Pendants" 
-        CatTitle4="Mangalsutra" 
-        CatTitle5="Bangles" 
-        CatTitle6="Chains"
+        CatTitle1="Rings Collection" 
+        CatTitle2="Luxury Earrings" 
+        CatTitle3="Pendants Collection" 
+        CatTitle4="Mangalsutra Designs" 
+        CatTitle5="Stylish Bangles" 
+        CatTitle6="Classic Chains"
         />} />
         <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/AdminAcc" element={<AdminAcc />} />
         <Route path="/CheckOut" element={<CheckOut />} />
         <Route path="/OrderSummary" element={<OrderSummary />} />
+        <Route path="/ItemDetails" element={<ItemDetails/>} />
       </Routes>
       
     </>

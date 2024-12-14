@@ -4,10 +4,12 @@ import CartContext from "./CartContext";
 
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
-    const [cartItems, setCartItems] = useState([]); // State to manage the cart
+  const [cartItems, setCartItems] = useState([]);
+  const [productItems, setProductItems] = useState("");
 
-    const [cart, setCart] = useState([]);
-    const [discount, setDiscount] = useState(0);
+
+  const [cart, setCart] = useState([]);
+  const [discount, setDiscount] = useState(0);
 
 
           // Load cart from localStorage on component mount
@@ -102,7 +104,8 @@ const CartContextProvider = ({children}) => {
 
     return (
         <CartContext.Provider value={{
-           cartItems, setCartItems, cart, addToCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart,calculateCartSummary
+           cartItems, setCartItems, cart, addToCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart,calculateCartSummary,
+           productItems,setProductItems
            }}>
           {children}
         </CartContext.Provider>
