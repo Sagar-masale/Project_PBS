@@ -4,8 +4,8 @@
 }
 
 .card {
-    width: 330px;
-    height: 80px;
+    width: fit-content;
+    height: fit-content;
     right: 0;
     top: 70px;
     margin-right: -500px;

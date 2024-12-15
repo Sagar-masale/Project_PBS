@@ -7,6 +7,7 @@ const RegisterContextProvider = ({children}) => {
     const [loginNotify, setLoginNotify] = useState(null)
     const [logout, setLogout] = useState(null)
     const [networkErrStatus, setNetworkErrStatus] = useState(null)
+    const [logoutNotify, setLogoutNotify] = useState(null)
     return(
         <RegisterContext.Provider value={
             {
@@ -14,7 +15,8 @@ const RegisterContextProvider = ({children}) => {
             registerErrStatus, setRegisterErrStatus, 
             networkErrStatus, setNetworkErrStatus,
             loginNotify, setLoginNotify,
-            logout, setLogout
+            logout, setLogout,
+            logoutNotify, setLogoutNotify
             }
             }>
             {children}

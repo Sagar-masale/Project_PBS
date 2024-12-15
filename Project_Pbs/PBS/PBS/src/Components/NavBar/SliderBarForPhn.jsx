@@ -1,17 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Loading from '../PageLoader/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../Context/ProfileContext';
 import RegisterContext from '../Context/RegisterContext';
 import './SliderBarForPhn.css';
 import '../Login/LoginUsingPass.css';
 import '../Login/LoginUsingOtp.css';
-import axios from 'axios';
+
 
 function SliderBarForPhn() {
   const [loginLogoutTitle, setLoginLogoutTitle] = useState('');
   const [userName, setUserName] = useState('');
   const { userData, setUserData } = useContext(ProfileContext);
-  const { setLogout } = useContext(RegisterContext);
+  const { setLogout, setLogoutNotify } = useContext(RegisterContext);
   const navigate = useNavigate();
 
   // Set user information based on context
@@ -39,14 +40,41 @@ function SliderBarForPhn() {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(false); 
+    useEffect(() => {
+      if (isLoading) {
+        document.body.style.overflow = 'hidden'; // Disable scroll
+      } else {
+        document.body.style.overflow = ''; // Enable scroll
+      }
+  
+      // Cleanup on unmount
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }, [isLoading]);
+
+
+  
+
   // Logout logic
   const handleLogout = () => {
-    setUserData("");        // Clear user data in context
-    localStorage.removeItem("accessToken"); // Clear stored tokens and data
-    localStorage.removeItem("refreshToken");     
-    setLogout(true);           // Update logout state in context
-    navigate('/');             // Redirect to homepage or login page
-  };
+   setIsLoading(true); // Trigger loading animation immediately
+ 
+   setTimeout(() => {
+ 
+     setIsLoading(false); // Stop loading animation after 3 seconds
+     setUserData("");
+     localStorage.removeItem("accessToken");
+     localStorage.removeItem("refreshToken");
+     setLogout(true);
+     setLogoutNotify(true);
+     navigate('/');
+   }, 3000);
+ 
+   // Perform logout actions
+ 
+ };
 
 
 
@@ -78,6 +106,9 @@ function SliderBarForPhn() {
   };
 
   return (
+    
+   <>
+   {isLoading && <Loading />}
     <div className="flex flex-col h-full dark:bg-red-40 dark:text-gray-800">
       <div className="space-y-3">
         <div className="SliderBar-Color-Box w-full">
@@ -139,6 +170,7 @@ function SliderBarForPhn() {
         </Link>
       </div>
     </div>
+   </>
   );
 }
 

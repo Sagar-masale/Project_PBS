@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Loading from '../PageLoader/Loading';
 // Profile Context
 import ProfileContext from '../Context/ProfileContext'
 import axios from 'axios';
@@ -18,7 +19,20 @@ function LoginUsingPass() {
   const {setRegisterErrStatus, setLoginNotify} = useContext(RegisterContext)
   const {setUserData} = useContext(ProfileContext)
  
+  const [isLoading, setIsLoading] = useState(false); 
 
+    useEffect(() => {
+        if (isLoading) {
+          document.body.style.overflow = 'hidden'; // Disable scroll
+        } else {
+          document.body.style.overflow = ''; // Enable scroll
+        }
+    
+        // Cleanup on unmount
+        return () => {
+          document.body.style.overflow = '';
+        };
+      }, [isLoading]);
  
   
   // State to store user data
@@ -101,72 +115,66 @@ const refreshAccessToken = async () => {
 
   const userLogin = async (e) => {
     e.preventDefault();
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let payload = {};
-
-    if (emailRegex.test(emailOrPhone)) {
-      payload.email = emailOrPhone; // Valid email
-    } else if (/^\d{10}$/.test(emailOrPhone)) {
-      payload.phoneNumber = emailOrPhone; // Valid phone number
-    } else {
-      alert('Please enter a valid email or phone number.');
-      return;
-    }
-
-    payload.password = password;
-
+    setIsLoading(true);
+  
     try {
+      // Email and phone number validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let payload = {};
+  
+      if (emailRegex.test(emailOrPhone)) {
+        payload.email = emailOrPhone; // Valid email
+      } else if (/^\d{10}$/.test(emailOrPhone)) {
+        payload.phoneNumber = emailOrPhone; // Valid phone number
+      } else {
+        alert('Please enter a valid email or phone number.');
+        setIsLoading(false); // Stop loading on validation failure
+        return;
+      }
+  
+      payload.password = password;
+  
+      // Simulate a delay for the loading state
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+  
+      // Send the login request
       const response = await axios.post('http://localhost:8000/api/v1/users/login', payload);
-
+  
       if (response.data.success) {
         const { accessToken, refreshToken } = response.data.data;
-
+  
         // Store tokens in localStorage
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        
-        setAccessToken(accessToken);  // Update state
-
-        setLoginNotify(response.data.data)
-        // setUserData(response.data.data); 
+  
+        // Update state and notify user
+        setAccessToken(accessToken);
+        setLoginNotify(response.data.data);
+  
+        // Fetch the user profile
         fetchUserProfile();
-        
+  
       } else {
         alert(response.data.message || 'Login failed. Please try again.');
       }
-    }catch (err) {
+    } catch (err) {
       CloseLoginBox();
-    
+  
       if (err.response) {
         console.error('Error:', err.response.data?.message || 'An error occurred');
-        alert(err.response.data?.message || 'Login failed.');
+        // alert(err.response.data?.message || 'Login failed.');
         setRegisterErrStatus(err.response.data?.message || 'An error occurred');
       } else {
         console.error('Unexpected Error:', err.message);
         alert('An unexpected error occurred. Please try again.');
         setRegisterErrStatus('An unexpected error occurred.');
       }
+    } finally {
+      setIsLoading(false); // Stop the loading spinner regardless of success or failure
     }
-    
   };
-
+  
  
-
-  // // Logout
-  // const handleLogout = () => {
-  //   localStorage.clear();  // Clear stored tokens
-  //   setAccessToken('');     // Reset state
-    
-  //   alert('You have been logged out.');
-  // };
-
-  // // UseEffect to watch for `logout` changes and trigger handleLogout
-  // useEffect(() => {
-  //   if (logout) {
-  //     handleLogout();
-  //   }
-  // }, [logout]); // Run only when `logout` changes
 
 
 
@@ -190,6 +198,7 @@ const refreshAccessToken = async () => {
 
   return (
    <>
+   {isLoading && <Loading />}
    <div className="Login-Main-Container">
       <div className=" pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white">

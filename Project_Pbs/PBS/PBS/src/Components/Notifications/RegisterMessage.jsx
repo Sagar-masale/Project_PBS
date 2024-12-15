@@ -8,19 +8,32 @@ function RegisterMessage() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   // Context 
-  const { registerStatus, loginNotify, setRegisterStatus, setLoginNotify } = useContext(RegisterContext); // Ensure setters are available in context
-
+  const { 
+    registerStatus, 
+    loginNotify, 
+    logoutNotify, 
+    setRegisterStatus, 
+    setLoginNotify, 
+    setLogoutNotify 
+  } = useContext(RegisterContext);
+  console.log('logoutnotify', logoutNotify);
+  
   useEffect(() => {
     if (registerStatus) {
       setNotifyTitle("Registered Successfully!");
       setNotifyMessage("Go to Login");
       setShowSuccess(true);
-      setRegisterStatus(false); // Reset after displaying notification
+      setRegisterStatus(false);
     } else if (loginNotify) {
       setNotifyTitle("Login Successfully!");
       setNotifyMessage("Welcome to PBS Jewellers");
       setShowSuccess(true);
-      setLoginNotify(false); // Reset after displaying notification
+      setLoginNotify(false);
+    } else if (logoutNotify) {
+      setNotifyTitle("Logged Out Successfully!");
+      setNotifyMessage("Thank you for visiting PBSalegoan Jewellers.");
+      setShowSuccess(true);
+      setLogoutNotify(false); // Reset logoutNotify after showing the message
     }
 
     // Remove the class after 5 seconds
@@ -31,7 +44,14 @@ function RegisterMessage() {
     }, 5000);
     return () => clearTimeout(timer); // Cleanup the timer
 
-  }, [registerStatus, loginNotify, setRegisterStatus, setLoginNotify]); // Add setters to dependencies
+  }, [
+    registerStatus,
+    loginNotify, 
+    logoutNotify, 
+    setRegisterStatus, 
+    setLoginNotify, 
+    setLogoutNotify
+  ]); // Add setters to dependencies
 
 
 
@@ -45,7 +65,7 @@ function RegisterMessage() {
     ></path>
   </svg>
 
-  <div className="icon-container">
+  <div className="icon-container ">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"

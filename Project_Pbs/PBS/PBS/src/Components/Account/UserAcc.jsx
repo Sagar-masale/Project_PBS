@@ -1,12 +1,53 @@
-import React, { useContext } from 'react';
-
-import './UserAcc.css'; // Custom styles for better design
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../PageLoader/Loading';
+import './UserAcc.css';
 import ProfileContext from '../Context/ProfileContext';
+import RegisterContext from '../Context/RegisterContext';
 
 function UserAcc() {
-  const {userData} = useContext(ProfileContext)
-  // console.log('profileeee dataa', userData);
+
+  const [isLoading, setIsLoading] = useState(false); 
+
+    useEffect(() => {
+      if (isLoading) {
+        document.body.style.overflow = 'hidden'; // Disable scroll
+      } else {
+        document.body.style.overflow = ''; // Enable scroll
+      }
   
+      // Cleanup on unmount
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }, [isLoading]);
+
+
+  const navigate = useNavigate();
+
+  const { userData, setUserData } = useContext(ProfileContext);
+
+  const { setLogout, setLogoutNotify } = useContext(RegisterContext);
+
+
+ // Logout logic
+ const handleLogout = () => {
+  setIsLoading(true); // Trigger loading animation immediately
+
+  setTimeout(() => {
+
+    setIsLoading(false); // Stop loading animation after 3 seconds
+    setUserData("");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setLogout(true);
+    setLogoutNotify(true);
+    navigate('/');
+  }, 3000);
+
+  // Perform logout actions
+
+};
 
 
 
@@ -14,13 +55,36 @@ function UserAcc() {
 
   return (
     <>
+    {isLoading && <Loading />}
         <div className='profile-container'>
-      <div className="px-4 sm:px-0">
+      <div className="px-4 sm:px-0 flex justify-between ">
         <h3 className="text-2xl font-semibold text-gray-900 flex gap-2">
           Welcome
           <span className="WelcomeUser"
           style={{color: "#4f3267"}}
         > {userData.fullName?.split(' ')[0] || 'Guest'}</span></h3>
+        <div className="LogOut-Button-EditButton flex gap-4 ml-auto">
+          <button 
+          className="editUserAcc px-4 py-1 rounded-lg">
+            Edit
+          </button>
+          <button 
+          onClick={() => handleLogout()}
+          className="
+          logOutUAcc 
+          bg-gradient-to-r 
+          from-purple-600 
+          to-pink-400 
+          hover:from-purple-700 
+          hover:to-pink-500 
+          text-white 
+          px-4 py-1 
+          rounded-lg 
+          flex 
+          items-center">
+            Logout
+          </button>
+        </div>
         <p className="mt-1 max-w-2xl text-sm/6 text-gray-500"></p>
       </div>
       <div className="mt-6 border-t border-gray-100">

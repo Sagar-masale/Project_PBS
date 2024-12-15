@@ -157,7 +157,19 @@ function NavBar() {
     
   ]
   
-
+  const handleAccountClick = (e) => {
+    const accessToken = localStorage.getItem("accessToken");
+    
+    if (!accessToken) {
+      e.preventDefault(); 
+      alert("You must be logged in to access your account.");
+      ShowNavMoreSec();
+      NavAccount();
+      
+    } else {
+      ShowNavMoreSec(); // Proceed if the user is logged in
+    }
+  };
 
     const handleClick = (item) => {
       if (item.id === 2) {
@@ -322,7 +334,7 @@ function NavBar() {
     Notifications
   </span>
 </Link>
-  <Link to="/UserAcc" onClick={ShowNavMoreSec}>
+  <Link to="/UserAcc" onClick={handleAccountClick}>
   <span className="value">
   <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   account_circle

@@ -359,10 +359,10 @@ body {
     left: -10px;
     width: 5px;
     height: 80%;
-    background-color:#832729;
+    background-color: #4F3267;
     border-radius: 5px;
     opacity: 0;
-    border-bottom: 1px solid red;
+   
   }
   
   .value:focus::before,
