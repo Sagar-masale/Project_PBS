@@ -30,10 +30,13 @@ const CartContextProvider = ({children}) => {
             }
           }, [cart]);
 
-
+          const toggleClass = (selector, className) => {
+            document.querySelector(selector).classList.toggle(className);
+          };
           const addToCart = (product) => {
             if (!userData?._id) {
               alert("Please log in to add items to the cart.");
+              toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
               return; // Prevent further execution
             }
           
