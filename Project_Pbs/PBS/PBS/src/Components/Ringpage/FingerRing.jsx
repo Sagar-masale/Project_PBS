@@ -37,8 +37,8 @@ const FingerRings=()=>{
         return(
           
           <div className="Show-Rings-Box ">
-          <div className="Ring-Box R-Box1 Box-one" onClick={() => GetProductDetails(curEle)}  key={curEle.id} >
-              <div className="Ring-Img-Box"><div className="Compare-Img-Box">
+          <div className="Ring-Box R-Box1 Box-one"  key={curEle.id} >
+              <div className="Ring-Img-Box"  onClick={() => GetProductDetails(curEle)}><div className="Compare-Img-Box">
                   <i className='bx bx-git-compare Compare-Arrow-Img'></i>
               </div>
               <div className="Add-Img-Box">

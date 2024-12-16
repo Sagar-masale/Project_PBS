@@ -31,7 +31,7 @@ function RegisterMessage() {
       setLoginNotify(false);
     } else if (logoutNotify) {
       setNotifyTitle("Logged Out Successfully!");
-      setNotifyMessage("Thank you for visiting PBSalegoan Jewellers.");
+      setNotifyMessage("Thank you for visiting PB Salegoan Jewellers.");
       setShowSuccess(true);
       setLogoutNotify(false); // Reset logoutNotify after showing the message
     }
