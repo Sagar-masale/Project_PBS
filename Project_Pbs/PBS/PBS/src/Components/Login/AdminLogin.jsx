@@ -1,10 +1,19 @@
 import React from 'react'
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AdminLogin.css';
 
 
 function AdminLogin() {
+
+    const [emailOrPhoneAdmin, setEmailOrPhoneAdmin] = useState('');
+    const [passwordAdmin, setPasswordAdmin] = useState('');
+    const [accessTokenAdmin, setAccessTokenAdmin] = useState('');
+
+
+
+
+
     const toggleClass = (selector, className) => {
         document.querySelector(selector).classList.toggle(className);
       };
@@ -13,25 +22,144 @@ function AdminLogin() {
         toggleClass('.AdminLoginBox','AdminLoginBoxShow');
     }
 
-    const getFormData=(e)=>{
-      e.preventDefault()
-      console.log(user_Num_Email,userPassword,Remember);
-      
-      if (user_Num_Email=='Sagar' && userPassword=='Sag@123') {
-        // alert("Correct");
-        toggleClass('.AdminLoginBox','AdminLoginBoxShow');
-        toggleClass('.AccountContainer','AccountContainer-Show');
-        toggleClass('.Admin-Block','Admin-Block-Show');
-
-      }else{
-        alert("Invalid information : ")
+    const  fetchAdminProfile = async () => {
+      try {
+        const accessTokenAdmin = localStorage.getItem('accessTokenAdmin');
+        if (!accessTokenAdmin) {
+          throw new Error('No access token found. Please log in again.');
+        }
+  
+        // Make the API request with the Authorization header
+        const response = await axios.get('http://localhost:8000/api/v1/admins/current-admin', {
+          headers: {
+            Authorization: `Bearer ${accessTokenAdmin}`,
+          },
+        });
+        
+        // Log the user data
+        console.log('admin Profile:', response.data);
+        
+  
+        // Update state with fetched data
+        CloseLoginBox()
+        
+        
+        
+  
+      } catch (error) {
+        if (error.response?.status === 401) {
+          console.warn('Access token expired. Attempting to refresh...');
+          const success = await refreshAccessTokenAdmin();
+          if (success) {
+            fetchAdminProfile();  // Retry after refreshing
+          } else {
+           // alert('Session expired. Please log in again.');
+          }
+        } else {
+          console.error('Error fetching profile:', error);
+          //alert('Failed to fetch user data. Please try again.');
+        }
       }
+    };
 
-    }
+    
+  
+    // Fetch user data when the component mounts
+    useEffect(() => {
+      fetchAdminProfile();
+    }, []);
 
-    const [user_Num_Email,setUserNum_Email]=useState('');
-    const [userPassword,setUserPassword]=useState('');
-    const [Remember,setRemember]=useState(false);
+    const refreshAccessTokenAdmin = async () => {
+      try {
+        const refreshTokenAdmin = localStorage.getItem('refreshTokenAdmin');
+        if (!refreshTokenAdmin) throw new Error('No refresh token found');
+    
+        const response = await axios.post('http://localhost:8000/api/v1/admins/refresh-token-admin', { refreshTokenAdmin });
+        if (response.data?.success) {
+          const { accessTokenAdmin, refreshTokenAdmin: newRefreshTokenAdmin } = response.data.data || {};
+    
+          localStorage.setItem('accessTokenAdmin', accessTokenAdmin);
+          localStorage.setItem('refreshTokenAdmin', newRefreshTokenAdmin);
+          setAccessTokenAdmin(accessTokenAdmin);  // Update state
+    
+          return true;
+        }
+        return false;
+      } catch (error) {
+        console.error('Error refreshing token:', error);
+        localStorage.clear();  // Clear tokens on error
+        setAccessTokenAdmin('');    // Reset state
+        return false;
+      }
+    };
+    
+      // Check for access token when the component mounts
+      useEffect(() => {
+        const storedAccessTokenAdmin = localStorage.getItem('accessTokenAdmin');
+        if (storedAccessTokenAdmin) {
+          setAccessTokenAdmin(storedAccessTokenAdmin);
+        }
+      }, []);
+
+
+
+
+
+
+    const AdminLogin = async (e) => {
+      e.preventDefault();
+      // setRegisterErrStatus("");
+      // setIsLoading(true); // Start loading spinner
+  
+      try {
+        // Email and phone number validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let payload = {};
+  
+        if (emailRegex.test(emailOrPhoneAdmin)) {
+          payload.adminEmail = emailOrPhoneAdmin; // Valid email
+        } else if (/^\d{10}$/.test(emailOrPhoneAdmin)) {
+          payload.adminPhoneNumber = emailOrPhoneAdmin; // Valid phone number
+        } else {
+          alert("Please enter a valid email or phone number.");
+          // setIsLoading(false);
+          return;
+        }
+  
+        payload.adminPassword = passwordAdmin;
+  
+        // API Call
+        const response = await axios.post(
+          "http://localhost:8000/api/v1/admins/login-admin",
+          payload
+        );
+  
+        if (response.data.success) {
+          const { accessToken, refreshToken } = response.data.data;
+  
+          // Store tokens
+          localStorage.setItem("accessTokenAdmin", accessToken);
+          localStorage.setItem("refreshTokenAdmin", refreshToken);
+  
+          setAccessTokenAdmin(accessToken);
+          alert("Login successful!");
+          console.log("admin",response.data);
+          
+  
+          // Redirect to dashboard
+          // window.location.href = "/admin/dashboard";
+        } else {
+          // setRegisterErrStatus(response.data.message || "Login failed.");
+        }
+      } catch (err) {
+        console.error("Error:", err.response?.data?.message || err.message);
+        // setRegisterErrStatus(err.response?.data?.message || "An error occurred.");
+      } finally {
+        // setIsLoading(false); // Stop loading spinner
+      }
+    };
+
+ 
  
 
   return (
@@ -56,20 +184,20 @@ function AdminLogin() {
         </div>
 
         <div className="Input-Username mt-8 w-full">
-          <form onSubmit={getFormData} className="FormUser" method='post'>
+          <form onSubmit={AdminLogin} className="FormUser" method='post'>
             <div className="SetInputFeilds_Admin flex flex-col gap-9 w-full">
             <input
-              onChange={(e)=>setUserNum_Email(e.target.value)}
+              onChange={(e)=>setEmailOrPhoneAdmin(e.target.value)}
               type="text"
-              name="Username"
+              name="emailOrNum"
               required
               placeholder="Enter Your Mobile Number / Email*"
               className="Input-User focus:ring-0"
             />
             <input
-              onChange={(e)=>setUserPassword(e.target.value)}
+              onChange={(e)=>setPasswordAdmin(e.target.value)}
               type="password"
-              name="UserPass"
+              name="adminPassword"
               required
               placeholder="Enter Password*"
               className="Input-User focus:ring-0"
@@ -78,7 +206,7 @@ function AdminLogin() {
             <div className="CheckBoxes flex flex-col w-full">
               <span className="CheckBox-Gap flex items-center gap-3">
                 <input
-                  onChange={(e)=>setRemember(e.target.checked)}
+                  // onChange={(e)=>setRemember(e.target.checked)}
                   type="checkbox"
                   className="checkbox focus:ring-0 w-5 h-5"
                 />

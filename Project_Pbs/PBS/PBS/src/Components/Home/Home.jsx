@@ -63,29 +63,56 @@ function Home({
  <div className="img-slide">
 
 
- <div id="carouselExampleAutoplaying" className="SlideImagesBox carousel slide " data-bs-ride="ride">
+ <div
+  id="carouselExampleAutoplaying"
+  className="SlideImagesBox carousel slide"
+  data-bs-ride="carousel"
+>
   <div className="carousel-inner ImageSlide-Carousel-Inner">
     <div className="carousel-item active">
-      <img  src={MainPage}className="d-block w-100" alt="..."/>
+      <img
+        src={MainPage}
+        className="d-block w-100 h-[90vh] object-fill"
+        alt="MainPage"
+      />
     </div>
     <div className="carousel-item">
-      <img src={MainPage2nd}className="d-block w-100" alt="..."/>
+      <img
+        src={MainPage2nd}
+        className="d-block w-100 h-[90vh] object-fill"
+        alt="..."
+      />
     </div>
     <div className="carousel-item">
-      <img src={MainPage3rd}className="d-block w-100" alt="..."/>
+      <img
+        src={MainPage3rd}
+        className="d-block w-100 h-[90vh] object-fill"
+        alt="..."
+      />
     </div>
   </div>
-  <button className="carousel-control-prev w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-  <span className="material-symbols-outlined Carousel-Arrows ">
-  chevron_left
-  </span>
+  <button
+    className="carousel-control-prev w-40"
+    type="button"
+    data-bs-target="#carouselExampleAutoplaying"
+    data-bs-slide="prev"
+  >
+    <span className="material-symbols-outlined Carousel-Arrows">
+      chevron_left
+    </span>
   </button>
-  <button className="carousel-control-next w-40" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-  <span className="material-symbols-outlined Carousel-Arrows">
-  chevron_right
-  </span>
+  <button
+    className="carousel-control-next w-40"
+    type="button"
+    data-bs-target="#carouselExampleAutoplaying"
+    data-bs-slide="next"
+  >
+    <span className="material-symbols-outlined Carousel-Arrows">
+      chevron_right
+    </span>
   </button>
 </div>
+
    </div>
    <div className="shop-category Category-List-First-Box  flex flex-col justify-center items-center">
 <h2 className="shop-c">Choose Your Category</h2><br/>
