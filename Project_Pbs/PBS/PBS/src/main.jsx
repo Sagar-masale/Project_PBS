@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';  // Import BrowserRouter
 import RegisterContextProvider from './Components/Context/RegisterContextProvider.jsx'
 import ProfileContextProvider from './Components/Context/ProfileContextProvider.jsx'
 import CartContextProvider from './Components/Context/CartContextProvider.jsx'
+import AdminContextProvider from './Components/Context/AdminContextProvider.jsx'
 
 const GlobalLayout = ({ children }) => (
   <>
@@ -22,11 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RegisterContextProvider>
     <ProfileContextProvider>
       <CartContextProvider>
-      <BrowserRouter>  {/* Wrap App with BrowserRouter */}
+        <AdminContextProvider>
+        <BrowserRouter>  {/* Wrap App with BrowserRouter */}
             <GlobalLayout>
               <App />
             </GlobalLayout>
-          </BrowserRouter>
+          </BrowserRouter>  
+        </AdminContextProvider>
       </CartContextProvider>
     </ProfileContextProvider>
     </RegisterContextProvider>

@@ -14,13 +14,14 @@ import SignupUser from '../Login/SignUpUser';
 // Context provider
 import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
+import CartContext from '../Context/CartContext';
+import AdminContext from '../Context/AdminContext';
 
 
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
 import './NavBar.css';
 import '../MediaQueries/MediaQueries.css';
-import CartContext from '../Context/CartContext';
 
 
 function NavBar() {
@@ -101,9 +102,10 @@ function NavBar() {
     toggleClass('.AccountShow', 'AccountShowBlock');
   };
   
-  // profileContext
-  const {userData} = useContext(ProfileContext)
-  console.log("userData", userData._id);
+  // profileContext User
+  const {userData} = useContext(ProfileContext);
+  
+  // console.log("userData", userData._id);
   
   const [accLogoName, setAccLogoName] = useState(''); 
   useEffect(() => {
@@ -114,6 +116,22 @@ function NavBar() {
         setAccLogoName('');
     }
 }, [userData]);
+
+
+const { adminData } = useContext(AdminContext);
+const [accLogoAdmin, setAccLogoAdmin] = useState('');
+
+    useEffect(() => {
+      // Check if adminData is available and contains the required data
+      if (adminData?.data?.adminFullName) {
+        setAccLogoAdmin(adminData.data.adminFullName.split(' ')[0]);
+      } else {
+        setAccLogoAdmin('');
+      }
+    }, [adminData]);
+
+
+
 
   const navigate = useNavigate();
   const navItemsLinks=[
@@ -126,10 +144,19 @@ function NavBar() {
     } ,
     {
       id: 2,
-      name: accLogoName ? accLogoName.toUpperCase() : 'ACCOUNT',
-      slug: accLogoName ? `/UserAcc` : '/',
+      name: accLogoAdmin
+        ? accLogoAdmin.toUpperCase()
+        : accLogoName
+        ? accLogoName.toUpperCase()
+        : 'ACCOUNT',
+      slug: accLogoAdmin
+        ? '/AdminAcc'
+        : accLogoName
+        ? '/UserAcc'
+        : '/',
       logo: 'person',
       active: isMobile ? false : true, // Hide ACCOUNT on mobile
+      
     },
     {
       id : 3,
@@ -175,7 +202,11 @@ function NavBar() {
       if (item.id === 2) {
         if (accLogoName) {
           navigate(item.slug);   // Go to user account if logged in
-        } else {
+        }
+        else if (accLogoAdmin) {
+          navigate(item.slug);
+        }
+        else {
           NavAccount();          // Show account login modal if logged out
         }
       } else {

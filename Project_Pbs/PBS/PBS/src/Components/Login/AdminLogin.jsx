@@ -1,7 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './AdminLogin.css';
+import AdminContext from '../Context/AdminContext';
 
 
 function AdminLogin() {
@@ -10,6 +11,8 @@ function AdminLogin() {
     const [passwordAdmin, setPasswordAdmin] = useState('');
     const [accessTokenAdmin, setAccessTokenAdmin] = useState('');
 
+
+    const {setAdminData} = useContext(AdminContext);
 
 
 
@@ -36,12 +39,14 @@ function AdminLogin() {
           },
         });
         
-        // Log the user data
-        console.log('admin Profile:', response.data);
+        // Log the admin data
+        // console.log('admin Profile:', response.data);
+        setAdminData(response.data)
+        
         
   
         // Update state with fetched data
-        CloseLoginBox()
+       
         
         
         
@@ -67,7 +72,7 @@ function AdminLogin() {
     // Fetch user data when the component mounts
     useEffect(() => {
       fetchAdminProfile();
-    }, []);
+    }, [accessTokenAdmin]);
 
     const refreshAccessTokenAdmin = async () => {
       try {
@@ -136,7 +141,7 @@ function AdminLogin() {
   
         if (response.data.success) {
           const { accessToken, refreshToken } = response.data.data;
-  
+          CloseLoginBox()
           // Store tokens
           localStorage.setItem("accessTokenAdmin", accessToken);
           localStorage.setItem("refreshTokenAdmin", refreshToken);

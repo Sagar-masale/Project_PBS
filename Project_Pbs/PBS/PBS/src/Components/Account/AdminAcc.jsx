@@ -4,257 +4,233 @@ import './AdminAcc.css'
 
 
 function AdminAcc() {
-  const AddItemsData=(e)=>{
-    e.preventDefault()
+
+
+  const cards = [
+    { title: "Save Products", value: "50.8K", change: "28.4%", color: "text-green-400" },
+    { title: "Stock Products", value: "23.6K", change: "-12.6%", color: "text-red-400" },
+    { title: "Sale Products", value: "756", change: "3.1%", color: "text-green-400" },
+    { title: "Average Revenue", value: "2.3K", change: "11.3%", color: "text-green-400" },
+  ];
+
+  // const countryStateMap = {
+  //   "United States": ["California", "Texas", "New York", "Florida"],
+  //   "India": ["Maharashtra", "Karnataka", "Goa", "Uttar Pradesh"],
+  //   "Australia": ["New South Wales", "Victoria", "Queensland", "Tasmania"],
+  //   // ...
+  // };
+
+  const orders = [
+    {
+      orderId: 101,
+      name: "Sagar Masale",
+      email: "sagar.masale@gmail.com",
+      date: "Jan 17, 2024",
+      status: "Delivered",
+      country: "India",
+      state: "Maharashtra",
+      total: "₹89,456.00",
+    },
+    {
+      orderId: 102,
+      name: "Mayuresh Parabat",
+      email: "mayuresh.parabat@gmail.com",
+      date: "Feb 27, 2024",
+      status: "Canceled",
+      country: "India",
+      state: "Karnataka",
+      total: "₹4,56,789.00",
+    },
+    {
+      orderId: 103,
+      name: "Prajwal Konade",
+      email: "prajwal.konade@gmail.com",
+      date: "Apr 14, 2024",
+      status: "Delivered",
+      country: "Australia",
+      state: "Telangana",
+      total: "₹10,23,899.00",
+    },
+    {
+      orderId: 104,
+      name: "Veeraj Mashal",
+      email: "veeraj.mashal@gmail.com",
+      date: "Jun 17, 2024",
+      status: "Pending",
+      country: "India",
+      state: "Goa",
+      total: "₹1,23,456.00",
+    },
+    {
+      orderId: 105,
+      name: "Abhi Mane",
+      email: "abhi.mane@gmail.com",
+      date: "Sep 14, 2024",
+      status: "Delivered",
+      country: "India",
+      state: "Madhya Pradesh",
+      total: "₹67,123.00",
+    },
+    {
+      orderId: 106,
+      name: "Rahul Patil",
+      email: "rahul.patil@gmail.com",
+      date: "Dec 27, 2024",
+      status: "Pending",
+      country: "India",
+      state: "Rajasthan",
+      total: "₹2,34,567.00",
+    }
+  ];
+  
+  
+    
+  
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Delivered":
+        return "bg-green-600";
+      case "Pending":
+        return "bg-yellow-500";
+      case "Canceled":
+        return "bg-red-600";
+      default:
+        return "bg-gray-600";
+    }
+  };
+  const getOrderDetails = (status) => {
+    switch (status) {
+      case "Delivered":
+        return "bg-[#09132e]";
+      case "Pending":
+        return "bg-[#0B1739]";
+      case "Canceled":
+        return "bg-[#0B1739]";
+      default:
+        return "bg-[#0B1739]";
+    }
   }
-  const toggleClass = (selector, className) => {
-    document.querySelector(selector).classList.toggle(className);
+  const handleEdit = (orderId) => {
+    // handle edit logic
+    alert("coming soon edit logic")
   };
-
-  const ShowEditBox = () => {
-    toggleClass('.Edit-Box', 'Edit-Box-Show');
+  
+  const handleDelete = (orderId) => {
+    // handle delete logic
+    alert("coming soon delete logic")
   };
-  const onClickAddItemsButton = () => {
-    toggleClass('.Edit-Box', 'Edit-Box-Show');
-    toggleClass('.AddItems-Container', 'AddItems-Container-Show');
-  };
-  const onClickDeleteItemsButton = () => {
-    toggleClass('.Edit-Box', 'Edit-Box-Show');
-    toggleClass('.DeleteItems-Container', 'DeleteItems-Container-Show');
-  };
-  const onClickUpdateItemsButton = () => {
-    toggleClass('.Edit-Box', 'Edit-Box-Show');
-    toggleClass('.UpdateItems-Container', 'UpdateItems-Container-Show');
-  };
-  const onClickUsersButton = () => {
-    toggleClass('.Edit-Box', 'Edit-Box-Show');
-    toggleClass('.Users-Container', 'Users-Container-Show');
-  };
+  
 
 
-
- 
   return (
     <>
-    <div className=' pt-5 w-full h-full  flex   justify-center Admin-Main-Container'>
-    <div className="w-full  h-full  gap-48 flex flex-row justify-center">
+  <div className="flex MainContainerAdmin min-h-screen text-white">
+  {/* Sidebar */}
+  <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
+    <div>
+      <h1 className="text-2xl font-bold text-white mb-6">ControlHub</h1>
+      <input
+        type="text"
+        placeholder="Search for..."
+        className="w-full p-2 rounded adminSearch placeholder-gray-400"
+      />
+      <nav className="mt-8 space-y-4">
+        <a href="#" className="block text-purple-400">Dashboard</a>
+        <a href="#" className="block text-gray-300">Features</a>
+        <a href="#" className="block text-gray-300">Users</a>
+        <a href="#" className="block text-gray-300">Pricing</a>
+        <a href="#" className="block text-gray-300">Integrations</a>
+        <a href="#" className="block text-gray-300">Authentication</a>
+        <a href="#" className="block text-gray-300">Settings</a>
+      </nav>
+    </div>
+    <div className="flex items-center space-x-3">
+      <img
+        src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
+        alt="admin"
+        className="w-10 h-10 rounded-full"
+      />
+      <span>Sagar Masale</span>
+    </div>
+  </div>
+
+  {/* Main Content */}
+  <div className="flex-1 p-8">
+    {/* Header */}
+    <header className="flex justify-end items-center mb-8">
+      <img
+        src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
+        alt="Admin"
+        className="w-10 h-10 rounded-full"
+      />
+      <span className="ml-2 text-sm">Sagar Masale</span>
+    </header>
+
+    {/* Dashboard Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {cards.map((card, index) => (
+        <div key={index} className="p-4 Admin-Dashboard-Cards rounded-lg">
+          <h2 className="text-sm text-gray-400">{card.title}</h2>
+          <p className="text-3xl font-bold mt-2">{card.value}</p>
+          <span className={`text-sm ${card.color}`}>{card.change}</span>
+        </div>
+      ))}
+    </div>
+
+   
+       {/* Orders Table */}
+       <div className="p-6">
+        <div className="overflow-auto rounded-lg">
+          <table className="w-full table-auto text-sm">
+            <thead className="orderCol">
+              <tr>
+                <th className="p-4 text-left">Order</th>
+                <th className="p-4 text-left">Client</th>
+                <th className="p-4 text-left">Date</th>
+                <th className="p-4 text-left">Status</th>
+                <th className="p-4 text-left">Country</th>
+                <th className="p-4 text-left">State</th>
+                <th className="p-4 text-left">Total</th>
+                <th className="p-4"></th>
+              </tr>
+            </thead>
+            <tbody>
+  {orders.reverse().map((order) => (
+    <tr key={order.orderId} className={`orderDetails ${getOrderDetails(order.status)}`}>
+      <td className="p-4">{order.orderId}</td>
+      <td className="p-4">
+        <div>
+          <p className="font-bold">{order.name}</p> {/* Corrected to use name */}
+          <p className="text-gray-400">{order.email}</p>
+        </div>
+      </td>
+      <td className="p-4">{order.date}</td>
+      <td className="p-4">
+        <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.status)}`}>
+          {order.status}
+        </span>
+      </td>
+      <td className="p-4">{order.country}</td>
+      <td className="p-4">{order.state}</td>
       
-      <div className="AdminAccount-Container p-6 sm:p-12 bg-gray-800 text-gray-100">
-	<div className="w-full flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSipZFVYJ9-ohTUiKfSicnJb9FyZoZm3TQDGw&s" alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start bg-gray-500 border-gray-700" />
-		<div className="flex flex-col w-full">
-			<h4 className="text-lg font-semibold text-center md:text-left">Hello Sagar</h4>
-			<p className="text-gray-400">Dear Admins,<br /><br />
+      <td className="p-4 font-bold">{order.total}</td>
+      <td className="p-4 flex space-x-3">
+        <button onClick={() => handleEdit(order.orderId)} className="text-gray-400 hover:text-white">✏️</button>
+        <button onClick={() => handleDelete(order.orderId)} className="text-gray-400 hover:text-white">🗑️</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
 
-      We're excited to inform you about the implementation of a new security protocol that will significantly enhance the protection of our system and user data. </p>
-		</div>
-	</div>
-	<div className="flex justify-center pt-4 space-x-4 align-center">
-		<a rel="noopener noreferrer" href="#" aria-label="GitHub" className="p-2 rounded-md text-gray-100 hover:text-violet-400">
-			<svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-current">
-				<path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-			</svg>
-		</a>
-		<a rel="noopener noreferrer" href="#" aria-label="Dribble" className="p-2 rounded-md text-gray-100 hover:text-violet-400">
-			<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-current">
-				<path d="M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z"></path>
-			</svg>
-		</a>
-		<a rel="noopener noreferrer" href="#" aria-label="Twitter" className="p-2 rounded-md text-gray-100 hover:text-violet-400">
-			<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-current">
-				<path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
-			</svg>
-		</a>
-		<a rel="noopener noreferrer" href="#" aria-label="Email" className="p-2 rounded-md text-gray-100 hover:text-violet-400">
-			<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-current">
-				<path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path>
-			</svg>
-		</a>
-	</div>
-    {/* Edit box */}
-    <div class="relative  inline-block">
-  <div
-    onClick={ShowEditBox}
-    className="bg-white hover:bg-slate-100 py-2 rounded-md shadow-lg hover:cursor-pointer flex justify-center items-center gap-4 px-4"
-  >
-        <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
-        </svg>
-    <button className="text-black">
-    Edit
-    </button>
-  </div>
-
-  <div
-    class="Edit-Box absolute left-0 mt-2 w-96  bg-white  border border-gray-200 rounded-md shadow-lg flex-col   transition-opacity duration-1000"
-  >
-   <div onClick={onClickAddItemsButton} class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-          <svg class="h-6 w-6 text-gray-600 group-hover:text-red-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-            </svg>
-          </div>
-          <div>
-            <button class="font-semibold text-gray-900">
-              Add items
-              <span class="absolute inset-0"></span>
-            </button>
-            <p class="mt-1 text-gray-600">Add images and dec in Category</p>
-          </div>
+          </table>
         </div>
-
-        <div onClick={onClickDeleteItemsButton} class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            
-            <button class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
-             delete
-            </button>
-            
-          </div>
-          <div>
-            <a span class="font-semibold text-gray-900">
-              Delete items 
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Delete Items any Category</p>
-          </div>
-        </div>
-
-        <div onClick={onClickUpdateItemsButton} class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-          <button class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
-           update
-          </button>
-          </div>
-          <div>
-            <span class="font-semibold text-gray-900">
-              Update
-              <span class="absolute inset-0"></span>
-            </span>
-            <p class="mt-1 text-gray-600">Update category and data</p>
-          </div>
-        </div>
-
-        <div onClick={onClickUsersButton} class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-          <button class="material-symbols-outlined h-6 w-6 text-gray-600 group-hover:text-red-900 font-semibold">
-             person
-            </button>
-          </div>
-          <div>
-            <span class="font-semibold text-gray-900">
-              Users 
-              <span class="absolute inset-0"></span>
-            </span>
-            <p class="mt-1 text-gray-600">show all users </p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-        <button class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-          <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z" clip-rule="evenodd" />
-          </svg>
-          Watch demo
-        </button>
-        <button class=" flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-          <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
-          </svg>
-          Contact Developer
-        </button>
-      </div>
-
-        
+    </div>
   </div>
 </div>
-</div>
+
 
     
-    </div>
-
-    </div>
-        <div className="AddItems-Container w-full  ">
-          <div className="SubContainer-AddItems">
-          <p className="form-title text-start ml-4 text-gray-500">Add items </p>
-          <form className="form" onSubmit={AddItemsData}>
-          <label className="custum-file-upload" for="file"  >
-          <div className="icon">
-          <span className="material-symbols-outlined text-6xl text-gray-500">
-           upload_file
-          </span>
-          </div>
-          <div className="text">
-          <span>Click to upload image</span>
-          </div>
-          <input type="file" id="file"/>
-        </label>
-
-
-  
-     
-      <div className="input-container mt-10">
-        <p className="AddItems-Title">
-          Enter Stocks
-        </p>
-        <input type="text" placeholder="Stocks"  className="focus:ring-0"  />
-      </div>
-      <div className="input-container">
-        <p className="AddItems-Title">
-          Enter Title
-        </p>
-        <input type="text" placeholder="Title"  className="focus:ring-0" />
-      </div>
-      <div className="input-container">
-        <p className="AddItems-Title">
-          Enter Price
-        </p>
-        <input type="text" placeholder="Price"  className="focus:ring-0" />
-      </div>
-      <div className="input-container">
-        <p className="AddItems-Title">
-          Enter Gender
-        </p>
-        <input type="text" placeholder="Gender"  className="focus:ring-0" />
-      </div>
-      <div className="SubmitBox w-full flex justify-end">
-      <button type="submit" className="submit">
-        Submit
-      </button>
-      </div>
-   
-    </form>
- 
-
-
-          </div>
-      </div>
-
-
-      {/* Delete Items */}
-      <div className="DeleteItems-Container w-full ">
-        <h1>Delete items block</h1>
-       
-
-
-      </div>
-
-
-            {/* Update Items */}
-      <div className="UpdateItems-Container w-full ">
-        <h1>Update items block</h1>
-      </div>
-
-
-
-           {/* User Block */}
-      <div className="Users-Container w-full ">
-        <h1>User block</h1>
-      </div>
-
-
-   
-      </>
+    </>
   )
 }
 
