@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import './AdminAcc.css'
-
+import AdminContext from "../Context/AdminContext";
 
 
 function AdminAcc() {
+  const {adminData} = useContext(AdminContext);
+
+  // console.log("admin",adminData.data.adminFullName);
+  
+  const adminName = adminData?.data?.adminFullName || "Admin";
+  
 
 
   const cards = [
@@ -83,7 +89,34 @@ function AdminAcc() {
     }
   ];
   
-  
+  const SlideBarItems = [
+    {
+      id: 1,
+      name: "Dashboard",
+      logo: "rounded_corner"
+    },
+    {
+      id: 2,
+      name: "Users",
+      logo: "group"
+    },
+    {
+      id: 3,
+      name: "Pricing",
+      logo: "credit_card_gear"
+    },
+    {
+      id: 4,
+      name: "Authentication",
+      logo: "verified_user"
+    },
+    {
+      id: 5,
+      name: "Settings",
+      logo: "tune"
+    },
+
+  ]
     
   
   const getStatusColor = (status) => {
@@ -112,121 +145,133 @@ function AdminAcc() {
   }
   const handleEdit = (orderId) => {
     // handle edit logic
-    alert("coming soon edit logic")
+    alert("coming soon edit logic" + orderId)
   };
   
   const handleDelete = (orderId) => {
     // handle delete logic
-    alert("coming soon delete logic")
+    alert("coming soon delete logic" + orderId)
   };
   
 
 
   return (
     <>
-  <div className="flex MainContainerAdmin min-h-screen text-white">
-  {/* Sidebar */}
-  <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
-    <div>
-      <h1 className="text-2xl font-bold text-white mb-6">ControlHub</h1>
-      <input
-        type="text"
-        placeholder="Search for..."
-        className="w-full p-2 rounded adminSearch placeholder-gray-400"
-      />
-      <nav className="mt-8 space-y-4">
-        <a href="#" className="block text-purple-400">Dashboard</a>
-        <a href="#" className="block text-gray-300">Features</a>
-        <a href="#" className="block text-gray-300">Users</a>
-        <a href="#" className="block text-gray-300">Pricing</a>
-        <a href="#" className="block text-gray-300">Integrations</a>
-        <a href="#" className="block text-gray-300">Authentication</a>
-        <a href="#" className="block text-gray-300">Settings</a>
-      </nav>
-    </div>
-    <div className="flex items-center space-x-3">
-      <img
-        src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
-        alt="admin"
-        className="w-10 h-10 rounded-full"
-      />
-      <span>Sagar Masale</span>
-    </div>
-  </div>
-
-  {/* Main Content */}
-  <div className="flex-1 p-8">
-    {/* Header */}
-    <header className="flex justify-end items-center mb-8">
-      <img
-        src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
-        alt="Admin"
-        className="w-10 h-10 rounded-full"
-      />
-      <span className="ml-2 text-sm">Sagar Masale</span>
-    </header>
-
-    {/* Dashboard Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-      {cards.map((card, index) => (
-        <div key={index} className="p-4 Admin-Dashboard-Cards rounded-lg">
-          <h2 className="text-sm text-gray-400">{card.title}</h2>
-          <p className="text-3xl font-bold mt-2">{card.value}</p>
-          <span className={`text-sm ${card.color}`}>{card.change}</span>
+    {adminData ? (
+        <div className="flex  MainContainerAdmin min-h-screen text-white">
+        {/* Sidebar */}
+        <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
+          <div className="slideBarBox">
+            <h1 className="text-2xl font-bold text-white mb-6">ControlHub</h1>
+              <div className="searchAdminBox flex  w-full  pl-2 adminSearch-Box">
+              <span class="material-symbols-outlined adminSearchLogo">
+            search
+            </span>
+            <input
+              type="text"
+              placeholder="Search for..."
+              className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
+            />
+              </div>
+            <nav className="mt-8 space-y-4">
+            {SlideBarItems.map( (SlideBarItem, index) => (
+                     <div className="logos-slideBar flex gap-1" key={index.id}>
+                     <span class="material-symbols-outlined SlideBar-Logos">
+                     {SlideBarItem.logo}
+                     </span>
+                     <span  className="block cursor-pointer SlideBar-Logos"> {SlideBarItem.name} </span>
+                     </div>
+                ))}
+           
+            </nav>
+          </div>
+          <div className="flex items-center space-x-3">
+            <img
+              src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
+              alt="admin"
+              className="w-10 h-10 rounded-full"
+            />
+            <span> {adminName} </span>
+          </div>
         </div>
-      ))}
-    </div>
-
-   
-       {/* Orders Table */}
-       <div className="p-6">
-        <div className="overflow-auto rounded-lg">
-          <table className="w-full table-auto text-sm">
-            <thead className="orderCol">
-              <tr>
-                <th className="p-4 text-left">Order</th>
-                <th className="p-4 text-left">Client</th>
-                <th className="p-4 text-left">Date</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Country</th>
-                <th className="p-4 text-left">State</th>
-                <th className="p-4 text-left">Total</th>
-                <th className="p-4"></th>
-              </tr>
-            </thead>
-            <tbody>
-  {orders.reverse().map((order) => (
-    <tr key={order.orderId} className={`orderDetails ${getOrderDetails(order.status)}`}>
-      <td className="p-4">{order.orderId}</td>
-      <td className="p-4">
-        <div>
-          <p className="font-bold">{order.name}</p> {/* Corrected to use name */}
-          <p className="text-gray-400">{order.email}</p>
-        </div>
-      </td>
-      <td className="p-4">{order.date}</td>
-      <td className="p-4">
-        <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.status)}`}>
-          {order.status}
-        </span>
-      </td>
-      <td className="p-4">{order.country}</td>
-      <td className="p-4">{order.state}</td>
       
-      <td className="p-4 font-bold">{order.total}</td>
-      <td className="p-4 flex space-x-3">
-        <button onClick={() => handleEdit(order.orderId)} className="text-gray-400 hover:text-white">✏️</button>
-        <button onClick={() => handleDelete(order.orderId)} className="text-gray-400 hover:text-white">🗑️</button>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
-          </table>
+        {/* Main Content */}
+        <div className="flex-1 p-8">
+          {/* Header */}
+          <header className="flex justify-end items-center mb-8">
+            <img
+              src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
+              alt="Admin"
+              className="w-10 h-10 rounded-full"
+            />
+            <span className="ml-2 text-sm"> {adminName} </span>
+          </header>
+      
+          {/* Dashboard Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {cards.map((card, index) => (
+              <div key={index} className="p-4 Admin-Dashboard-Cards rounded-lg">
+                <h2 className="text-sm text-gray-400">{card.title}</h2>
+                <p className="text-3xl font-bold mt-2">{card.value}</p>
+                <span className={`text-sm ${card.color}`}>{card.change}</span>
+              </div>
+            ))}
+          </div>
+      
+         
+             {/* Orders Table */}
+             <div className="pt-6">
+              <div className="overflow-auto rounded-lg">
+                <table className="w-full table-auto text-sm">
+                  <thead className="orderCol">
+                    <tr>
+                      <th className="p-4 text-left">Order</th>
+                      <th className="p-4 text-left">Client</th>
+                      <th className="p-4 text-left">Date</th>
+                      <th className="p-4 text-left">Status</th>
+                      <th className="p-4 text-left">Country</th>
+                      <th className="p-4 text-left">State</th>
+                      <th className="p-4 text-left">Total</th>
+                      <th className="p-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+        {orders.reverse().map((order) => (
+          <tr key={order.orderId} className={`orderDetails ${getOrderDetails(order.status)}`}>
+            <td className="p-4">{order.orderId}</td>
+            <td className="p-4">
+              <div>
+                <p className="font-bold">{order.name}</p> {/* Corrected to use name */}
+                <p className="text-gray-400">{order.email}</p>
+              </div>
+            </td>
+            <td className="p-4">{order.date}</td>
+            <td className="p-4">
+              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.status)}`}>
+                {order.status}
+              </span>
+            </td>
+            <td className="p-4">{order.country}</td>
+            <td className="p-4">{order.state}</td>
+            
+            <td className="p-4 font-bold">{order.total}</td>
+            <td className="p-4 flex space-x-3">
+              <button onClick={() => handleEdit(order.orderId)} className="text-gray-400 hover:text-white">✏️</button>
+              <button onClick={() => handleDelete(order.orderId)} className="text-gray-400 hover:text-white">🗑️</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+      
+                </table>
+              </div>
+          </div>
         </div>
-    </div>
-  </div>
-</div>
+      </div>
+    ) : (
+    <h1>login adminData..</h1>
+    )}
+
 
 
     

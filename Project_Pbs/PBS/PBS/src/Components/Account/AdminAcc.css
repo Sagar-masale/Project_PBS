@@ -1,12 +1,55 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 .MainContainerAdmin{
   background-color: #081027;
 }
+/* .slideBarBox{
+  border: 1px solid red;
+  
+  height: 100%;
+} */
 .slideBar-AdminPanel{
   background-color: #081028;
 }
-.adminSearch{
-  background-color: #081028;
+.logos-slideBar{
+  font-size: 15px;
+  padding-top: 5px;
 }
+.SlideBar-Logos{
+  color: #9389ff;
+}
+.SlideBarItem.name{
+  font-family: "Open Sans", serif;
+  font-optical-sizing: auto;
+  font-weight:100;
+  
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+  color: #cb3cff;
+}
+.adminSearch-Box{
+  border: 1px solid rgba(255, 255, 255, 0.179);
+  align-items: center;
+  border-radius: 2px;
+  background-color: #0B1739;
+}
+.adminSearchLogo{
+  font-size: 20px;
+}
+.adminSearch{
+  border: none;
+  font-size: 14px;
+  background-color: #0B1739;
+  padding-left: 2px;
+}
+.adminSearch:focus {
+  border: none;
+
+  outline:none;
+  }
 .Admin-Dashboard-Cards{
   background-color: #0B1739;
 }
