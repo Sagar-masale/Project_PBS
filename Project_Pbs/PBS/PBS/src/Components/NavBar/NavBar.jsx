@@ -184,17 +184,17 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     
   ]
   
+  const accessToken = localStorage.getItem("accessToken");
   const handleAccountClick = (e) => {
-    const accessToken = localStorage.getItem("accessToken");
     
-    if (!accessToken) {
+    if (!accessToken && !adminData) {
       e.preventDefault(); 
       alert("You must be logged in to access your account.");
       ShowNavMoreSec();
       NavAccount();
       
     } else {
-      ShowNavMoreSec(); // Proceed if the user is logged in
+      ShowNavMoreSec();
     }
   };
 
@@ -365,7 +365,14 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     Notifications
   </span>
 </Link>
-  <Link to="/UserAcc" onClick={handleAccountClick}>
+  <Link   
+      to={
+      accessToken
+      ? "/UserAcc"
+      : adminData
+      ? "/AdminAcc"
+      : "/loginPage"
+  } onClick={handleAccountClick}>
   <span className="value">
   <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   account_circle

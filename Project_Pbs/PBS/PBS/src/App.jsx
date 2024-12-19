@@ -13,8 +13,10 @@ import Diamond from './Components/DiamondDetails/Diamond.jsx';
 import CartDeatils from './Components/CartAdd/CartDeatils.jsx';
 import ItemsInfo from './Components/ItemsInfo/ItemsInfo.jsx';
 import StoreDetails from './Components/StoreDetails/StoreDetails.jsx';
-import UserAcc from './Components/Account/UserAcc.jsx';
-import AdminAcc from './Components/Account/AdminAcc.jsx';
+import UserAcc from './Components/Account/User/UserAcc.jsx'
+// Admin
+import AdminAcc from './Components/Account/Admin/AdminAcc.jsx';
+import AllUsers from './Components/Account/Admin/AdminSlideBarComponent/AllUsers.jsx';
 import WishList from './Components/WishList/WishList.jsx';
 import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
@@ -48,6 +50,7 @@ const App = () => {
         <Route path="/CheckOut" element={<CheckOut />} />
         <Route path="/OrderSummary" element={<OrderSummary />} />
         <Route path="/ItemDetails" element={<ItemDetails/>} />
+        <Route path="/AllUsers" element={<AllUsers/>}/>
       </Routes>
       
     </>

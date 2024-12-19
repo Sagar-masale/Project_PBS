@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../PageLoader/Loading';
+import Loading from '../../PageLoader/Loading';
 import './UserAcc.css';
-import ProfileContext from '../Context/ProfileContext';
-import RegisterContext from '../Context/RegisterContext';
+import ProfileContext from '../../Context/ProfileContext';
+import RegisterContext from '../../Context/RegisterContext';
 
 function UserAcc() {
 

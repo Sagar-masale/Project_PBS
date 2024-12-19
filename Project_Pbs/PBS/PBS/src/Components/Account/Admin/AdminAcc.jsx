@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import './AdminAcc.css'
-import AdminContext from "../Context/AdminContext";
-
+import AdminContext from "../../Context/AdminContext";
+import AdminSlideBar from "./AdminSlideBar";
 
 function AdminAcc() {
   const {adminData} = useContext(AdminContext);
@@ -89,34 +89,34 @@ function AdminAcc() {
     }
   ];
   
-  const SlideBarItems = [
-    {
-      id: 1,
-      name: "Dashboard",
-      logo: "rounded_corner"
-    },
-    {
-      id: 2,
-      name: "Users",
-      logo: "group"
-    },
-    {
-      id: 3,
-      name: "Pricing",
-      logo: "credit_card_gear"
-    },
-    {
-      id: 4,
-      name: "Authentication",
-      logo: "verified_user"
-    },
-    {
-      id: 5,
-      name: "Settings",
-      logo: "tune"
-    },
+  // const SlideBarItems = [
+  //   {
+  //     id: 1,
+  //     name: "Dashboard",
+  //     logo: "rounded_corner"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Users",
+  //     logo: "group"
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Pricing",
+  //     logo: "credit_card_gear"
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Authentication",
+  //     logo: "verified_user"
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Settings",
+  //     logo: "tune"
+  //   },
 
-  ]
+  // ]
     
   
   const getStatusColor = (status) => {
@@ -145,12 +145,12 @@ function AdminAcc() {
   }
   const handleEdit = (orderId) => {
     // handle edit logic
-    alert("coming soon edit logic" + orderId)
+    alert("coming soon edit logic orderId " + orderId)
   };
   
   const handleDelete = (orderId) => {
     // handle delete logic
-    alert("coming soon delete logic" + orderId)
+    alert("coming soon delete logic orderId " + orderId)
   };
   
 
@@ -160,7 +160,7 @@ function AdminAcc() {
     {adminData ? (
         <div className="flex  MainContainerAdmin min-h-screen text-white">
         {/* Sidebar */}
-        <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
+        {/* <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
           <div className="slideBarBox">
             <h1 className="text-2xl font-bold text-white mb-6">ControlHub</h1>
               <div className="searchAdminBox flex  w-full  pl-2 adminSearch-Box">
@@ -193,7 +193,8 @@ function AdminAcc() {
             />
             <span> {adminName} </span>
           </div>
-        </div>
+        </div> */}
+        <AdminSlideBar/>
       
         {/* Main Content */}
         <div className="flex-1 p-8">
