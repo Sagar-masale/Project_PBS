@@ -17,8 +17,17 @@
   font-size: 15px;
   padding-top: 5px;
 }
-.SlideBar-Logos{
-  color: #9389ff;
+.SlideBar-Logos-Active{
+  color: #8f85fe;
+}
+.SlideBar-Logos-Noactive{
+  color: #9389ff57;
+}
+.Status-Name {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: -20px;
+  color: #8f85fe;
 }
 .SlideBarItem.name{
   font-family: "Open Sans", serif;
@@ -53,6 +62,7 @@
 .Admin-Dashboard-Cards{
   background-color: #0B1739;
 }
-.orderDetails, .orderCol{
+.orderDetails, .orderCol, .userDetails, .userCol{
+
   background-color: #0B1739;
 }

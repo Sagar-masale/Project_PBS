@@ -41,6 +41,8 @@ function AdminLogin() {
         
         // Log the admin data
         // console.log('admin Profile:', response.data);
+        console.log('admin', response);
+        
         setAdminData(response.data)
         
         

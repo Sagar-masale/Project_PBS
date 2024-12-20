@@ -200,6 +200,7 @@ function AdminAcc() {
         <div className="flex-1 p-8">
           {/* Header */}
           <header className="flex justify-end items-center mb-8">
+          <h2 className="TopSectionName font-bold text-lg mr-auto">Analytics</h2>
             <img
               src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
               alt="Admin"
@@ -207,7 +208,7 @@ function AdminAcc() {
             />
             <span className="ml-2 text-sm"> {adminName} </span>
           </header>
-      
+          
           {/* Dashboard Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {cards.map((card, index) => (
@@ -223,8 +224,22 @@ function AdminAcc() {
              {/* Orders Table */}
              <div className="pt-6">
               <div className="overflow-auto rounded-lg">
+              <tr className="flex justify-between align-items-center">
+                    <h2 className="Status-Name p-4 text-left">Orders Status</h2>
+                    <th className="p-4">
+                    <div className="searchAdminBox SlideBar-Logos-Active flex w-full pl-2 adminSearch-Box">
+                    <span className="material-symbols-outlined ">search</span>
+                      <input
+                        type="text"
+                        placeholder="Search for..."
+                        className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
+                      />
+                      </div>
+                    </th>
+              </tr>
                 <table className="w-full table-auto text-sm">
                   <thead className="orderCol">
+                   
                     <tr>
                       <th className="p-4 text-left">Order</th>
                       <th className="p-4 text-left">Client</th>
@@ -242,7 +257,7 @@ function AdminAcc() {
             <td className="p-4">{order.orderId}</td>
             <td className="p-4">
               <div>
-                <p className="font-bold">{order.name}</p> {/* Corrected to use name */}
+                <p className="">{order.name}</p> {/* Corrected to use name */}
                 <p className="text-gray-400">{order.email}</p>
               </div>
             </td>
@@ -257,8 +272,16 @@ function AdminAcc() {
             
             <td className="p-4 font-bold">{order.total}</td>
             <td className="p-4 flex space-x-3">
-              <button onClick={() => handleEdit(order.orderId)} className="text-gray-400 hover:text-white">✏️</button>
-              <button onClick={() => handleDelete(order.orderId)} className="text-gray-400 hover:text-white">🗑️</button>
+              <button onClick={() => handleEdit(order.orderId)} className="text-[#8f85fe] hover:text-[#9389ff57]">
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+              </button>
+              <button onClick={() => handleDelete(order.orderId)} className="text-[#8f85fe] hover:text-[#9389ff57]  ">
+              <span class="material-symbols-outlined">
+                delete
+              </span>
+              </button>
             </td>
           </tr>
         ))}
