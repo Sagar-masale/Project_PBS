@@ -22,18 +22,24 @@ function AdminSlideBar() {
     },
     {
       id: 3,
+      name: "Add Products",
+      logo: "category",
+      slug: "/Add-Products",
+    },
+    {
+      id: 4,
       name: "Pricing",
       logo: "credit_card_gear",
       slug: "/Pricing",
     },
     {
-      id: 4,
+      id: 5,
       name: "Authentication",
       logo: "verified_user",
       slug: "/Authentication",
     },
     {
-      id: 5,
+      id: 6,
       name: "Settings",
       logo: "tune",
       slug: "/Settings",

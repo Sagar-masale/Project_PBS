@@ -27,7 +27,7 @@
   font-size: 20px;
   font-weight: 500;
   margin-left: -20px;
-  color: #8f85fe;
+  color: #8f85fe94;
 }
 .SlideBarItem.name{
   font-family: "Open Sans", serif;
@@ -65,4 +65,12 @@
 .orderDetails, .orderCol, .userDetails, .userCol{
 
   background-color: #0B1739;
+}
+
+
+.AddProduct-LeftBlock{
+  border-right: 1px solid rgba(149, 121, 253, 0.438);
+}
+.AddProduct-RightBlock{
+  border-left: 1px solid rgba(149, 121, 253, 0.438);
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import "../AdminAcc.css";
+import '../AdminAcc.css';
 import AdminContext from "../../../Context/AdminContext";
 import AdminSlideBar from "../AdminSlideBar";
 
@@ -10,6 +10,7 @@ function AllUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     
@@ -31,7 +32,14 @@ function AllUsers() {
     
   }, [adminData]);
 
-  console.log("Users", users);
+  // console.log("Users", users);
+
+    // Filter users based on searchQuery
+    const filteredUsers = users.filter((user) =>
+      user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.phoneNumber.includes(searchQuery)
+    );
   
 
   const handleEditAllUser = (userId) => {
@@ -89,6 +97,7 @@ function AllUsers() {
                         type="text"
                         placeholder="Search for..."
                         className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
                       </div>
                     </th>
@@ -105,40 +114,44 @@ function AllUsers() {
                         <th className="p-4"></th>
                       </tr>
                     </thead>
-                    <tbody>
-                    {users
-  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by date (most recent first)
-  .map((user) => (
-    <tr key={user._id} className={`userDetails`} loading="lazy">
-      <td className="p-4">{user._id}</td>
-      <td className="p-4">
-        <div>
-          <p className="font-bold">{user.fullName}</p>
-          <p className="text-gray-400">{user.email}</p>
-        </div>
-      </td>
-      <td className="p-4">{formatDate(user.createdAt)}</td>
-      <td className="p-4">{user.country || "..."}</td>
-      <td className="p-4">{user.state || "..."}</td>
-      <td className="p-4 font-bold">{user.moreInfo || "..."}</td>
-      <td className="p-4 flex space-x-3">
-        <button
-          onClick={() => handleEditAllUser(user._id)}
-          className="text-[#8f85fe] hover:text-[#9389ff57]"
-        >
-          <span className="material-symbols-outlined text-[22px]">edit</span>
-        </button>
-        <button
-          onClick={() => handleDeleteAllUser(user._id)}
-          className="text-[#8f85fe] hover:text-[#9389ff57]"
-        >
-          <span className="material-symbols-outlined text-[22px]">delete</span>
-        </button>
-      </td>
-    </tr>
-  ))}
+                    {filteredUsers.length === 0 ? (
+                      <p className="text-[#8f85fe] text-center mt-4">User does not exist.</p>
+                    ) : (
+                      <tbody>
+                        {filteredUsers
+                          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by date
+                          .map((user) => (
+                            <tr key={user._id} className="userDetails" loading="lazy">
+                              <td className="p-4">{user._id}</td>
+                              <td className="p-4">
+                                <div>
+                                  <p className="font-bold">{user.fullName}</p>
+                                  <p className="text-gray-400">{user.email}</p>
+                                </div>
+                              </td>
+                              <td className="p-4">{formatDate(user.createdAt)}</td>
+                              <td className="p-4">{user.country || "..."}</td>
+                              <td className="p-4">{user.state || "..."}</td>
+                              <td className="p-4 font-bold">{user.moreInfo || "..."}</td>
+                              <td className="p-4 flex space-x-3">
+                                <button
+                                  onClick={() => handleEditAllUser(user._id)}
+                                  className="text-[#8f85fe] hover:text-[#9389ff57]"
+                                >
+                                  <span className="material-symbols-outlined text-[22px]">edit</span>
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteAllUser(user._id)}
+                                  className="text-[#8f85fe] hover:text-[#9389ff57]"
+                                >
+                                  <span className="material-symbols-outlined text-[22px]">delete</span>
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    )}
 
-                    </tbody>
                   </table>
                 </div>
               )}

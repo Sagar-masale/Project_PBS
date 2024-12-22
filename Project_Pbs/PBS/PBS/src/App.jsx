@@ -21,6 +21,7 @@ import WishList from './Components/WishList/WishList.jsx';
 import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
+import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/OrderSummary" element={<OrderSummary />} />
         <Route path="/ItemDetails" element={<ItemDetails/>} />
         <Route path="/AllUsers" element={<AllUsers/>}/>
+        <Route path="/Add-Products" element={<AddProduct/>}/>
       </Routes>
       
     </>

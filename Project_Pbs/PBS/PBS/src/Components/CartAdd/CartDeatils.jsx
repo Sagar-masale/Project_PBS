@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import CartContext from '../Context/CartContext';
+import ProfileContext from '../Context/ProfileContext';
+import AdminContext from '../Context/AdminContext';
 import './CartDetails.css'
 
 
@@ -9,7 +11,8 @@ import OrderSummary from '../OrderDetails/OrderSummary';
 
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
-
+  const {userData} = useContext(ProfileContext)
+  const {adminData} = useContext(AdminContext)
  
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
@@ -46,11 +49,16 @@ function CartDeatils() {
           <button className="px-6 py-2 cartButtons  border-1 border-purple-900  rounded-md  transition-shadow">
             Continue Shopping
           </button>
+          {!userData && !adminData ? (
           <button
-           onClick={CloseLoginBox}
-           className="px-6 py-2 cartButtons-Login login-cart-button  border-none text-white rounded-md  transition-shadow">
+            onClick={CloseLoginBox}
+            className="px-6 py-2 cartButtons-Login login-cart-button border-none text-white rounded-md transition-shadow"
+          >
             Login To View Your Cart
           </button>
+        ) : null}
+
+
         </div>
       </div>
   ) : (
