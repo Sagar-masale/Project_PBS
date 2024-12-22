@@ -13,6 +13,7 @@ function AddProduct() {
     productName: "",
     category: "",
     price: "",
+    Qty: "",
     description: "",
   });
 
@@ -55,6 +56,7 @@ function AddProduct() {
   data.append("productName", formData.productName);
   data.append("category", formData.category);
   data.append("price", formData.price);
+  data.append("Qty", formData.stocksQty);
   data.append("description", formData.description);
 
   // Append images to FormData (with unique keys)
@@ -190,12 +192,25 @@ function AddProduct() {
                       </div>
 
                       <div className="mb-4">
+                        <label className="block font-medium mb-2">stocksQty</label>
+                        <input
+                          type="text"
+                          name="stocksQty"
+                          value={formData.stocksQty}
+                          onChange={handleInputChange}
+                          className="w-full border-gray-300 bg-[#0B1739] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Enter Stock Quantity"
+                          required
+                        />
+                      </div>
+
+                      <div className="mb-4">
                         <label className="block font-medium mb-2">Description</label>
                         <textarea
                           name="description"
                           value={formData.description}
                           onChange={handleInputChange}
-                          className="w-full border-gray-300 rounded-lg bg-[#0B1739] shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full pl-3 pt-3 border-gray-300 rounded-lg bg-[#0B1739] shadow-sm focus:ring-blue-500 focus:border-blue-500"
                           rows="4"
                           placeholder="Enter product description"
                           required
