@@ -17,6 +17,7 @@ function AddProduct() {
     ProductDescription: "",
   });
 
+  // const [formDefaultImage, setFormDefaultImage] = useState(AddImage);
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
 
@@ -24,6 +25,7 @@ function AddProduct() {
     const files = event.target.files;
     if (files.length > 0) {
       setImages(Array.from(files));
+      // setFormDefaultImage(URL.createObjectURL(files[0]));
     }
   };
 
@@ -93,15 +95,28 @@ function AddProduct() {
                     <label className="block font-medium mb-2">Add Images</label>
                     <div
                       onClick={() => fileInputRef.current.click()}
-                      className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer"
+                      className={`border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer ${
+                        images.length > 0 ? "w-full p-0 border-none" : null
+                      }`}
                     >
-                      <div className="AddProduct-ImagesBox w-36 h-60 flex justify-center items-center">
+                      <div className={`AddProduct-ImagesBox flex justify-center items-center rounded ${
+                      images.length > 0 ? "w-[100%] h-full" : "w-36 h-60"
+                    }`}
+                      >
+                      {images.length > 0 ? (
+                        <img
+                          src={URL.createObjectURL(images[0])}
+                          alt="Preview"
+                          className="w-72 h-full object-cover rounded"
+                        />
+                      ) : (
                         <img
                           src={AddImage}
                           alt="Add Image"
                           style={{ filter: "invert(100%) brightness(200%)" }}
                           className="mt-[-25%]"
                         />
+                      )}
                       </div>
                       <input
                         ref={fileInputRef}
