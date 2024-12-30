@@ -20,6 +20,7 @@ const FingerRings=()=>{
   
   const GetProductDetails = (curEle) => {
     setProductItems(curEle)
+    console.log(curEle);
     navigate(`${location.pathname=''}/ItemDetails`);
     
   }

@@ -99,9 +99,9 @@ const EarringsData = [
   },
   {
     id: 8,
-    img: './Erraings/imgR8.jpg',
+    img: './Erraings/imgR8M1.jpg',
     moreImages: [
-      './Erraings/imgR8M1.jpg',
+      './Erraings/imgR8.jpg',
       './Erraings/imgR8M2.jpg',
       './Erraings/imgR8M3.jpg',
     ],

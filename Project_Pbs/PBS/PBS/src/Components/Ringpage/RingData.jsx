@@ -22,8 +22,8 @@ const Ringsdata = [
     },
     {
         id: 3,
-        img: "./RingImgs/imgR3M1.jpg",
-        moreImages: ["./RingImgs/imgR3.jpg", "./RingImgs/imgR3M2.jpg", "./RingImgs/imgR3M1.jpg"],
+        img:  "./RingImgs/imgR3.jpg",
+        moreImages: ["./RingImgs/imgR3M1.jpg", "./RingImgs/imgR3M2.jpg", "./RingImgs/imgR3M1.jpg"],
         stocks: "ONLY 5 LEFT IN STOCK",
         stocksQty: 6,
         title: "Engraved Silver Ring",
