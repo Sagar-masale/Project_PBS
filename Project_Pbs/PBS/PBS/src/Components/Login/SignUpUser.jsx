@@ -85,7 +85,7 @@ function SignUpUser() {
   };
 
   return (
-    <div className="Login-Main-Container">
+    <div className="Login-Main-Container pt-20">
       <div className="SignUp-Pass-Container justify-center ">
         <div className="LeftSide-Block-SignUp rounded-l-lg bg-white h-auto">
           <span
@@ -94,7 +94,7 @@ function SignUpUser() {
           >
             close
           </span>
-          <h1 className="LoginName text-3xl mt-0">Sign Up</h1>
+          <h1 className="LoginName text-3xl">Sign Up</h1>
 
           <div className="Input-Username flex justify-center mt-5">
             <form onSubmit={registerUser} className="FormUser">

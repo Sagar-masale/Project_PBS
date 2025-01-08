@@ -14,7 +14,21 @@ function ItemDetails() {
             navigate('/');
         }
     }, [productItems, navigate]);
- 
+
+    const [currentImage, setCurrentImage] = useState(
+      productItems?.ProductImages?.[0] || ""
+    );
+
+    useEffect(() => {
+      // Check if productItems is available
+      if (!productItems) {
+        navigate("/"); // If not, navigate to the home page
+      } else {
+        setCurrentImage(productItems.ProductImages[0]); // Set initial main image
+      }
+    }, [productItems, navigate]);
+    console.log("Product Items:", productItems);
+
     const reviewsData = [
       {
         id: 1,
@@ -59,13 +73,13 @@ function ItemDetails() {
         {/* Left Side: Product Image */}
         <div className="flex flex-col items-center">
           <img
-            src={productItems.img} // Replace with actual image URL
+            src={currentImage} // Replace with actual image URL
             alt="ProductImage"
             className="ProductMain-Image mb-4"
           />
           {/* Thumbnail images */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-4">
-              {productItems.moreImages?.map((thumb, index) => (
+              {productItems.ProductImages?.map((thumb, index) => (
                 <div
                   key={index}
                   className="ProductMore-Images  hover:border-blue-500 cursor-pointer"
@@ -108,8 +122,8 @@ function ItemDetails() {
       {/* Price */}
       <div className="mb-2">
         <h2 className="ProductPrice  text-2xl font-bold">
-        ₹{productItems.price} {" "}
-          <span className="line-through text-gray-500 text-lg"> {productItems.price + 3000} </span>
+        ₹{productItems.ProductPrice} {" "}
+          <span className="line-through text-gray-500 text-lg"> {productItems.ProductPrice + 3000} </span>
           {/* <span className="text-red-600 text-lg font-semibold">(20% off)</span> */}
         </h2>
         <p className="text-gray-500 text-sm">(MRP Inclusive of all taxes)</p>
@@ -117,7 +131,7 @@ function ItemDetails() {
 
       {/* Title */}
       <h1 className="Product-Title text-lg font-semibold mb-2">
-      {productItems.title}
+      {productItems.ProductName}
       </h1>
 
       {/* Offer Banner */}
@@ -139,7 +153,7 @@ function ItemDetails() {
 
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
-      <div className="button-AddToCart" data-tooltip={"₹"+productItems.price}>
+      <div className="button-AddToCart" data-tooltip={"₹"+productItems.ProductPrice}>
      <div onClick={() => addToCart(productItems)} className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center">
     
     <div className="text-AddCart-Feild flex flex-row gap-2">   

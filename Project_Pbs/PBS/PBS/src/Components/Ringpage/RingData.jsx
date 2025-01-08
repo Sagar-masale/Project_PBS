@@ -1,4 +1,3 @@
-// 
 const Ringsdata = [
     {
         id: 1,

@@ -63,14 +63,17 @@ function OrderSummary({subTotal = "0"}) {
         </div>
         <div className="flex justify-between mt-4 border-t pt-4">
           <span className="text-lg font-semibold">TOTAL (Incl. of all Taxes.)</span>
-          <span className="text-lg font-bold text-gray-900">₹ {discountedTotal.toFixed(2)}</span>
+          <span className="text-lg font-bold text-gray-900">₹ {(discountedTotal - extraDiscount).toFixed(2)}</span>
         </div>
       </div>
 
       <div className="border-t mt-4 pt-4">
         <div className="flex justify-between">
           <span className="text-green-800 font-bold text-lg">YOU SAVE</span>
-          <span className="text-green-800 font-bold text-lg">+ ₹ {totalDiscount.toFixed(2)}</span>
+          <span className="text-green-800 font-bold text-lg">
+            + ₹ {(totalDiscount + extraDiscount).toFixed(2)}
+          </span>
+
         </div>
       </div>
     </div>

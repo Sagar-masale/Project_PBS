@@ -83,23 +83,23 @@ function CartDeatils() {
         <div className="flow-root ">
 <ul className="-my-20 ul-cartDatas">
   {cart.map(item => (
-     <li key={item.id} className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
+     <li key={item._id} className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
      <div className="shrink-0 cart-Image-Box">
        <img
          className="cart-Image  rounded-lg object-cover"
-         src={item.img} alt={item.title}
+         src={item.ProductImages[0]} alt={item.ProductName}
        />
      </div>
 
      <div className="relative flex flex-1  flex-col justify-between">
        <div className="sm:col-gap-5 sm:grid ml-10 sm:grid-cols-2">
          <div className="pr-8 sm:pr-5">
-           <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.title}</p>
+           <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
-           <p className="cart-Price text-2xl text-black mt-2">₹ {item.price}</p>
+           <p className="cart-Price text-2xl text-black mt-2">₹ {item.ProductPrice}</p>
           
             <span className="remove-WishList-Box flex mt-2">
-            <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item.id)}>
+            <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item._id)}>
             <span class="material-symbols-outlined" style={{color:"#4f3267"}}>delete</span>
             <p className="cart-Price text-sm text-black ml-1"> Remove</p>  
             </span> 
@@ -119,9 +119,9 @@ function CartDeatils() {
 
            <div className="sm:order-1">
              <div className="mx-auto flex h-8 items-stretch text-gray-600">
-               <button onClick={() => decrementQuantity(item.id)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">-</button>
+               <button onClick={() => decrementQuantity(item._id)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">-</button>
                <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item.quantity}</div>
-               <button onClick={() => incrementQuantity(item.id)}  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">+</button>
+               <button onClick={() => incrementQuantity(item._id)}  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">+</button>
              </div>
            </div>
          </div>

@@ -34,35 +34,39 @@ const CartContextProvider = ({children}) => {
             document.querySelector(selector).classList.toggle(className);
           };
           const addToCart = (product) => {
+            if (!product || !product._id || !product.ProductPrice) {
+                console.error("Invalid product data:", product);
+                return;
+            }
+        
             if (!userData?._id) {
-              alert("Please log in to add items to the cart.");
-              toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
-              return; // Prevent further execution
+                alert("Please log in to add items to the cart.");
+                toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
+                return;
             }
-          
-            const existingProductIndex = cart.findIndex(item => item.id === product.id);
-          
+        
+            const existingProductIndex = cart.findIndex(item => item._id === product._id);
+        
             if (existingProductIndex >= 0) {
-              // Update quantity if product already exists in the cart
-              const updatedCart = [...cart];
-              updatedCart[existingProductIndex].quantity += 1;
-              setCart(updatedCart);
+                const updatedCart = [...cart];
+                updatedCart[existingProductIndex].quantity += 1;
+                setCart(updatedCart);
             } else {
-              // Add new product to cart
-              setCart([...cart, { ...product, quantity: 1 }]);
+                setCart([...cart, { ...product, quantity: 1 }]);
             }
-          };
+        };
+        
           
     const incrementQuantity = (id) => {
       const updatedCart = cart.map(item => 
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setCart(updatedCart);
     };
   
     const decrementQuantity = (id) => {
       const updatedCart = cart.map(item => 
-        item.id === id && item.quantity > 1 
+        item._id === id && item.quantity > 1 
           ? { ...item, quantity: item.quantity - 1 } 
           : item
       );
@@ -70,7 +74,7 @@ const CartContextProvider = ({children}) => {
     };
 
     const removeFromCart = (id) => {
-      const updatedCart = cart.filter(item => item.id !== id);
+      const updatedCart = cart.filter(item => item._id !== id);
       setCart(updatedCart);
       
       // Update localStorage after removing item
@@ -86,7 +90,7 @@ const CartContextProvider = ({children}) => {
     
 
     const calculateCartSummary = () => {
-      const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+      const totalPrice = cart.reduce((total, item) => total + item.ProductPrice * item.quantity, 0);
     
       // Apply ₹400 discount if totalPrice > 60000
       const discount = totalPrice > 100000 ? 400 : 0;

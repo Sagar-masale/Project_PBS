@@ -16,7 +16,7 @@ function AdminAcc() {
     { title: "Save Products", value: "50.8K", change: "28.4%", color: "text-green-400" },
     { title: "Stock Products", value: "23.6K", change: "-12.6%", color: "text-red-400" },
     { title: "Sale Products", value: "756", change: "3.1%", color: "text-green-400" },
-    { title: "Average Revenue", value: "2.3K", change: "11.3%", color: "text-green-400" },
+    { title: "Average Revenue", value: "215.20k", change: "11.3%", color: "text-green-400" },
   ];
 
   // const countryStateMap = {

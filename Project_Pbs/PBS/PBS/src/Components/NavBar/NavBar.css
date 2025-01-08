@@ -37,8 +37,8 @@
 
 .LoginOtpBox,.LoginPassBox,.SignUpBox,.AdminLoginBox{
     top: 0;
-    padding-top: 15%;
-    padding-bottom: 5%;
+    /* padding-top: 15%; */
+    /* padding-bottom: 5%; */
     display: flex;
     justify-content: center;
     align-items: center;
