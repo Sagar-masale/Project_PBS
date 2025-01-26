@@ -17,15 +17,14 @@ function AddProduct() {
     ProductDescription: "",
   });
 
-  // const [formDefaultImage, setFormDefaultImage] = useState(AddImage);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false); // New state for loading
   const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files.length > 0) {
       setImages(Array.from(files));
-      // setFormDefaultImage(URL.createObjectURL(files[0]));
     }
   };
 
@@ -39,7 +38,9 @@ function AddProduct() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+  
+    setLoading(true); // Disable the button
+  
     const data = new FormData();
     data.append("ProductName", formData.ProductName);
     data.append("ProductCategory", formData.ProductCategory);
@@ -47,14 +48,26 @@ function AddProduct() {
     data.append("ProductQty", Number(formData.ProductQty));
     data.append("ProductDescription", formData.ProductDescription);
     data.append("adminId", adminData.data._id);
-
+  
     images.forEach((image) => {
       data.append("ProductImages", image);
     });
-
+  
+    const categoryApiMap = {
+      Rings: "add-ring",
+      Earrings: "add-earring",
+      Pendants: "add-pendants",
+      Mangalsutra: "add-mangalsutra",
+      Bangles: "add-bangles",
+      Chains: "add-chains",
+    };
+  
+    const selectedCategory = formData.ProductCategory;
+    const apiEndpoint = categoryApiMap[selectedCategory] || "add-products";
+  
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/products/add-ring",
+        `http://localhost:8000/api/v1/products/${apiEndpoint}`,
         data,
         {
           headers: {
@@ -62,15 +75,27 @@ function AddProduct() {
           },
         }
       );
-      alert("Data added successfully")
-      console.log("data added", response.data.data);
-      
+      alert("Product added successfully!");
+      console.log("Data added:", response.data.data);
+  
+      // Clear form fields and uploaded images
+      setFormData({
+        ProductName: "",
+        ProductCategory: "",
+        ProductPrice: "",
+        ProductQty: "",
+        ProductDescription: "",
+      });
+      setImages([]);
+      fileInputRef.current.value = null; // Reset file input field
     } catch (error) {
       console.error("Error adding product:", error.response?.data || error.message);
       alert("Failed to add product. Please try again.");
+    } finally {
+      setLoading(false); // Re-enable the button
     }
   };
-
+  
   return (
     <>
       {adminData ? (
@@ -99,24 +124,25 @@ function AddProduct() {
                         images.length > 0 ? "w-full p-0 border-none" : null
                       }`}
                     >
-                      <div className={`AddProduct-ImagesBox flex justify-center items-center rounded ${
-                      images.length > 0 ? "w-[100%] h-full" : "w-36 h-60"
-                    }`}
+                      <div
+                        className={`AddProduct-ImagesBox flex justify-center items-center rounded ${
+                          images.length > 0 ? "w-[100%] h-full" : "w-36 h-60"
+                        }`}
                       >
-                      {images.length > 0 ? (
-                        <img
-                          src={URL.createObjectURL(images[0])}
-                          alt="Preview"
-                          className="w-72 h-full object-cover rounded"
-                        />
-                      ) : (
-                        <img
-                          src={AddImage}
-                          alt="Add Image"
-                          style={{ filter: "invert(100%) brightness(200%)" }}
-                          className="mt-[-25%]"
-                        />
-                      )}
+                        {images.length > 0 ? (
+                          <img
+                            src={URL.createObjectURL(images[0])}
+                            alt="Preview"
+                            className="w-72 h-full object-cover rounded"
+                          />
+                        ) : (
+                          <img
+                            src={AddImage}
+                            alt="Add Image"
+                            style={{ filter: "invert(100%) brightness(200%)" }}
+                            className="mt-[-25%]"
+                          />
+                        )}
                       </div>
                       <input
                         ref={fileInputRef}
@@ -146,7 +172,9 @@ function AddProduct() {
                   <div className="AddProduct-RightBlock pl-8">
                     <form onSubmit={handleFormSubmit}>
                       <div className="mb-4">
-                        <label className="block font-medium mb-2">Product Name</label>
+                        <label className="block font-medium mb-2">
+                          Product Name
+                        </label>
                         <input
                           type="text"
                           name="ProductName"
@@ -158,7 +186,9 @@ function AddProduct() {
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="block font-medium mb-2">Product Category</label>
+                        <label className="block font-medium mb-2">
+                          Product Category
+                        </label>
                         <select
                           name="ProductCategory"
                           value={formData.ProductCategory}
@@ -169,12 +199,16 @@ function AddProduct() {
                           <option value="">Select a category</option>
                           <option value="Rings">Rings</option>
                           <option value="Earrings">Earrings</option>
-                          <option value="Necklaces">Necklaces</option>
-                          <option value="Bracelets">Bracelets</option>
+                          <option value="Pendants">Pendants</option>
+                          <option value="Mangalsutra">Mangalsutra</option>
+                          <option value="Bangles">Bangles</option>
+                          <option value="Chains">Chains</option>
                         </select>
                       </div>
                       <div className="mb-4">
-                        <label className="block font-medium mb-2">Product Price</label>
+                        <label className="block font-medium mb-2">
+                          Product Price
+                        </label>
                         <input
                           type="text"
                           name="ProductPrice"
@@ -186,7 +220,9 @@ function AddProduct() {
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="block font-medium mb-2">Stock Quantity</label>
+                        <label className="block font-medium mb-2">
+                          Stock Quantity
+                        </label>
                         <input
                           type="text"
                           name="ProductQty"
@@ -198,7 +234,9 @@ function AddProduct() {
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="block font-medium mb-2">Product Description</label>
+                        <label className="block font-medium mb-2">
+                          Product Description
+                        </label>
                         <textarea
                           name="ProductDescription"
                           value={formData.ProductDescription}
@@ -211,9 +249,12 @@ function AddProduct() {
                       </div>
                       <button
                         type="submit"
-                        className="w-full bg-[#8f85fe] text-white hover:bg-[#8f85fe94] shadow-md transition-all duration-100 py-2 rounded-lg mt-4"
+                        disabled={loading} // Disable button when loading
+                        className={`w-full ${
+                          loading ? "bg-gray-500" : "bg-[#8f85fe]"
+                        } text-white hover:bg-[#8f85fe94] shadow-md transition-all duration-100 py-2 rounded-lg mt-4`}
                       >
-                        Publish Product
+                        {loading ? "Publishing..." : "Publish Product"}
                       </button>
                     </form>
                   </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import ProductContext from "../Context/ProductContext.js";
 
 import './FingerRings.css';
 import { useNavigate, useLocation  } from 'react-router-dom';
@@ -15,6 +16,9 @@ const FingerRings=()=>{
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
 
+  // ProductContext
+  const { setRingProductData } = useContext(ProductContext);
+
 
 
   const [rings, setRings] = useState([]);
@@ -23,6 +27,7 @@ const FingerRings=()=>{
     const fetchRingData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/api/v1/products/All-rings");
+        setRingProductData(response.data.message.rings)
         setRings(response.data.message.rings)
       } catch (error) {
         console.error("error fetching ring data", error)

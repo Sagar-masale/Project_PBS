@@ -1,86 +1,103 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import ProductContext from "../Context/ProductContext.js";
 import { useNavigate, useLocation } from 'react-router-dom';
-import '../Ringpage/FingerRings.css';
+import CartContext from "../Context/CartContext.js";
 
-import MangalsutraData from './MangalsutraData.jsx';
-import CartContext from '../Context/CartContext.js';
-
-
-
-const MangalSutra=()=>{
-  const {setCartItems} = useContext(CartContext);
-
+const MangalSutra = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+  const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
+  const { setMangalSutraProductData } = useContext(ProductContext);
 
-  const GetInfo=(curEle)=>{
-    // console.log(curEle);
-    setCartItems(curEle)
-    document.querySelector('.CartBox').classList.toggle('CartBox-Show')
-  }
-  const GetProductDetails = (curEle) => {
-  
-    setProductItems(curEle)
-    navigate(`${location.pathname=''}/ItemDetails`);
-    
-  }
+  const [mangalSutras, setMangalSutras] = useState([]);
+
+  useEffect(() => {
+    const fetchMangalSutraData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-mangalsutra");
+        setMangalSutraProductData(response.data.message.mangalsutras)
+        setMangalSutras(response.data.message.mangalsutras);
+      } catch (error) {
+        console.error("Error fetching MangalSutra data", error);
+      }
+    };
+    fetchMangalSutraData();
+  }, []);
+
+  const GetInfo = (mangalSutra) => {
+    setCartItems(mangalSutra);
+    console.log("AddMangalSutraCart", mangalSutra);
+    document.querySelector('.CartBox').classList.toggle('CartBox-Show');
+  };
+
+  const GetProductDetails = (mangalSutra) => {
+    setProductItems(mangalSutra);
+    console.log("ViewMangalSutraDetails", mangalSutra);
+    navigate(`${location.pathname = ''}/ItemDetails`);
+  };
+
+  console.log("MangalSutra Data is ", mangalSutras);
+
   return (
     <>
-<div className="ResComponent">
-    {
-      MangalsutraData.map((curEle)=>{
-        // console.log(curEle);
-
-        return(
-          
-          <div className="Show-Rings-Box">
-          <div className="Ring-Box R-Box1 Box-one" key={curEle.id}>
-              <div className="Ring-Img-Box" onClick={() => GetProductDetails(curEle)}><div className="Compare-Img-Box">
-                  <i className='bx bx-git-compare Compare-Arrow-Img'></i>
-              </div>
-              <div className="Add-Img-Box">
-               </div>
-               <img loading='lazy' src={curEle.img}className="Finger-Style"/>
-          </div>
-          <div className="Img-Info-Box">
-              <div className="Itm-Stock">
-              <div className="flex justify-between items-center">
-                  <span
-                  style={{ color: curEle.stocksQty > 5 ? "black" : curEle.stocksQty > 0 ? "red" : "gray" }}
-                  className="font-bold Title-Stock"
+      <div className="ResComponent">
+        {mangalSutras.map((mangalSutra) => {
+          return (
+            <div className="Show-Rings-Box" key={mangalSutra._id}>
+              <div className="Ring-Box R-Box1 Box-one">
+                <div
+                  className="Ring-Img-Box"
+                  onClick={() => GetProductDetails(mangalSutra)}
                 >
-                  {curEle.stocksQty > 5
-                    ? "Available"
-                    : curEle.stocksQty > 0
-                    ? `ONLY ${curEle.stocksQty} LEFT IN STOCK`
-                    : "Not Available"}
-                </span>
-     
-    </div>
-              </div>
-                  <h4 className="Card-Title">{curEle.title}</h4>
-                  <div className="Card-Price">
-                      <span className="Doller">₹</span>
-                      <span className="Price-Rate">{curEle.price}</span>
+                  <div className="Compare-Img-Box">
+                    <i className='bx bx-git-compare Compare-Arrow-Img'></i>
                   </div>
-                      <span className="Gender-Name">Women <span className="Between-Line-Gender">|</span></span>
-                      <span className="Type-Of-Ring">Finger Ring</span>
-                      <div className="Explore-Box" onClick={()=>GetInfo(curEle)}>
-                          <h3 className="Explore-Name">Add to Cart</h3>
-                          </div>
-                      </div>
-           </div>
-           </div>
-        )
-     
-  
-      })
-    }
-    </div>
+                  <div className="Add-Img-Box"></div>
+                  <img
+                    loading='lazy'
+                    src={mangalSutra.ProductImages[0]}
+                    className="Finger-Style"
+                  />
+                </div>
+                <div className="Img-Info-Box">
+                  <div className="Itm-Stock">
+                    <div className="flex justify-between items-center">
+                      <span
+                        style={{
+                          color: mangalSutra.ProductQty > 5 ? "black" : mangalSutra.ProductQty > 0 ? "red" : "gray",
+                        }}
+                        className="font-bold Title-Stock"
+                      >
+                        {mangalSutra.ProductQty > 5
+                          ? "Available"
+                          : mangalSutra.ProductQty > 0
+                          ? `ONLY ${mangalSutra.ProductQty} LEFT IN STOCK`
+                          : "Not Available"}
+                      </span>
+                    </div>
+                  </div>
+                  <h4 className="Card-Title">{mangalSutra.ProductName}</h4>
+                  <div className="Card-Price">
+                    <span className="Doller">₹</span>
+                    <span className="Price-Rate">{mangalSutra.ProductPrice}</span>
+                  </div>
+                  <span className="Gender-Name">
+                    Women <span className="Between-Line-Gender">|</span>
+                  </span>
+                  <span className="Type-Of-Ring">{mangalSutra.ProductCategory}</span>
+                  <div className="Explore-Box" onClick={() => GetInfo(mangalSutra)}>
+                    <h3 className="Explore-Name">Add to Cart</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
-}
+};
 
 export default MangalSutra;

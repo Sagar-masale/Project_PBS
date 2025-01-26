@@ -40,7 +40,7 @@ const CartContextProvider = ({children}) => {
             }
         
             if (!userData?._id) {
-                alert("Please log in to add items to the cart.");
+                alert("Please log in as user to add items to the cart.");
                 toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
                 return;
             }
