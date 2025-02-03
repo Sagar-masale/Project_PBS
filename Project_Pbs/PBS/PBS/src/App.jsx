@@ -47,7 +47,7 @@ const App = () => {
         <Route path="/Diamond-Details" element={<Diamond />} />
         <Route path="/WishList-Deatils" element={<WishList />} />
         <Route path="/Cart-Deatils" element={<CartDeatils />} />
-        <Route path="/UserAcc" element={<EditUser />} />
+        <Route path="/UserAcc" element={<UserAcc />} />
         <Route path="/AdminAcc" element={<AdminAcc />} />
         <Route path="/CheckOut" element={<CheckOut />} />
         <Route path="/OrderSummary" element={<OrderSummary />} />

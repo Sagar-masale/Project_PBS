@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../PageLoader/Loading';
 import './UserAcc.css';
+import EditUser from './EditUser';
 import ProfileContext from '../../Context/ProfileContext';
 import RegisterContext from '../../Context/RegisterContext';
 
 function UserAcc() {
 
   const [isLoading, setIsLoading] = useState(false); 
+  const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
       if (isLoading) {
@@ -49,6 +51,22 @@ function UserAcc() {
 
 };
 
+const handleEdit = () => {
+  setIsLoading(true); // Start loading effect
+
+  setTimeout(() => {
+    setIsLoading(false); // Stop loading after 1.5s
+    setIsEditing(true); // Show EditUser component
+  }, 1500);
+};
+const handleCloseEdit = () => {
+  setIsLoading(true); // Start loading effect
+
+  setTimeout(() => {
+    setIsLoading(false); // Stop loading after 1.5s
+    setIsEditing(false); // Hide EditUser component
+  }, 1500);
+};
 
 
 
@@ -56,6 +74,7 @@ function UserAcc() {
   return (
     <>
     {isLoading && <Loading />}
+    {isEditing && <EditUser onCloseEditComponent={handleCloseEdit} />} 
         <div className='profile-container'>
       <div className="px-4 sm:px-0 flex justify-between ">
         <h3 className="text-2xl font-semibold text-gray-900 flex gap-2">
@@ -65,7 +84,9 @@ function UserAcc() {
         > {userData.fullName?.split(' ')[0] || 'Guest'}</span></h3>
         <div className="LogOut-Button-EditButton flex gap-4 ml-auto">
           <button 
-          className="editUserAcc px-4 py-1 rounded-lg">
+          className="editUserAcc px-4 py-1 rounded-lg"
+          onClick={handleEdit}
+          >
             Edit
           </button>
           <button 
