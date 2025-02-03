@@ -37,8 +37,8 @@ function LogoutAdmin({ onCancel }) {
       {isLoading && <Loading />}
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div className="bg-white rounded-lg shadow-lg p-6 w-96 max-w-full text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Admin Logout</h2>
-          <p className="text-gray-600 mb-6">Are you sure you want to logout?</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Confirm Logout</h2>
+          <p className="text-gray-600 mb-6">Are you sure you want to log out? You will need to log in again to access the admin panel.</p>
           <div className="flex justify-around">
             <button
               onClick={handleConfirm}

@@ -82,7 +82,7 @@ function AdminAcc() {
       name: "Rahul Patil",
       email: "rahul.patil@gmail.com",
       date: "Dec 27, 2024",
-      status: "Pending",
+      status: "Delivered",
       country: "India",
       state: "Rajasthan",
       total: "₹2,34,567.00",

@@ -22,6 +22,7 @@ import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
+import EditUser from './Components/Account/User/EditUser.jsx';
 
 const App = () => {
   return (
@@ -46,7 +47,7 @@ const App = () => {
         <Route path="/Diamond-Details" element={<Diamond />} />
         <Route path="/WishList-Deatils" element={<WishList />} />
         <Route path="/Cart-Deatils" element={<CartDeatils />} />
-        <Route path="/UserAcc" element={<UserAcc />} />
+        <Route path="/UserAcc" element={<EditUser />} />
         <Route path="/AdminAcc" element={<AdminAcc />} />
         <Route path="/CheckOut" element={<CheckOut />} />
         <Route path="/OrderSummary" element={<OrderSummary />} />
