@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import ProfileContext from '../../Context/ProfileContext';
 import './EditUser.css';
 
@@ -6,6 +7,7 @@ const EditUser = ({onCloseEditComponent}) => {
   const {userData} = useContext(ProfileContext);
   
   const [formData, setFormData] = useState({
+    userId: userData._id,
     fullName: '',
     phoneNumber: '',
     email: '',
@@ -14,7 +16,7 @@ const EditUser = ({onCloseEditComponent}) => {
     country: '',
     city: '',
     state: '',
-    zip: '',
+    zipCode: '',
     password: '',
   });
 
@@ -26,9 +28,25 @@ const EditUser = ({onCloseEditComponent}) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await axios.put('http://localhost:8000/api/v1/users/update-User', formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.status === 200) {
+        alert('User updated successfully!');
+        window.location.reload();
+        onCloseEditComponent(); // Close the edit form
+      }
+    } catch (error) {
+      console.error('Error updating user:', error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || 'Failed to update user');
+    }
+    
   };
 
 
@@ -154,8 +172,8 @@ const EditUser = ({onCloseEditComponent}) => {
           <input 
           type="text" 
           id="zip" 
-          name="zip" 
-          value={formData.zip} 
+          name="zipCode" 
+          value={formData.zipCode} 
           onChange={handleChange} 
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
           placeholder={userData.zip || "eg: 413005"}
