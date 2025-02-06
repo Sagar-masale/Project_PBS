@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import '../Notifications/RegisterMessage.css';
+import '../Notifications/SuccessMessage.css';
 import RegisterContext from '../Context/RegisterContext';
+import ProfileContext from '../Context/ProfileContext';
 
-function RegisterMessage() {
+function SuccessMessage() {
   const [notifyTitle, setNotifyTitle] = useState('');
   const [notifyMessage, setNotifyMessage] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -16,7 +17,10 @@ function RegisterMessage() {
     setLoginNotify, 
     setLogoutNotify 
   } = useContext(RegisterContext);
-  console.log('logoutnotify', logoutNotify);
+
+  const { updateUserData, setUpdateUserData } = useContext(ProfileContext);
+  console.log("UserUpdateData: ", updateUserData);
+  
   
   useEffect(() => {
     if (registerStatus) {
@@ -34,6 +38,14 @@ function RegisterMessage() {
       setNotifyMessage("Thank you for visiting PB Salegoan Jewellers.");
       setShowSuccess(true);
       setLogoutNotify(false); // Reset logoutNotify after showing the message
+    }else if (updateUserData) {
+      setNotifyTitle("Updated Successfully!");
+      setNotifyMessage("Your changes have been saved.");
+      setShowSuccess(true);
+      setRegisterStatus(false);
+
+      setUpdateUserData(false);
+      
     }
 
     // Remove the class after 5 seconds
@@ -41,7 +53,8 @@ function RegisterMessage() {
       setShowSuccess(false);
       setNotifyTitle('');
       setNotifyMessage('');
-    }, 5000);
+
+    }, 4000);
     return () => clearTimeout(timer); // Cleanup the timer
 
   }, [
@@ -50,7 +63,8 @@ function RegisterMessage() {
     logoutNotify, 
     setRegisterStatus, 
     setLoginNotify, 
-    setLogoutNotify
+    setLogoutNotify,
+    updateUserData
   ]); // Add setters to dependencies
 
 
@@ -98,4 +112,4 @@ function RegisterMessage() {
   )
 }
 
-export default RegisterMessage
+export default SuccessMessage

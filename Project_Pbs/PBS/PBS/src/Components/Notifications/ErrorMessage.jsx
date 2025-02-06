@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import RegisterContext from '../Context/RegisterContext';
-import '../Notifications/RegisterErr.css';
+import '../Notifications/ErrorMessage.css';
 
-function RegisterErr() {
+function ErrorMessage() {
   const { registerErrStatus , setRegisterErrStatus } = useContext(RegisterContext);
   // console.log("Errrr status", registerErrStatus);
 
@@ -81,4 +81,4 @@ function RegisterErr() {
   )
 }
 
-export default RegisterErr
+export default ErrorMessage

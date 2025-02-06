@@ -8,11 +8,11 @@ import RegisterContext from '../../Context/RegisterContext';
 
 function UserAcc() {
 
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoadingUserAcc, setIsLoadingUserAcc] = useState(false); 
   const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-      if (isLoading) {
+      if (isLoadingUserAcc) {
         document.body.style.overflow = 'hidden'; // Disable scroll
       } else {
         document.body.style.overflow = ''; // Enable scroll
@@ -22,7 +22,7 @@ function UserAcc() {
       return () => {
         document.body.style.overflow = '';
       };
-    }, [isLoading]);
+    }, [isLoadingUserAcc]);
 
 
   const navigate = useNavigate();
@@ -36,38 +36,33 @@ function UserAcc() {
 
  // Logout logic
  const handleLogout = () => {
-  setIsLoading(true); // Trigger loading animation immediately
+  setIsLoadingUserAcc(true); // Trigger loading animation immediately
 
   setTimeout(() => {
 
-    setIsLoading(false); // Stop loading animation after 3 seconds
+    setIsLoadingUserAcc(false); // Stop loading animation after 3 seconds
     setUserData("");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setLogout(true);
     setLogoutNotify(true);
     navigate('/');
-  }, 3000);
+  }, 2000);
 
   // Perform logout actions
 
 };
 
 const handleEdit = () => {
-  setIsLoading(true); // Start loading effect
-
+  setIsLoadingUserAcc(true);
   setTimeout(() => {
-    setIsLoading(false); // Stop loading after 1.5s
-    setIsEditing(true); // Show EditUser component
-  }, 1500);
+    setIsLoadingUserAcc(false);
+    setIsEditing(true);
+  }, 1000);
 };
-const handleCloseEdit = () => {
-  setIsLoading(true); // Start loading effect
 
-  setTimeout(() => {
-    setIsLoading(false); // Stop loading after 1.5s
+const handleCloseEdit = () => {
     setIsEditing(false); // Hide EditUser component
-  }, 1500);
 };
 
 
@@ -75,8 +70,8 @@ const handleCloseEdit = () => {
 
   return (
     <>
-    {isLoading && <Loading />}
-    {isEditing && <EditUser onCloseEditComponent={handleCloseEdit} />}
+    {isLoadingUserAcc && <Loading />}
+    <div>{isEditing && <EditUser onCloseEditComponent={handleCloseEdit} />}</div>
     <div className="profile-container">
       <div className="px-4 sm:px-0 flex justify-between">
         <h3 className="text-2xl font-semibold text-gray-900 flex gap-2">

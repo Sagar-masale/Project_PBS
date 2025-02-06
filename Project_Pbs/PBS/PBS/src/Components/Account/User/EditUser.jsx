@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import Loading from '../../PageLoader/Loading';
 import ProfileContext from '../../Context/ProfileContext';
 import './EditUser.css';
 
 const EditUser = ({onCloseEditComponent}) => {
-  const {userData} = useContext(ProfileContext);
+  const {userData, setUserData, setUpdateUserData} = useContext(ProfileContext);
+
+   const [isLoading, setIsLoading] = useState(false); 
   
   const [formData, setFormData] = useState({
     userId: userData._id,
@@ -28,32 +31,37 @@ const EditUser = ({onCloseEditComponent}) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const userEditeSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading before making the request
+  
     try {
       const response = await axios.put('http://localhost:8000/api/v1/users/update-User', formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-
+  
       if (response.status === 200) {
-        alert('User updated successfully!');
-        window.location.reload();
-        onCloseEditComponent(); // Close the edit form
+        setUserData(response.data.data)
+        setIsLoading(false);      // ✅ Stop loading
+        setUpdateUserData(true);
+        onCloseEditComponent();   // ✅ Close form right away
       }
+      
     } catch (error) {
+      setIsLoading(false); // ✅ Stop loading on error
       console.error('Error updating user:', error.response?.data?.message || error.message);
       alert(error.response?.data?.message || 'Failed to update user');
     }
-    
   };
-
+  
 
   return (
     <>
+    {isLoading && <Loading />}
     <span className='close-EditUserAc position-absolute mt-[-50px] right-10 cursor-pointer' onClick={onCloseEditComponent}>Close</span>
-    <form onSubmit={handleSubmit} className='mt-16'>
+    <form onSubmit={userEditeSubmit} className='mt-16'>
       <div className="grid gap-6 mb-6 md:grid-cols-2 w-[100%] px-10">
         <div>
           <label htmlFor="fullName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

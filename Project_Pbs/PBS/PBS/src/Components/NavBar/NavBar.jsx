@@ -1,7 +1,7 @@
 import React, { useState , useEffect, useContext } from 'react';
 // Notifications
-import RegisterMessage from '../Notifications/RegisterMessage';
-import RegisterErr from '../Notifications/RegisterErr';
+import SuccessMessage from '../Notifications/SuccessMessage';
+import ErrorMessage from '../Notifications/ErrorMessage';
 import NetworkErr from '../Notifications/NetworkErr';
 
 
@@ -226,8 +226,8 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
             <SliderBarForPhn />
           </div>
         </div>
-        <RegisterMessage/>
-        <RegisterErr/>
+        <SuccessMessage/>
+        <ErrorMessage/>
         <NetworkErr/>
         <div className="custome-bar" onClick={SliderMove}>
           <span className="material-symbols-outlined menu-items">menu</span>
