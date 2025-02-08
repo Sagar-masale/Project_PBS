@@ -23,6 +23,8 @@ import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
 import EditUser from './Components/Account/User/EditUser.jsx';
+import EmailAuth from './Components/AuthontiCations/EmailAuth.jsx';
+
 
 const App = () => {
   return (
@@ -37,7 +39,7 @@ const App = () => {
         CatTitle5="Stylish Bangles" 
         CatTitle6="Classic Chains"
         />} />
-        <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
+        <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><EmailAuth /></>} />
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />
         <Route path="/Pendants-Page" element={<><ItemsInfo title="Pendants" /><CartBox /><PenDants /></>} />
         <Route path="/Mangalsutra-Page" element={<><ItemsInfo title="Mangalsutra" /><CartBox /><MangalSutra /></>} />
