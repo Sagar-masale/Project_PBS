@@ -39,7 +39,7 @@ const App = () => {
         CatTitle5="Stylish Bangles" 
         CatTitle6="Classic Chains"
         />} />
-        <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><EmailAuth /></>} />
+        <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />
         <Route path="/Pendants-Page" element={<><ItemsInfo title="Pendants" /><CartBox /><PenDants /></>} />
         <Route path="/Mangalsutra-Page" element={<><ItemsInfo title="Mangalsutra" /><CartBox /><MangalSutra /></>} />

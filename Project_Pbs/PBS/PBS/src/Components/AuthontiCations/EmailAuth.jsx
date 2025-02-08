@@ -3,7 +3,7 @@ import axios from "axios";
 import Loading from "../PageLoader/Loading"; // Ensure this component works properly
 import ProfileContext from "../Context/ProfileContext";
 
-const EmailAuth = () => {
+const EmailAuth = ({closeEmailAuth, onOtpVerified }) => {
     const { userData } = useContext(ProfileContext);
     const [otp, setOtp] = useState("");
     const [message, setMessage] = useState("");
@@ -36,6 +36,7 @@ const EmailAuth = () => {
         try {
             const response = await axios.post("http://localhost:8000/api/v1/auth/verify-otp", { email, otp });
             setMessage(response.data.message || "OTP verified successfully!");
+            onOtpVerified ();
         } catch (error) {
             setMessage(error.response?.data?.message || "OTP verification failed");
         } finally {
@@ -44,20 +45,25 @@ const EmailAuth = () => {
     };
 
     return (
-        <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-xl w-96">
+      <>
+       <div className="Auth-Container flex justify-content-center align-items-center   w-full h-[100vh]">
+       <div className="flex flex-col  items-center p-6 bg-white shadow-lg rounded-xl mb-52 w-[50%] h-[fit-content]">
+       <span class="material-symbols-outlined relative ml-auto cursor-pointer" onClick={closeEmailAuth}>
+        close
+        </span>
             <h2 className="text-xl font-semibold text-gray-800">OTP Verification</h2>
             
             {step === "send" ? (
                 <div className="w-full text-center">
                     <p className="text-sm text-gray-600 mt-2">
-                        We will send a One-Time Password (OTP) to your registered email:
+                        We will send a OTP to your registered email:
                     </p>
                     <p className="text-lg font-semibold text-[#4f3267]">{email}</p>
                     
                     <button 
                         onClick={sendOTP} 
                         disabled={loading}
-                        className="mt-4 bg-[#4f3267] text-white py-2 px-6 rounded-lg hover:bg-[#432a58] transition duration-200 flex items-center justify-center w-full"
+                        className="mt-4 mb-3 bg-[#4f3267] text-white py-2 px-6 rounded-lg hover:bg-[#432a58] transition duration-200 flex items-center justify-center w-full"
                     >
                         {loading ? <Loading /> : "Send OTP"}
                     </button>
@@ -110,6 +116,8 @@ const EmailAuth = () => {
 
             {message && <p className="mt-3 text-sm text-gray-700">{message}</p>}
         </div>
+       </div>
+      </>
     );
 };
 
