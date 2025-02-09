@@ -4,7 +4,7 @@ import AdminContext from "../../../Context/AdminContext.js";
 import Loading from "../../../PageLoader/Loading.jsx";
 
 function LogoutAdmin({ onCancel }) {
-  const { setAdminData } = useContext(AdminContext);
+  const { setAdminData, setAdminLogoutNotify } = useContext(AdminContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,6 +27,7 @@ function LogoutAdmin({ onCancel }) {
       localStorage.removeItem("accessTokenAdmin");
       localStorage.removeItem("refreshTokenAdmin");
       setAdminData(null);
+      setAdminLogoutNotify(true);
       setIsLoading(false);
       navigate("/"); // Redirect to home/login page
     }, 3000);

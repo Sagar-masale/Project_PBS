@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import '../Notifications/SuccessMessage.css';
 import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
+import AdminContext from '../Context/AdminContext';
 
 function SuccessMessage() {
   const [notifyTitle, setNotifyTitle] = useState('');
@@ -19,7 +20,8 @@ function SuccessMessage() {
   } = useContext(RegisterContext);
 
   const { updateUserData, setUpdateUserData } = useContext(ProfileContext);
-  console.log("UserUpdateData: ", updateUserData);
+  
+  const { adminLoginNotify, setAdminLoginNotify, adminLogoutNotify, setAdminLogoutNotify } = useContext(AdminContext);
   
   
   useEffect(() => {
@@ -43,11 +45,19 @@ function SuccessMessage() {
       setNotifyMessage("Your changes have been saved.");
       setShowSuccess(true);
       setRegisterStatus(false);
-
       setUpdateUserData(false);
-      
-    }
+    }else if (adminLoginNotify) {
+      setNotifyTitle("Admin Logged In Successfully");
+      setNotifyMessage("Welcome back! You are now logged in to the admin panel.");
+      setShowSuccess(true);
+      setAdminLoginNotify(false);
+    }else if (adminLogoutNotify) {
+      setNotifyTitle("Admin Logged Out");
+      setNotifyMessage("You have been successfully logged out. See you again soon!");
+      setShowSuccess(true);
+      setAdminLogoutNotify(false);
 
+    }
     // Remove the class after 5 seconds
     const timer = setTimeout(() => {
       setShowSuccess(false);
@@ -64,7 +74,9 @@ function SuccessMessage() {
     setRegisterStatus, 
     setLoginNotify, 
     setLogoutNotify,
-    updateUserData
+    updateUserData,
+    adminLoginNotify,
+    adminLogoutNotify
   ]); // Add setters to dependencies
 
 

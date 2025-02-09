@@ -64,12 +64,12 @@ const EditUser = ({onCloseEditComponent}) => {
     {isLoading && <Loading />}
     {!isOtpVerified && (
         <div className="EmailAuth-Container">
-          <EmailAuth closeEmailAuth={onCloseEditComponent} onOtpVerified={() => setIsOtpVerified(true)} />
+          <EmailAuth decriptionOfEmailVerify="we are sending a one-time password (OTP) to verify the changes made to your profile. Please check your email: " closeEmailAuth={onCloseEditComponent} onOtpVerified={() => setIsOtpVerified(true)} />
         </div>
       )}
 
       {isOtpVerified && (
-        <div className="edit-user-container">
+        <div className="edit-user-container ">
           <div className="flex justify-end p-4">
             <button className="close-btn text-red-500" onClick={onCloseEditComponent}>
               ✖ Close

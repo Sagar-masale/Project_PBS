@@ -12,7 +12,7 @@ function AdminLogin() {
     const [accessTokenAdmin, setAccessTokenAdmin] = useState('');
 
 
-    const {setAdminData} = useContext(AdminContext);
+    const {setAdminData, setAdminLoginNotify} = useContext(AdminContext);
 
 
 
@@ -149,8 +149,7 @@ function AdminLogin() {
           localStorage.setItem("refreshTokenAdmin", refreshToken);
   
           setAccessTokenAdmin(accessToken);
-          alert("Login successful!");
-          console.log("admin",response.data);
+          setAdminLoginNotify(true);
           
   
           // Redirect to dashboard

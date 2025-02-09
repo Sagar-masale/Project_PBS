@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
+    "@lottiefiles/dotlottie-react": "^0.12.3",
     "axios": "^1.7.7",
     "firebase": "^11.3.0",
+    "framer-motion": "^12.4.1",
     "heroicons": "^2.1.5",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",

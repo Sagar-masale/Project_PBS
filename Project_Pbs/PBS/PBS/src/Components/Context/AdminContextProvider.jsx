@@ -4,11 +4,15 @@ import AdminContext from "./AdminContext";
 
 const AdminContextProvider = ({children}) => {
     const [adminData, setAdminData] = useState(null);
+    const [adminLoginNotify, setAdminLoginNotify] = useState(null);
+    const [adminLogoutNotify, setAdminLogoutNotify] = useState(null);
 
     return(
         <AdminContext.Provider value={
             {
-                adminData, setAdminData
+                adminData, setAdminData,
+                adminLoginNotify, setAdminLoginNotify,
+                adminLogoutNotify, setAdminLogoutNotify
             }
 
         }>
