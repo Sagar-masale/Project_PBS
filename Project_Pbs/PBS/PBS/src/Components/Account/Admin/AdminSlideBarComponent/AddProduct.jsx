@@ -14,11 +14,12 @@ function AddProduct() {
     ProductCategory: "",
     ProductPrice: "",
     ProductQty: "",
+    ProductGender: "",
     ProductDescription: "",
   });
 
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false); // New state for loading
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
@@ -38,21 +39,29 @@ function AddProduct() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-  
-    setLoading(true); // Disable the button
-  
+
+    if (isNaN(formData.ProductPrice) || isNaN(formData.ProductQty)) {
+      alert("Price and Quantity must be valid numbers.");
+      return;
+    }
+
+    setLoading(true);
+
     const data = new FormData();
     data.append("ProductName", formData.ProductName);
     data.append("ProductCategory", formData.ProductCategory);
     data.append("ProductPrice", Number(formData.ProductPrice));
     data.append("ProductQty", Number(formData.ProductQty));
+    data.append("ProductGender", formData.ProductGender);
     data.append("ProductDescription", formData.ProductDescription);
     data.append("adminId", adminData.data._id);
-  
+    console.log('Form Data:', formData);  // Check if ProductGender has a value
+
     images.forEach((image) => {
       data.append("ProductImages", image);
+
     });
-  
+
     const categoryApiMap = {
       Rings: "add-ring",
       Earrings: "add-earring",
@@ -61,10 +70,10 @@ function AddProduct() {
       Bangles: "add-bangles",
       Chains: "add-chains",
     };
-  
+
     const selectedCategory = formData.ProductCategory;
     const apiEndpoint = categoryApiMap[selectedCategory] || "add-products";
-  
+
     try {
       const response = await axios.post(
         `http://localhost:8000/api/v1/products/${apiEndpoint}`,
@@ -77,25 +86,26 @@ function AddProduct() {
       );
       alert("Product added successfully!");
       console.log("Data added:", response.data.data);
-  
-      // Clear form fields and uploaded images
+
       setFormData({
         ProductName: "",
         ProductCategory: "",
         ProductPrice: "",
         ProductQty: "",
+        ProductGender: "",
         ProductDescription: "",
       });
+      
       setImages([]);
-      fileInputRef.current.value = null; // Reset file input field
+      fileInputRef.current.value = null;
     } catch (error) {
       console.error("Error adding product:", error.response?.data || error.message);
       alert("Failed to add product. Please try again.");
     } finally {
-      setLoading(false); // Re-enable the button
+      setLoading(false);
     }
   };
-  
+
   return (
     <>
       {adminData ? (
@@ -133,7 +143,7 @@ function AddProduct() {
                           <img
                             src={URL.createObjectURL(images[0])}
                             alt="Preview"
-                            className="w-72 h-full object-cover rounded"
+                            className="w-64 h-60 object-cover rounded"
                           />
                         ) : (
                           <img
@@ -162,9 +172,7 @@ function AddProduct() {
                           key={index}
                           className="flex justify-between items-center bg-[#0B1739] p-2 rounded"
                         >
-                          <span>
-                            {image.name} ({Math.round(image.size / 1024)} KB)
-                          </span>
+                          <span>{image.name}</span>
                         </div>
                       ))}
                     </div>
@@ -210,7 +218,7 @@ function AddProduct() {
                           Product Price
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           name="ProductPrice"
                           value={formData.ProductPrice}
                           onChange={handleInputChange}
@@ -224,7 +232,7 @@ function AddProduct() {
                           Stock Quantity
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           name="ProductQty"
                           value={formData.ProductQty}
                           onChange={handleInputChange}
@@ -233,6 +241,22 @@ function AddProduct() {
                           required
                         />
                       </div>
+                      <div className="mb-4">
+                        <label className="block font-medium mb-2">Gender</label>
+                        <select
+                          name="ProductGender"
+                          value={formData.ProductGender}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border-gray-300 bg-[#0B1739] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                          required
+                        >
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Unisex">Unisex</option>
+                        </select>
+                      </div>
+
                       <div className="mb-4">
                         <label className="block font-medium mb-2">
                           Product Description
@@ -249,12 +273,18 @@ function AddProduct() {
                       </div>
                       <button
                         type="submit"
-                        disabled={loading} // Disable button when loading
+                        disabled={loading}
                         className={`w-full ${
                           loading ? "bg-gray-500" : "bg-[#8f85fe]"
                         } text-white hover:bg-[#8f85fe94] shadow-md transition-all duration-100 py-2 rounded-lg mt-4`}
                       >
-                        {loading ? "Publishing..." : "Publish Product"}
+                        {loading ? (
+                          <div className="spinner-border text-light" role="status">
+                            <span className="sr-only">Loading...</span>
+                          </div>
+                        ) : (
+                          "Publish Product"
+                        )}
                       </button>
                     </form>
                   </div>

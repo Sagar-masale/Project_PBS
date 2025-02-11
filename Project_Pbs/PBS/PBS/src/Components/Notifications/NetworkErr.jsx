@@ -4,7 +4,6 @@ import '../Notifications/NetworkErr.css'
 
 function NetworkErr() {
     const { networkErrStatus } = useContext(RegisterContext);
-    console.log("netWork : ", networkErrStatus);
   
     const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
   

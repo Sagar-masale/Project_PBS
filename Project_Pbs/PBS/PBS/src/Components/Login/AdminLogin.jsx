@@ -41,7 +41,7 @@ function AdminLogin() {
         
         // Log the admin data
         // console.log('admin Profile:', response.data);
-        console.log('admin', response);
+        // console.log('admin', response);
         
         setAdminData(response.data)
         
@@ -63,7 +63,7 @@ function AdminLogin() {
            // alert('Session expired. Please log in again.');
           }
         } else {
-          console.error('Error fetching profile:', error);
+          //console.error('Error fetching profile:', error);
           //alert('Failed to fetch user data. Please try again.');
         }
       }

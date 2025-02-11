@@ -63,7 +63,7 @@ const EditUser = ({onCloseEditComponent}) => {
     <>
     {isLoading && <Loading />}
     {!isOtpVerified && (
-        <div className="EmailAuth-Container">
+        <div className="EmailAuth-Container bg-[#d7a8fe3d]">
           <EmailAuth decriptionOfEmailVerify="we are sending a one-time password (OTP) to verify the changes made to your profile. Please check your email: " closeEmailAuth={onCloseEditComponent} onOtpVerified={() => setIsOtpVerified(true)} />
         </div>
       )}

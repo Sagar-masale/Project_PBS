@@ -8,6 +8,7 @@
     background-color: rgba(206, 206, 206, 0.819);
 }
 .SignUp-Pass-Container{
+   
     display: flex;
     /* border: 1px solid red; */
 }
@@ -37,4 +38,11 @@ background-color: #4f3267;
 }
 .Register-submit-Button:hover{
 background-color: #432a58;
+}
+.closeSignUpBox{
+    top: -20px;
+    margin-left: auto;
+    margin-right: -20px;
+    font-size: 30px;
+    color: #432a58;
 }

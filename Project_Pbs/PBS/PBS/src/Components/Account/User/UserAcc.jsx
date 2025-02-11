@@ -28,13 +28,13 @@ function UserAcc() {
   const navigate = useNavigate();
 
   const { userData, setUserData } = useContext(ProfileContext);
-  console.log("userData",userData);
+
   
 
   const { setLogout, setLogoutNotify } = useContext(RegisterContext);
 
 
- // Logout logic
+
  const handleLogout = () => {
   setIsLoadingUserAcc(true); // Trigger loading animation immediately
 
@@ -49,7 +49,6 @@ function UserAcc() {
     navigate('/');
   }, 2000);
 
-  // Perform logout actions
 
 };
 
@@ -62,7 +61,7 @@ const handleEdit = () => {
 };
 
 const handleCloseEdit = () => {
-    setIsEditing(false); // Hide EditUser component
+    setIsEditing(false);
 };
 
 

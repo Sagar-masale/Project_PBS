@@ -5,7 +5,7 @@ import Loading from "../PageLoader/Loading";
 import ProfileContext from "../Context/ProfileContext";
 import SuccessAnimation from "../Animation/SuccessAnimation";
 
-const EmailAuth = ({ closeEmailAuth, onOtpVerified, decriptionOfEmailVerify }) => {
+const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEmailVerify, decriptionOfEmailVerifyImp }) => {
     const { userData } = useContext(ProfileContext);
     const [otp, setOtp] = useState("");
     const [message, setMessage] = useState("");
@@ -15,7 +15,13 @@ const EmailAuth = ({ closeEmailAuth, onOtpVerified, decriptionOfEmailVerify }) =
     const [animationCompleted, setAnimationCompleted] = useState(false);
     
 
-    const email = userData?.email || "";
+    let email = "";
+
+    if (userData) {
+      email = userData?.email || "";
+    } else if (enteredEmail) {
+      email = enteredEmail;
+    }
 
     const sendOTP = async () => {
         if (loading) return;
@@ -77,7 +83,7 @@ const EmailAuth = ({ closeEmailAuth, onOtpVerified, decriptionOfEmailVerify }) =
 
     return (
         <>
-            <div className="Auth-Container flex justify-content-center align-items-center bg-[#d7a8fe3d] w-full h-[85vh]">
+            <div className="Auth-Container flex justify-content-center align-items-center  w-full h-[85vh]">
                 <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30 w-[50%] h-[fit-content]">
                     <span className="material-symbols-outlined relative ml-auto cursor-pointer" onClick={closeEmailAuth}>
                         close
@@ -88,7 +94,7 @@ const EmailAuth = ({ closeEmailAuth, onOtpVerified, decriptionOfEmailVerify }) =
                         <SuccessAnimation /> // Show success animation
                     ) : step === "send" ? (
                         <div className="w-full text-center">
-                            <p className="text-sm text-gray-600 mt-2">{decriptionOfEmailVerify}</p>
+                            <p className="text-sm text-gray-600 mt-2">{decriptionOfEmailVerify} <span className="importantDec text-[#ef3333]">{decriptionOfEmailVerifyImp}</span> </p>
                             <p className="text-lg font-semibold text-[#4f3267]">{maskEmail(email)}</p>
                             
                             <button 

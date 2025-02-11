@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollToTop from './Components/ScrollToTop.jsx';
 import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 import CartBox from './Components/CartAdd/CartBox.jsx';
 import Home from './Components/Home/Home.jsx';
@@ -29,6 +30,7 @@ import EmailAuth from './Components/AuthontiCations/EmailAuth.jsx';
 const App = () => {
   return (
     <>
+        <ScrollToTop/>
       <Routes>  {/* Define routes here */}
         <Route path="/" element={  
         <Home 

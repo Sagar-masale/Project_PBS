@@ -92,7 +92,7 @@ const FingerRings=()=>{
                       <span className="Doller">₹</span>
                       <span className="Price-Rate">{ring.ProductPrice}</span>
                   </div>
-                      <span className="Gender-Name">Women <span className="Between-Line-Gender">|</span></span>
+                      <span className="Gender-Name"> {ring.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span></span>
                       <span className="Type-Of-Ring">{ring.ProductCategory}</span>
                       <div className="Explore-Box" onClick={()=>GetInfo(ring)}>
                           <h3 className="Explore-Name">Add to Cart</h3>
