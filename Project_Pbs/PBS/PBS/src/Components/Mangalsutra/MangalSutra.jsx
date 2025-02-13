@@ -84,7 +84,7 @@ const MangalSutra = () => {
                     <span className="Price-Rate">{mangalSutra.ProductPrice}</span>
                   </div>
                   <span className="Gender-Name">
-                    Women <span className="Between-Line-Gender">|</span>
+                  {mangalSutra.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span>
                   </span>
                   <span className="Type-Of-Ring">{mangalSutra.ProductCategory}</span>
                   <div className="Explore-Box" onClick={() => GetInfo(mangalSutra)}>

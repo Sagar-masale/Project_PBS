@@ -4,6 +4,7 @@ import CartContext from "./CartContext";
 
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
+
   const [cartItems, setCartItems] = useState([]);
   const [productItems, setProductItems] = useState("");
 
@@ -41,7 +42,7 @@ const CartContextProvider = ({children}) => {
         
             if (!userData?._id) {
                 alert("Please log in as user to add items to the cart.");
-                toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
+                
                 return;
             }
         

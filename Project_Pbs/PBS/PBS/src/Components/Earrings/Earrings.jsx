@@ -86,7 +86,7 @@ const Earrings = () => {
                     <span className="Price-Rate">{earring.ProductPrice}</span>
                   </div>
                   <span className="Gender-Name">
-                    Women <span className="Between-Line-Gender">|</span>
+                    {earring.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span>
                   </span>
                   <span className="Type-Of-Ring">{earring.ProductCategory}</span>
                   <div className="Explore-Box" onClick={() => GetInfo(earring)}>

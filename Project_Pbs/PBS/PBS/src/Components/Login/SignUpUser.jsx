@@ -87,22 +87,76 @@ function SignUpUser() {
       <div className="SignUp-Pass-Container justify-center">
         {!isEmailSubmitted ? (
           <div className="EmailVerificationContainer">
-            <h2 className="text-2xl font-semibold mb-4">Enter Your Email</h2>
-            <form onSubmit={handleEmailSubmit} className="flex flex-col items-center gap-4">
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter Email ID*"
-                required
-                className="Input-User focus:ring-0"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button type="submit" className="bg-[#4f3267] text-white px-6 py-2 rounded-lg">
-                Submit
-              </button>
-            </form>
+          
+          <section class="flex justify-center items-center">
+            <button
+              href="/"
+              onClick={CloseSignUpBox}
+              className="ml-auto mb-10 group flex justify-center p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-[#4f3267] to-[#432a58] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+                stroke-width="0"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M8 2H1L9.26086 13.0145L1.44995 21.9999H4.09998L10.4883 14.651L16 22H23L14.3917 10.5223L21.8001 2H19.1501L13.1643 8.88578L8 2ZM17 20L5 4H7L19 20H17Z"
+                ></path>
+              </svg>
+              <span
+                className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700"
+              >
+                x
+              </span>
+            </button>
+          </section>
+
+        
+        <form onSubmit={handleEmailSubmit} className="flex flex-col items-center gap-4">
+          <div className="input-wrapper">
+            <svg 
+              className="icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24"
+            >
+              <g data-name="Layer 2">
+                <g data-name="inbox">
+                  <rect 
+                    width="24" 
+                    height="24" 
+                    transform="rotate(180 12 12)" 
+                    opacity="0"
+                  ></rect>
+                  <path
+                    d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+            <input 
+              type="email" 
+              name="email" 
+              required
+              className="emailBox focus:ring-0" 
+              placeholder="Enter Your Email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button 
+              type="submit"
+              className="Subscribe-btn"
+            >
+             
+              Submit
+            </button>
           </div>
+        </form>
+      </div>
+      
         ) : !isEmailVerified ? (
           <div className="EmailAuth-Component absolute w-100 top-0 h-full   bg-[#d7a8fe3d]">
           <EmailAuth 
