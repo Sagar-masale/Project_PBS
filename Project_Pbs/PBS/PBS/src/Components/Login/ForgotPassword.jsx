@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Loading from '../PageLoader/Loading';
 
-const ForgotPassword = ({ CloseLoginBox, onResetSuccess }) => {
+const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -50,19 +50,30 @@ const ForgotPassword = ({ CloseLoginBox, onResetSuccess }) => {
   return (
     <>
       {isLoading && <Loading />}
-      <div className="ForgotPassBox">
+      <div className="ForgotPassBox bg-white w-[25%] p-4 rounded-md flex flex-col gap-4">
+        <span 
+        className="close-Forgot-Box material-symbols-outlined relative ml-auto cursor-pointer"
+        onClick={closeForgotEmailBox} 
+        >
+          close
+        </span>
+        <h2 className="Forgot-Title text-xl mt-[-5%]"
+        
+        >
+          Forgot Password
+        </h2>
         {step === 1 && (
           <form onSubmit={requestOtp}>
-            <h2 className="text-2xl mb-4">Forgot Password</h2>
+          
             <input
               type="text"
               placeholder="Enter Your Email or Phone"
               required
               value={emailOrPhone}
               onChange={(e) => setEmailOrPhone(e.target.value)}
-              className="Input-User focus:ring-0"
+              className="Input-User focus:ring-0 outline-none "
             />
-            <button type="submit" className="Login-Button mt-4 text-white rounded-md cursor-pointer duration-200 Button-Submit">
+            <button type="submit" className="w-full Login-Button mt-4 text-white rounded-md cursor-pointer duration-200 Button-Submit">
               Request OTP
             </button>
           </form>

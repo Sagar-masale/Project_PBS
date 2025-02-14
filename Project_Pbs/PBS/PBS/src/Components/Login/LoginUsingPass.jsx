@@ -15,6 +15,10 @@ function LoginUsingPass() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [accessToken, setAccessToken] = useState('');
+
+  const [isLoginContainerVisible, setIsLoginContainerVisible] = useState(true);
+  const [isForgotPassBoxVisible, setIsForgotPassBoxVisible] = useState(false);
+  const [showForgotText, setShowForgotText] = useState(false);
   
 
   // setProfile Context
@@ -145,26 +149,36 @@ const refreshAccessToken = async () => {
       if (response.data.success) {
         const { accessToken, refreshToken } = response.data.data;
   
-        // Store tokens in localStorage
+        
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
   
-        // Update state and notify user
+        
         setAccessToken(accessToken);
         setLoginNotify(response.data.data);
   
-        // Fetch the user profile
+        setEmailOrPhone('');
+        setPassword('');
+     
         fetchUserProfile();
   
       } else {
         alert(response.data.message || 'Login failed. Please try again.');
+        
+        
       }
     } catch (err) {
-      CloseLoginBox();
+      
   
       if (err.response) {
-        console.error('Error:', err.response.data?.message || 'An error occurred');
-        // alert(err.response.data?.message || 'Login failed.');
+        console.log('Error:', err.response.data?.message || 'An error occurred');
+        if (err.response.data.message === "Password is incorrect") {
+          setShowForgotText(true);
+        }else{
+          CloseLoginBox();
+          setShowForgotText(false);
+        }
+        
         setRegisterErrStatus(err.response.data?.message || 'An error occurred');
       } else {
         console.error('Unexpected Error:', err.message);
@@ -175,10 +189,8 @@ const refreshAccessToken = async () => {
       setIsLoading(false); // Stop the loading spinner regardless of success or failure
     }
   };
-  const [isLoginContainerVisible, setIsLoginContainerVisible] = useState(true);
-  const [isForgotPassBoxVisible, setIsForgotPassBoxVisible] = useState(false);
 
-  const [showForgotPassBox, setShowForgotPassBox] = useState(false);
+
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -190,34 +202,48 @@ const refreshAccessToken = async () => {
     setIsLoginContainerVisible(false);  
     
   };
-  
-  
- 
+  const close_Forgot_Box = () => {
+    setIsForgotPassBoxVisible(false);
+    setIsLoginContainerVisible(true);
+    setShowForgotText(false);
+  }
+
 
 
   const CloseLoginBox = () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
+    setShowForgotText(false);
+    setEmailOrPhone('');
+    setPassword('');
     setIsForgotPassBoxVisible(false);
   };
 
   const ShowLoginOtpBox = () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
     toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
+    setShowForgotText(false);
+    setEmailOrPhone('');
+    setPassword('');
   };
   
   const ShowSignUpBox = () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
     toggleClass('.SignUpBox', 'SignUpBoxShow');
+    setShowForgotText(false);
+    setEmailOrPhone('');
+    setPassword('');
   };
 
   return (
    <>
    {isForgotPassBoxVisible  && (
     <ForgotPassword 
-    CloseLoginBox={CloseLoginBox} 
+   
+    closeForgotEmailBox={close_Forgot_Box}
     onResetSuccess={() => {
       setIsLoginContainerVisible(true); 
       setIsForgotPassBoxVisible(false); 
+      setShowForgotText(false);
     }} 
   />
   
@@ -254,6 +280,7 @@ const refreshAccessToken = async () => {
                 placeholder="Enter Your Mobile Number / Email"
                 className="Input-User focus:ring-0"
                 onChange={(e) => setEmailOrPhone(e.target.value)}
+                value={emailOrPhone}
               />
               <input
                 type="password"
@@ -262,8 +289,14 @@ const refreshAccessToken = async () => {
                 placeholder="Enter Password"
                 className="Input-User focus:ring-0 mt-9"
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
-              <span className="changeUserPass ml-auto mt-2 text-[#4f3267e0] font-medium text-[17px] cursor-pointer" onClick={forgotUserPass}>Forgot Password ?</span>
+              {showForgotText && (
+                       <span className="changeUserPass ml-auto mt-2 text-[#4f3267] font-medium text-[16px] cursor-pointer" 
+                       onClick={forgotUserPass}>
+                         Forgot Password ?
+                         </span>
+              )}     
               <div className="CheckBoxes mt-10 flex flex-col gap-2">
                 <span className="CheckBox-Gap flex items-center gap-3">
                   <input

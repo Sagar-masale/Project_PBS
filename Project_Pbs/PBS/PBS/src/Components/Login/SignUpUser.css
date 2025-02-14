@@ -61,7 +61,7 @@ background-color: #432a58;
     box-sizing: content-box;
     display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.668);
+    background-color: rgba(255, 255, 255, 0.905);
   }
   
   .icon {
@@ -99,6 +99,9 @@ background-color: #432a58;
     justify-content: center;
     position: relative;
     transition: all 0.3s;
+  }
+  .Subscribe-btn:hover{
+    background-color: #432a58;
   }
 
   .input-wrapper:active .icon {
