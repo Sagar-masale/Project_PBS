@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Loading from '../PageLoader/Loading';
+import ForgotPassword from './ForgotPassword';
+
 // Profile Context
 import ProfileContext from '../Context/ProfileContext'
 import axios from 'axios';
@@ -173,17 +175,29 @@ const refreshAccessToken = async () => {
       setIsLoading(false); // Stop the loading spinner regardless of success or failure
     }
   };
-  
- 
+  const [isLoginContainerVisible, setIsLoginContainerVisible] = useState(true);
+  const [isForgotPassBoxVisible, setIsForgotPassBoxVisible] = useState(false);
 
-
+  const [showForgotPassBox, setShowForgotPassBox] = useState(false);
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
   };
 
+
+  const forgotUserPass = () => {
+    setIsForgotPassBoxVisible(true);
+    setIsLoginContainerVisible(false);  
+    
+  };
+  
+  
+ 
+
+
   const CloseLoginBox = () => {
     toggleClass('.LoginPassBox', 'LoginPassBoxShow');
+    setIsForgotPassBoxVisible(false);
   };
 
   const ShowLoginOtpBox = () => {
@@ -198,7 +212,19 @@ const refreshAccessToken = async () => {
 
   return (
    <>
+   {isForgotPassBoxVisible  && (
+    <ForgotPassword 
+    CloseLoginBox={CloseLoginBox} 
+    onResetSuccess={() => {
+      setIsLoginContainerVisible(true); 
+      setIsForgotPassBoxVisible(false); 
+    }} 
+  />
+  
+    )}
+
    {isLoading && <Loading />}
+   {isLoginContainerVisible && (
    <div className="Login-Main-Container">
       <div className=" pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white">
@@ -237,6 +263,7 @@ const refreshAccessToken = async () => {
                 className="Input-User focus:ring-0 mt-9"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <span className="changeUserPass ml-auto mt-2 text-[#4f3267e0] font-medium text-[17px] cursor-pointer" onClick={forgotUserPass}>Forgot Password ?</span>
               <div className="CheckBoxes mt-10 flex flex-col gap-2">
                 <span className="CheckBox-Gap flex items-center gap-3">
                   <input
@@ -298,6 +325,7 @@ const refreshAccessToken = async () => {
         </div>
       </div>
     </div>
+   )}
 
    </>
   );
