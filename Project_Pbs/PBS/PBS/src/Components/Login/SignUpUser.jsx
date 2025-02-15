@@ -83,6 +83,8 @@ function SignUpUser() {
 
 
   return (
+    
+    <>
     <div className="Login-Main-Container pt-20">
       <div className="SignUp-Pass-Container justify-center">
         {!isEmailSubmitted ? (
@@ -259,6 +261,7 @@ function SignUpUser() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

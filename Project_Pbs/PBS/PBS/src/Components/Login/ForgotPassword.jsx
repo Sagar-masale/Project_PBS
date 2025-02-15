@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../PageLoader/Loading';
 
 const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
@@ -9,46 +10,65 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
   const [step, setStep] = useState(1); // Step 1: Enter Email/Phone, Step 2: Enter OTP, Step 3: Set New Password
   const [isLoading, setIsLoading] = useState(false);
 
-  // Step 1: Request OTP
   const requestOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    const loadingToastId = toast.loading('Sending OTP...');
+
+
     try {
       await axios.post('http://localhost:8000/api/v1/auth/request-otp', {
         emailOrPhone,
       });
-      alert('OTP sent successfully. Please check your phone or email.');
-      setStep(2); // Proceed to OTP verification
+      toast.dismiss(loadingToastId);
+      toast.success('OTP sent successfully!', {
+        duration: 3000,
+      });
+      setStep(2);
     } catch (error) {
       console.error('Error requesting OTP:', error);
-      alert(error.response?.data?.message || 'Failed to send OTP.');
+      toast.dismiss(loadingToastId);
+      toast.error(error.response?.data?.message || 'Failed to send OTP.',{
+        duration:3000,
+      } )
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Step 2: Verify OTP and Set New Password
+
   const verifyOtpAndResetPassword = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    const VerifyingToastId = toast.loading('Verifying OTP...');
     try {
       await axios.post('http://localhost:8000/api/v1/auth/verify-otp-reset-password', {
         emailOrPhone,
         otp,
         newPassword,
       });
-      alert('Password reset successfully. You can now log in with your new password.');
-      onResetSuccess(); // Trigger the callback to show Login-Main-Container
+      toast.dismiss(VerifyingToastId);
+      onResetSuccess();
     } catch (error) {
       console.error('Error resetting password:', error);
-      alert(error.response?.data?.message || 'Failed to reset password.');
+      toast.dismiss(VerifyingToastId);
+      toast.error(error.response?.data?.message || 'Failed to reset password.',{
+        duration:3000,
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
+  
+
   return (
     <>
+      <Toaster
+       position="top-right" 
+       reverseOrder={false} 
+       />
       {isLoading && <Loading />}
       <div className="ForgotPassBox bg-white w-[25%] p-4 rounded-md flex flex-col gap-4">
         <span 
