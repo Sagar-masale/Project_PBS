@@ -23,8 +23,7 @@ import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
-import EditUser from './Components/Account/User/EditUser.jsx';
-import EmailAuth from './Components/AuthontiCations/EmailAuth.jsx';
+
 
 
 const App = () => {

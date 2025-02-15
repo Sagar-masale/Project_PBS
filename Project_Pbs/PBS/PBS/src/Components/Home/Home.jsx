@@ -1,5 +1,5 @@
 import React from 'react';
-
+import WeddingProducts from './Collections/WeddingProducts';
 import '../NavBar/NavBar';
 import './Home.css';
 
@@ -164,7 +164,7 @@ function Home({
     {/* Wedding Section */}
     
     <div className="bg-white ">
-     
+     <WeddingProducts/>
     </div>
     
  
