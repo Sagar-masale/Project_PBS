@@ -1,30 +1,3 @@
-
-.FooterInformation-Box{
-    
-    display: flex;
-    flex-direction: column;
-    
-}
-.End-info{
-    background-color: #6d4c7b;
-}
-
-.info-box {
-    gap: 15px;
-}
-@media screen and (max-width:768px  ) {
-    .Show-First-Box,.Show-Second-Box,  .Show-Third-Box {
-        width: 100%;
-        height: 100%;
-        border:none;
-   
-        
-        display: none;
-    }
-    .Show-First-Box-Clicked,   .Show-Second-Box-Clicked,.Show-Third-Box-Clicked{
-        display: flex;
-    }
-    
-
-
+.FooterContainer{
+    background-color: rgb(246, 239, 246);
 }

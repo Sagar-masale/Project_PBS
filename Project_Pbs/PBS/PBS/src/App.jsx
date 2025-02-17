@@ -3,7 +3,6 @@ import ScrollToTop from './Components/ScrollToTop.jsx';
 import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 import CartBox from './Components/CartAdd/CartBox.jsx';
 import Home from './Components/Home/Home.jsx';
-import Footer from './Components/Footer/Footer.jsx';
 import FingerRings from "./Components/Ringpage/FingerRing"
 import Earrings from './Components/Earrings/Earrings.jsx';
 import PenDants from './Components/Pendants/PenDants.jsx';

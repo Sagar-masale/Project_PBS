@@ -3,11 +3,11 @@ import React from 'react'
 function WeddingProducts() {
   return (
     <>
-    <div className="bg-white dark:bg-gray-800 h-screen py-6 sm:py-8">
+    <div className="bg-white dark:bg-gray-800 h-100 py-6 sm:py-8">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
           <div className="flex items-center gap-12">
-            <h2 className="text-2xl font-bold text-[#4f3267] lg:text-3xl dark:text-white">Wedding</h2>
+            <h2 className="text-2xl font-bold text-[#4f3267] lg:text-3xl ">Wedding</h2>
           </div>
    
         </div>

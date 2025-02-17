@@ -135,7 +135,7 @@ function Home({
     <div className="bg-white ">
       <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32 ">
-          <h2 className="Collection-Name text-2xl font-bold text-purple-900">Collections</h2>
+          <h2 className="Collection-Name text-2xl font-bold text-[#4f3267]">Collections</h2>
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0 ">
             {Collections.map((Collections) => (
@@ -163,11 +163,10 @@ function Home({
 
     {/* Wedding Section */}
     
-    <div className="bg-white ">
+    <div className="bg-white">
      <WeddingProducts/>
     </div>
     
- 
         </>
     )
     
