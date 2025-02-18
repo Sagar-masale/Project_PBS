@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import CartContext from '../Context/CartContext';
 import './ItemDetails.css'
 import { useNavigate } from 'react-router-dom';
+import CustomerReviews from './CustomerReviews';
 
 function ItemDetails() {
     const rating = 3;
@@ -32,15 +33,17 @@ function ItemDetails() {
     const reviewsData = [
       {
         id: 1,
+        productId:2520,
         author: "Veeraj M",
         date: "May 16, 2021",
-        reviewStar: 3,
+        reviewStar: 5,
         title: "Beautiful and Perfect!",
         content:
         "I bought this gold ring for a special day, and it is perfect! The design is beautiful, and it shines so nicely. It feels strong but is very comfortable to wear. Everyone keeps asking me where I got it. I love it!"
       },
       {
         id: 2,
+        productId:2520,
         author: "Mayur P",
         date: "April 6, 2021",
         reviewStar: 5,
@@ -50,6 +53,7 @@ function ItemDetails() {
       },
       {
         id: 3,
+        productId:2520,
         author: "Prajwal P",
         date: "February 24, 2021",
         reviewStar: 4,
@@ -67,6 +71,9 @@ function ItemDetails() {
     
   return (
     <>
+    <div className="Review-Section fixed w-full  flex row bottom-10 z-10">
+    <CustomerReviews/>
+    </div>
      <div className="ItemDetails-Container  rounded-lg ">
       {/* Product Content */}
       <div className="gap-8 Left-Side-Product-Details">
@@ -185,6 +192,9 @@ function ItemDetails() {
         </button>
 
         </div>
+
+
+        
       {reviewsData.map((review) => (
         <div key={review.id} className="review">
           <div className="review-header">
