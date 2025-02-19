@@ -68,12 +68,18 @@ function ItemDetails() {
       const renderStars = (count) => {
         return "★".repeat(count) + "☆".repeat(5 - count);
       };
+
+      const [showReviewBox, setShowReviewBox] = useState(false);
     
   return (
     <>
-    <div className="Review-Section fixed w-full  flex row bottom-10 z-10">
-    <CustomerReviews/>
-    </div>
+    {showReviewBox && (
+          <div className="Review-Section fixed w-full  flex row align-items-center justify-content-center  mt-[-5%] z-[9999999999]">
+          <CustomerReviews 
+          closeReviewBox={() => setShowReviewBox(false)}
+          />
+          </div>
+    )}
      <div className="ItemDetails-Container  rounded-lg ">
       {/* Product Content */}
       <div className="gap-8 Left-Side-Product-Details">
@@ -187,7 +193,10 @@ function ItemDetails() {
       <div className="reviews-container w-full">
         <div className="review-WriteReview flex flex-row ">
         <h2 className="reviews-title">Recent Reviews</h2>
-        <button className="Customer-Write-Review bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg flex items-center">
+        <button 
+        className="Customer-Write-Review bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg flex items-center"
+        onClick={() => setShowReviewBox(true)}
+        >
           WRITE A REVIEW
         </button>
 
