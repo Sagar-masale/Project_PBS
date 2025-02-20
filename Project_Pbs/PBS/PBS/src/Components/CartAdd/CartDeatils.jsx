@@ -3,7 +3,7 @@ import CartContext from '../Context/CartContext';
 import ProfileContext from '../Context/ProfileContext';
 import AdminContext from '../Context/AdminContext';
 import './CartDetails.css'
-
+import CheckOutModel from './CheckoutProduct/CheckOutModel';
 
 import ClearCartConfirm from './ClearCartConfirm';
 import OrderSummary from '../OrderDetails/OrderSummary';
@@ -11,12 +11,13 @@ import OrderSummary from '../OrderDetails/OrderSummary';
 
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
+  const { calculateCartSummary } = useContext(CartContext);
+  const { discountedTotal } = calculateCartSummary();
   const {userData} = useContext(ProfileContext)
   const {adminData} = useContext(AdminContext)
- 
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
    
+  const [openCheckout, setOpenCheckout] = useState(false);
   const handleClearCart = () => {
     setisClearCartVisible(false);  // Hide confirmation modal
     
@@ -32,8 +33,18 @@ function CartDeatils() {
   
   return (
     <>
+    {openCheckout && (
+    <div className="Checkout-Box w-full h-full fixed inset-0 bg-black bg-opacity-50 z-[99999999] flex items-center  justify-center p-4">
+    <CheckOutModel 
+    ProductTotalAmt={ discountedTotal } 
+    closeCheckout={() =>setOpenCheckout(false)}
+    />
+    </div>
+    )}
+  
    
  <div className="cart-container">
+  
   {cart.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
         {/* Bag Icon */}
@@ -137,7 +148,9 @@ function CartDeatils() {
      
 
         </div>
-        <button className='p-3 rounded-lg text-white mt-12 checkOutBtn'>
+        <button className='p-3 rounded-lg text-white mt-12 checkOutBtn'
+        onClick={() => setOpenCheckout(true)}
+        >
           CheckOut
         </button>
     </div>
@@ -150,6 +163,7 @@ function CartDeatils() {
     
   )}
 </div>
+
 
     </>
   )
