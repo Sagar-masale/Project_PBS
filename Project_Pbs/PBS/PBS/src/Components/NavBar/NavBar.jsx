@@ -341,7 +341,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     Chat
   </span>
 </Link>
-<Link>
+<Link to="/Order-Details" onClick={ShowNavMoreSec}>
 <span className="value">
 <span className="material-symbols-outlined MoreOpt-Logos font-bold">
   orders

@@ -22,6 +22,7 @@ import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
+import OrderDetail from './Components/OrderDetails/OrderDetail.jsx';
 
 
 
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/ItemDetails" element={<ItemDetails/>} />
         <Route path="/AllUsers" element={<AllUsers/>}/>
         <Route path="/Add-Products" element={<AddProduct/>}/>
+        <Route path="/Order-Details" element={<OrderDetail/>}/>
       </Routes>
       
     </>
