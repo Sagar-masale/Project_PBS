@@ -16,6 +16,7 @@ function CartDeatils() {
   const {userData} = useContext(ProfileContext)
   const {adminData} = useContext(AdminContext)
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
+  
    
   const [openCheckout, setOpenCheckout] = useState(false);
   const handleClearCart = () => {

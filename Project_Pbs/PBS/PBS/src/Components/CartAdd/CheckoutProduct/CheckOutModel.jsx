@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
+import axios from "axios";
 import { FaTimes, FaLock } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import ProfileContext from '../../Context/ProfileContext';
+import CartContext from "../../Context/CartContext";
 
 const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +22,9 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
     country: "",
     totalAmount: ProductTotalAmt
   });
+ 
   
-
+  const { cart } = useContext(CartContext);
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -48,6 +51,42 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  
+
+  const addOrder = async () => {
+    try {
+        if (!cart.length) throw new Error("Cart is empty!");
+
+        const orderData = {
+            userId: userData._id,
+            totalAmount: formData.totalAmount,
+            orderQuantity: cart.length,
+            products: cart.map(item => ({
+                productId: item._id,
+                orderQuantity: item.quantity,
+            })),
+        };
+
+        console.log("Sending order data:", orderData);
+
+        const response = await axios.post(
+            "http://localhost:8000/api/v1/orders/add-order",
+            orderData,
+            { headers: { "Content-Type": "application/json" } }
+        );
+
+        console.log("Order response:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error adding order:", error.response?.data || error.message);
+        throw new Error(error.response?.data?.message || "Failed to place order");
+    }
+};
+
+
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -55,8 +94,10 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
       try {
         await new Promise(resolve => setTimeout(resolve, 2000));
         alert("Order placed successfully!");
-        console.log("Order", formData);
+        const response = await addOrder();
+        console.log("Order Response:", response);
         
+        closeCheckout();
         setFormData({
           firstName: "",
           lastName: "",
@@ -226,7 +267,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
                           >
                             <option value="">Select Country</option>
                             <option value="US">United States</option>
-                            <option value="IN">India</option>
+                            <option value="India">India</option>
                             <option value="CA">Canada</option>
                             <option value="UK">United Kingdom</option>
                           </select>

@@ -29,7 +29,7 @@ function UserAcc() {
 
   const { userData, setUserData } = useContext(ProfileContext);
 
-  
+  console.log("UserData with order", userData);
 
   const { setLogout, setLogoutNotify } = useContext(RegisterContext);
 
