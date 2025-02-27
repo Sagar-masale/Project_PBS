@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import './AdminAcc.css'
 import AdminContext from "../../Context/AdminContext";
 import AdminSlideBar from "./AdminSlideBar";
@@ -9,7 +10,8 @@ function AdminAcc() {
   // console.log("admin",adminData.data.adminFullName);
   
   const adminName = adminData?.data?.adminFullName || "Admin";
-  
+  const [orders, setOrders] = useState([]);
+
 
 
   const cards = [
@@ -19,6 +21,23 @@ function AdminAcc() {
     { title: "Average Revenue", value: "215.20k", change: "11.3%", color: "text-green-400" },
   ];
 
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/orders/getAll-orders");
+        console.log("API Response Order:", response.data.data); // Debugging log
+        setOrders(response.data.data);
+      } catch (error) {
+        setError("Error fetching orders. Please try again later.");
+        console.error("Error fetching orders:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   // const countryStateMap = {
   //   "United States": ["California", "Texas", "New York", "Florida"],
   //   "India": ["Maharashtra", "Karnataka", "Goa", "Uttar Pradesh"],
@@ -26,68 +45,68 @@ function AdminAcc() {
   //   // ...
   // };
 
-  const orders = [
-    {
-      orderId: 101,
-      name: "Sagar Masale",
-      email: "sagar.masale@gmail.com",
-      date: "Jan 17, 2024",
-      status: "Delivered",
-      country: "India",
-      state: "Maharashtra",
-      total: "₹89,456.00",
-    },
-    {
-      orderId: 102,
-      name: "Mayuresh Parabat",
-      email: "mayuresh.parabat@gmail.com",
-      date: "Feb 27, 2024",
-      status: "Canceled",
-      country: "India",
-      state: "Karnataka",
-      total: "₹4,56,789.00",
-    },
-    {
-      orderId: 103,
-      name: "Prajwal Konade",
-      email: "prajwal.konade@gmail.com",
-      date: "Apr 14, 2024",
-      status: "Delivered",
-      country: "Australia",
-      state: "Telangana",
-      total: "₹10,23,899.00",
-    },
-    {
-      orderId: 104,
-      name: "Veeraj Mashal",
-      email: "veeraj.mashal@gmail.com",
-      date: "Jun 17, 2024",
-      status: "Pending",
-      country: "India",
-      state: "Goa",
-      total: "₹1,23,456.00",
-    },
-    {
-      orderId: 105,
-      name: "Abhi Mane",
-      email: "abhi.mane@gmail.com",
-      date: "Sep 14, 2024",
-      status: "Delivered",
-      country: "India",
-      state: "Madhya Pradesh",
-      total: "₹67,123.00",
-    },
-    {
-      orderId: 106,
-      name: "Rahul Patil",
-      email: "rahul.patil@gmail.com",
-      date: "Dec 27, 2024",
-      status: "Delivered",
-      country: "India",
-      state: "Rajasthan",
-      total: "₹2,34,567.00",
-    }
-  ];
+  // const orders = [
+  //   {
+  //     orderId: 101,
+  //     name: "Sagar Masale",
+  //     email: "sagar.masale@gmail.com",
+  //     date: "Jan 17, 2024",
+  //     status: "Success",
+  //     country: "India",
+  //     state: "Maharashtra",
+  //     total: "₹89,456.00",
+  //   },
+  //   {
+  //     orderId: 102,
+  //     name: "Mayuresh Parabat",
+  //     email: "mayuresh.parabat@gmail.com",
+  //     date: "Feb 27, 2024",
+  //     status: "Canceled",
+  //     country: "India",
+  //     state: "Karnataka",
+  //     total: "₹4,56,789.00",
+  //   },
+  //   {
+  //     orderId: 103,
+  //     name: "Prajwal Konade",
+  //     email: "prajwal.konade@gmail.com",
+  //     date: "Apr 14, 2024",
+  //     status: "Success",
+  //     country: "Australia",
+  //     state: "Telangana",
+  //     total: "₹10,23,899.00",
+  //   },
+  //   {
+  //     orderId: 104,
+  //     name: "Veeraj Mashal",
+  //     email: "veeraj.mashal@gmail.com",
+  //     date: "Jun 17, 2024",
+  //     status: "Pending",
+  //     country: "India",
+  //     state: "Goa",
+  //     total: "₹1,23,456.00",
+  //   },
+  //   {
+  //     orderId: 105,
+  //     name: "Abhi Mane",
+  //     email: "abhi.mane@gmail.com",
+  //     date: "Sep 14, 2024",
+  //     status: "Success",
+  //     country: "India",
+  //     state: "Madhya Pradesh",
+  //     total: "₹67,123.00",
+  //   },
+  //   {
+  //     orderId: 106,
+  //     name: "Rahul Patil",
+  //     email: "rahul.patil@gmail.com",
+  //     date: "Dec 27, 2024",
+  //     status: "Success",
+  //     country: "India",
+  //     state: "Rajasthan",
+  //     total: "₹2,34,567.00",
+  //   }
+  // ];
   
   // const SlideBarItems = [
   //   {
@@ -121,9 +140,9 @@ function AdminAcc() {
   
   const getStatusColor = (status) => {
     switch (status) {
-      case "Delivered":
+      case "Success":
         return "bg-green-600";
-      case "Pending":
+      case "pending":
         return "bg-yellow-500";
       case "Canceled":
         return "bg-red-600";
@@ -133,9 +152,9 @@ function AdminAcc() {
   };
   const getOrderDetails = (status) => {
     switch (status) {
-      case "Delivered":
+      case "Success":
         return "bg-[#09132e]";
-      case "Pending":
+      case "pending":
         return "bg-[#0B1739]";
       case "Canceled":
         return "bg-[#0B1739]";
@@ -207,7 +226,7 @@ function AdminAcc() {
                   <thead className="orderCol">
                    
                     <tr>
-                      <th className="p-4 text-left">Order</th>
+                      <th className="p-4 text-left">Order Id</th>
                       <th className="p-4 text-left">Client</th>
                       <th className="p-4 text-left">Date</th>
                       <th className="p-4 text-left">Status</th>
@@ -219,31 +238,32 @@ function AdminAcc() {
                   </thead>
                   <tbody>
         {orders.reverse().map((order) => (
-          <tr key={order.orderId} className={`orderDetails ${getOrderDetails(order.status)}`}>
-            <td className="p-4">{order.orderId}</td>
+          <tr key={order._id} className={`orderDetails ${getOrderDetails(order.orderStatus)}`}>
+            <td className="p-4">{order._id}</td>
             <td className="p-4">
               <div>
-                <p className="">{order.name}</p> {/* Corrected to use name */}
-                <p className="text-gray-400">{order.email}</p>
+                <p className="">{order.userId.fullName}</p> {/* Corrected to use name */}
+                <p className="text-gray-400">{order.userId.email}</p>
               </div>
             </td>
-            <td className="p-4">{order.date}</td>
+            <td className="p-4">{new Date(order.createdAt).toLocaleDateString()}</td>
+
             <td className="p-4">
-              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.status)}`}>
-                {order.status}
+              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.orderStatus)}`}>
+                {order.orderStatus}
               </span>
             </td>
-            <td className="p-4">{order.country}</td>
-            <td className="p-4">{order.state}</td>
+            <td className="p-4">{order.userId.country}</td>
+            <td className="p-4">{order.userId.state}</td>
             
-            <td className="p-4 font-bold">{order.total}</td>
+            <td className="p-4 font-bold">{order.totalAmount}</td>
             <td className="p-4 flex space-x-3">
-              <button onClick={() => handleEdit(order.orderId)} className="text-[#8f85fe] hover:text-[#9389ff57]">
+              <button onClick={() => handleEdit(order._id)} className="text-[#8f85fe] hover:text-[#9389ff57]">
               <span class="material-symbols-outlined">
                 edit
               </span>
               </button>
-              <button onClick={() => handleDelete(order.orderId)} className="text-[#8f85fe] hover:text-[#9389ff57]  ">
+              <button onClick={() => handleDelete(order._id)} className="text-[#8f85fe] hover:text-[#9389ff57]  ">
               <span class="material-symbols-outlined">
                 delete
               </span>

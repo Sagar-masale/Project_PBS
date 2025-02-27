@@ -10,7 +10,7 @@ const OrderDetail = () => {
           size: "10",
           qty: 1,
           price: 150.0,
-          status: "Delivered",
+          status: "Success",
           deliveryDate: "25th Feb 2025",
         },
         {
@@ -39,7 +39,7 @@ const OrderDetail = () => {
 
       const getStatusColor = (status) => {
         switch (status) {
-          case "Delivered":
+          case "Success":
             return "text-green-600";
           case "Pending":
             return "text-yellow-500";

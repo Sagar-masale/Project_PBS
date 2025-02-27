@@ -11,35 +11,43 @@ function AllUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
   useEffect(() => {
-    
-      // Fetch users from the API
-      const fetchUsers = async () => {
-        try {
-          const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
-          setUsers(response?.data || []); // Adjust response structure based on your API
-          // console.log("API Response:", response.data);
-        } catch (error) {
-          setError("Error fetching users. Please try again later.");
-          console.error("Error fetching users:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
+        console.log("API Response:", response.data); // Debugging log
+        setUsers(response.data.data || []); // If users are inside a `users` key
+        console.log("before:",users);
+      } catch (error) {
+        setError("Error fetching users. Please try again later.");
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    if (adminData) {
       fetchUsers();
-    
+      
+      
+    }
   }, [adminData]);
+  
+  
+ 
 
   // console.log("Users", users);
 
     // Filter users based on searchQuery
-    const filteredUsers = users.filter((user) =>
-      user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.phoneNumber.includes(searchQuery)
-    );
+    const filteredUsers = Array.isArray(users)
+    ? users.filter((user) =>
+        user.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user._id?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.phoneNumber?.includes(searchQuery)
+      )
+    : [];
+    // console.log("Users Data:", users);
+  
   
 
   const handleEditAllUser = (userId) => {
