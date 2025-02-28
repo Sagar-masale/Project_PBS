@@ -11,7 +11,8 @@ function AdminAcc() {
   
   const adminName = adminData?.data?.adminFullName || "Admin";
   const [orders, setOrders] = useState([]);
-
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [updatedStatus, setUpdatedStatus] = useState("");
 
 
   const cards = [
@@ -26,124 +27,25 @@ function AdminAcc() {
       try {
         const response = await axios.get("http://localhost:8000/api/v1/orders/getAll-orders");
         console.log("API Response Order:", response.data.data); // Debugging log
-        setOrders(response.data.data);
+        setOrders(response.data.data || []); // Ensure it's always an array
       } catch (error) {
-        setError("Error fetching orders. Please try again later.");
         console.error("Error fetching orders:", error);
-      } finally {
-        setLoading(false);
+        setOrders([]); // Prevent undefined state
       }
     };
-
+  
     fetchOrders();
   }, []);
-
-  // const countryStateMap = {
-  //   "United States": ["California", "Texas", "New York", "Florida"],
-  //   "India": ["Maharashtra", "Karnataka", "Goa", "Uttar Pradesh"],
-  //   "Australia": ["New South Wales", "Victoria", "Queensland", "Tasmania"],
-  //   // ...
-  // };
-
-  // const orders = [
-  //   {
-  //     orderId: 101,
-  //     name: "Sagar Masale",
-  //     email: "sagar.masale@gmail.com",
-  //     date: "Jan 17, 2024",
-  //     status: "Success",
-  //     country: "India",
-  //     state: "Maharashtra",
-  //     total: "₹89,456.00",
-  //   },
-  //   {
-  //     orderId: 102,
-  //     name: "Mayuresh Parabat",
-  //     email: "mayuresh.parabat@gmail.com",
-  //     date: "Feb 27, 2024",
-  //     status: "Canceled",
-  //     country: "India",
-  //     state: "Karnataka",
-  //     total: "₹4,56,789.00",
-  //   },
-  //   {
-  //     orderId: 103,
-  //     name: "Prajwal Konade",
-  //     email: "prajwal.konade@gmail.com",
-  //     date: "Apr 14, 2024",
-  //     status: "Success",
-  //     country: "Australia",
-  //     state: "Telangana",
-  //     total: "₹10,23,899.00",
-  //   },
-  //   {
-  //     orderId: 104,
-  //     name: "Veeraj Mashal",
-  //     email: "veeraj.mashal@gmail.com",
-  //     date: "Jun 17, 2024",
-  //     status: "Pending",
-  //     country: "India",
-  //     state: "Goa",
-  //     total: "₹1,23,456.00",
-  //   },
-  //   {
-  //     orderId: 105,
-  //     name: "Abhi Mane",
-  //     email: "abhi.mane@gmail.com",
-  //     date: "Sep 14, 2024",
-  //     status: "Success",
-  //     country: "India",
-  //     state: "Madhya Pradesh",
-  //     total: "₹67,123.00",
-  //   },
-  //   {
-  //     orderId: 106,
-  //     name: "Rahul Patil",
-  //     email: "rahul.patil@gmail.com",
-  //     date: "Dec 27, 2024",
-  //     status: "Success",
-  //     country: "India",
-  //     state: "Rajasthan",
-  //     total: "₹2,34,567.00",
-  //   }
-  // ];
   
-  // const SlideBarItems = [
-  //   {
-  //     id: 1,
-  //     name: "Dashboard",
-  //     logo: "rounded_corner"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Users",
-  //     logo: "group"
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Pricing",
-  //     logo: "credit_card_gear"
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Authentication",
-  //     logo: "verified_user"
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Settings",
-  //     logo: "tune"
-  //   },
+  
 
-  // ]
-    
   
   const getStatusColor = (status) => {
     switch (status) {
       case "Success":
         return "bg-green-600";
-      case "pending":
-        return "bg-yellow-500";
+      case "Pending":
+        return "bg-gray-600";
       case "Canceled":
         return "bg-red-600";
       default:
@@ -154,7 +56,7 @@ function AdminAcc() {
     switch (status) {
       case "Success":
         return "bg-[#09132e]";
-      case "pending":
+      case "Pending":
         return "bg-[#0B1739]";
       case "Canceled":
         return "bg-[#0B1739]";
@@ -162,20 +64,101 @@ function AdminAcc() {
         return "bg-[#0B1739]";
     }
   }
-  const handleEdit = (orderId) => {
-    // handle edit logic
-    alert("coming soon edit logic orderId " + orderId)
+
+
+
+  const openEditPopup = (order) => {
+    if (!order) return;  // Prevent setting undefined values
+    console.log("ED:",order.orderStatus);
+    
+    setSelectedOrder(order);
+    setUpdatedStatus(order?.orderStatus || "Pending"); // Default to 'Pending' if undefined
   };
   
-  const handleDelete = (orderId) => {
-    // handle delete logic
-    alert("coming soon delete logic orderId " + orderId)
+  const closeEditPopup = () => {
+    setSelectedOrder(null);
   };
+  const confirmUpdate = async () => {
+    if (!selectedOrder || !selectedOrder._id) {
+      console.error("Error: No order selected for update.");
+      return;
+    }
+    
+    try {
+      const response = await axios.put("http://localhost:8000/api/v1/orders/updateOrder", {
+        orderId: selectedOrder?._id, 
+        orderStatus: updatedStatus,
+      });
+      console.log("Update Response:", response.data);
+
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === selectedOrder._id
+            ? { ...order, orderStatus: response.data?.updatedOrder?.orderStatus || updatedStatus }
+            : order
+        )
+      );
+      
+      closeEditPopup();
+    } catch (error) {
+      console.error("Error updating order:", error.response ? error.response.data : error.message);
+    }
+  };
+
+
+
+
+
+
+
+
+      const handleDelete = async (orderId) => {
+      try {
+        await axios.delete(`http://localhost:8000/api/v1/orders/deleteOrder`, {
+          data: { orderId },
+        });
+        setOrders((prevOrders) => prevOrders.filter(order => order._id !== orderId));
+      } catch (error) {
+        console.error('Error deleting order:', error.response ? error.response.data : error.message);
+      }
+    };
   
 
 
   return (
     <>
+    {selectedOrder && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="bg-white p-6 rounded-lg shadow-lg text-black w-96">
+      <h2 className="text-lg font-bold mb-4">Edit Order</h2>
+      <p><strong>Order ID:</strong> {selectedOrder._id}</p>
+      <p><strong>Client:</strong> {selectedOrder.userId.fullName}</p>
+      <p><strong>Email:</strong> {selectedOrder.userId.email}</p>
+      <p><strong>Total Amount:</strong> ${selectedOrder.totalAmount}</p>
+      
+      <label className="block mt-4 mb-2 font-semibold">Update Status:</label>
+      <select
+        className="w-full p-2 border rounded"
+        value={updatedStatus}
+        onChange={(e) => setUpdatedStatus(e.target.value)}
+      >
+        <option value="Pending">Pending</option>
+        <option value="Success">Success</option>
+        <option value="Canceled">Canceled</option>
+      </select>
+
+      <div className="flex justify-end mt-4 space-x-2">
+        <button onClick={closeEditPopup} className="bg-gray-500 text-white px-4 py-2 rounded">
+          Cancel
+        </button>
+        <button onClick={confirmUpdate} className="bg-blue-500 text-white px-4 py-2 rounded">
+          Confirm Update
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     {adminData ? (
         <div className="flex  MainContainerAdmin min-h-screen text-white">
       
@@ -237,8 +220,10 @@ function AdminAcc() {
                     </tr>
                   </thead>
                   <tbody>
-        {orders.reverse().map((order) => (
-          <tr key={order._id} className={`orderDetails ${getOrderDetails(order.orderStatus)}`}>
+                   
+                  {(orders || []).reverse().map((order) => (
+                  <tr key={order?._id} className={`orderDetails ${getOrderDetails(order?.orderStatus || "Pending")}`}>
+
             <td className="p-4">{order._id}</td>
             <td className="p-4">
               <div>
@@ -249,7 +234,7 @@ function AdminAcc() {
             <td className="p-4">{new Date(order.createdAt).toLocaleDateString()}</td>
 
             <td className="p-4">
-              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.orderStatus)}`}>
+              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.orderStatus) || ""}`}>
                 {order.orderStatus}
               </span>
             </td>
@@ -258,11 +243,10 @@ function AdminAcc() {
             
             <td className="p-4 font-bold">{order.totalAmount}</td>
             <td className="p-4 flex space-x-3">
-              <button onClick={() => handleEdit(order._id)} className="text-[#8f85fe] hover:text-[#9389ff57]">
-              <span class="material-symbols-outlined">
-                edit
-              </span>
-              </button>
+            <button onClick={() => openEditPopup(order)} className="text-[#8f85fe] hover:text-[#9389ff57]">
+  <span class="material-symbols-outlined">edit</span>
+</button>
+
               <button onClick={() => handleDelete(order._id)} className="text-[#8f85fe] hover:text-[#9389ff57]  ">
               <span class="material-symbols-outlined">
                 delete
