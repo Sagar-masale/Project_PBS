@@ -1,114 +1,133 @@
 import React from "react";
-import demoImage from "../../../public/RingImgs/imgR2M1.jpg"
-const OrderDetail = () => {
-    const orders = [
-        {
-          id: 1,
-          image: demoImage,
-          name: "Gold Twisted Ring",
-          brand: "Goldsmiths",
-          size: "10",
-          qty: 1,
-          price: 150.0,
-          status: "Success",
-          deliveryDate: "25th Feb 2025",
-        },
-        {
-          id: 2,
-          image: demoImage,
-          name: "Gold Twisted Ring",
-          brand: "Goldsmiths",
-          size: "M",
-          qty: 1,
-          price: 150.0,
-          status: "Pending",
-          deliveryDate: "28th Feb 2025",
-        },
-        {
-          id: 3,
-          image: demoImage,
-          name: "Gold Twisted Ring",
-          brand: "Goldsmiths",
-          size: "L",
-          qty: 1,
-          price: 150.0,
-          status: "Cancelled",
-          deliveryDate: "N/A",
-        },
-      ];
 
-      const getStatusColor = (status) => {
-        switch (status) {
-          case "Success":
-            return "text-green-600";
-          case "Pending":
-            return "text-yellow-500";
-          case "Cancelled":
-            return "text-red-500";
-          default:
-            return "text-gray-500";
-        }
-      };
+const OrderDetail = () => {
+  const orders = [
+    {
+      id: 54879,
+      productName: "Nomad Tumbler",
+      price: 35.00,
+      description:
+        "This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.",
+      image: "/RingImgs/imgR2M1.jpg",
+      customer: "Floyd Miles",
+      address: "7363 Cynthia Pass, Toronto, ON N3Y 4H8",
+      email: "f•••@example.com",
+      phone: "1••••••••40",
+      status: "Processing",
+      progress: "25%",
+      subtotal: 72,
+      shipping: 5,
+      tax: 6.16,
+    },
+    {
+      id: 1253366,
+      productName: "Nomad Tumbler",
+      price: 3255.00,
+      description:
+        "This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.",
+      image: "/RingImgs/imgR2M1.jpg",
+      customer: "Floyd Miles",
+      address: "7363 Cynthia Pass, Toronto, ON N3Y 4H8",
+      email: "f•••@example.com",
+      phone: "1••••••••40",
+      status: "Processing",
+      progress: "25%",
+      subtotal: 72,
+      shipping: 5,
+      tax: 6.16,
+    },
+  ];
 
   return (
-    <div className="p-10 pr-12 rounded-lg shadow-md bg-white w-full mx-auto">
-      {/* Order Header */}
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h2 className="text-3xl font-semibold">Order History</h2>
-          <p className="text-sm text-gray-500">Order Date: 20th Feb 2025</p>
-        </div>
-        <div className="flex space-x-3">
-          <button className="border border-gray-300 px-4 py-2 rounded-lg text-gray-600">
-            Show Invoice
-          </button>
-        </div>
-      </div>
-
-      {/* Order Details */}
+    <div className="w-full mx-auto p-16 bg-white rounded-xl shadow-md">
       {orders.map((order) => (
-        <div key={order.id} className="flex items-center border-b p-4">
-          {/* Product Image */}
-          <img src={order.image} alt={order.name} className="w-[12%] h-full" />
-
-          {/* Product Details */}
-          <div className="ml-8  flex-1 col">
-            <h3 className="text-2xl font-semibold">{order.name}</h3>
-            <p className="text-lg text-gray-500 mt-3">By: {order.brand}</p>
-            <p className="text-lg text-gray-500 flex mt-5 gap-3">Wtg: {order.size} | Qty: {order.qty} <p className="text-md font-semibold text-black">Price: {order.price.toFixed(2)}</p></p>
-           
+        <div key={order.id} className="mb-10 border-b pb-6">
+          <div className="flex justify-between items-center border-b pb-4">
+            <h2 className="text-xl font-semibold">
+              Order <span className="text-[#4f3267]">#{order.id}</span>
+            </h2>
+            <a href="#" className="text-blue-500 hover:underline">
+              View invoice →
+            </a>
           </div>
 
-          {/* Centered Status Block */}
-          <div className="flex row col gap-2 items-center">
-            <p className="text-gray-400 text-sm">Status</p>
-            <p className={`font-semibold ${getStatusColor(order.status)}`}>
-              {order.status}
-            </p>
+          <div className="flex flex-col sm:flex-row mt-4 gap-6">
+            <div className="w-24 h-24 flex-shrink-0">
+              <img
+                src={order.image}
+                alt={order.productName}
+                className="w-full h-full object-cover rounded"
+              />
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold">{order.productName}</h3>
+              <p className="text-gray-500">${order.price.toFixed(2)}</p>
+              <p className="text-gray-600 mt-2">{order.description}</p>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold">Delivery address</h4>
+              <p className="text-gray-600">{order.customer}</p>
+              <p className="text-gray-600">{order.address}</p>
+            </div>
           </div>
 
-          {/* Delivery Date */}
-          <div className="ml-6 text-right flex col row gap-2">
-            <p className="text-gray-500 text-sm">Delivery Expected by</p>
-            <p className="text-sm font-semibold">{order.deliveryDate}</p>
+          <p className="text-gray-700 mt-6">Status: {order.status}</p>
+
+          <div className="relative mt-3">
+            <div className="h-2 bg-gray-300 rounded-full">
+              <div
+                className="h-2 bg-blue-600 rounded-full"
+                style={{ width: order.progress }}
+              ></div>
+            </div>
           </div>
         </div>
       ))}
 
-      {/* Bottom Section */}
-      <div className="flex justify-between items-center mt-6 border-t pt-4">
-        {/* Cancel Order Button */}
-        <div className="flex items-center text-red-500 cursor-pointer">
-          <span className="text-xl font-bold mr-2">×</span>
-          <p className="text-sm">Cancel Order</p>
+      {/* Billing & Payment Section */}
+      <div className="bg-gray-100 p-6 rounded-lg mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Billing Address */}
+          <div>
+            <h4 className="text-lg font-semibold">Billing address</h4>
+            <p className="text-gray-600">Floyd Miles</p>
+            <p className="text-gray-600">7363 Cynthia Pass</p>
+            <p className="text-gray-600">Toronto, ON N3Y 4H8</p>
+          </div>
+
+          {/* Payment Information */}
+          <div>
+            <h4 className="text-lg font-semibold">Payment information</h4>
+            <div className="flex items-center gap-2">
+              <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">VISA</span>
+              <p className="text-gray-600">Ending with 4242</p>
+            </div>
+            <p className="text-gray-600">Expires 02 / 24</p>
+          </div>
+
+          {/* Order Summary */}
+          <div>
+            <h4 className="text-lg font-semibold">Order Summary</h4>
+            <div className="flex justify-between text-gray-600">
+              <span>Subtotal</span>
+              <span>${orders[0].subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>Shipping</span>
+              <span>${orders[0].shipping.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>Tax</span>
+              <span>${orders[0].tax.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between font-semibold mt-2">
+              <span>Order total</span>
+              <span className="text-blue-600">{(orders[0].subtotal + orders[0].shipping + orders[0].tax).toFixed(2)}</span>
+            </div>
+          </div>
         </div>
-
-
-
-        {/* Total Price */}
-        <p className="text-lg font-semibold">
-          Total Price: <span className="text-black">{orders.reduce((total, order) => total + order.price, 0).toFixed(2)}</span>
-        </p>
       </div>
     </div>
   );

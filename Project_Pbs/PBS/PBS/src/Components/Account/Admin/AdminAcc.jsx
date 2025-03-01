@@ -5,15 +5,12 @@ import AdminContext from "../../Context/AdminContext";
 import AdminSlideBar from "./AdminSlideBar";
 
 function AdminAcc() {
-  const {adminData} = useContext(AdminContext);
-
-  // console.log("admin",adminData.data.adminFullName);
-  
+  const { adminData } = useContext(AdminContext);
   const adminName = adminData?.data?.adminFullName || "Admin";
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [updatedStatus, setUpdatedStatus] = useState("");
-
+  const [searchQuery, setSearchQuery] = useState("");
 
   const cards = [
     { title: "Save Products", value: "50.8K", change: "28.4%", color: "text-green-400" },
@@ -26,8 +23,12 @@ function AdminAcc() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get("http://localhost:8000/api/v1/orders/getAll-orders");
-        console.log("API Response Order:", response.data.data); // Debugging log
-        setOrders(response.data.data || []); // Ensure it's always an array
+        console.log("API Response Order:", response.data.data);
+  
+        // Ensure sorting by date (latest first)
+        const sortedOrders = (response.data.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+        setOrders(sortedOrders);
       } catch (error) {
         console.error("Error fetching orders:", error);
         setOrders([]); // Prevent undefined state
@@ -36,6 +37,12 @@ function AdminAcc() {
   
     fetchOrders();
   }, []);
+  const filteredOrders = orders.filter(order => 
+    order._id.includes(searchQuery) || 
+    order.userId.phoneNumber.includes(searchQuery) || 
+    order.userId.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
   
   
 
@@ -68,27 +75,27 @@ function AdminAcc() {
 
 
   const openEditPopup = (order) => {
-    if (!order) return;  // Prevent setting undefined values
-    console.log("ED:",order.orderStatus);
-    
+    if (!order) return;
     setSelectedOrder(order);
-    setUpdatedStatus(order?.orderStatus || "Pending"); // Default to 'Pending' if undefined
-  };
   
-  const closeEditPopup = () => {
-    setSelectedOrder(null);
+    setUpdatedStatus(order?.orderStatus || "Pending");
+    console.log("Edit::",order)
   };
+
+  const closeEditPopup = () => setSelectedOrder(null);
+
   const confirmUpdate = async () => {
     if (!selectedOrder || !selectedOrder._id) {
       console.error("Error: No order selected for update.");
       return;
     }
-    
+
     try {
       const response = await axios.put("http://localhost:8000/api/v1/orders/updateOrder", {
-        orderId: selectedOrder?._id, 
+        orderId: selectedOrder._id,
         orderStatus: updatedStatus,
       });
+
       console.log("Update Response:", response.data);
 
       setOrders((prevOrders) =>
@@ -98,65 +105,100 @@ function AdminAcc() {
             : order
         )
       );
-      
+
       closeEditPopup();
     } catch (error) {
       console.error("Error updating order:", error.response ? error.response.data : error.message);
     }
   };
 
-
-
-
-
-
-
-
-      const handleDelete = async (orderId) => {
-      try {
-        await axios.delete(`http://localhost:8000/api/v1/orders/deleteOrder`, {
-          data: { orderId },
-        });
-        setOrders((prevOrders) => prevOrders.filter(order => order._id !== orderId));
-      } catch (error) {
-        console.error('Error deleting order:', error.response ? error.response.data : error.message);
-      }
-    };
+  const handleDelete = async (orderId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/v1/orders/deleteOrder`, {
+        data: { orderId },
+      });
+      setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
+    } catch (error) {
+      console.error("Error deleting order:", error.response ? error.response.data : error.message);
+    }
+  };
   
 
 
   return (
     <>
     {selectedOrder && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-    <div className="bg-white p-6 rounded-lg shadow-lg text-black w-96">
-      <h2 className="text-lg font-bold mb-4">Edit Order</h2>
-      <p><strong>Order ID:</strong> {selectedOrder._id}</p>
-      <p><strong>Client:</strong> {selectedOrder.userId.fullName}</p>
-      <p><strong>Email:</strong> {selectedOrder.userId.email}</p>
-      <p><strong>Total Amount:</strong> ${selectedOrder.totalAmount}</p>
-      
-      <label className="block mt-4 mb-2 font-semibold">Update Status:</label>
-      <select
-        className="w-full p-2 border rounded"
-        value={updatedStatus}
-        onChange={(e) => setUpdatedStatus(e.target.value)}
-      >
-        <option value="Pending">Pending</option>
-        <option value="Success">Success</option>
-        <option value="Canceled">Canceled</option>
-      </select>
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center p-4">
+        <div className="bg-white p-6 rounded-lg shadow-lg text-black w-[80%] h-[70%] overflow-auto">
+          <h2 className="text-2xl font-bold mb-6 border-b pb-2">Order Details</h2>
 
-      <div className="flex justify-end mt-4 space-x-2">
-        <button onClick={closeEditPopup} className="bg-gray-500 text-white px-4 py-2 rounded">
-          Cancel
-        </button>
-        <button onClick={confirmUpdate} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Confirm Update
-        </button>
-      </div>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="border-r pr-6">
+              <h3 className="text-lg font-semibold mb-3">Products: {selectedOrder.products.length} </h3>
+              {selectedOrder.productDetails.map((product, index) => (
+                <div key={index} className="flex items-center space-x-4 mb-4 bg-gray-100 p-3 rounded-lg">
+                  <img src={product.ProductImages[0]} alt={product.ProductName} className="w-20 h-20 object-cover rounded" />
+                  <div>
+                    <p className="font-semibold">{product.ProductName}</p>
+                    
+                    <p className="text-sm text-gray-600">Qty: {selectedOrder.products[index]?.orderQuantity || 'N/A'}</p>
+
+                    <p className="text-green-600 font-bold">{product.ProductPrice}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gray-100 w-full p-6 rounded-lg shadow-md">
+  <h3 className="text-lg font-semibold mb-4 text-gray-800">Customer Details</h3>
+  
+  <div className="grid grid-cols-1 gap-5">
+    <div>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Name:</strong> {selectedOrder.userId.fullName}</p>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Phone:</strong> {selectedOrder.userId.phoneNumber}</p>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Email:</strong> {selectedOrder.userId.email}</p>
+    </div>
+    
+    <div>
+      <p className="text-gray-700  w-[70%]"><strong className="font-semibold text-gray-900">Address:</strong> {selectedOrder.userId.addressLine1}</p>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">State:</strong> {selectedOrder.userId.state}</p>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">City:</strong> {selectedOrder.userId.city}</p>
+      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Zip Code:</strong> {selectedOrder.userId.zipCode}</p>
     </div>
   </div>
+</div>
+
+          </div>
+
+          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <p className="text-lg font-semibold text-left">
+              Total Amount: <span className="text-green-600">{selectedOrder.totalAmount}</span>
+            </p>
+
+            <div className="mt-4">
+              <label className="block mb-2 font-semibold text-gray-700">Update Status:</label>
+              <select
+                className="w-[20%] p-2 border rounded focus:ring-2 focus:ring-purple-500"
+                value={updatedStatus}
+                onChange={(e) => setUpdatedStatus(e.target.value)}
+              >
+                <option value="Pending">Pending</option>
+                <option value="Success">Success</option>
+                <option value="Canceled">Canceled</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3 mt-4">
+            <button onClick={closeEditPopup} className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400">
+              Cancel
+            </button>
+            <button onClick={confirmUpdate} className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">
+              Confirm Update
+            </button>
+          </div>
+        </div>
+      </div>  
 )}
 
     {adminData ? (
@@ -197,11 +239,13 @@ function AdminAcc() {
                     <th className="p-4">
                     <div className="searchAdminBox SlideBar-Logos-Active flex w-full pl-2 adminSearch-Box">
                     <span className="material-symbols-outlined ">search</span>
-                      <input
-                        type="text"
-                        placeholder="Search for..."
-                        className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
-                      />
+                    <input
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      type="text"
+                      placeholder="Search for..."
+                      className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
+                    />
+
                       </div>
                     </th>
               </tr>
@@ -221,7 +265,8 @@ function AdminAcc() {
                   </thead>
                   <tbody>
                    
-                  {(orders || []).reverse().map((order) => (
+                  {filteredOrders.length > 0 ? (
+                    filteredOrders.map((order) => (
                   <tr key={order?._id} className={`orderDetails ${getOrderDetails(order?.orderStatus || "Pending")}`}>
 
             <td className="p-4">{order._id}</td>
@@ -253,9 +298,14 @@ function AdminAcc() {
               </span>
               </button>
             </td>
-          </tr>
-        ))}
-      </tbody>
+            </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="8" className="p-4 text-center text-gray-500">Order not found</td>
+    </tr>
+  )}
+</tbody>
       
                 </table>
               </div>
