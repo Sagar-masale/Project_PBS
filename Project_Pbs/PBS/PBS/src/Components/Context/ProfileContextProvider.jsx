@@ -4,12 +4,14 @@ import ProfileContext from "./ProfileContext";
 const ProfileContextProvider = ({children}) => {
     const [userData, setUserData] = useState('')
     const [updateUserData, setUpdateUserData ] = useState('')
+    const [orderData, setOrderData] = useState("");
 
     return(
         <ProfileContext.Provider value = {
            {
             userData, setUserData,
-            updateUserData, setUpdateUserData
+            updateUserData, setUpdateUserData,
+            orderData, setOrderData
            } 
         }>
         {children}

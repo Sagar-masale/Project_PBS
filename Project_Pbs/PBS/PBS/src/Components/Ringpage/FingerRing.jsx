@@ -88,6 +88,7 @@ const FingerRings=()=>{
     </div>
               </div>
                   <h4 className="Card-Title">{ring.ProductName}</h4>
+                  {/* <p className="Product-Price">{ring.ProductDescription}</p> */}
                   <div className="Card-Price">
                       <span className="Doller">₹</span>
                       <span className="Price-Rate">{ring.ProductPrice}</span>

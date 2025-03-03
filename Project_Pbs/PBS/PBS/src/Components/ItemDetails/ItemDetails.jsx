@@ -143,9 +143,10 @@ function ItemDetails() {
       </div>
 
       {/* Title */}
-      <h1 className="Product-Title text-lg font-semibold mb-2">
+      <h1 className="Product-Title text-lg font-semibold">
       {productItems.ProductName}
       </h1>
+      <p className="Product-Dec mb-2"> {productItems.ProductDescription} </p>
 
       {/* Offer Banner */}
       <div className="Product-Offer-Box p-2 rounded-lg text-sm mb-4">
