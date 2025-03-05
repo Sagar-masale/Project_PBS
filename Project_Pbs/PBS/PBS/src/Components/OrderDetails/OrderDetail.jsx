@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
-import { Link } from "react-router-dom";
+
 import OrderBill from "./OrderBill";
+
 
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
@@ -72,19 +73,20 @@ const OrderDetail = () => {
   }, [orderData]);
   
   
+  const [showInvoice , setShowInvoice] = useState(false);
   
   
   
  
-  console.log("Order Bill Data:", orderBillGenerate);
+ 
 
   return (
     <>
-    <div className="Order-Bill-Generate">
-    <OrderBill/>
-
-
-    </div>
+    {showInvoice ? (
+          <div className="Order-Bill-Generate bg-[#a4a4a460] w-full h-full z-[99] fixed top-0 overflow-y-scroll p-24">
+          <OrderBill selectedOrder={showInvoice} />
+          </div>
+    ):(null)}
     {userData ? (
       <div className="w-full mx-auto p-16 bg-white rounded-xl shadow-md">
       {orderData?.length > 0 ? (
@@ -94,13 +96,18 @@ const OrderDetail = () => {
             <h2 className="text-xl font-semibold">
               Order id: <span className="text-[#8f6faab6]">#{order._id || "orderID"}</span>
             </h2>
-           <Link to={"../Bill-Details"}>
-           <a href="#" className="text-blue-500 hover:underline"
-            
-            >
-              View invoice →
-            </a>
-           </Link>
+           
+            <span 
+            className="text-blue-500 hover:underline cursor-pointer"
+            onClick={() => {
+              console.log("Clicked Order Details:", order);
+              setShowInvoice(order);
+            }}
+          >
+            View invoice →
+          </span>
+
+          
           </div>
 
           <div className="flex flex-col sm:flex-row mt-4 gap-6">
@@ -153,7 +160,7 @@ const OrderDetail = () => {
                 ? "bg-[#835aa4d8]"
                 : order.orderStatus === "Success"
                 ? "bg-[#4f3267]"
-                : order.orderStatus === "Cancelled"
+                : order.orderStatus === "Canceled"
                 ? "bg-red-600"
                 : "bg-gray-300"
             }`}

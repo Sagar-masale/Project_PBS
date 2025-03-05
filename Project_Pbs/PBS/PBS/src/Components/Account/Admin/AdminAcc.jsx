@@ -172,7 +172,7 @@ function AdminAcc() {
 
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
             <p className="text-lg font-semibold text-left">
-              Total Amount: <span className="text-green-600">{selectedOrder.totalAmount}</span>
+              Total Amount: <span className="text-green-600">{(selectedOrder.totalAmount).toFixed(2)}</span>
             </p>
 
             <div className="mt-4">

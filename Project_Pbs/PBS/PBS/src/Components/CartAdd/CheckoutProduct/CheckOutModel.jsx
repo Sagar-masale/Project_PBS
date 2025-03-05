@@ -281,7 +281,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
                 <div className="border-t pt-6">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-medium">Total Amount:</span>
-                    <span className="text-2xl font-bold"> ₹{ProductTotalAmt} </span>
+                    <span className="text-2xl font-bold"> ₹{ProductTotalAmt.toFixed(2)} </span>
                   </div>
                   <button
                     type="submit"
