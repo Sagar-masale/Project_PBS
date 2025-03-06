@@ -10,6 +10,7 @@ import ProfileContextProvider from './Components/Context/ProfileContextProvider.
 import CartContextProvider from './Components/Context/CartContextProvider.jsx'
 import AdminContextProvider from './Components/Context/AdminContextProvider.jsx'
 import ProductContextProvider from './Components/Context/ProductContextProvider.jsx'
+import ReviewContextProvider from './Components/Context/ReviewContextProvider.jsx'
 
 const GlobalLayout = ({ children }) => (
   <>
@@ -21,7 +22,8 @@ const GlobalLayout = ({ children }) => (
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <ProductContextProvider>
+    <ReviewContextProvider>
+    <ProductContextProvider>
    <RegisterContextProvider>
     <ProfileContextProvider>
       <CartContextProvider>
@@ -36,5 +38,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ProfileContextProvider>
     </RegisterContextProvider>
    </ProductContextProvider>
+    </ReviewContextProvider>
   </React.StrictMode>
 )

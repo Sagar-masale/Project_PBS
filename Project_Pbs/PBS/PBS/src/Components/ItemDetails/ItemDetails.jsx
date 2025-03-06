@@ -1,10 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 import CartContext from '../Context/CartContext';
+import ProfileContext from '../Context/ProfileContext';
+import ReviewContext from "../Context/ReviewContext"
 import './ItemDetails.css'
 import { useNavigate } from 'react-router-dom';
 import CustomerReviews from './CustomerReviews';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function ItemDetails() {
+    const {userData} = useContext(ProfileContext);
     const rating = 3;
     const { productItems, addToCart  } = useContext(CartContext);
     const navigate = useNavigate();
@@ -30,39 +36,7 @@ function ItemDetails() {
     }, [productItems, navigate]);
     console.log("Product Items:", productItems);
 
-    const reviewsData = [
-      {
-        id: 1,
-        productId:2520,
-        author: "Veeraj M",
-        date: "May 16, 2021",
-        reviewStar: 5,
-        title: "Beautiful and Perfect!",
-        content:
-        "I bought this gold ring for a special day, and it is perfect! The design is beautiful, and it shines so nicely. It feels strong but is very comfortable to wear. Everyone keeps asking me where I got it. I love it!"
-      },
-      {
-        id: 2,
-        productId:2520,
-        author: "Mayur P",
-        date: "April 6, 2021",
-        reviewStar: 5,
-        title: "Elegant and Classic",
-        content:
-        "The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy!The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy! This gold ring looks simple but very elegant. It shines bright and feels like good quality. I bought it as a gift, and they loved it! The packaging was also very nice. I would definitely buy it again."  
-      },
-      {
-        id: 3,
-        productId:2520,
-        author: "Prajwal P",
-        date: "February 24, 2021",
-        reviewStar: 4,
-        title: "Good Ring, But Be Careful",
-        content:
-        "The gold ring looks very pretty and shiny. It fits well, but it feels a bit light, so I don’t wear it every day. It’s perfect for special occasions. For the price, it’s still a great buy!"   
-      },
-    ];
-    
+
     
       // Function to render star ratings dynamically
       const renderStars = (count) => {
@@ -70,16 +44,58 @@ function ItemDetails() {
       };
 
       const [showReviewBox, setShowReviewBox] = useState(false);
+
+
+      const { reviews, setReviews } = useContext(ReviewContext);
+
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+    
+      const fetchReviews = async () => {
+        if (!productItems?._id) return;
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
+          );
+          console.log("Fetched Reviews Data:", response.data.data);
+          setReviews(response.data.data);
+        } catch (err) {
+          console.error("Error fetching reviews:", err);
+          setError("Failed to load reviews.");
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      useEffect(() => {
+        fetchReviews();
+      }, [productItems]);
+      
+      useEffect(() => {
+        if (!userData && showReviewBox) {
+          toast.error("Please log in to write a review.");
+          setShowReviewBox(false);
+        }
+      }, [showReviewBox, userData]);
+      
+      
+      
     
   return (
     <>
-    {showReviewBox && (
-          <div className="Review-Section fixed w-full  flex row align-items-center justify-content-center  mt-[-5%] z-[9999999999]">
-          <CustomerReviews 
-          closeReviewBox={() => setShowReviewBox(false)}
-          />
-          </div>
-    )}
+      <Toaster position="top-left" reverseOrder={false} />
+
+{userData && showReviewBox && (
+  <div className="Review-Section fixed w-full flex row align-items-center justify-content-center mt-[-5%] z-[9999999999]">
+    <CustomerReviews
+      closeReviewBox={() => setShowReviewBox(false)}
+      productId={productItems._id}
+      refreshReviews={fetchReviews}
+    />
+  </div>
+)}
+
+
      <div className="ItemDetails-Container  rounded-lg ">
       {/* Product Content */}
       <div className="gap-8 Left-Side-Product-Details">
@@ -203,24 +219,39 @@ function ItemDetails() {
 
         </div>
 
+          {/* Display loading message */}
+          {loading && <p className="text-gray-500">Loading reviews...</p>}
 
+{/* Display error message */}
+{error && <p className="text-red-500">{error}</p>}
         
-      {reviewsData.map((review) => (
-        <div key={review.id} className="review">
-          <div className="review-header">
-           <div className="review-Auther-Time flex flex-col">
-           <span className="review-author">{review.author}</span>
-           <span className="review-date">{review.date}</span>
-           </div>
-            
-          </div>
-          <div className="review-stars flex">{renderStars(review.reviewStar)}</div>
-          <div className="reviewTitle-txt">
-          <h3 className="review-title">{review.title}</h3>
-          <p className="review-content flex flex-col">{review.content}</p>
-          </div>
+{reviews.length > 0 ? (
+  reviews.map((review) => (
+    <div key={review._id} className="review">
+      <div className="review-header">
+        <div className="review-Auther-Time flex flex-col">
+          <span className="review-author">{review.userName}</span>
+          <span className="review-date">
+          {new Date(review.createdAt).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          })}
+</span>
+
         </div>
-      ))}
+      </div>
+      <div className="review-stars flex">{renderStars(review.reviewRating)}</div>
+      <div className="reviewTitle-txt">
+        <h3 className="review-title">{review.reviewTitle}</h3>
+        <p className="review-content flex flex-col">{review.reviewComment}</p>
+      </div>
+    </div>
+  ))
+) : (
+  <p className="text-gray-500">No reviews available.</p>
+)}
+
     </div>
   
     

@@ -122,14 +122,14 @@ const OrderBill = ({selectedOrder}) => {
           alt={`Product Image ${orderIndex}`}
           className="w-16 h-16 object-cover rounded"
         />
-        <div>
-          <p className="font-semibold">{order.ProductName}</p>
+        <div className="w-[150px]">
+          <p className="font-semibold text-[14px]">{order.ProductName}</p>
           <p className="text-sm text-gray-600">Qty: {quantity}</p>
           <p className="text-sm text-gray-600">Gram: {order.size || "10g"}</p>
         </div>
       </div>
-      <p className="text-gray-600">{new Date(selectedOrder.createdAt).toLocaleDateString()}</p>
-      <p className="text-gray-900 font-semibold">₹{totalPrice}</p> {/* Updated total price */}
+      <p className="text-gray-600 relative right-10">{new Date(selectedOrder.createdAt).toLocaleDateString()}</p>
+      <p className="text-gray-900 font-semibold">₹{totalPrice}</p>
     </div>
   );
 })}
