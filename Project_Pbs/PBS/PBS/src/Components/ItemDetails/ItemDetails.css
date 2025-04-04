@@ -251,3 +251,35 @@
     color: #555;
   }
   
+  @media screen and (max-width:768px  ) {
+            /* Items Details */
+            .ItemDetails-Container{
+              flex-direction: column;
+          }
+          .Left-Side-Product-Details{
+            width: 100%;
+            padding: 4%;
+          }
+          .Right-Side-Product-Details{
+            width: 100%;
+            display: flex;
+            
+          }
+
+  
+  }
+
+  @media screen and (max-width:490px  ) {
+    /* Items Details */
+    .Product-Weight{
+      width: 100%;
+      padding: 2%;
+    }
+  .button-AddToCart{
+    width: 100%;
+    padding: 2%;
+    font-size: 1px;
+  }
+
+
+}

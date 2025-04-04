@@ -25,7 +25,7 @@ function OrderSummary({subTotal = "0"}) {
     const deliveryCharge = 0; // FREE
   return (
     <>
-     <div className="p-6 mr-28 relative OrderSummary-MainContainer rounded-md ">
+     <div className="p-10 relative OrderSummary-MainContainer rounded-md ">
       <div className="">
         <h2 className="text-xl font-bold text-gray-800">Enter Code</h2>
         <div className="flex mt-4 gap-2">

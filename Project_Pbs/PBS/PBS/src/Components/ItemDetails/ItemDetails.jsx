@@ -127,7 +127,7 @@ function ItemDetails() {
         {/* Right Side: Product Details */}
         <div className='Right-Side-Product-Details'>
           
-          <div className="p-6 max-w-lg mx-auto Right-Side-Product-Details-Box rounded-lg">
+          <div className="p-6 max-w-lg  Right-Side-Product-Details-Box rounded-lg">
       
        {/* Rating */}
        <span className="text-sm text-green-600 font-semibold">In stock</span>
@@ -174,11 +174,11 @@ function ItemDetails() {
       <div className="flex gap-2 text-center text-sm mb-4">
         <div className="Product-Weight border rounded-lg p-2 flex gap-1">
           <p className="">Weight</p>
-          <p className="font-semibold">13 (52.8 mm)</p>
+          <p className="font-semibold w-[100px]">13 (52.8 mm)</p>
         </div>
      
         <div className="Product-Weight Product-Customise text-center rounded-lg p-2 cursor-pointer">
-          <p className="text-white font-semibold">CUSTOMISE</p>
+          <p className="text-white">CUSTOMISE</p>
         </div>
       </div>
 

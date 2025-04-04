@@ -54,7 +54,7 @@ const Footer = () => {
             <div className="lg:mx-auto text-left ">
                 <h4 className="text-lg text-gray-900 font-medium mb-7">Subscribe</h4>
                 <p className="text-sm text-gray-500 leading-6 mb-7">Subscribe to get the latest news from us</p>
-                <a href="javascript:;"  className="flex items-center justify-center gap-2 border border-[#4f3267] rounded-full py-3 px-6 w-fit lg:mx-0  text-sm text-[#4f3267] font-semibold transition-all duration-500 hover:bg-[#9d6dc5]">Subscribe
+                <a href="#"  className="subscribe-button flex items-center justify-center gap-2 border border-[#4f3267] rounded-full py-3 px-6 lg:mx-0  text-sm text-[#4f3267] font-semibold transition-all duration-500 hover:bg-[#9d6dc5]">Subscribe
                 <span class="material-symbols-outlined">
                 arrow_right_alt
                 </span>

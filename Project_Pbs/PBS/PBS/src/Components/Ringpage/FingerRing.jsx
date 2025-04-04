@@ -26,7 +26,7 @@ const FingerRings=()=>{
   useEffect(() => {
     const fetchRingData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-rings");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-rings");
         setRingProductData(response.data.message.rings)
         setRings(response.data.message.rings)
       } catch (error) {

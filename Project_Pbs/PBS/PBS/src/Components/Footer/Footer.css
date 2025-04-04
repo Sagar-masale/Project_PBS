@@ -1,3 +1,9 @@
 .FooterContainer{
     background-color: rgb(246, 239, 246);
 }
+
+@media screen and (max-width:340px  ) {
+    .subscribe-button{
+        font-size: 14px;
+    }
+}

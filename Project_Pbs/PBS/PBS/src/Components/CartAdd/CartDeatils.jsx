@@ -44,7 +44,7 @@ function CartDeatils() {
     )}
   
    
- <div className="cart-container">
+ <div className="cart-container   ">
   
   {cart.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
@@ -57,16 +57,16 @@ function CartDeatils() {
         <h1 className="text-3xl font-semibold  mb-6" style={{color:"#4f3267"}}>YOUR CART IS EMPTY</h1>
   
         {/* Buttons */}
-        <div className="flex space-x-4 w-full  justify-center">
+        <div className="flex space-x-4 w-full pl-10 pr-10  justify-center">
           <Link to="/"  className="px-6 py-2 cartButtons flex justify-center  border-1 border-purple-900  rounded-md  transition-shadow">
-          <button>
+          <button className='font-sans'>
             Continue Shopping
           </button>
           </Link>
           {!userData && !adminData ? (
           <button
             onClick={CloseLoginBox}
-            className="px-6 py-2 cartButtons-Login login-cart-button border-none text-white rounded-md transition-shadow"
+            className="px-6 py-2 cartButtons-Login font-sans login-cart-button border-none text-white rounded-md transition-shadow"
           >
             Login To View Your Cart
           </button>
@@ -160,7 +160,9 @@ function CartDeatils() {
   </div>
 </div>
 </div>
+  <div className="OrderSummary-Box w-full ml-auto">
   <OrderSummary/>
+  </div>
  
     </div>
     
