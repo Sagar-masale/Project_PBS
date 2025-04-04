@@ -1,0 +1,30 @@
+.otpInput-Box{
+    width: 50px;
+    height:50px;
+}
+@media screen and (max-width:720px  ){
+    .Otp-Box{
+        width: 80%;
+        padding: 3%;
+    }
+    .otpInput-Box{
+        width: 40px;
+        height:40px;
+    }
+}
+@media screen and (max-width:580px  ){
+    .Auth-Container{
+        padding: 2%;
+    }
+    .Otp-Box{
+        width: 100%;
+        padding: 3%;
+    }
+}
+@media screen and (max-width:420px  ){
+
+    .otpInput-Box{
+        width: 40px;
+        height: 40px;
+    }
+}

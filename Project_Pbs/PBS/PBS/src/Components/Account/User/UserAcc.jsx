@@ -89,7 +89,7 @@ const handleCloseEdit = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="logOutUAcc bg-gradient-to-r from-purple-600 to-pink-400 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg flex items-center"
+                className="logOutUAcc bg-gradient-to-r from-purple-600 to-pink-400 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg  items-center"
               >
                 Logout
               </button>
@@ -125,7 +125,7 @@ const handleCloseEdit = () => {
                 </span>
               </div>
       
-              <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <div className=" py-6 sm:grid sm:grid-cols-3">
                 <h3 className="text-sm/6 font-medium text-gray-900">Order Data</h3>
                 <span className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                   <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">

@@ -83,7 +83,7 @@ function ItemDetails() {
     
   return (
     <>
-      <Toaster position="top-left" reverseOrder={false} />
+      <Toaster position="top-left" reverseOrder={true} />
 
 {userData && showReviewBox && (
   <div className="Review-Section fixed w-full flex row align-items-center justify-content-center mt-[-5%] z-[9999999999]">

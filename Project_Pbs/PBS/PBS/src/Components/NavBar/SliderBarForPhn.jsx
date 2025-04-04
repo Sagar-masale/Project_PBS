@@ -83,7 +83,7 @@ function SliderBarForPhn() {
     { id: 1, name: 'Home', slug: '/', logo: 'home', active: true },
     { id: 2, name: 'Search', slug: '/search', logo: 'search', active: true },
     { id: 3, name: 'Chat', slug: '/chat', logo: 'chat', active: true },
-    { id: 4, name: 'Orders', slug: '/orders', logo: 'orders', active: true },
+    { id: 4, name: 'Orders', slug: '/Order-Details', logo: 'orders', active: true },
     { id: 5, name: 'Wishlist', slug: '/wishlist-details', logo: 'favorite', active: true },
     { id: 6, name: 'Settings', slug: '/settings', logo: 'settings', active: true },
 	{ 
@@ -143,7 +143,7 @@ function SliderBarForPhn() {
           <ul className="pt-2 space-y-1 text-sm flex flex-col gap-3">
             {menuLinks.map((item) => item.active && (
               <li key={item.id} className="rounded-sm" onClick={() => menuLinkClick(item)}>
-                <span className='flex items-center p-2 space-x-3 rounded-md'>
+                <span className='flex items-center p-2 space-x-3 rounded-md hover:bg-[rgb(246,239,246)]' onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
                   <span className="material-symbols-outlined sliderBar-Logos font-bold">{item.logo}</span>
                   <span>{item.name}</span>
                 </span>

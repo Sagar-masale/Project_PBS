@@ -24,12 +24,13 @@ import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
 import OrderDetail from './Components/OrderDetails/OrderDetail.jsx';
 import OrderBill from './Components/OrderDetails/OrderBill.jsx';
-
+import { Toaster } from 'react-hot-toast';
 
 
 const App = () => {
   return (
     <>
+    <Toaster position="top-left" />
         <ScrollToTop/>
       <Routes>  {/* Define routes here */}
         <Route path="/" element={  

@@ -4,6 +4,7 @@ import { FaTimes, FaLock } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import ProfileContext from '../../Context/ProfileContext';
 import CartContext from "../../Context/CartContext";
+import toast  from 'react-hot-toast';
 
 const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,12 +71,20 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
         console.log("Sending order data:", orderData);
 
         const response = await axios.post(
-            "https://backend-pbs-coo6.onrender.com/api/v1/orders/add-order",
+            "http://localhost:8000/api/v1/orders/add-order",
             orderData,
             { headers: { "Content-Type": "application/json" } }
         );
 
-        console.log("Order response:", response.data);
+
+        console.log("Order response:", response.data.success);
+        if(response.data.success){
+            toast.success("Order placed successfully!");
+          
+        }else{
+          
+          toast.error("An error occurred. Please try again.");
+        }
         return response.data;
     } catch (error) {
         console.error("Error adding order:", error.response?.data || error.message);
@@ -93,7 +102,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
       setIsLoading(true);
       try {
         await new Promise(resolve => setTimeout(resolve, 2000));
-        alert("Order placed successfully!");
+       
         const response = await addOrder();
         console.log("Order Response:", response);
         
@@ -112,7 +121,8 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
           totalAmount: ProductTotalAmt
         });
       } catch (error) {
-        alert("An error occurred. Please try again.");
+        closeCheckout();
+        toast.error("An error occurred. Please try again.");
       }
       setIsLoading(false);
     }
@@ -127,8 +137,9 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
   };
 
   return (
+    
+  <>
     <div className="font-sans">
-       
           <div className="bg-white rounded-xl max-w-4xl w-full max-h-[84vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
@@ -302,6 +313,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
             </div>
           </div>
         </div>
+  </>
       
     
   );

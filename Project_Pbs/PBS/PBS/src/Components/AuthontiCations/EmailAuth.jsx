@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import Loading from "../PageLoader/Loading";
 import ProfileContext from "../Context/ProfileContext";
 import SuccessAnimation from "../Animation/SuccessAnimation";
-
+import toast from "react-hot-toast";
+import './EmailAuth.css';
 const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEmailVerify, decriptionOfEmailVerifyImp }) => {
     const { userData } = useContext(ProfileContext);
     const [otp, setOtp] = useState("");
@@ -31,8 +32,10 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         try {
             const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/send-otp", { email });
             setMessage(response.data.message || `OTP sent to ${email}`);
+            toast.success("OTP sent successfully");
             setStep("verify"); 
         } catch (error) {
+            toast.error("Error sending OTP");
             setMessage(error.response?.data?.message || "Error sending OTP");
         } finally {
             setLoading(false);
@@ -50,6 +53,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
             setIsVerified(true);
     
             setTimeout(() => {
+                toast.success("OTP verified successfully!");
                 setMessage(response.data.message || "OTP verified successfully!");
             }, 2500);
     
@@ -59,6 +63,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
     
         } catch (error) {
             setTimeout(() => {  // Delay error message for 2 seconds
+                toast.error("OTP verification failed!");
                 setMessage(error.response?.data?.message || "OTP verification failed");
                 setLoading(false);  // Stop loading after showing error
             }, 2000);
@@ -84,7 +89,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
     return (
         <>
             <div className="Auth-Container flex justify-content-center align-items-center  w-full h-[85vh]">
-                <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30 w-[50%] h-[fit-content]">
+                <div className="Otp-Box flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30 w-[50%] h-[fit-content]">
                     <span className="material-symbols-outlined relative ml-auto cursor-pointer" onClick={closeEmailAuth}>
                         close
                     </span>
@@ -114,6 +119,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
                                         key={index}
                                         type="text"
                                         maxLength="1"
+                                       
                                         value={otp[index] || ""}
                                         onChange={(e) => {
                                             let newOtp = otp.split("");
@@ -134,7 +140,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
                                             }
                                         }}
                                         id={`otp-input-${index}`}
-                                        className="w-12 h-12 text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="otpInput-Box  text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                     />
                                 ))}
                             </div>

@@ -3,7 +3,7 @@ import '../Notifications/SuccessMessage.css';
 import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
 import AdminContext from '../Context/AdminContext';
-import toast, { Toaster } from 'react-hot-toast';
+
 function SuccessMessage() {
   const [notifyTitle, setNotifyTitle] = useState('');
   const [notifyMessage, setNotifyMessage] = useState('');
@@ -84,10 +84,7 @@ function SuccessMessage() {
 
   return (
     <>
-    <Toaster
-      position="top-right"
-      reverseOrder={false}
-    />
+
     <div className={`card ${showSuccess ? 'card-success' : ''}`}>
   <svg className="wave" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
     <path
