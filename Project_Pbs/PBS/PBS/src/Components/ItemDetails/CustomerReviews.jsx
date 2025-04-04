@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import ReviewContext from "../Context/ReviewContext.js"
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import { FaStar } from 'react-icons/fa';
 import ProfileContext from "../Context/ProfileContext";
@@ -35,7 +36,7 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
     };
   
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/reviews/add-review', reviewData);
+      const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/reviews/add-review', reviewData);
   
       console.log('Review Submitted Successfully:', response.data);
   
@@ -53,7 +54,9 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
         productId: productId || '' 
       });
   
-      alert('Review submitted successfully!');
+      closeReviewBox();
+      toast.success("Review submitted successfully!");
+
     } catch (error) {
       console.error('Error submitting review:', error);
       alert('Failed to submit review. Please try again.');
@@ -76,7 +79,9 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
   };
 
   return (
+    
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg relative">
+
       <h2 className="text-2xl text-[#4f3267] font-bold mb-6 text-left">Submit a Review</h2>
       <span className="material-symbols-outlined absolute right-0 top-0 mt-3 cursor-pointer mr-4 text-3xl" onClick={closeReviewBox}>
         close

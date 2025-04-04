@@ -30,7 +30,7 @@ function SignUpUser() {
     setIsLoading(true);
   
     axios
-      .post("http://localhost:8000/api/v1/users/register", {
+      .post("https://backend-pbs-coo6.onrender.com/api/v1/users/register", {
         fullName,
         phoneNumber,
         email,

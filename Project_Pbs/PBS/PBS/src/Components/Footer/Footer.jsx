@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./Footer.css"
 const Footer = () => {
   return (
@@ -26,7 +27,7 @@ const Footer = () => {
             <div className="lg:mx-auto text-left ">
                 <h4 className="text-lg text-gray-900 font-medium mb-7">Quick links</h4>
                 <ul className="text-sm  transition-all duration-500">
-                    <li className="mb-6"><a href="javascript:;"  className="text-gray-600 hover:text-gray-900">Home</a></li>
+                    <Link to="/"><li className="mb-6"><a href="javascript:;"  className="text-gray-600 hover:text-gray-900">Home</a></li></Link>
                     <li className="mb-6"><a href="javascript:;"  className=" text-gray-600 hover:text-gray-900">About</a></li>
                     <li><a href="javascript:;"  className=" text-gray-600 hover:text-gray-900">Pricing</a></li>
                 </ul>

@@ -4,7 +4,7 @@ import ProfileContext from '../Context/ProfileContext';
 import AdminContext from '../Context/AdminContext';
 import './CartDetails.css'
 import CheckOutModel from './CheckoutProduct/CheckOutModel';
-
+import { Link } from 'react-router-dom';
 import ClearCartConfirm from './ClearCartConfirm';
 import OrderSummary from '../OrderDetails/OrderSummary';
 
@@ -58,9 +58,11 @@ function CartDeatils() {
   
         {/* Buttons */}
         <div className="flex space-x-4 w-full  justify-center">
-          <button className="px-6 py-2 cartButtons  border-1 border-purple-900  rounded-md  transition-shadow">
+          <Link to="/"  className="px-6 py-2 cartButtons flex justify-center  border-1 border-purple-900  rounded-md  transition-shadow">
+          <button>
             Continue Shopping
           </button>
+          </Link>
           {!userData && !adminData ? (
           <button
             onClick={CloseLoginBox}

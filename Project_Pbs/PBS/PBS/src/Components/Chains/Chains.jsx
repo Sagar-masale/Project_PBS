@@ -16,7 +16,7 @@ const Chains = () => {
   useEffect(() => {
     const fetchChainsData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/products/All-chains");
+        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-chains");
         setChainProductData(response.data.message.chains);
         setChains(response.data.message.chains);
       } catch (error) {

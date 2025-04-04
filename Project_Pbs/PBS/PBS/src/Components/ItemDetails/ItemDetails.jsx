@@ -55,7 +55,7 @@ function ItemDetails() {
         if (!productItems?._id) return;
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
+            `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
           );
           console.log("Fetched Reviews Data:", response.data.data);
           setReviews(response.data.data);
@@ -97,6 +97,7 @@ function ItemDetails() {
 
 
      <div className="ItemDetails-Container  rounded-lg ">
+      
       {/* Product Content */}
       <div className="gap-8 Left-Side-Product-Details">
         {/* Left Side: Product Image */}

@@ -16,7 +16,7 @@ const MangalSutra = () => {
   useEffect(() => {
     const fetchMangalSutraData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/products/All-mangalsutra");
+        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-mangalsutra");
         setMangalSutraProductData(response.data.message.mangalsutras)
         setMangalSutras(response.data.message.mangalsutras);
       } catch (error) {

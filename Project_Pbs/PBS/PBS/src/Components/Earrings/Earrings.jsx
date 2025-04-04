@@ -18,7 +18,7 @@ const Earrings = () => {
   useEffect(() => {
     const fetchEarringData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/products/All-earrings");
+        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-earrings");
         setEarringProductData(response.data.message.earrings)
         setEarrings(response.data.message.earrings);
       } catch (error) {

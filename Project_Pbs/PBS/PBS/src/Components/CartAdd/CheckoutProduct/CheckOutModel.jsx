@@ -70,7 +70,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
         console.log("Sending order data:", orderData);
 
         const response = await axios.post(
-            "http://localhost:8000/api/v1/orders/add-order",
+            "https://backend-pbs-coo6.onrender.com/api/v1/orders/add-order",
             orderData,
             { headers: { "Content-Type": "application/json" } }
         );
@@ -266,10 +266,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
                             className={`mt-1 block w-full rounded-md border ${errors.country ? 'border-red-500' : 'border-gray-300'} px-3 py-2`}
                           >
                             <option value="">Select Country</option>
-                            <option value="US">United States</option>
                             <option value="India">India</option>
-                            <option value="CA">Canada</option>
-                            <option value="UK">United Kingdom</option>
                           </select>
                           {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
                         </div>

@@ -1,7 +1,7 @@
 import React, {useState ,useEffect, useContext } from "react";
 import ProfileContext from "./ProfileContext";
 import CartContext from "./CartContext";
-
+import toast, { Toaster } from 'react-hot-toast';
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
 
@@ -41,7 +41,8 @@ const CartContextProvider = ({children}) => {
             }
         
             if (!userData?._id) {
-                alert("Please log in as user to add items to the cart.");
+              
+                toast.error("Please log in as user to add items to the cart.");
                 
                 return;
             }

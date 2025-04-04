@@ -38,7 +38,7 @@ const EditUser = ({onCloseEditComponent}) => {
     setIsLoading(true); // Start loading before making the request
   
     try {
-      const response = await axios.put('http://localhost:8000/api/v1/users/update-User', formData, {
+      const response = await axios.put('https://backend-pbs-coo6.onrender.com/api/v1/users/update-User', formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },

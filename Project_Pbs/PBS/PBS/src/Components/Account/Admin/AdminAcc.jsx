@@ -12,17 +12,30 @@ function AdminAcc() {
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const cards = [
-    { title: "Save Products", value: "50.8K", change: "28.4%", color: "text-green-400" },
-    { title: "Stock Products", value: "23.6K", change: "-12.6%", color: "text-red-400" },
-    { title: "Sale Products", value: "756", change: "3.1%", color: "text-green-400" },
-    { title: "Average Revenue", value: "215.20k", change: "11.3%", color: "text-green-400" },
+  const productData = [
+    { title: "Save Products", value: 500 },
+    { title: "Stock Products", value: 153 },
+    { title: "Sale Products", value: 347, price: 620 }, // Example price per unit
   ];
-
+  
+  // Ensure values exist, otherwise default to 0
+  const totalStock = productData.find((item) => item.title === "Stock Products")?.value || 0;
+  const totalSales = productData.find((item) => item.title === "Sale Products")?.value || 0;
+  const pricePerUnit = productData.find((item) => item.title === "Sale Products")?.price || 0;
+  
+  const totalRevenue = totalSales * pricePerUnit;
+  
+  // Update the cards array dynamically
+  const cards = [
+    { title: "Save Products", value: productData.find((item) => item.title === "Save Products")?.value || 0, change: "2.4%", color: "text-green-400" },
+    { title: "Stock Products", value: totalStock, change: "-12.6%", color: "text-red-400" },
+    { title: "Sale Products", value: totalSales, change: "3.1%", color: "text-green-400" },
+    { title: "Total Revenue", value: totalRevenue > 0 ? totalRevenue.toLocaleString() : "0", change: "11.3%", color: "text-green-400" },
+  ];
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/orders/getAll-orders");
+        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/orders/getAll-orders");
         console.log("API Response Order:", response.data.data);
   
         // Ensure sorting by date (latest first)
@@ -91,7 +104,7 @@ function AdminAcc() {
     }
 
     try {
-      const response = await axios.put("http://localhost:8000/api/v1/orders/updateOrder", {
+      const response = await axios.put("https://backend-pbs-coo6.onrender.com/api/v1/orders/updateOrder", {
         orderId: selectedOrder._id,
         orderStatus: updatedStatus,
       });
@@ -114,7 +127,7 @@ function AdminAcc() {
 
   const handleDelete = async (orderId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/orders/deleteOrder`, {
+      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/orders/deleteOrder`, {
         data: { orderId },
       });
       setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
