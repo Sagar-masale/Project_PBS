@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
-
+import "./OrderDetail.css"
 import OrderBill from "./OrderBill";
 
 
@@ -88,13 +88,14 @@ const OrderDetail = () => {
           </div>
     ):(null)}
     {userData ? (
-      <div className="w-full mx-auto p-16 bg-white rounded-xl shadow-md">
+      <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
       {orderData?.length > 0 ? (
       orderData.map((order) => (
-        <div key={order._id} className="mb-10 border-b pb-6">
+        <div key={order._id} className="mb-10 border-b pb-6 Order-Details-Container">
           <div className="flex justify-between items-center border-b pb-4">
             <h2 className="text-xl font-semibold">
-              Order id: <span className="text-[#8f6faab6]">#{order._id || "orderID"}</span>
+            Order id: <span className="text-[#8f6faab6]">#{order._id ? order._id.slice(0, 6) + "..." : "orderID"}</span>
+
             </h2>
            
             <span 
@@ -110,8 +111,8 @@ const OrderDetail = () => {
           
           </div>
 
-          <div className="flex flex-col sm:flex-row mt-4 gap-6">
-            <div className="w-fit h-24 flex justify-center gap-2">
+          <div className="flex flex-col sm:flex-row mt-4 gap-6 order-Details-Sub-Box">
+            <div className="w-fit h-24 flex order-Details-Images-Box gap-2 ">
             {order?.orderDetails?.map((orderImageInfo, index) => (
             <div className="relative" key={index}>
                 {orderImageInfo?.ProductImages?.length > 0 && (
@@ -126,21 +127,35 @@ const OrderDetail = () => {
 
             </div>
 
-            <div className="mt-4 flex gap-4">
+            <div className="mt-4 flex gap-4 Order-Details-Info">
           {order?.orderDetails?.map((orderInfo, index) => (
             <div key={index} className="mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">{orderInfo.ProductName || "Product Name"}</h3>
-              <p className="text-gray-700">{orderInfo.ProductPrice?.toFixed(2) || "0.00"}</p>
-              <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity || "0.00"}</p>
+              <h3 className="text-lg font-semibold text-gray-900">
+                {orderInfo.ProductName
+                  ? orderInfo.ProductName.split(" ").length > 2
+                    ? orderInfo.ProductName.split(" ").slice(0, 2).join(" ") + "..."
+                    : orderInfo.ProductName
+                  : "Product Name"}
+              </h3>
+
+              <p className="text-gray-700">Price: {orderInfo.ProductPrice?.toFixed(2) || "0.00"}</p>
+              <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity  || "0.00"}</p>
               <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
-              <p className="text-gray-600">{orderInfo.ProductDescription || "No description available"}</p>
+              <p className="text-gray-600">
+                {orderInfo.ProductDescription
+                  ? orderInfo.ProductDescription.length > 20
+                    ? orderInfo.ProductDescription.slice(0, 20) + "..."
+                    : orderInfo.ProductDescription
+                  : "No description available"}
+              </p>
+
             </div>
           ))}
         </div>
 
   
 
-            <div className="space-y-2 ml-auto">
+            <div className="space-y-2 Order-Detail-Delivery-Address">
               <h4 className="text-sm font-semibold">Delivery address</h4>
               <p className="text-gray-600">{order.userId.fullName || "Order Customer" }</p>
               <p className="text-gray-600">{order.userId.addressLine1 || "Address"}</p>
@@ -192,7 +207,7 @@ const OrderDetail = () => {
 
 
           {/* Payment Information */}
-          <div>
+          <div className="OrderDetail w-full">
             <h4 className="text-lg font-semibold">Payment information</h4>
             <div className="flex items-center gap-2">
               <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">VISA</span>

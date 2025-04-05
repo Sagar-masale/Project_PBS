@@ -19,7 +19,7 @@ const Footer = () => {
             </div>
                 <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-left lg:text-left">Have any query? Please contact us.
                 Our team is here to assist you with any questions or concerns. Feel free to reach out for personalized support and guidance.</p>
-                <a href="javascript:;"  className="py-2.5 px-5 h-9 block w-fit bg-[#4f3267] rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-[#432a58] lg:mx-0">
+                <a href="javascript:;"  className="py-2.5 px-5 h-9 block  bg-[#4f3267] rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-[#432a58] lg:mx-0">
                     Contact us
                 </a>
             </div>

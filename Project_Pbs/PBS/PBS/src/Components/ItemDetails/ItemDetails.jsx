@@ -187,14 +187,14 @@ function ItemDetails() {
       <div className="button-AddToCart" data-tooltip={"₹"+productItems.ProductPrice}>
      <div onClick={() => addToCart(productItems)} className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center">
     
-    <div className="text-AddCart-Feild flex flex-row gap-2">   
-        <span className="material-symbols-outlined">
+    <div className="text-AddCart-Feild flex flex-row gap-2 cursor-pointer">   
+        <span className="material-symbols-outlined cursor-pointer">
             shopping_cart
         </span>
         ADD TO CART
     </div>
-    <span className="icon-AddTo-Cart">
-    <span className="material-symbols-outlined">
+    <span className="icon-AddTo-Cart cursor-pointer">
+    <span className="material-symbols-outlined cursor-pointer">
             shopping_cart
         </span>
     </span>

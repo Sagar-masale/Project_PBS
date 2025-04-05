@@ -113,6 +113,9 @@
 .cart-container{
     padding-right: 2%;
 }
+.cart-structrue{
+    margin-left: 5%;
+}
 
 @media screen and (max-width:890px  ) {
     .cart-container{
@@ -131,4 +134,13 @@
         padding-bottom: 5%;
         padding-right: 0%;
     }
+}
+@media screen and (max-width:640px  ) {
+    .cart-structrue{
+        margin-left: 0;
+    }
+    .cart-Image-Box {
+        width: 100px;
+    }
+
 }

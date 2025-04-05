@@ -71,7 +71,7 @@ const CheckOutModel = ({ProductTotalAmt, closeCheckout}) => {
         console.log("Sending order data:", orderData);
 
         const response = await axios.post(
-            "http://localhost:8000/api/v1/orders/add-order",
+            "https://backend-pbs-coo6.onrender.com/api/v1/orders/add-order",
             orderData,
             { headers: { "Content-Type": "application/json" } }
         );

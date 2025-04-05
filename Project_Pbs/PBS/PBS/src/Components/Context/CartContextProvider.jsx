@@ -2,6 +2,8 @@ import React, {useState ,useEffect, useContext } from "react";
 import ProfileContext from "./ProfileContext";
 import CartContext from "./CartContext";
 import toast from 'react-hot-toast';
+
+
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
 
@@ -10,7 +12,7 @@ const CartContextProvider = ({children}) => {
 
 
   const [cart, setCart] = useState([]);
-  const [discount, setDiscount] = useState(0);
+
 
 
           // Load cart from localStorage on component mount
@@ -28,6 +30,7 @@ const CartContextProvider = ({children}) => {
             if (cart.length > 0) {
               //localStorage.setItem('cart', JSON.stringify(cart));
               localStorage.setItem(`cart_${userData._id}`, JSON.stringify(cart));
+              
             }
           }, [cart]);
 
@@ -38,6 +41,8 @@ const CartContextProvider = ({children}) => {
             if (!product || !product._id || !product.ProductPrice) {
                 console.error("Invalid product data:", product);
                 return;
+            }else{
+              toast.success("Item added to your cart successfully!")
             }
         
             if (!userData?._id) {
@@ -78,16 +83,16 @@ const CartContextProvider = ({children}) => {
     const removeFromCart = (id) => {
       const updatedCart = cart.filter(item => item._id !== id);
       setCart(updatedCart);
-      
       // Update localStorage after removing item
       localStorage.setItem(`cart_${userData._id}`, JSON.stringify(updatedCart));
+      toast.success("Item removed from your cart.");
     };
     
     const clearCart = () => {
       setCart([]);
-      
       // Clear the cart from localStorage
       localStorage.removeItem(`cart_${userData._id}`);
+      toast.success("All items removed from your cart.");
     };
     
 

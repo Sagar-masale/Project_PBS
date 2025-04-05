@@ -91,7 +91,7 @@ function CartDeatils() {
   />
 )}
    
-  <div className="mx-auto mt-8 max-w-26 md:mt-12">
+  <div className="mx-auto mt-16 max-w-26">
     <div className="">
       <div className="px-4 py-6 sm:px-8 sm:py-10 ">
         <div className="flow-root ">
@@ -106,7 +106,7 @@ function CartDeatils() {
      </div>
 
      <div className="relative flex flex-1  flex-col justify-between">
-       <div className="sm:col-gap-5 sm:grid ml-10 sm:grid-cols-2">
+       <div className="sm:col-gap-5 sm:grid sm:grid-cols-2 cart-structrue">
          <div className="pr-8 sm:pr-5">
            <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>

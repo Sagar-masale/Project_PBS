@@ -174,6 +174,7 @@ const refreshAccessToken = async () => {
         console.log('Error:', err.response.data?.message || 'An error occurred');
         if (err.response.data.message === "Password is incorrect") {
           setShowForgotText(true);
+          
         }else{
           CloseLoginBox();
           setShowForgotText(false);
@@ -182,7 +183,8 @@ const refreshAccessToken = async () => {
         setRegisterErrStatus(err.response.data?.message || 'An error occurred');
       } else {
         console.error('Unexpected Error:', err.message);
-        alert('An unexpected error occurred. Please try again.');
+        // alert('An unexpected error occurred. Please try again.');
+        CloseLoginBox();
         setRegisterErrStatus('An unexpected error occurred.');
       }
     } finally {

@@ -1,0 +1,37 @@
+.Order-Details-Container{
+    padding: 5%;
+}
+.order-Details-Sub-Box{
+    align-items: center;
+}
+.order-Details-Images-Box{
+    justify-content: center;
+}
+.Order-Detail-Delivery-Address{
+    margin-left: auto;
+}
+
+@media screen and (max-width:640px  ){
+    .order-Details-Sub-Box{
+        display: flex;
+        justify-content: left;
+        align-content: space-between;
+        align-items: stretch;
+    }
+    .order-Details-Images-Box{
+        justify-content: left;
+    }
+    .Order-Details-Info{
+        display: flex;
+        flex-direction: column;
+    }
+    .Order-Detail-Delivery-Address{
+        margin-left: 0;
+    }
+    .orderDetails-Structure{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+    }
+
+}
