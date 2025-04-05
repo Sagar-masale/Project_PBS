@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import WeddingProducts from './Collections/WeddingProducts';
 import '../NavBar/NavBar';
 import './Home.css';
@@ -6,9 +6,14 @@ import './Home.css';
 import '../MediaQueries/MediaQueries.css';
 import { Link } from 'react-router-dom';
 import MainPage from '../images/Home.png';
+import MainPagePhn from '../images/H.png';
 
-import MainPage2nd from '../images/Products.jpg';
-import MainPage3rd from '../images/Product2.jpg';
+import MainPage2nd from '../images/Home2.png';
+import MainPage2ndPhn from '../images/Home2Phn.png';
+
+import MainPage3rd from '../images/Home3.png';
+import MainPage3rdPhn from '../images/Home3Phn.png';
+
 import MangalSutraImg from '../images/Mangalsutra.jpg';
 import BanglesImg from '../images/Bangles.jpg';
 import ChainsImg from '../images/Chains.jpg';
@@ -55,7 +60,18 @@ function Home({
         
         
       ]
-    
+      useEffect(() => {
+        const carousel = document.querySelector('#carouselExampleAutoplaying');
+        if (carousel && !window.bootstrap.Carousel.getInstance(carousel)) {
+          new window.bootstrap.Carousel(carousel, {
+            interval: 4000,
+            ride: 'carousel',
+            touch: true,
+            pause: false,
+          });
+        }
+      }, []);
+      
       
     return(
         <>
@@ -70,25 +86,35 @@ function Home({
 >
   <div className="carousel-inner ImageSlide-Carousel-Inner">
     <div className="carousel-item active">
-      <img
+    <picture>
+    <source media="(max-width: 480px)" srcSet={MainPagePhn} />
+    <img
         src={MainPage}
         className="d-block w-100 h-[90vh] object-fill"
         alt="MainPage"
       />
+    </picture>
+
     </div>
     <div className="carousel-item">
+    <picture>
+    <source media="(max-width: 480px)" srcSet={MainPage2ndPhn} />
       <img
         src={MainPage2nd}
         className="d-block w-100 h-[90vh] object-fill"
         alt="..."
       />
+     </picture>
     </div>
     <div className="carousel-item">
+    <picture>
+    <source media="(max-width: 480px)" srcSet={MainPage3rdPhn} />
       <img
         src={MainPage3rd}
         className="d-block w-100 h-[90vh] object-fill"
         alt="..."
       />
+      </picture>
     </div>
   </div>
   <button
