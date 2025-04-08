@@ -191,7 +191,7 @@ const refreshAccessToken = async () => {
     }
   };
 
-
+if(userData)return null;
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -253,7 +253,7 @@ const refreshAccessToken = async () => {
     )}
 
    {isLoading && <Loading />}
-   {isLoginContainerVisible && userData &&  (
+   {isLoginContainerVisible && !userData &&  (
    <div className="Login-Main-Container">
       <div className=" pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white">
