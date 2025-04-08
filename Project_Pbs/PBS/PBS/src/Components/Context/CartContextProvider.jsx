@@ -23,7 +23,7 @@ const CartContextProvider = ({children}) => {
             } else {
               setCart([]); // Clear the cart UI if no user is logged in
             }
-          }, [userData._id]);
+          }, [userData?._id]);
 
           // Save cart to localStorage whenever it changes
           useEffect(() => {

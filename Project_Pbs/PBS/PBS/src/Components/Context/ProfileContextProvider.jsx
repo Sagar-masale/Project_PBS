@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import ProfileContext from "./ProfileContext";
 
 const ProfileContextProvider = ({children}) => {
-    const [userData, setUserData] = useState('')
+    const [userData, setUserData] = useState(null)
     const [updateUserData, setUpdateUserData ] = useState('')
     const [orderData, setOrderData] = useState("");
 
