@@ -23,8 +23,7 @@ function LoginUsingPass() {
 
   // setProfile Context
   const {setRegisterErrStatus, setLoginNotify} = useContext(RegisterContext)
-  const {setUserData} = useContext(ProfileContext)
- 
+  const { userData, setUserData } = useContext(ProfileContext);
   const [isLoading, setIsLoading] = useState(false); 
 
     useEffect(() => {
@@ -254,7 +253,7 @@ const refreshAccessToken = async () => {
     )}
 
    {isLoading && <Loading />}
-   {isLoginContainerVisible && (
+   {isLoginContainerVisible && !userData &&  (
    <div className="Login-Main-Container">
       <div className=" pass-Container">
         <div className="LeftSide-Block-Login rounded-l-lg bg-white">
