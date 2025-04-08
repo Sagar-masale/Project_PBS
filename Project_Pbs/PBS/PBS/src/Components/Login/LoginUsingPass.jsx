@@ -191,7 +191,7 @@ const refreshAccessToken = async () => {
     }
   };
 
-if(userData)return null;
+
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
