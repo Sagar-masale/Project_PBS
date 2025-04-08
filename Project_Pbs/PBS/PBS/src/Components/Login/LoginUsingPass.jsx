@@ -3,7 +3,7 @@ import Loading from '../PageLoader/Loading';
 import ForgotPassword from './ForgotPassword';
 import toast from 'react-hot-toast';
 // Profile Context
-import ProfileContext from '../Context/ProfileContext'
+import ProfileContext from '../Context/ProfileContext';
 import axios from 'axios';
 import './LoginUsingOtp.css';
 import './LoginUsingPass.css';

@@ -1,13 +1,19 @@
 import React from 'react'
 import './LoginShow.css'
+import { useContext } from 'react';
+import ProfileContext from '../Context/ProfileContext';
 function LoginShow() {
+  const { userData } = useContext(ProfileContext);
   const toggleClass = (selector, className)=>{
     document.querySelector(selector).classList.toggle(className);
   }
   const ShowUserLogin=()=>{
-    toggleClass('.AccountShow','AccountShowBlock'); 
-    toggleClass('.LoginOtpBox','LoginOtpBoxShow');
+        if(!userData){
+      toggleClass('.AccountShow','AccountShowBlock'); 
+      toggleClass('.LoginOtpBox','LoginOtpBoxShow');
+    }
   }
+
   const ShowAdminLogin=()=>{
     toggleClass('.AccountShow','AccountShowBlock');
     toggleClass('.AdminLoginBox','AdminLoginBoxShow');
