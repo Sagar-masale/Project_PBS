@@ -38,3 +38,6 @@
 .Login-Button:hover{
     background-color: #432a58;
 }
+.LoginPassBox{
+    padding: 3%;
+}

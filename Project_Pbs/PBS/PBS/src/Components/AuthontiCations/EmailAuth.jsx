@@ -89,7 +89,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
     return (
         <>
             <div className="Auth-Container flex justify-content-center align-items-center  w-full h-[85vh]">
-                <div className="Otp-Box flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30 w-[50%] h-[fit-content]">
+                <div className="Otp-Box flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30  h-[fit-content]">
                     <span className="material-symbols-outlined relative ml-auto cursor-pointer" onClick={closeEmailAuth}>
                         close
                     </span>
@@ -119,7 +119,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
                                         key={index}
                                         type="text"
                                         maxLength="1"
-                                       
+                                        inputMode="numeric"
                                         value={otp[index] || ""}
                                         onChange={(e) => {
                                             let newOtp = otp.split("");
@@ -140,7 +140,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
                                             }
                                         }}
                                         id={`otp-input-${index}`}
-                                        className="otpInput-Box  text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="otpInput-Box  text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900"
                                     />
                                 ))}
                             </div>

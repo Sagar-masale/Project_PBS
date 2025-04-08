@@ -77,7 +77,7 @@ function Home({
         <>
 
  <div className="img-slide">
-
+ 
 
  <div
   id="carouselExampleAutoplaying"

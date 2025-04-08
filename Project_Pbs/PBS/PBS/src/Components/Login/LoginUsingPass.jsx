@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Loading from '../PageLoader/Loading';
 import ForgotPassword from './ForgotPassword';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 // Profile Context
 import ProfileContext from '../Context/ProfileContext'
 import axios from 'axios';
@@ -238,7 +238,7 @@ const refreshAccessToken = async () => {
 
   return (
    <>
-   <Toaster position="top-right" reverseOrder={false} />
+  
    {isForgotPassBoxVisible  && (
     <ForgotPassword 
    

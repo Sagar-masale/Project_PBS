@@ -1,10 +1,13 @@
+.Otp-Box{
+    width: 500px;
+}
 .otpInput-Box{
     width: 50px;
     height:50px;
 }
 @media screen and (max-width:720px  ){
     .Otp-Box{
-        width: 80%;
+        width: 500px;
         padding: 3%;
     }
     .otpInput-Box{
@@ -17,14 +20,27 @@
         padding: 2%;
     }
     .Otp-Box{
-        width: 100%;
+        width: 400px;
+        
         padding: 3%;
     }
 }
 @media screen and (max-width:420px  ){
-
+    .Otp-Box{
+        width: 400px;
+    }
     .otpInput-Box{
         width: 40px;
         height: 40px;
+    }
+}
+
+@media screen and (max-width:360px  ){
+    .Otp-Box{
+        width: 300px;
+    }
+    .otpInput-Box{
+        width: 35px;
+        height: 35px;
     }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import './ForgotPassword.css'
 import Loading from '../PageLoader/Loading';
 
 const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
@@ -65,12 +66,9 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
 
   return (
     <>
-      <Toaster
-       position="top-right" 
-       reverseOrder={false} 
-       />
+
       {isLoading && <Loading />}
-      <div className="ForgotPassBox bg-white w-[25%] p-4 rounded-md flex flex-col gap-4">
+      <div className="ForgotPassBox bg-white  p-4 rounded-md flex flex-col gap-4">
         <span 
         className="close-Forgot-Box material-symbols-outlined relative ml-auto cursor-pointer"
         onClick={closeForgotEmailBox} 
