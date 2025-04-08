@@ -32,7 +32,7 @@ const App = () => {
     <>
     <Toaster position="top-left" />
         <ScrollToTop/>
-      <Routes>  {/* Define routes here */}
+      <Routes> 
         <Route path="/" element={  
         <Home 
         CatTitle1="Rings Collection" 
