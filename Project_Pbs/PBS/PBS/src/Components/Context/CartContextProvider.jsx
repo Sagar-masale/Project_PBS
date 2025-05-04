@@ -41,16 +41,14 @@ const CartContextProvider = ({children}) => {
             if (!product || !product._id || !product.ProductPrice) {
                 console.error("Invalid product data:", product);
                 return;
-            }else{
-              toast.success("Item added to your cart successfully!")
             }
         
             if (!userData?._id) {
-              
                 toast.error("Please log in as user to add items to the cart.");
-                
-                return;
+                return; 
             }
+        
+            toast.success("Item added to your cart successfully!");
         
             const existingProductIndex = cart.findIndex(item => item._id === product._id);
         
@@ -62,6 +60,7 @@ const CartContextProvider = ({children}) => {
                 setCart([...cart, { ...product, quantity: 1 }]);
             }
         };
+        
         
           
     const incrementQuantity = (id) => {

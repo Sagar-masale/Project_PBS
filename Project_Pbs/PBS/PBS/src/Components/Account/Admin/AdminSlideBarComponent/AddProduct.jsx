@@ -76,7 +76,7 @@ function AddProduct() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/v1/products/${apiEndpoint}`,
+        `https://backend-pbs-coo6.onrender.com/api/v1/products/${apiEndpoint}`,
         data,
         {
           headers: {

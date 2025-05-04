@@ -39,7 +39,7 @@ function Home({
           description: 'Perfect for Every Occasion',
           CollectionImgs: './HomeImgs/CollectionImg1.jpg',
           imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-          href: '#',
+          href: '/Ring-Page',
         },
         {
           id:2,
@@ -47,7 +47,7 @@ function Home({
           description: 'Classic gold earrings for timeless elegance.',
           CollectionImgs: './HomeImgs/CollectionImg2.jpg',
           imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-          href: '#',
+          href: '/Earrings-Page',
         },
         {
           id:3,
@@ -55,7 +55,7 @@ function Home({
           description: 'A modern silver necklace with a contemporary diamond design',
           CollectionImgs: './HomeImgs/CollectionImg3.jpg',
           imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-          href: '#',
+          href: '/Pendants-Page',
         },
         
         
@@ -174,10 +174,10 @@ function Home({
                   />
                 </div>
                 <h3 className="mt-6 text-sm text-gray-500">
-                  <a href={Collections.href}>
+                  <Link to={Collections.href}>
                     <span className="absolute inset-0" />
                     {Collections.nameCollectionImgTitle}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-base font-semibold text-gray-900">{Collections.description}</p>
               </div>
