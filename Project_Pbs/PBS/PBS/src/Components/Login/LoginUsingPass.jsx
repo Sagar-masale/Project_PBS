@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import axiosInstance from "../../Components/axiosInstance";
 import Loading from '../PageLoader/Loading';
 import ForgotPassword from './ForgotPassword';
 import toast from 'react-hot-toast';
@@ -49,7 +50,7 @@ function LoginUsingPass() {
       }
 
       // Make the API request with the Authorization header
-      const response = await axios.get('https://backend-pbs-coo6.onrender.com/api/v1/users/current-user', {
+      const response = await axiosInstance.get('http://localhost:8000/api/v1/users/current-user', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -91,7 +92,7 @@ const refreshAccessToken = async () => {
     const refreshToken = localStorage.getItem('refreshToken');
     if (!refreshToken) throw new Error('No refresh token found');
 
-    const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/users/refresh-token', { refreshToken });
+    const response = await axios.post('http://localhost:8000/api/v1/users/refresh-token', { refreshToken });
     if (response.data?.success) {
       const { accessToken, refreshToken: newRefreshToken } = response.data.data || {};
 
@@ -143,7 +144,7 @@ const refreshAccessToken = async () => {
       await new Promise((resolve) => setTimeout(resolve, 3000));
   
       // Send the login request
-      const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/users/login', payload);
+      const response = await axios.post('http://localhost:8000/api/v1/users/login', payload);
   
       if (response.data.success) {
         const { accessToken, refreshToken } = response.data.data;
