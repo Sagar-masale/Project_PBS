@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import swapIcon from "../../../public/swap.png";
 import { Link } from 'react-router-dom';
 import ProductContext from '../Context/ProductContext';
 
@@ -43,12 +44,8 @@ function ItemsInfo({ title = "..." }) {
       </div>
       <div className="Compare-Type-Box">
         <div className="Compare-Box">
-          <i className='bx bx-git-compare Compare-Arrow'></i>
+          <img src={swapIcon} alt={"Compare Icon"} className='Compare-Arrow'/>
           <span className="Compare-Title">COMPARE</span>
-        </div>
-        <div className="BEST-SELLER-BOX">
-          <span className="Seller-Title">SORT BY : BEST SELLERS</span>
-          <i className='bx bx-chevron-down SELLER-Arrow'></i>
         </div>
       </div>
     </>

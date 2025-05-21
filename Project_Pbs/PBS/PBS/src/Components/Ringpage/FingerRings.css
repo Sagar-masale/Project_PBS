@@ -201,15 +201,16 @@
 }
 .Compare-Img-Box{
     /* border: 1px solid yellow; */
-    margin-left: .5%;
-    margin-top: .5%;
+    margin-left: auto;
+    margin-top: 20px;
     position: absolute;
-    width: 37px;
-    height: 5%;
+    width: 30px;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1;
+    cursor: pointer;
 }
 .Add-Img-Box{
     border: 1px solid rgb(34, 255, 0);

@@ -6,10 +6,15 @@ import './ItemDetails.css'
 import { useNavigate } from 'react-router-dom';
 import CustomerReviews from './CustomerReviews';
 import axios from 'axios';
+import moreIcon from "../../../public/menu.png";
 import toast, { Toaster } from 'react-hot-toast';
+import EditProductDetails from './EditProductDetails';
 
 
 function ItemDetails() {
+
+  const [showEditPopUp, setShowEditPopUp] = useState(false);
+
     const {userData} = useContext(ProfileContext);
     const rating = 3;
     const { productItems, addToCart  } = useContext(CartContext);
@@ -78,8 +83,34 @@ function ItemDetails() {
         }
       }, [showReviewBox, userData]);
       
+
+      const [currentProduct, setCurrentProduct] = useState([]);
       
-      
+        const GetProductDetailsForUpdate = (productItems) => {
+          setCurrentProduct(productItems);
+          setShowEditPopUp(true);
+        };
+
+      useEffect(() => {
+  console.log("Ring details for admin (updated):", currentProduct);
+}, [currentProduct]);
+
+const fetchUpdatedProduct = async () => {
+  try {
+    const response = await axios.get(
+      `https://backend-pbs-coo6.onrender.com/api/v1/products/get-productBy-id?productId=${productItems._id}`
+    );
+    const updatedProduct = response.data.product;
+
+    // Update productItems here if it's in state or call a context method if available
+    setCurrentProduct(updatedProduct); // update local state for edit pop-up
+    setCurrentImage(updatedProduct.ProductImages[0]); // update image
+  } catch (error) {
+    console.error("Failed to fetch updated product:", error);
+  }
+};
+
+console.log("Product Items:", productItems);
     
   return (
     <>
@@ -130,7 +161,11 @@ function ItemDetails() {
           <div className="p-6 max-w-lg  Right-Side-Product-Details-Box rounded-lg">
       
        {/* Rating */}
+            <div className="More flex justify-between" onClick={() => GetProductDetailsForUpdate(productItems)}>
+
        <span className="text-sm text-green-600 font-semibold">In stock</span>
+                  <img src={moreIcon} alt="More options about product for admin" className="w-8" />
+              </div>
        <div className="flex items-center mt-2 mb-4">
           <div className="flex">
             {[...Array(5)].map((_, i) => (
@@ -255,7 +290,15 @@ function ItemDetails() {
 
     </div>
   
-    
+  {showEditPopUp && (
+  <EditProductDetails
+    ring={currentProduct}
+    onClose={() => setShowEditPopUp(false)}
+    refreshData={fetchUpdatedProduct} // pass this here
+  />
+)}
+
+
     </>
   )
 }

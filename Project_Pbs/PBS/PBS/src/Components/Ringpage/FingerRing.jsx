@@ -23,6 +23,7 @@ const FingerRings=()=>{
 
   const [rings, setRings] = useState([]);
 
+
   useEffect(() => {
     const fetchRingData = async () => {
       try {
@@ -38,18 +39,17 @@ const FingerRings=()=>{
 
   const GetInfo=(ring)=>{
     setCartItems(ring)
-    console.log("addRingCart"+ring);
     document.querySelector('.CartBox').classList.toggle('CartBox-Show')
   }
   
   const GetProductDetails = (ring) => {
     setProductItems(ring)
-    console.log("addRingCart"+ring);
-    navigate(`${location.pathname=''}/ItemDetails`);
+    navigate('/ItemDetails');
+
     
   }
 
-  console.log("RingData is ", rings);
+
   
   return (
     <>
@@ -63,9 +63,9 @@ const FingerRings=()=>{
           
           <div className="Show-Rings-Box ">
           <div className="Ring-Box R-Box1 Box-one"  key={ring._id} >
-              <div className="Ring-Img-Box"  onClick={() => GetProductDetails(ring)}><div className="Compare-Img-Box">
-                  <i className='bx bx-git-compare Compare-Arrow-Img'></i>
-              </div>
+              <div className="Ring-Img-Box"  onClick={() => GetProductDetails(ring)}>
+
+              
               <div className="Add-Img-Box">
                </div>
                <img loading='lazy' src={ring.ProductImages[0]}className="Finger-Style" />
