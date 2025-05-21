@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import CartContext from '../Context/CartContext';
+import AdminContext from "../Context/AdminContext";
 import ProfileContext from '../Context/ProfileContext';
 import ReviewContext from "../Context/ReviewContext"
 import './ItemDetails.css'
@@ -16,6 +17,7 @@ function ItemDetails() {
   const [showEditPopUp, setShowEditPopUp] = useState(false);
 
     const {userData} = useContext(ProfileContext);
+    const {adminData} = useContext(AdminContext);
     const rating = 3;
     const { productItems, addToCart  } = useContext(CartContext);
     const navigate = useNavigate();
@@ -161,10 +163,12 @@ console.log("Product Items:", productItems);
           <div className="p-6 max-w-lg  Right-Side-Product-Details-Box rounded-lg">
       
        {/* Rating */}
-            <div className="More flex justify-between" onClick={() => GetProductDetailsForUpdate(productItems)}>
+            <div className="More flex justify-between" >
 
        <span className="text-sm text-green-600 font-semibold">In stock</span>
-                  <img src={moreIcon} alt="More options about product for admin" className="w-8" />
+               {adminData &&(
+                <img src={moreIcon} alt="More options about product for admin" className="w-8" onClick={() => GetProductDetailsForUpdate(productItems)}/>
+               )}
               </div>
        <div className="flex items-center mt-2 mb-4">
           <div className="flex">
