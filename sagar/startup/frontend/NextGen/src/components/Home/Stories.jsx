@@ -26,10 +26,14 @@ const stories = [
     name: "Dhoni MS",
     img: "https://livingtotellatale.wordpress.com/wp-content/uploads/2020/08/msd.jpg",
   },
+    {
+    name: "Dhoni MS",
+    img: "https://livingtotellatale.wordpress.com/wp-content/uploads/2020/08/msd.jpg",
+  },  
 ];
 
 const StoryItem = ({ name, img }) => (
-<div className="flex flex-col items-center mx-1">
+<div className="flex flex-col items-center mx-1 z-10">
   <div className="w-[80px] h-[80px] rounded-full bg-gradient-to-br from-[#3DC1F9] to-[#0150A0] p-[2px] flex items-center justify-center">
     <div className="w-full h-full rounded-full bg-white p-[3px] flex items-center justify-center">
       <img
@@ -46,9 +50,9 @@ const StoryItem = ({ name, img }) => (
 
 const Stories = () => {
   return (
-    <div className="flex items-center ml-8 space-x-3 gap-5 overflow-x-auto py-2">
+    <div className="flex items-center mt-5 ml-8 space-x-3 gap-4 overflow-x-auto py-2 z-10">
       {/* Your Snap */}
-      <div className="flex flex-col items-center mx-1">
+      <div className="flex flex-col items-center mx-1 z-10">
         <div className="w-[80px] h-[80px] rounded-full bg-[#3B9DFF] flex  items-center  justify-center text-white text-2xl">
           +
         </div>
@@ -61,7 +65,7 @@ const Stories = () => {
       ))}
 
       {/* Scroll Arrow */}
-      <div className="w-[80px] h-[80px]  bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+      <div className="w-[80px] h-[80px]  bg-blue-100 hover:bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-5 z-10">
         <ChevronRight size={18} />
       </div>
     </div>

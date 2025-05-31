@@ -6,7 +6,13 @@ const navItems = [
   { name: "Messages", icon: <MessageCircle /> },
   { name: "Notifications", icon: <Bell /> },
   { name: "Settings", icon: <Settings /> },
-  { name: "Profile", icon: <User /> },
+  { name: "Profile", icon: (
+      <img
+        src="https://english.cdn.zeenews.com/sites/default/files/2024/10/05/1535993-untitled-design-32.jpg"
+        alt="Virat Kohli"
+        className="w-6 h-6 rounded-full object-cover"
+      />
+    ),},
 ];
 
 function SidebarNav() {
