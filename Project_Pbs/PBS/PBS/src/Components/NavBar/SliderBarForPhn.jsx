@@ -124,7 +124,7 @@ function SliderBarForPhn() {
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center py-4">
                 <button type="submit" className="p-2">
-                  <span className="material-symbols-outlined Slider-Bar-Search text-3xl">Search</span>
+                  <span className="material-symbols-outlined Slider-Bar-Search text-3xl">search</span>
                 </button>
               </span>
               <input
