@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.AdminLogin-TypeOtp{
+    font-weight: 400;
+    color: rgb(190, 190, 190);
+    border-bottom: 2px solid rgb(190, 190, 190);
+}
+.AdminLogin-TypePass{
+    font-weight: 600;
+    color: #4f3267;
+    border-bottom: 2px solid #432a58;
+}
+.Close-Login-Box-Arrow-Admin{
+    margin-top: 5px;
+    margin-left: 180px;
+    font-size: 40px;
+    color: #4f3267;
+    transition: all linear .2s;
+}
+.Close-Login-Box-Arrow-Admin:hover{
+    font-size: 38px;
+    color: #6c478b;
+}

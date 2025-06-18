@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.pass-Container{
+    width:800px;
+    height: 90vh;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.Close-Login-Box-Arrow-pass{
+    margin-top: 8px;
+    margin-left: 220px;
+    font-size: 40px;
+    color: #432a58;
+    transition: all linear .2s;
+}
+.Close-Login-Box-Arrow-pass:hover{
+    color: #4f3267;
+    font-size: 38px;
+}
+/* .TypeLogin1{
+    font-weight: 400;
+    color: rgb(130, 130, 130);
+    border-bottom: 2px solid rgb(143, 142, 142);
+} */
+
+
+.RightSide-Block-Login{
+    height: 100%;
+}
+.Login-Button{
+    background-color: #4f3267;
+}
+.Login-Button:hover{
+    background-color: #432a58;
+}
+.LoginPassBox{
+    padding: 3%;
+}

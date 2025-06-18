@@ -1,0 +1,20 @@
+.profile-container {
+  width: 100%;
+  padding: 5%;
+  padding-top: 2%;
+
+
+  }
+  .editUserAcc{
+    border: 1px solid #4f3267;
+    color: #4f3267;
+  }
+  .logoutAcc{
+    display: flex;
+  }
+  
+  @media screen and (max-width:490px  ){
+    .logOutUAcc{
+      display: none;
+    }
+  }

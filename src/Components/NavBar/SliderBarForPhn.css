@@ -1,0 +1,27 @@
+
+.SliderBar-,.Slider-Bar-Search{
+    color:#4F3267;
+}
+.SliderBar-Color-Box{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 114px;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(246, 239, 246);
+}
+.sliderBar-Logos{
+    color: #4F3267;
+}
+.User-LogOunt{
+    display: none;
+}
+.Profile-Box{
+
+    /* border: 1px solid red; */
+    position:absolute;
+    bottom: 2%;
+    
+}

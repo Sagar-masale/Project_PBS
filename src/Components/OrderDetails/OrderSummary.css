@@ -1,0 +1,22 @@
+.coupon-Apply-Button{
+    background-color: #4f3267;
+    
+}
+.discount{
+    color: #4f3267;
+}
+.OrderSummary-MainContainer{
+    width: 100%;
+    
+    height: fit-content;
+    background-color: rgb(246, 239, 246);
+}
+.Coupon-Text{
+    width: 50%;
+    border: 1px solid rgb(53, 53, 53);
+    background-color: rgb(246, 239, 246);
+}
+.coupon-Apply-Button:hover{
+    
+    background-color: #432a58;
+}
