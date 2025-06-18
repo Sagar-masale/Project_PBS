@@ -138,7 +138,11 @@ function SliderBarForPhn() {
           </form>
         </div>
 
+<<<<<<< HEAD
         {/* Menu items */}
+=======
+        {/* Menu items block */}
+>>>>>>> master
         <div className="flex-1 pl-2">
           <ul className="pt-2 space-y-1 text-sm flex flex-col gap-3">
             {menuLinks.map((item) => item.active && (
