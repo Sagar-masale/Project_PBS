@@ -1,10 +1,6 @@
 import React from 'react';
 import ScrollToTop from './Components/ScrollToTop.jsx';
 import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
-<<<<<<< HEAD
-=======
-import About from './Components/About_PBS/About.jsx';
->>>>>>> master
 import CartBox from './Components/CartAdd/CartBox.jsx';
 import Home from './Components/Home/Home.jsx';
 import FingerRings from "./Components/Ringpage/FingerRing"
@@ -28,6 +24,7 @@ import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
 import OrderDetail from './Components/OrderDetails/OrderDetail.jsx';
 import OrderBill from './Components/OrderDetails/OrderBill.jsx';
+import About from './Components/About_PBS/About.jsx';
 import { Toaster } from 'react-hot-toast';
 
 
@@ -47,10 +44,7 @@ const App = () => {
         CatTitle6="Classic Chains"
         />} />
         <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
-<<<<<<< HEAD
-=======
         <Route path="About" element={<><About/></>} />
->>>>>>> master
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />
         <Route path="/Pendants-Page" element={<><ItemsInfo title="Pendants" /><CartBox /><PenDants /></>} />
         <Route path="/Mangalsutra-Page" element={<><ItemsInfo title="Mangalsutra" /><CartBox /><MangalSutra /></>} />

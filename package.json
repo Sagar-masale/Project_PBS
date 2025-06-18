@@ -18,10 +18,7 @@
     "framer-motion": "^12.4.1",
     "heroicons": "^2.1.5",
     "js-cookie": "^3.0.5",
-<<<<<<< HEAD
-=======
     "lucide-react": "^0.516.0",
->>>>>>> master
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.5.1",
