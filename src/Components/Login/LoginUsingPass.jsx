@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axiosInstance from "../../Components/axiosInstance";
 import Loading from '../PageLoader/Loading';
 import ForgotPassword from './ForgotPassword';
@@ -12,7 +13,7 @@ import RegisterContext from '../Context/RegisterContext';
 
 
 
-function LoginUsingPass() {
+function LoginUsingPass({onSwitchToSignup}) {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [accessToken, setAccessToken] = useState('');
@@ -213,28 +214,14 @@ const refreshAccessToken = async () => {
 
 
   const CloseLoginBox = () => {
-    toggleClass('.LoginPassBox', 'LoginPassBoxShow');
     setShowForgotText(false);
     setEmailOrPhone('');
     setPassword('');
     setIsForgotPassBoxVisible(false);
   };
 
-  const ShowLoginOtpBox = () => {
-    toggleClass('.LoginPassBox', 'LoginPassBoxShow');
-    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
-    setShowForgotText(false);
-    setEmailOrPhone('');
-    setPassword('');
-  };
-  
-  const ShowSignUpBox = () => {
-    toggleClass('.LoginPassBox', 'LoginPassBoxShow');
-    toggleClass('.SignUpBox', 'SignUpBoxShow');
-    setShowForgotText(false);
-    setEmailOrPhone('');
-    setPassword('');
-  };
+
+
 
   return (
    <>
@@ -255,19 +242,22 @@ const refreshAccessToken = async () => {
 
    {isLoading && <Loading />}
    {isLoginContainerVisible && (
-   <div className="Login-Main-Container">
+   <div className="Login-Main-Container  bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5">
       <div className=" pass-Container">
-        <div className="LeftSide-Block-Login rounded-l-lg bg-white">
-          <span
-            className="material-symbols-outlined Close-Login-Box-Arrow-Phn relative cursor-pointer"
-            onClick={CloseLoginBox}
-          >
-            close
-          </span>
+    <div className="LeftSide-Block-Login relative rounded-l-lg bg-white">
+      <Link to={'/'}>
+        <span
+          className="material-symbols-outlined absolute top-4 right-10 text-2xl text-gray-700 hover:text-black cursor-pointer z-50"
+          onClick={CloseLoginBox}
+        >
+          close
+        </span>
+      </Link>
+
           <h1 className="LoginName text-3xl mt-6">Login</h1>
 
           <div className="Top-Side mt-8">
-            <span className="TypeLogin1" onClick={ShowLoginOtpBox}>
+            <span className="TypeLogin1 cursor-not-allowed">
               <span className="UseOtp cursor-pointer">Using OTP</span>
             </span>
             <span className="TypeLogin2 TypeLogin1-Otp   TypeLogin2-Pass">
@@ -339,26 +329,12 @@ const refreshAccessToken = async () => {
           <span className="NewUser mt-10">
             New User?{' '}
             <span
-              onClick={ShowSignUpBox}
+              onClick={onSwitchToSignup}
               className="New-SignUp underline cursor-pointer"
             >
               Sign Up Now
             </span>
           </span>
-        </div>
-
-        <div className="RightSide-Block-Login justify-center align-middle ">
-          <span
-            className="material-symbols-outlined Close-Login-Box-Arrow-pass absolute cursor-pointer"
-            onClick={CloseLoginBox}
-          >
-            close
-          </span>
-          <img
-            src="./LoginImgs/LoginImg1.png"
-            alt="Login visual"
-            className="w-full loginImage rounded-r-lg"
-          />
         </div>
       </div>
     </div>

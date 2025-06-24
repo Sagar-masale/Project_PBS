@@ -5,9 +5,6 @@
        
     }
 
-    .LeftSide-Block-Login,.LeftSide-Block-SignUp{
-        width: 60%;
-    }
 
 
     
@@ -302,8 +299,6 @@
         }
         .LeftSide-Block-Login{
             width: 100%;
-            margin-left: 4%;
-            margin-right: 4%;
             border-top-right-radius:0.5rem;
             border-bottom-right-radius:0.5rem;
         }
