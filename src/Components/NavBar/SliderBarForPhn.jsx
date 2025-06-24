@@ -31,9 +31,6 @@ function SliderBarForPhn() {
   const menuLinkClick = (item) => {
     if (item.name === "Logout") {
       handleLogout();
-    } 
-    else if (item.name === "Login"){
-      CloseLoginBox()
     }
     else {
       navigate(item.slug);
@@ -88,8 +85,8 @@ function SliderBarForPhn() {
     { id: 6, name: 'Settings', slug: '/settings', logo: 'settings', active: true },
 	{ 
 		id: 7, 
-		name: loginLogoutTitle, // Dynamically set based on userData
-		slug: userData ? '/' : '/',     // Redirect to login if logged out
+		name: loginLogoutTitle,
+		slug: userData ? '/' : '/login',   
 		logo: 'login', 
 		active: true 
 	  },

@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ScrollToTop from './Components/ScrollToTop.jsx';
-import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { Routes, Route, useLocation } from 'react-router-dom';
 import CartBox from './Components/CartAdd/CartBox.jsx';
 import Home from './Components/Home/Home.jsx';
 import FingerRings from "./Components/Ringpage/FingerRing"
@@ -26,13 +26,27 @@ import OrderDetail from './Components/OrderDetails/OrderDetail.jsx';
 import OrderBill from './Components/OrderDetails/OrderBill.jsx';
 import About from './Components/About_PBS/About.jsx';
 import { Toaster } from 'react-hot-toast';
+import LoginUsingPass from './Components/Login/LoginUsingPass.jsx';
+import SignUpUser from './Components/Login/SignUpUser.jsx';
 
 
 const App = () => {
+  const location = useLocation();
+  const [showSignup, setShowSignup] = useState(false);
+
+  // Check if current path is "/login"
+  const isAuthPage = location.pathname === '/login';
   return (
     <>
     <Toaster position="top-left" />
         <ScrollToTop/>
+         {isAuthPage ? (
+        showSignup ? (
+          <SignUpUser onSwitchToLogin={() => setShowSignup(false)} />
+        ) : (
+          <LoginUsingPass onSwitchToSignup={() => setShowSignup(true)} />
+        )
+      ):(
       <Routes> 
         <Route path="/" element={  
         <Home 
@@ -64,6 +78,8 @@ const App = () => {
         <Route path="/Order-Details" element={<OrderDetail/>}/>
         <Route path="/Bill-Details" element={<OrderBill/>}/>
       </Routes>
+        )
+        }
       
     </>
   );

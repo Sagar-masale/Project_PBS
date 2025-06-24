@@ -3,8 +3,10 @@ import "./SignUpUser.css";
 import axios from "axios";
 import RegisterContext from "../Context/RegisterContext";
 import EmailAuth from "../AuthontiCations/EmailAuth";
+import { Link } from "react-router-dom";
+import {X} from 'lucide-react';
 
-function SignUpUser() {
+function SignUpUser({onSwitchToLogin}) {
   const [email, setEmail] = useState("");
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -61,54 +63,37 @@ function SignUpUser() {
       });
   };
 
-  const toggleClass = (selector, className) => {
-    document.querySelector(selector).classList.toggle(className);
-  };
 
   const closeEmailAuthBox = () => {
     setIsEmailSubmitted();
   }
   const CloseSignUpBox = () => {
-    //alert("Verification failed if you want to signup then again you want to verify your email!");
-    toggleClass('.SignUpBox', 'SignUpBoxShow');
     setIsEmailSubmitted(false);
     setIsEmailVerified(false);
     setEmail("");
   };
 
-  const ShowLoginBox = () => {
-    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
-    toggleClass('.SignUpBox', 'SignUpBoxShow');
-  };
 
 
   return (
     
     <>
-    <div className="Login-Main-Container pt-20">
+    <div className="Login-Main-Container pb-10 bg-gradient-to-br from-purple-100 via-white to-pink-100 w-full min-h-[60vh] max-h-full flex justify-center"
+    style={{alignItems:'center'}}
+    >
       <div className="SignUp-Pass-Container justify-center">
         {!isEmailSubmitted ? (
           <div className="EmailVerificationContainer">
           
           <section class="flex justify-center items-center">
             <button
-              href="/"
-              onClick={CloseSignUpBox}
+              onClick={onSwitchToLogin}
               className="ml-auto mb-10 group flex justify-center p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-[#4f3267] to-[#432a58] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                stroke-width="0"
-                fill="currentColor"
-                stroke="currentColor"
-              >
-                <path
-                  d="M8 2H1L9.26086 13.0145L1.44995 21.9999H4.09998L10.4883 14.651L16 22H23L14.3917 10.5223L21.8001 2H19.1501L13.1643 8.88578L8 2ZM17 20L5 4H7L19 20H17Z"
-                ></path>
-              </svg>
+              <X 
+              width={20}
+              height={20}
+              />
               <span
                 className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700"
               >
@@ -172,12 +157,13 @@ function SignUpUser() {
         ) : (
           
           <div className="LeftSide-Block-SignUp rounded-lg bg-white w-[100%]  p-[40px] h-[100%]">
-              <span
+            <Link to={'/'}>
+            <span
             className="material-symbols-outlined closeSignUpBox relative cursor-pointer"
-            onClick={CloseSignUpBox}
           >
             close
           </span>
+            </Link>
             <h1 className="LoginName text-3xl">Sign Up</h1>
             <div className="Input-Username flex justify-center mt-5">
               <form onSubmit={registerUser} className="FormUser">
@@ -250,7 +236,7 @@ function SignUpUser() {
               <span className="NewUser mt-10">
             Already a User?{' '}
             <span
-              onClick={ShowLoginBox}
+              onClick={onSwitchToLogin}
               className="New-SignUp underline cursor-pointer"
             >
               Login
