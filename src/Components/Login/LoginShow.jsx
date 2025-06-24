@@ -11,13 +11,11 @@ function LoginShow() {
   const ShowUserLogin=()=>{
         if(!userData){
       toggleClass('.AccountShow','AccountShowBlock'); 
-      toggleClass('.LoginOtpBox','LoginOtpBoxShow');
     }
   }
 
   const ShowAdminLogin=()=>{
     toggleClass('.AccountShow','AccountShowBlock');
-    toggleClass('.AdminLoginBox','AdminLoginBoxShow');
   }
   return (
     <>
@@ -36,8 +34,8 @@ function LoginShow() {
           </div>
         </div>
         <div className="bg-gray-50   py-3 sm:flex sm:flex-row-reverse justify-center px-5">
-          <Link to={'login'}><button type="button" className="userLogin-Button w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-20 hover:w-44 ease-in-out duration-150 ">User</button></Link>
-          <Link to={'login_admin'}><button type="button" className=" w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-20 hover:w-44 ease-in-out duration-150">Admin</button></Link>
+          <Link to={'login'}><button onClick={ShowUserLogin} type="button" className="userLogin-Button w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-20 hover:w-44 ease-in-out duration-150 ">User</button></Link>
+          <Link to={'login_admin'}><button onClick={ShowAdminLogin} type="button" className=" w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-20 hover:w-44 ease-in-out duration-150">Admin</button></Link>
       
        
         </div>

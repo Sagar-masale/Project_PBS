@@ -28,7 +28,7 @@ import About from './Components/About_PBS/About.jsx';
 import { Toaster } from 'react-hot-toast';
 import LoginUsingPass from './Components/Login/LoginUsingPass.jsx';
 import SignUpUser from './Components/Login/SignUpUser.jsx';
-
+import AdminLogin from './Components/Login/AdminLogin.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -57,6 +57,7 @@ const App = () => {
         CatTitle5="Stylish Bangles" 
         CatTitle6="Classic Chains"
         />} />
+        <Route path="/login_admin" element={<><AdminLogin /></>} />
         <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
         <Route path="About" element={<><About/></>} />
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />

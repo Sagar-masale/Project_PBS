@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './AdminLogin.css';
 import AdminContext from '../Context/AdminContext';
-
+import { Link } from 'react-router-dom';
 
 function AdminLogin() {
 
@@ -14,16 +14,6 @@ function AdminLogin() {
 
     const {setAdminData, setAdminLoginNotify} = useContext(AdminContext);
 
-
-
-
-    const toggleClass = (selector, className) => {
-        document.querySelector(selector).classList.toggle(className);
-      };
-    
-    const CloseLoginBox=()=>{
-        toggleClass('.AdminLoginBox','AdminLoginBoxShow');
-    }
 
     const  fetchAdminProfile = async () => {
       try {
@@ -169,88 +159,65 @@ function AdminLogin() {
  
 
   return (
-    <div className="Login-Main-Container">
-      
-    <div className="Login-Pass-Container">
-      <div className="LeftSide-Block-Login rounded-l-lg bg-white h-full">
-      <span
-            className="material-symbols-outlined Close-Login-Box-Arrow-Phn  relative cursor-pointer"
-            onClick={CloseLoginBox}
-          >
-            close
-          </span>
-        <h1 className="LoginName text-3xl">Admin</h1>
-        <div className="Top-Side mt-8">
-          <span className="TypeLogin1 AdminLogin-TypeOtp">
-            <span className="UseOtp cursor-not-allowed">Using OTP</span>
-          </span>
-          <span className="w-full AdminLogin-TypePass">
-            <span className="UseOtp cursor-pointer">Using Password</span>
-          </span>
-        </div>
-
-        <div className="Input-Username mt-8 w-full">
-          <form onSubmit={AdminLogin} className="FormUser" method='post'>
-            <div className="SetInputFeilds_Admin flex flex-col gap-9 w-full">
-            <input
-              onChange={(e)=>setEmailOrPhoneAdmin(e.target.value)}
-              type="text"
-              name="emailOrNum"
-              required
-              placeholder="Enter Your Mobile Number / Email*"
-              className="Input-User focus:ring-0"
-            />
-            <input
-              onChange={(e)=>setPasswordAdmin(e.target.value)}
-              type="password"
-              name="adminPassword"
-              required
-              placeholder="Enter Password*"
-              className="Input-User focus:ring-0"
-            />
-            </div>
-            <div className="CheckBoxes flex flex-col w-full">
-              <span className="CheckBox-Gap flex items-center gap-3">
-                <input
-                  // onChange={(e)=>setRemember(e.target.checked)}
-                  type="checkbox"
-                  className="checkbox focus:ring-0 w-5 h-5"
-                />
-                <span className="Remember">Remember Me</span>
-              </span>
+<div className="Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 min-h-screen flex  items-center justify-center px-4">
+  <div className="Login-Pass-Container w-full max-w-lg flex-col bg-white rounded-lg shadow-lg p-6 relative">
     
-            </div>
+    {/* Close Icon */}
+    <Link to="/">
+      <span className="material-symbols-outlined absolute top-4 right-4 text-2xl cursor-pointer">
+        close
+      </span>
+    </Link>
 
-            
+    {/* Heading */}
+    <h1 className="text-3xl font-semibold text-center text-[#4F3267]">Admin</h1>
 
-            <button
-              type='submit'  
-              className="Login-Button text-white  w-44 h-12 rounded-md cursor-pointer  duration-200 mt-10"
-            >
-                Login
-            </button>
-          </form>
-        </div>
-
- 
-      </div>
-
-      <div className="RightSide-Block-Login  justify-center align-middle w-64">
-        <span
-          className="material-symbols-outlined Close-Login-Box-Arrow-Admin absolute cursor-pointer"
-          onClick={CloseLoginBox}
-        >
-          close
-        </span>
-        <img
-          src="./LoginImgs/LoginImg1.png"
-          alt="Login visual"
-          className="w-full h-full rounded-r-lg"
-        />
-      </div>
+    {/* Tabs */}
+    <div className="flex justify-center  gap-5 w-full mt-8 border-b pb-2">
+      <span className="text-gray-500 cursor-not-allowed">Using OTP</span>
+      <span className="text-[#4F3267] cursor-pointer font-medium">Using Password</span>
     </div>
-  
+
+    {/* Form */}
+    <form onSubmit={AdminLogin} className="mt-8 space-y-6" method="post">
+      <input
+        onChange={(e) => setEmailOrPhoneAdmin(e.target.value)}
+        type="text"
+        name="emailOrNum"
+        required
+        placeholder="Enter Your Mobile Number / Email*"
+        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+      />
+      <input
+        onChange={(e) => setPasswordAdmin(e.target.value)}
+        type="password"
+        name="adminPassword"
+        required
+        placeholder="Enter Password*"
+        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+      />
+
+      <div className="flex items-center gap-3">
+       <input
+          type="checkbox"
+          className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
+        />
+
+
+
+        <span className="text-gray-600">Remember Me</span>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full h-12 bg-[#4F3267] hover:bg-purple-700 text-white rounded-md transition duration-200"
+      >
+        Login
+      </button>
+    </form>
   </div>
+</div>
+
   )
 }
 

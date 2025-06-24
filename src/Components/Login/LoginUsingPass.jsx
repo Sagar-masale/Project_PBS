@@ -242,7 +242,7 @@ const refreshAccessToken = async () => {
 
    {isLoading && <Loading />}
    {isLoginContainerVisible && (
-   <div className="Login-Main-Container  bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5">
+   <div className="Login-Main-Container  bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5 pt-5">
       <div className=" pass-Container">
     <div className="LeftSide-Block-Login relative rounded-l-lg bg-white">
       <Link to={'/'}>
@@ -258,7 +258,7 @@ const refreshAccessToken = async () => {
 
           <div className="Top-Side mt-8">
             <span className="TypeLogin1 cursor-not-allowed">
-              <span className="UseOtp cursor-pointer">Using OTP</span>
+              <span className="UseOtp cursor-not-allowed">Using OTP</span>
             </span>
             <span className="TypeLogin2 TypeLogin1-Otp   TypeLogin2-Pass">
               <span className="UseOtp cursor-pointer">Using Password</span>
@@ -293,9 +293,9 @@ const refreshAccessToken = async () => {
               )}     
               <div className="CheckBoxes mt-10 flex flex-col gap-2">
                 <span className="CheckBox-Gap flex items-center gap-3">
-                  <input
+                <input
                     type="checkbox"
-                    className="checkbox  focus:ring-0 w-5 h-5"
+                    className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
                   />
                   <span className="Remember">Remember Me</span>
                 </span>
@@ -303,7 +303,7 @@ const refreshAccessToken = async () => {
                   <input
                     type="checkbox"
                     required
-                    className="checkbox  focus:ring-0 w-5 h-5"
+                    className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
                   />
                   <span className="Remember text-wrap text focus:ring-0">
                     By continuing, I agree to{' '}
