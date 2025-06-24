@@ -242,102 +242,110 @@ const refreshAccessToken = async () => {
 
    {isLoading && <Loading />}
    {isLoginContainerVisible && (
-   <div className="Login-Main-Container  bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5 pt-5">
-      <div className=" pass-Container">
-    <div className="LeftSide-Block-Login relative rounded-l-lg bg-white">
+<div className="Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5 pt-5 min-h-screen flex items-center justify-center px-4">
+  <div className="pass-Container w-full max-w-lg">
+    <div className="LeftSide-Block-Login relative rounded-l-lg bg-white p-6 shadow-lg">
+
       <Link to={'/'}>
         <span
-          className="material-symbols-outlined absolute top-4 right-10 text-2xl text-gray-700 hover:text-black cursor-pointer z-50"
+          className="material-symbols-outlined absolute top-4 right-6 text-3xl text-gray-700 hover:text-black cursor-pointer z-50"
           onClick={CloseLoginBox}
         >
           close
         </span>
       </Link>
 
-          <h1 className="LoginName text-3xl mt-6">Login</h1>
+      <h1 className="LoginName text-2xl md:text-3xl font-semibold text-[#4f3267] mt-6 text-center">Login</h1>
 
-          <div className="Top-Side mt-8">
-            <span className="TypeLogin1 cursor-not-allowed">
-              <span className="UseOtp cursor-not-allowed">Using OTP</span>
-            </span>
-            <span className="TypeLogin2 TypeLogin1-Otp   TypeLogin2-Pass">
-              <span className="UseOtp cursor-pointer">Using Password</span>
-            </span>
-          </div>
-
-          <div className="Input-Username flex justify-center mt-8">
-            <form onSubmit={userLogin} className="FormUser">
-              <input
-                type="text"
-                name="emailOrNum"
-                required
-                placeholder="Enter Your Mobile Number / Email"
-                className="Input-User focus:ring-0"
-                onChange={(e) => setEmailOrPhone(e.target.value)}
-                value={emailOrPhone}
-              />
-              <input
-                type="password"
-                name="password"
-                required
-                placeholder="Enter Password"
-                className="Input-User focus:ring-0 mt-9"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-              {showForgotText && (
-                       <span className="changeUserPass ml-auto mt-2 text-[#4f3267] font-medium text-[16px] cursor-pointer" 
-                       onClick={forgotUserPass}>
-                         Forgot Password ?
-                         </span>
-              )}     
-              <div className="CheckBoxes mt-10 flex flex-col gap-2">
-                <span className="CheckBox-Gap flex items-center gap-3">
-                <input
-                    type="checkbox"
-                    className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
-                  />
-                  <span className="Remember">Remember Me</span>
-                </span>
-                <span className="CheckBox-Gap flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    required
-                    className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
-                  />
-                  <span className="Remember text-wrap text focus:ring-0">
-                    By continuing, I agree to{' '}
-                    <span className="Conditions font-bold border-b-2 cursor-pointer">
-                      Terms & Conditions
-                    </span>{' '}
-                    &{' '}
-                    <span className="Policy  font-bold border-b-2 cursor-pointer">
-                      Privacy Policy
-                    </span>
-                  </span>
-                </span>
-              </div>
-
-              <input
-                type="submit"
-                value="Login"
-                className="Login-Button mt-10 text-white rounded-md cursor-pointer duration-200 Button-Submit"
-              />
-            </form>
-          </div>
-
-          <span className="NewUser mt-10">
-            New User?{' '}
-            <span
-              onClick={onSwitchToSignup}
-              className="New-SignUp underline cursor-pointer"
-            >
-              Sign Up Now
-            </span>
-          </span>
-        </div>
+      <div className="Top-Side mt-8 flex justify-between text-sm md:text-base">
+        <span className="TypeLogin1 cursor-not-allowed">
+          <span className="UseOtp cursor-not-allowed">Using OTP</span>
+        </span>
+        <span className="TypeLogin2 TypeLogin1-Otp TypeLogin2-Pass">
+          <span className="UseOtp cursor-pointer text-[#4f3267] font-medium">Using Password</span>
+        </span>
       </div>
+
+      <div className="Input-Username flex justify-center mt-8">
+        <form onSubmit={userLogin} className="FormUser w-full flex flex-col gap-6 text-sm md:text-base">
+
+          <input
+            type="text"
+            name="emailOrNum"
+            required
+            placeholder="Enter Your Mobile Number / Email"
+            className="Input-User focus:ring-0 p-3 border border-gray-300 rounded-md"
+            onChange={(e) => setEmailOrPhone(e.target.value)}
+            value={emailOrPhone}
+          />
+
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="Enter Password"
+            className="Input-User focus:ring-0 p-3 border border-gray-300 rounded-md mt-2"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+
+          {showForgotText && (
+            <span
+              className="changeUserPass ml-auto text-[#4f3267] font-medium text-sm md:text-base cursor-pointer"
+              onClick={forgotUserPass}
+            >
+              Forgot Password?
+            </span>
+          )}
+
+          <div className="CheckBoxes mt-6 flex flex-col gap-3 text-sm md:text-base text-gray-700">
+            <span className="CheckBox-Gap flex items-center gap-3">
+              <input
+                type="checkbox"
+                className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
+              />
+              <span className="Remember">Remember Me</span>
+            </span>
+            <span className="CheckBox-Gap flex items-start gap-3">
+              <input
+                type="checkbox"
+                required
+                className="w-5 h-5 cursor-pointer accent-[#4F3267] appearance-auto"
+              />
+              <span className="Remember text-wrap focus:ring-0">
+                By continuing, I agree to{' '}
+                <span className="Conditions font-bold border-b-2 cursor-pointer">
+                  Terms & Conditions
+                </span>{' '}
+                &{' '}
+                <span className="Policy font-bold border-b-2 cursor-pointer">
+                  Privacy Policy
+                </span>
+              </span>
+            </span>
+          </div>
+
+          <input
+            type="submit"
+            value="Login"
+            className="Login-Button mt-6 text-white rounded-md cursor-pointer duration-200 Button-Submit bg-[#4F3267] hover:bg-[#3e2752] h-12 text-base"
+          />
+        </form>
+      </div>
+
+      <span className="NewUser mt-6 text-sm md:text-base block text-center">
+        New User?{' '}
+        <span
+          onClick={onSwitchToSignup}
+          className="New-SignUp underline cursor-pointer text-[#4F3267] font-medium"
+        >
+          Sign Up Now
+        </span>
+      </span>
     </div>
+  </div>
+</div>
+
    )}
 
    </>

@@ -78,53 +78,83 @@ function SignUpUser({onSwitchToLogin}) {
   return (
     
     <>
-<div className="Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 w-full min-h-screen flex justify-center items-center px-4 ">
-  <div className="SignUp-Pass-Container w-full max-w-lg">
+<div className="Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 w-full h-fit min-h-screen flex justify-center  px-4 " style={{alignItems:'center'}}>
+  <div className="SignUp-Pass-Container w-full max-w-lg  flex justify-center">
 
     {/* Email Verification Stage */}
-    {!isEmailSubmitted ? (
-      <div className="EmailVerificationContainer">
-        <section className="flex justify-end">
-          <button
-            onClick={onSwitchToLogin}
-            className="group p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-[#4f3267] to-[#432a58] text-white font-semibold hover:translate-y-1 transition-all duration-500 hover:from-[#331029] hover:to-[#310413]"
-          >
-            <X width={20} height={20} />
-            <span className="absolute opacity-0 group-hover:opacity-100 text-sm -translate-y-8 duration-700">
-              x
-            </span>
-          </button>
-        </section>
+        {!isEmailSubmitted ? (
+          <div className="EmailVerificationContainer">
+          
+          <section class="flex justify-center items-center">
+            <button
+              onClick={onSwitchToLogin}
+              className="ml-auto mb-10 group flex justify-center p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-[#4f3267] to-[#432a58] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]"
+            >
+              <X 
+              width={20}
+              height={20}
+              />
+              <span
+                className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700"
+              >
+                x
+              </span>
+            </button>
+          </section>
 
-        <form onSubmit={handleEmailSubmit} className="flex flex-col items-center gap-6">
-          <div className="input-wrapper w-full flex flex-col items-center gap-4">
-            <input
-              type="email"
+        
+        <form onSubmit={handleEmailSubmit} className="flex flex-col items-center gap-4">
+          <div className="input-wrapper">
+            <svg 
+              className="icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24"
+            >
+              <g data-name="Layer 2">
+                <g data-name="inbox">
+                  <rect 
+                    width="24" 
+                    height="24" 
+                    transform="rotate(180 12 12)" 
+                    opacity="0"
+                  ></rect>
+                  <path
+                    d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+            <input 
+              type="email" 
+              name="email" 
               required
-              placeholder="Enter Your Email"
-              className="emailBox w-full p-3 border border-gray-300 rounded-md text-base focus:ring-2 focus:ring-[#4F3267]"
+              className="emailBox focus:ring-0" 
+              placeholder="Enter Your Email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit" className="Subscribe-btn bg-[#4F3267] text-white px-6 py-2 rounded-md hover:bg-[#3e2752]">
+            <button 
+              type="submit"
+              className="Subscribe-btn"
+            >
+             
               Submit
             </button>
           </div>
         </form>
       </div>
-
-    ) : !isEmailVerified ? (
-      <div className="EmailAuth-Component absolute top-0 w-full h-full bg-[#d7a8fe3d]">
-        <EmailAuth
-          enteredEmail={email}
+      
+        ) : !isEmailVerified ? (
+          <div className="EmailAuth-Component absolute w-100 top-0 h-full   bg-[#d7a8fe3d]">
+          <EmailAuth 
+          enteredEmail={email} 
           onOtpVerified={handleOtpVerified}
-          decriptionOfEmailVerify="We've sent a one-time password (OTP) to your email. Enter it below to verify your account."
+          decriptionOfEmailVerify=" We've sent a one-time password (OTP) to your email. Enter it below to verify your account." 
           decriptionOfEmailVerifyImp="If you don’t see it, check your spam folder and mark our emails as safe."
-          closeEmailAuth={closeEmailAuthBox}
-        />
-      </div>
-
-    ) : (
+          closeEmailAuth={closeEmailAuthBox} 
+          />
+          </div>
+        ) : (
           <div className="LeftSide-Block-Login relative rounded-l-lg bg-white">
       <Link to={'/'}>
         <span

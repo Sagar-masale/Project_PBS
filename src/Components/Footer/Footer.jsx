@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import "./Footer.css";
-
 const Footer = () => {
   return (
     <>
@@ -58,7 +57,7 @@ const Footer = () => {
               </h4>
               <ul className="text-sm transition-all duration-500">
                 <Link to="/support"><li className="mb-6"><span className="text-gray-600 hover:text-gray-900">Customer Support</span></li></Link>
-                <Link to="/terms"><li className="mb-6"><span className="text-gray-600 hover:text-gray-900">Terms & Conditions</span></li></Link>
+                <Link to="/terms_conditions"><li className="mb-6"><span className="text-gray-600 hover:text-gray-900">Terms & Conditions</span></li></Link>
                 <Link to="/privacy"><li><span className="text-gray-600 hover:text-gray-900">Privacy Policy</span></li></Link>
               </ul>
             </div>

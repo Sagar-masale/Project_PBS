@@ -29,6 +29,11 @@ import { Toaster } from 'react-hot-toast';
 import LoginUsingPass from './Components/Login/LoginUsingPass.jsx';
 import SignUpUser from './Components/Login/SignUpUser.jsx';
 import AdminLogin from './Components/Login/AdminLogin.jsx';
+import TermsAndConditions from './Components/Supports/TermsAndConditions.jsx';
+import Pricing from './Components/Pricing/Pricing.jsx';
+import Privacy_Policy from './Components/Supports/Privacy_Policy.jsx';
+import Customer_Support from './Components/Supports/Customer_Support.jsx';
+
 
 const App = () => {
   const location = useLocation();
@@ -58,6 +63,10 @@ const App = () => {
         CatTitle6="Classic Chains"
         />} />
         <Route path="/login_admin" element={<><AdminLogin /></>} />
+        <Route path="/pricing" element={<><Pricing /></>} />
+        <Route path="/support" element={<><Customer_Support /></>} />
+        <Route path="/privacy" element={<><Privacy_Policy /></>} />
+        <Route path="/terms_conditions" element={<><TermsAndConditions /></>} />
         <Route path="/Ring-Page" element={<><ItemsInfo title="Rings" /><CartBox /><FingerRings /></>} />
         <Route path="About" element={<><About/></>} />
         <Route path="/Earrings-Page" element={<><ItemsInfo title="Earrings" /><CartBox /><Earrings /></>} />
