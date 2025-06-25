@@ -136,7 +136,7 @@ const refreshAccessToken = async () => {
       } else if (/^\d{10}$/.test(emailOrPhone)) {
         payload.phoneNumber = emailOrPhone; // Valid phone number
       } else {
-        alert('Please enter a valid email or phone number.');
+        toast.error('Please enter a valid email or phone number.');
         setIsLoading(false); // Stop loading on validation failure
         return;
       }
@@ -158,7 +158,7 @@ const refreshAccessToken = async () => {
   
         
         setAccessToken(accessToken);
-        setLoginNotify(response.data.data);
+        toast.success(response.data.data);
   
         setEmailOrPhone('');
         setPassword('');
@@ -167,7 +167,7 @@ const refreshAccessToken = async () => {
         navigate('/');
 
       } else {
-        alert(response.data.message || 'Login failed. Please try again.');
+        toast.error(response.data.message || 'Login failed. Please try again.');
         
         
       }

@@ -15,12 +15,27 @@ import EditProductDetails from './EditProductDetails';
 function ItemDetails() {
 
   const [showEditPopUp, setShowEditPopUp] = useState(false);
+  const [averageRating, setAverageRating] = useState(0);
 
     const {userData} = useContext(ProfileContext);
     const {adminData} = useContext(AdminContext);
-    const rating = 3;
+    const rating = 2;
     const { productItems, addToCart  } = useContext(CartContext);
+    const [customising, setCustomising] = useState(false);
+    const [selectedSize, setSelectedSize] = useState("13 (52.8 mm)");
     const navigate = useNavigate();
+
+
+    const sizeOptions = [
+      "13 (52.8 mm)",
+      "14 (54.0 mm)",
+      "15 (55.5 mm)",
+      "16 (57.0 mm)",
+      "17 (58.5 mm)"
+    ];
+
+
+
     useEffect(() => {
         // Check if productItems is available
         if (!productItems) {
@@ -45,6 +60,8 @@ function ItemDetails() {
 
 
     
+
+    
       // Function to render star ratings dynamically
       const renderStars = (count) => {
         return "★".repeat(count) + "☆".repeat(5 - count);
@@ -58,21 +75,32 @@ function ItemDetails() {
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
     
-      const fetchReviews = async () => {
-        if (!productItems?._id) return;
-        try {
-          const response = await axios.get(
-            `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
-          );
-          console.log("Fetched Reviews Data:", response.data.data);
-          setReviews(response.data.data);
-        } catch (err) {
-          console.error("Error fetching reviews:", err);
-          setError("Failed to load reviews.");
-        } finally {
-          setLoading(false);
-        }
-      };
+ const fetchReviews = async () => {
+  if (!productItems?._id) return;
+  try {
+    const response = await axios.get(
+      `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
+    );
+    const reviewData = response.data.data;
+    setReviews(reviewData);
+
+    // Calculate average rating
+    if (reviewData.length > 0) {
+      const total = reviewData.reduce((sum, r) => sum + r.reviewRating, 0);
+      const avg = total / reviewData.length;
+      setAverageRating(avg);
+    } else {
+      setAverageRating(0);
+    }
+
+  } catch (err) {
+    console.error("Error fetching reviews:", err);
+    setError("Failed to load reviews.");
+  } finally {
+    setLoading(false);
+  }
+};
+
       
       useEffect(() => {
         fetchReviews();
@@ -171,21 +199,24 @@ console.log("Product Items:", productItems);
                )}
               </div>
        <div className="flex items-center mt-2 mb-4">
-          <div className="flex">
-            {[...Array(5)].map((_, i) => (
-                <svg
-                key={i}
-                xmlns="http://www.w3.org/2000/svg"
-                fill={i < rating ? "currentColor" : "none"}
-                stroke="currentColor"
-                className={`w-5 h-5 ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
-                viewBox="0 0 20 20"
-                >
-                <path d="M10 15l-5.5 3 1.5-6.5L1 7l6.5-.5L10 1l2.5 5.5L19 7l-5 4.5L15.5 18z" />
-                </svg>
-            ))}
-            </div>
-            <span className="ml-2 text-gray-500 text-sm">345 Reviews</span>
+        <div className="flex items-center">
+          {[...Array(5)].map((_, i) => (
+            <svg
+              key={i}
+              xmlns="http://www.w3.org/2000/svg"
+              fill={i < Math.round(averageRating) ? "currentColor" : "none"}
+              stroke="currentColor"
+              className={`w-5 h-5 ${i < Math.round(averageRating) ? "text-yellow-400" : "text-gray-300"}`}
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 15l-5.5 3 1.5-6.5L1 7l6.5-.5L10 1l2.5 5.5L19 7l-5 4.5L15.5 18z" />
+            </svg>
+          ))}
+          <span className="ml-2 text-sm text-gray-600">
+            {reviews.length} Review{reviews.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+
           </div>
 
       {/* Price */}
@@ -210,16 +241,42 @@ console.log("Product Items:", productItems);
       </div>
 
       {/* Product Details */}
-      <div className="flex gap-2 text-center text-sm mb-4">
-        <div className="Product-Weight border rounded-lg p-2 flex gap-1">
-          <p className="">Weight</p>
-          <p className="font-semibold w-[100px]">13 (52.8 mm)</p>
-        </div>
-     
-        <div className="Product-Weight Product-Customise text-center rounded-lg p-2 cursor-pointer">
-          <p className="text-white">CUSTOMISE</p>
-        </div>
-      </div>
+<div className="flex flex-col gap-2 text-sm mb-4">
+  {/* Default or selected size */}
+  <div className="flex gap-2 flex-wrap">
+    <div className="Product-Weight border rounded-lg p-2 px-4 flex items-center gap-2">
+      <p className="text-gray-600">Weight:</p>
+      <p className="font-semibold">{selectedSize}</p>
+    </div>
+
+    <button
+      onClick={() => setCustomising(!customising)}
+      className="Product-Weight Product-Customise bg-gradient-to-r bg-[#581C87] text-white rounded-lg px-4 py-2 text-sm font-semibold shadow-md transition hover:bg-[#481b6a]"
+    >
+      {customising ? "HIDE OPTIONS" : "CUSTOMISE"}
+    </button>
+  </div>
+
+  {/* Customise Options */}
+  {customising && (
+    <div className="flex flex-wrap gap-3 mt-2">
+      {sizeOptions.map((size) => (
+        <button
+          key={size}
+          onClick={() => setSelectedSize(size)}
+          className={`px-4 py-2 rounded-md border transition font-medium text-sm ${
+            selectedSize === size
+              ? "bg-purple-600 text-white border-purple-600"
+              : "bg-white text-gray-700 border-gray-300 hover:border-purple-500"
+          }`}
+        >
+          {size}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
 
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">

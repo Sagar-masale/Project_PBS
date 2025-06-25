@@ -7,7 +7,7 @@ import CheckOutModel from './CheckoutProduct/CheckOutModel';
 import { Link } from 'react-router-dom';
 import ClearCartConfirm from './ClearCartConfirm';
 import OrderSummary from '../OrderDetails/OrderSummary';
-
+import { useNavigate } from 'react-router-dom';
 
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
@@ -21,15 +21,13 @@ function CartDeatils() {
   const [openCheckout, setOpenCheckout] = useState(false);
   const handleClearCart = () => {
     setisClearCartVisible(false);  // Hide confirmation modal
-    
-    
   };
-  const toggleClass = (selector, className) => {
-    document.querySelector(selector).classList.toggle(className);
-  };
-  const CloseLoginBox = () => {
-    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
-  };
+
+  const navigate = useNavigate();
+  function onLogin(){
+    navigate('/login');
+  }
+
 
   
   return (
@@ -47,41 +45,50 @@ function CartDeatils() {
  <div className="cart-container   ">
   
   {cart.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-        {/* Bag Icon */}
-        <div className="empty-cart-img-box flex items-center justify-center  rounded-full mb-4">
-          <img src="./Cart/empty-cart.png" alt="empty-cart" className='empty-cart-img ' />
-        </div>
-  
-        {/* Message */}
-        <h1 className="text-3xl font-semibold  mb-6" style={{color:"#4f3267"}}>YOUR CART IS EMPTY</h1>
-  
-        {/* Buttons */}
-        <div className="flex space-x-4 w-full pl-10 pr-10  justify-center">
-          <Link to="/"  className="px-6 py-2 cartButtons flex justify-center  border-1 border-purple-900  rounded-md  transition-shadow">
-          <button className='font-sans'>
-            Continue Shopping
-          </button>
-          </Link>
-          {!userData && !adminData ? (
-          <button
-            onClick={CloseLoginBox}
-            className="px-6 py-2 cartButtons-Login font-sans login-cart-button border-none text-white rounded-md transition-shadow"
-          >
-            Login To View Your Cart
-          </button>
-        ) : null}
+<div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-6 text-center">
+  {/* Bag Icon */}
+  <div className="empty-cart-img-box flex items-center justify-center rounded-full mb-4">
+    <img
+      src="./Cart/empty-cart.png"
+      alt="empty-cart"
+      className="w-28 h-28 sm:w-40 sm:h-40 object-contain"
+    />
+  </div>
 
+  {/* Message */}
+  <h1 className="text-xl sm:text-3xl font-semibold mb-6" style={{ color: '#4f3267' }}>
+    YOUR CART IS EMPTY
+  </h1>
 
-        </div>
-      </div>
+  {/* Buttons */}
+  <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center">
+    <Link
+      to="/"
+      className="w-full sm:w-auto px-4 sm:px-6 py-2 cartButtons flex justify-center border border-purple-900 rounded-md transition-shadow"
+    >
+      <button className="font-sans text-sm sm:text-base">Continue Shopping</button>
+    </Link>
+
+    {!userData && !adminData ? (
+      <button
+       onClick={onLogin}
+        className="w-full sm:w-auto px-4 sm:px-6 py-2 cartButtons-Login font-sans login-cart-button text-sm sm:text-base border-none text-white rounded-md transition-shadow"
+      >
+        Login To View Your Cart
+      </button>
+    ) : null}
+  </div>
+</div>
+
   ) : (
     <div className='Cart-Main-Container'>
          <div className=" cart-md-container bg-white-100  ">
 
-<div className="cart-md-container-items px-4 sm:px-6 lg:px-8">
+<div className="cart-md-container-items px-3 sm:px-6 lg:px-8">
+
   <div className="flex ">
-    <h1 className="text-2xl mt-0 font-semibold Your-Cart ">Your Cart</h1>
+    <h1 className="text-xl sm:text-2xl mt-0 font-semibold Your-Cart">Your Cart</h1>
+
     <button onClick={ () => setisClearCartVisible(true) } className="clearCartAll rounded-lg mt-0 ml-auto  font-semibold text-white">Clear All</button>
   </div>
   {isClearCartVisible && (
@@ -97,32 +104,39 @@ function CartDeatils() {
         <div className="flow-root ">
 <ul className="-my-20 ul-cartDatas">
   {cart.map(item => (
-     <li key={item._id} className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
+    <li key={item._id} className="flex flex-col space-y-4 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
+
      <div className="shrink-0 cart-Image-Box">
-       <img
-         className="cart-Image  rounded-lg object-cover"
-         src={item.ProductImages[0]} alt={item.ProductName}
-       />
+      <img
+        className="cart-Image w-24 h-24 sm:w-32 sm:h-32 rounded-lg object-cover"
+        src={item.ProductImages[0]}
+        alt={item.ProductName}
+      />
+
      </div>
 
      <div className="relative flex flex-1  flex-col justify-between">
        <div className="sm:col-gap-5 sm:grid sm:grid-cols-2 cart-structrue">
          <div className="pr-8 sm:pr-5">
-           <p className="text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
+           <p className="text-base sm:text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
+
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
            <p className="cart-Price text-2xl text-black mt-2">₹ {item.ProductPrice}</p>
+
           
             <span className="remove-WishList-Box flex mt-2">
             <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item._id)}>
             <span class="material-symbols-outlined" style={{color:"#4f3267"}}>delete</span>
-            <p className="cart-Price text-sm text-black ml-1"> Remove</p>  
+            <p className="cart-Price text-xs sm:text-sm text-black ml-1">Remove</p>
+
             </span> 
 
             <span className="remove-wishlist-middle ml-3 text-xl font-light">|</span>
 
             <span className="add-WishList-Block flex cursor-pointer">
             <span class="material-symbols-outlined ml-2" style={{color:"#4f3267"}}>favorite</span>
-            <p className="cart-Price text-sm text-black ml-1"> Move to Wishlist</p> 
+            <p className="cart-Price text-sm text-black ml-1"> Move to Wishlist</p>
+
 
             </span>
             </span>

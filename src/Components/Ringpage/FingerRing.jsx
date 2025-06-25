@@ -11,7 +11,6 @@ import CartContext from "../Context/CartContext.js"
 
 const FingerRings=()=>{
   const navigate = useNavigate();
-  const location = useLocation();
   // CartContext
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
