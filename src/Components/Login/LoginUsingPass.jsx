@@ -163,8 +163,9 @@ const refreshAccessToken = async () => {
         setEmailOrPhone('');
         setPassword('');
      
-        fetchUserProfile();
+        await fetchUserProfile();
         navigate('/');
+
       } else {
         alert(response.data.message || 'Login failed. Please try again.');
         
