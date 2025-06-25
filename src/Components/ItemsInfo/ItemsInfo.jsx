@@ -35,7 +35,7 @@ function ItemsInfo({ title = "..." }) {
       <div className="Go-To-Container">
         <Link to="/" className="Go-Home-Page-Logo">Home</Link>
         <span className="Between-Line">|</span>
-        <a href="#Ring-Page" className="Go-Ring-Page-Logo">{title}</a>
+        <span className="Go-Ring-Page-Logo">{title}</span>
       </div>
       <div className="Ring-Type-Box">
         <h1 className="Ring-Name">{title}</h1>

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import ProductContext from "../Context/ProductContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 function EditProductDetails({ ring, onClose, refreshData  }) {
+  const {setRingProductData} = useContext(ProductContext);
   const [ringData, setRingData] = useState({
     ProductName: "",
     ProductDescription: "",
@@ -33,7 +35,15 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
         data: { id: ring._id },
       });
       toast.success("Ring deleted successfully");
+          setRingProductData((prevRings) =>
+      prevRings.map((item) =>
+        item._id === ring._id ? { ...item, ...ringData } : item
+      )
+    );
       onClose();
+      setTimeout(() => {
+      window.location.reload();
+    }, 100); 
       refreshData && refreshData();
     } catch (error) {
       toast.error("Failed to delete ring");
@@ -46,9 +56,16 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
         id: ring._id,
         ...ringData,
       });
-toast.success("Product updated successfully");
-refreshData(); // <-- call this
-onClose(); // <-- then close the modal
+      toast.success("Product updated successfully");
+         setRingProductData((prevRings) =>
+      prevRings.map((item) =>
+        item._id === ring._id ? { ...item, ...ringData } : item
+      )
+    );
+      onClose(); 
+       setTimeout(() => {
+      window.location.reload();
+    }, 100); 
 
     } catch (err) {
       toast.error("Failed to update ring");
@@ -59,7 +76,7 @@ onClose(); // <-- then close the modal
     <div className="fixed inset-0 bg-black bg-opacity-50 z-[99999] flex justify-center items-center">
       <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Ring Admin Options</h2>
+          <h2 className="text-xl font-bold">Update products</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-black">
             ✕
           </button>

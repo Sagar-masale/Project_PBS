@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminContext from "../../../Context/AdminContext.js";
 import Loading from "../../../PageLoader/Loading.jsx";
+import toast from 'react-hot-toast';
+
 
 function LogoutAdmin({ onCancel }) {
   const { setAdminData, setAdminLogoutNotify } = useContext(AdminContext);
@@ -27,8 +29,9 @@ function LogoutAdmin({ onCancel }) {
       localStorage.removeItem("accessTokenAdmin");
       localStorage.removeItem("refreshTokenAdmin");
       setAdminData(null);
-      setAdminLogoutNotify(true);
       setIsLoading(false);
+      toast.success('Admin logged out successfully', { duration: 3000 });
+
       navigate("/"); // Redirect to home/login page
     }, 3000);
   };

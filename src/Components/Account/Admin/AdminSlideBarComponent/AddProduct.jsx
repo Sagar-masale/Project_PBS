@@ -4,6 +4,7 @@ import axios from "axios";
 import "../AdminAcc.css";
 import AdminContext from "../../../Context/AdminContext";
 import AdminSlideBar from "../AdminSlideBar";
+import toast from 'react-hot-toast';
 
 function AddProduct() {
   const { adminData } = useContext(AdminContext);
@@ -41,7 +42,7 @@ function AddProduct() {
     e.preventDefault();
 
     if (isNaN(formData.ProductPrice) || isNaN(formData.ProductQty)) {
-      alert("Price and Quantity must be valid numbers.");
+      toast.error("Price and Quantity must be valid numbers.");
       return;
     }
 
@@ -76,7 +77,7 @@ function AddProduct() {
 
     try {
       const response = await axios.post(
-        `https://backend-pbs-coo6.onrender.com/api/v1/products/${apiEndpoint}`,
+        `http://localhost:8000/api/v1/products/${apiEndpoint}`,
         data,
         {
           headers: {
@@ -84,8 +85,7 @@ function AddProduct() {
           },
         }
       );
-      alert("Product added successfully!");
-      console.log("Data added:", response.data.data);
+      toast.success("Product added successfully!");
 
       setFormData({
         ProductName: "",
@@ -100,7 +100,7 @@ function AddProduct() {
       fileInputRef.current.value = null;
     } catch (error) {
       console.error("Error adding product:", error.response?.data || error.message);
-      alert("Failed to add product. Please try again.");
+      toast.error("Failed to add product. Please try again.");
     } finally {
       setLoading(false);
     }

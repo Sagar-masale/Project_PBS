@@ -222,8 +222,8 @@ const refreshAccessToken = async () => {
 
   return (
    <>
-  
-   {isForgotPassBoxVisible  && (
+       {isForgotPassBoxVisible  && (
+   <div className="Forgot_Pass_Container Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 pb-5 pt-5 min-h-screen flex items-center justify-center px-4">
     <ForgotPassword 
    
     closeForgotEmailBox={close_Forgot_Box}
@@ -235,6 +235,7 @@ const refreshAccessToken = async () => {
     }} 
   />
   
+   </div>
     )}
 
    {isLoading && <Loading />}

@@ -4,6 +4,8 @@ import axios from 'axios';
 import './AdminLogin.css';
 import AdminContext from '../Context/AdminContext';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 
 function AdminLogin() {
 
@@ -12,7 +14,7 @@ function AdminLogin() {
     const [accessTokenAdmin, setAccessTokenAdmin] = useState('');
 
 
-    const {setAdminData, setAdminLoginNotify} = useContext(AdminContext);
+    const {setAdminData} = useContext(AdminContext);
 
 
     const  fetchAdminProfile = async () => {
@@ -29,10 +31,6 @@ function AdminLogin() {
           },
         });
         
-        // Log the admin data
-        // console.log('admin Profile:', response.data);
-        // console.log('admin', response);
-        
         setAdminData(response.data)
         
         
@@ -45,7 +43,6 @@ function AdminLogin() {
   
       } catch (error) {
         if (error.response?.status === 401) {
-          console.warn('Access token expired. Attempting to refresh...');
           const success = await refreshAccessTokenAdmin();
           if (success) {
             fetchAdminProfile();  // Retry after refreshing
@@ -105,11 +102,8 @@ function AdminLogin() {
 
     const AdminLogin = async (e) => {
       e.preventDefault();
-      // setRegisterErrStatus("");
-      // setIsLoading(true); // Start loading spinner
   
       try {
-        // Email and phone number validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         let payload = {};
   
@@ -118,8 +112,7 @@ function AdminLogin() {
         } else if (/^\d{10}$/.test(emailOrPhoneAdmin)) {
           payload.adminPhoneNumber = emailOrPhoneAdmin; // Valid phone number
         } else {
-          alert("Please enter a valid email or phone number.");
-          // setIsLoading(false);
+          toast.error("Please enter a valid email or phone number.");
           return;
         }
   
@@ -133,23 +126,19 @@ function AdminLogin() {
   
         if (response.data.success) {
           const { accessToken, refreshToken } = response.data.data;
-          CloseLoginBox()
           // Store tokens
           localStorage.setItem("accessTokenAdmin", accessToken);
           localStorage.setItem("refreshTokenAdmin", refreshToken);
   
           setAccessTokenAdmin(accessToken);
-          setAdminLoginNotify(true);
-          
-  
-          // Redirect to dashboard
-          // window.location.href = "/admin/dashboard";
+          toast.success('Admin Loggedin successfull');
+
+          window.location.href = "/AdminAcc";
         } else {
-          // setRegisterErrStatus(response.data.message || "Login failed.");
+          toast.error(response.data.message);
         }
       } catch (err) {
-        console.error("Error:", err.response?.data?.message || err.message);
-        // setRegisterErrStatus(err.response?.data?.message || "An error occurred.");
+        toast.error(err.response?.data?.message || err.message);
       } finally {
         // setIsLoading(false); // Stop loading spinner
       }

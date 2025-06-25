@@ -13,8 +13,8 @@ function AdminSlideBar() {
     { id: 1, name: "Dashboard", logo: "rounded_corner", slug: "/AdminAcc" },
     { id: 2, name: "Users", logo: "group", slug: "/AllUsers" },
     { id: 3, name: "Add Products", logo: "category", slug: "/Add-Products" },
-    { id: 4, name: "Pricing", logo: "credit_card_gear", slug: "/Pricing" },
-    { id: 5, name: "Authentication", logo: "verified_user", slug: "/Authentication" },
+    { id: 4, name: "Pricing", logo: "credit_card_gear", slug: "/Pricing_Setting" },
+    { id: 5, name: "Home", logo: "home", slug: "/" },
     { id: 6, name: "LogOut", logo: "logout" },
   ];
 

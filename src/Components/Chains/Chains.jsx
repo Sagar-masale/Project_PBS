@@ -38,7 +38,6 @@ const Chains = () => {
     navigate(`${location.pathname = ''}/ItemDetails`);
   };
 
-  console.log("Chains Data is ", chains);
 
   return (
     <>
