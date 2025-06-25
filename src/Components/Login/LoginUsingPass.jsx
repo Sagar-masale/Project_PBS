@@ -10,6 +10,7 @@ import axios from 'axios';
 import './LoginUsingOtp.css';
 import './LoginUsingPass.css';
 import RegisterContext from '../Context/RegisterContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -27,6 +28,7 @@ function LoginUsingPass({onSwitchToSignup}) {
   const {setRegisterErrStatus, setLoginNotify} = useContext(RegisterContext)
   const { userData, setUserData } = useContext(ProfileContext);
   const [isLoading, setIsLoading] = useState(false); 
+  const navigate = useNavigate();
 
     useEffect(() => {
         if (isLoading) {
@@ -162,7 +164,7 @@ const refreshAccessToken = async () => {
         setPassword('');
      
         fetchUserProfile();
-  
+        navigate('/');
       } else {
         alert(response.data.message || 'Login failed. Please try again.');
         
@@ -191,12 +193,6 @@ const refreshAccessToken = async () => {
     } finally {
       setIsLoading(false); // Stop the loading spinner regardless of success or failure
     }
-  };
-
-
-
-  const toggleClass = (selector, className) => {
-    document.querySelector(selector).classList.toggle(className);
   };
 
 

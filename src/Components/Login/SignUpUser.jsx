@@ -5,6 +5,7 @@ import RegisterContext from "../Context/RegisterContext";
 import EmailAuth from "../AuthontiCations/EmailAuth";
 import { Link } from "react-router-dom";
 import {X} from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 function SignUpUser({onSwitchToLogin}) {
   const [email, setEmail] = useState("");
@@ -17,6 +18,8 @@ function SignUpUser({onSwitchToLogin}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { setRegisterStatus, setRegisterErrStatus, setNetworkErrStatus } = useContext(RegisterContext);
+
+  const navigate = useNavigate();
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +45,7 @@ function SignUpUser({onSwitchToLogin}) {
       .then((response) => {
         if (response.data.success) {
           setRegisterStatus(response.data.success);
+          navigate('/login');
           CloseSignUpBox();
         } else {
           alert(response.data.message || "Registration failed. Please try again.");
