@@ -59,7 +59,7 @@ useEffect(() => {
       for (const endpoint of endpoints) {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/v1/products/${endpoint}?productId=${id}`
+            `https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}?productId=${id}`
           );
 
           const data = response.data.message.product;
@@ -92,7 +92,7 @@ useEffect(() => {
     if (!product?._id) return;
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
+        `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
       );
       const reviewData = response.data.data;
       setReviews(reviewData);
@@ -130,7 +130,7 @@ useEffect(() => {
 
   const fetchUpdatedProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/v1/products/get-productBy-id?productId=${product._id}`);
+      const response = await axios.get(`https://backend-pbs-coo6.onrender.com/api/v1/products/get-productBy-id?productId=${product._id}`);
       const updatedProduct = response.data.product;
       setCurrentProduct(updatedProduct);
       setCurrentImage(updatedProduct.ProductImages[0]);
