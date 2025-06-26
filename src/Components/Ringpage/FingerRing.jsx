@@ -42,7 +42,7 @@ const FingerRings=()=>{
   }
   
   const GetProductDetails = (ring) => {
-    setProductItems(ring)
+    setProductItems(ring)    
     navigate('/ItemDetails');
 
     

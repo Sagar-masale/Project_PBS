@@ -3,8 +3,7 @@ import React, { useState , useEffect, useContext } from 'react';
 import SuccessMessage from '../Notifications/SuccessMessage';
 import ErrorMessage from '../Notifications/ErrorMessage';
 import NetworkErr from '../Notifications/NetworkErr';
-
-
+import SearchBar from '../SearchBar/SearchBar';
 import { Link,useNavigate } from 'react-router-dom';
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
@@ -220,7 +219,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     <>
       
        
-      <div className="Navheader Navcontainer">
+      <div className="Navheader Navcontainer overflow-visible">
         <div className="Slider-Bar" id="SliderBar">
           <div className="Login-SignUp-Box">
             <SliderBarForPhn />
@@ -237,23 +236,9 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
           <p className="logo">PBS</p>
         </div>
 
-        <form
-          action="#"
-          onSubmit={UserSearch}
-          className="w-3/6 Search_Feald"
-        >
-          <input
-            type="search"
-            onChange={(e) => setUserSearchValue(e.target.value)}
-            className="text-sm search focus:ring-0"
-            placeholder="Search for rings, earrings, bangles, chains..."
-          />
-          <div className="Search-Icon-Box flex justify-center items-center">
-            <button>
-              <span className="material-symbols-outlined mt-1 text-purple-900 text-3xl">search</span>
-            </button>
-          </div>
-        </form>
+        <div className="w-3/6 Search_Feald search-container-one relative">
+          <SearchBar />
+        </div>
 
         <div className="navItems-Links-Block">
           <ul className='nav-link-logos flex align-middle'>
@@ -292,26 +277,10 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
 
     
         </div>
-
-        <form
-          action="#"
-          onSubmit={UserSearch}
-          className="w-full pl-4 pr-4 search-container-two"
-        >
-          <div className="flex w-full h-xl">
-            <input
-              type="text"
-              onChange={(e) => setUserSearchValue(e.target.value)}
-              className="search focus:ring-0 text-gray-600"
-              placeholder="Search for rings, earrings, bangles, chains..."
-            />
-            <div className="Search-Icon-Box flex justify-center items-center">
-              <button>
-                <span className="material-symbols-outlined mt-1 searchLogo text-3xl">search</span>
-              </button>
-            </div>
-          </div>
-        </form>
+<div className="w-full pl-4 pr-4 search-container-two">
+  <SearchBar />
+</div>
+    
       </div>
 
       <div className="nav-item flex flex-row  justify-center">
