@@ -18,7 +18,7 @@ const Earrings = () => {
   useEffect(() => {
     const fetchEarringData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-earrings");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-earrings");
         setEarringProductData(response.data.message.earrings)
         setEarrings(response.data.message.earrings);
       } catch (error) {
@@ -35,9 +35,8 @@ const Earrings = () => {
   };
 
   const GetProductDetails = (earring) => {
-    setProductItems(earring);
-    console.log("ViewEarringDetails", earring);
-    navigate(`${location.pathname = ''}/ItemDetails`);
+    setProductItems(earring)    
+    navigate(`/ItemDetails/${earring._id}`);
   };
 
   console.log("Earring Data is ", earrings);

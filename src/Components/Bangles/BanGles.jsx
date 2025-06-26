@@ -16,7 +16,7 @@ const Bangles = () => {
   useEffect(() => {
     const fetchBanglesData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-bangles");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-bangles");
         setBangleProductData(response.data.message.bangles);
         setBangles(response.data.message.bangles);
       } catch (error) {
@@ -33,9 +33,8 @@ const Bangles = () => {
   };
 
   const GetProductDetails = (bangle) => {
-    setProductItems(bangle);
-    console.log("ViewBangleDetails", bangle);
-    navigate(`${location.pathname = ''}/ItemDetails`);
+    setProductItems(bangle)    
+    navigate(`/ItemDetails/${bangle._id}`);
   };
 
   console.log("Bangles Data is ", bangles);

@@ -16,7 +16,7 @@ const Pendants = () => {
   useEffect(() => {
     const fetchPendantData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-pendants");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-pendants");
         setPendantProductData(response.data.message.pendants)
         setPendants(response.data.message.pendants);
       } catch (error) {
@@ -33,9 +33,8 @@ const Pendants = () => {
   };
 
   const GetProductDetails = (pendant) => {
-    setProductItems(pendant);
-    console.log("ViewPendantDetails", pendant);
-    navigate(`${location.pathname = ''}/ItemDetails`);
+    setProductItems(pendant)    
+    navigate(`/ItemDetails/${pendant._id}`);
   };
 
   console.log("Pendant Data is ", pendants);

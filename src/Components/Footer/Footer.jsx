@@ -13,7 +13,7 @@ const Footer = () => {
                   progress_activity
                 </span>
                 <span className="Footer-Pbs-Name ml-5 text-2xl">
-                  PBSSupport
+                  PBS
                 </span>
               </div>
               <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-left lg:text-left">

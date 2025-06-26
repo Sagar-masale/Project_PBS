@@ -1,366 +1,402 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CartContext from '../Context/CartContext';
 import AdminContext from "../Context/AdminContext";
 import ProfileContext from '../Context/ProfileContext';
-import ReviewContext from "../Context/ReviewContext"
-import './ItemDetails.css'
-import { useNavigate } from 'react-router-dom';
+import ReviewContext from "../Context/ReviewContext";
 import CustomerReviews from './CustomerReviews';
-import axios from 'axios';
+import EditProductDetails from './EditProductDetails';
+import './ItemDetails.css';
 import moreIcon from "../../../public/menu.png";
 import toast, { Toaster } from 'react-hot-toast';
-import EditProductDetails from './EditProductDetails';
-
 
 function ItemDetails() {
-
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
+  const [currentImage, setCurrentImage] = useState("");
   const [showEditPopUp, setShowEditPopUp] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
+  const [customising, setCustomising] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("13 (52.8 mm)");
+  const [showReviewBox, setShowReviewBox] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const {userData} = useContext(ProfileContext);
-    const {adminData} = useContext(AdminContext);
-    const rating = 2;
-    const { productItems, addToCart  } = useContext(CartContext);
-    const [customising, setCustomising] = useState(false);
-    const [selectedSize, setSelectedSize] = useState("13 (52.8 mm)");
-    const navigate = useNavigate();
+  const { productItems, addToCart } = useContext(CartContext);
+  const { adminData } = useContext(AdminContext);
+  const { userData } = useContext(ProfileContext);
+  const { reviews, setReviews } = useContext(ReviewContext);
 
+  const sizeOptions = [
+    "13 (52.8 mm)",
+    "14 (54.0 mm)",
+    "15 (55.5 mm)",
+    "16 (57.0 mm)",
+    "17 (58.5 mm)"
+  ];
 
-    const sizeOptions = [
-      "13 (52.8 mm)",
-      "14 (54.0 mm)",
-      "15 (55.5 mm)",
-      "16 (57.0 mm)",
-      "17 (58.5 mm)"
-    ];
-
-
-
-    useEffect(() => {
-        // Check if productItems is available
-        if (!productItems) {
-            // If not, navigate to the home page
-            navigate('/');
-        }
-    }, [productItems, navigate]);
-
-    const [currentImage, setCurrentImage] = useState(
-      productItems?.ProductImages?.[0] || ""
-    );
-
-    useEffect(() => {
-      // Check if productItems is available
-      if (!productItems) {
-        navigate("/"); // If not, navigate to the home page
-      } else {
-        setCurrentImage(productItems.ProductImages[0]); // Set initial main image
-      }
-    }, [productItems, navigate]);
-    console.log("Product Items:", productItems);
-
-
-    
-
-    
-      // Function to render star ratings dynamically
-      const renderStars = (count) => {
-        return "★".repeat(count) + "☆".repeat(5 - count);
-      };
-
-      const [showReviewBox, setShowReviewBox] = useState(false);
-
-
-      const { reviews, setReviews } = useContext(ReviewContext);
-
-      const [loading, setLoading] = useState(true);
-      const [error, setError] = useState(null);
-    
- const fetchReviews = async () => {
-  if (!productItems?._id) return;
-  try {
-    const response = await axios.get(
-      `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${productItems._id}`
-    );
-    const reviewData = response.data.data;
-    setReviews(reviewData);
-
-    // Calculate average rating
-    if (reviewData.length > 0) {
-      const total = reviewData.reduce((sum, r) => sum + r.reviewRating, 0);
-      const avg = total / reviewData.length;
-      setAverageRating(avg);
+useEffect(() => {
+  const loadProduct = async () => {
+    if (productItems) {
+      setProduct(productItems);
+      setCurrentImage(productItems.ProductImages?.[0] || "");
     } else {
-      setAverageRating(0);
-    }
+      // List of all category-specific endpoints
+      const endpoints = [
+        "get-productBy-id",
+        "get-earringBy-id",
+        "get-pendantBy-id",
+        "get-mangalsutraBy-id",
+        "get-bangleBy-id",
+        "get-chainBy-id",
+      ];
 
-  } catch (err) {
-    console.error("Error fetching reviews:", err);
-    setError("Failed to load reviews.");
-  } finally {
-    setLoading(false);
-  }
-};
+      let found = false;
 
-      
-      useEffect(() => {
-        fetchReviews();
-      }, [productItems]);
-      
-      useEffect(() => {
-        if (!userData && showReviewBox) {
-          toast.error("Please log in to write a review.");
-          setShowReviewBox(false);
+      for (const endpoint of endpoints) {
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/api/v1/products/${endpoint}?productId=${id}`
+          );
+
+          const data = response.data.message.product;
+          if (data) {
+            console.log(`Fetched from ${endpoint}:`, data);
+            setProduct(data);
+            setCurrentImage(data.ProductImages?.[0] || "");
+            found = true;
+            break; // Exit the loop if data is found
+          }
+        } catch (err) {
+          // Continue trying next endpoint silently
         }
-      }, [showReviewBox, userData]);
-      
+      }
 
-      const [currentProduct, setCurrentProduct] = useState([]);
-      
-        const GetProductDetailsForUpdate = (productItems) => {
-          setCurrentProduct(productItems);
-          setShowEditPopUp(true);
-        };
+      if (!found) {
+        console.error("Product not found in any category.");
+        // Optionally navigate to 404 or show error message
+        // navigate("/");
+      }
+    }
+  };
 
-      useEffect(() => {
-  console.log("Ring details for admin (updated):", currentProduct);
-}, [currentProduct]);
+  loadProduct();
+}, [id, productItems]);
 
-const fetchUpdatedProduct = async () => {
-  try {
-    const response = await axios.get(
-      `https://backend-pbs-coo6.onrender.com/api/v1/products/get-productBy-id?productId=${productItems._id}`
-    );
-    const updatedProduct = response.data.product;
 
-    // Update productItems here if it's in state or call a context method if available
-    setCurrentProduct(updatedProduct); // update local state for edit pop-up
-    setCurrentImage(updatedProduct.ProductImages[0]); // update image
-  } catch (error) {
-    console.error("Failed to fetch updated product:", error);
-  }
-};
 
-console.log("Product Items:", productItems);
+  const fetchReviews = async () => {
+    if (!product?._id) return;
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
+      );
+      const reviewData = response.data.data;
+      setReviews(reviewData);
+
+      if (reviewData.length > 0) {
+        const total = reviewData.reduce((sum, r) => sum + r.reviewRating, 0);
+        const avg = total / reviewData.length;
+        setAverageRating(avg);
+      } else {
+        setAverageRating(0);
+      }
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+      setError("Failed to load reviews.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, [product]);
+
+  useEffect(() => {
+    if (!userData && showReviewBox) {
+      toast.error("Please log in to write a review.");
+      setShowReviewBox(false);
+    }
+  }, [showReviewBox, userData]);
+
+  const GetProductDetailsForUpdate = (item) => {
+    setCurrentProduct(item);
+    setShowEditPopUp(true);
+  };
+
+  const fetchUpdatedProduct = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/v1/products/get-productBy-id?productId=${product._id}`);
+      const updatedProduct = response.data.product;
+      setCurrentProduct(updatedProduct);
+      setCurrentImage(updatedProduct.ProductImages[0]);
+    } catch (error) {
+      console.error("Failed to fetch updated product:", error);
+    }
+  };
+
+  const renderStars = (count) => {
+    return "★".repeat(count) + "☆".repeat(5 - count);
+  };
+
+if (!product) {
+  return <div className="text-center text-gray-500 mt-20">Loading product details...</div>;
+}
+
     
   return (
-    <>
-      <Toaster position="top-left" reverseOrder={true} />
+<>
+  <Toaster position="top-left" reverseOrder={true} />
 
-{userData && showReviewBox && (
-  <div className="Review-Section fixed w-full flex row align-items-center justify-content-center mt-[-5%] z-[9999999999]">
-    <CustomerReviews
-      closeReviewBox={() => setShowReviewBox(false)}
-      productId={productItems._id}
-      refreshReviews={fetchReviews}
-    />
-  </div>
-)}
+  {userData && showReviewBox && (
+    <div className="Review-Section fixed w-full flex row align-items-center justify-content-center mt-[-5%] z-[9999999999]">
+      <CustomerReviews
+        closeReviewBox={() => setShowReviewBox(false)}
+        productId={product._id}
+        refreshReviews={fetchReviews}
+      />
+    </div>
+  )}
 
+  <div className="ItemDetails-Container rounded-lg">
+    <div className="gap-8 Left-Side-Product-Details">
+      <div className="flex flex-col items-center">
+        <img
+          src={currentImage}
+          alt="ProductImage"
+          className="ProductMain-Image mb-4"
+        />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-4">
+          {product.ProductImages?.map((thumb, index) => (
+            <div
+              key={index}
+              className="ProductMore-Images hover:border-blue-500 cursor-pointer"
+            >
+              <img
+                src={thumb}
+                alt={`Thumbnail ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
 
-     <div className="ItemDetails-Container  rounded-lg ">
-      
-      {/* Product Content */}
-      <div className="gap-8 Left-Side-Product-Details">
-        {/* Left Side: Product Image */}
-        <div className="flex flex-col items-center">
-          <img
-            src={currentImage} // Replace with actual image URL
-            alt="ProductImage"
-            className="ProductMain-Image mb-4"
-          />
-          {/* Thumbnail images */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-4">
-              {productItems.ProductImages?.map((thumb, index) => (
-                <div
-                  key={index}
-                  className="ProductMore-Images  hover:border-blue-500 cursor-pointer"
+    <div className="Right-Side-Product-Details">
+      <div className="p-6 max-w-lg Right-Side-Product-Details-Box rounded-lg">
+        <div className="More flex justify-between">
+          <span className="text-sm text-green-600 font-semibold">In stock</span>
+          {adminData && (
+            <img
+              src={moreIcon}
+              alt="More options about product for admin"
+              className="w-8"
+              onClick={() => GetProductDetailsForUpdate(product)}
+            />
+          )}
+        </div>
+
+        <div className="flex items-center mt-2 mb-4">
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <svg
+                key={i}
+                xmlns="http://www.w3.org/2000/svg"
+                fill={i < Math.round(averageRating) ? "currentColor" : "none"}
+                stroke="currentColor"
+                className={`w-5 h-5 ${
+                  i < Math.round(averageRating)
+                    ? "text-yellow-400"
+                    : "text-gray-300"
+                }`}
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 15l-5.5 3 1.5-6.5L1 7l6.5-.5L10 1l2.5 5.5L19 7l-5 4.5L15.5 18z" />
+              </svg>
+            ))}
+            <span className="ml-2 text-sm text-gray-600">
+              {reviews.length} Review{reviews.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+        </div>
+
+        <div className="mb-2">
+          <h2 className="ProductPrice text-2xl font-bold">
+            ₹{product.ProductPrice}{" "}
+            <span className="line-through text-gray-500 text-lg">
+              {product.ProductPrice + 3000}
+            </span>
+          </h2>
+          <p className="text-gray-500 text-sm">(MRP Inclusive of all taxes)</p>
+        </div>
+
+        <h1 className="Product-Title text-lg font-semibold">
+          {product.ProductName}
+        </h1>
+        <p className="Product-Dec mb-2">{product.ProductDescription}</p>
+
+        <div className="Product-Offer-Box p-2 rounded-lg text-sm mb-4">
+          Flat 10% off on making charges
+        </div>
+
+        <div className="flex flex-col gap-2 text-sm mb-4">
+          <div className="flex gap-2 flex-wrap">
+            <div className="Product-Weight border rounded-lg p-2 px-4 flex items-center gap-2">
+              <p className="text-gray-600">Weight:</p>
+              <p className="font-semibold">{selectedSize}</p>
+            </div>
+
+            <button
+              onClick={() => setCustomising(!customising)}
+              className="Product-Weight Product-Customise bg-gradient-to-r bg-[#581C87] text-white rounded-lg px-4 py-2 text-sm font-semibold shadow-md transition hover:bg-[#481b6a]"
+            >
+              {customising ? "HIDE OPTIONS" : "CUSTOMISE"}
+            </button>
+          </div>
+
+          {customising && (
+            <div className="flex flex-wrap gap-3 mt-2">
+              {sizeOptions.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`px-4 py-2 rounded-md border transition font-medium text-sm ${
+                    selectedSize === size
+                      ? "bg-purple-600 text-white border-purple-600"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-purple-500"
+                  }`}
                 >
-                  <img
-                    src={thumb} // Replace with actual thumbnail URLs
-                    alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                  {size}
+                </button>
               ))}
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <div
+            className="button-AddToCart"
+            data-tooltip={"₹" + product.ProductPrice}
+          >
+            <div
+              onClick={() => addToCart(product)}
+              className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center"
+            >
+              <div className="text-AddCart-Feild flex flex-row gap-2 cursor-pointer">
+                <span className="material-symbols-outlined cursor-pointer">
+                  shopping_cart
+                </span>
+                ADD TO CART
+              </div>
+              <span className="icon-AddTo-Cart cursor-pointer">
+                <span className="material-symbols-outlined cursor-pointer">
+                  shopping_cart
+                </span>
+              </span>
             </div>
           </div>
         </div>
-        {/* Right Side: Product Details */}
-        <div className='Right-Side-Product-Details'>
-          
-          <div className="p-6 max-w-lg  Right-Side-Product-Details-Box rounded-lg">
-      
-       {/* Rating */}
-            <div className="More flex justify-between" >
-
-       <span className="text-sm text-green-600 font-semibold">In stock</span>
-               {adminData &&(
-                <img src={moreIcon} alt="More options about product for admin" className="w-8" onClick={() => GetProductDetailsForUpdate(productItems)}/>
-               )}
-              </div>
-       <div className="flex items-center mt-2 mb-4">
-        <div className="flex items-center">
-          {[...Array(5)].map((_, i) => (
-            <svg
-              key={i}
-              xmlns="http://www.w3.org/2000/svg"
-              fill={i < Math.round(averageRating) ? "currentColor" : "none"}
-              stroke="currentColor"
-              className={`w-5 h-5 ${i < Math.round(averageRating) ? "text-yellow-400" : "text-gray-300"}`}
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.5 3 1.5-6.5L1 7l6.5-.5L10 1l2.5 5.5L19 7l-5 4.5L15.5 18z" />
-            </svg>
-          ))}
-          <span className="ml-2 text-sm text-gray-600">
-            {reviews.length} Review{reviews.length !== 1 ? "s" : ""}
-          </span>
-        </div>
-
-          </div>
-
-      {/* Price */}
-      <div className="mb-2">
-        <h2 className="ProductPrice  text-2xl font-bold">
-        ₹{productItems.ProductPrice} {" "}
-          <span className="line-through text-gray-500 text-lg"> {productItems.ProductPrice + 3000} </span>
-          {/* <span className="text-red-600 text-lg font-semibold">(20% off)</span> */}
-        </h2>
-        <p className="text-gray-500 text-sm">(MRP Inclusive of all taxes)</p>
       </div>
-
-      {/* Title */}
-      <h1 className="Product-Title text-lg font-semibold">
-      {productItems.ProductName}
-      </h1>
-      <p className="Product-Dec mb-2"> {productItems.ProductDescription} </p>
-
-      {/* Offer Banner */}
-      <div className="Product-Offer-Box p-2 rounded-lg text-sm mb-4">
-        Flat 10% off on making charges
-      </div>
-
-      {/* Product Details */}
-<div className="flex flex-col gap-2 text-sm mb-4">
-  {/* Default or selected size */}
-  <div className="flex gap-2 flex-wrap">
-    <div className="Product-Weight border rounded-lg p-2 px-4 flex items-center gap-2">
-      <p className="text-gray-600">Weight:</p>
-      <p className="font-semibold">{selectedSize}</p>
     </div>
+  </div>
 
+<div className="reviews-container w-full px-4 md:px-10 py-6">
+  {/* Heading & Button */}
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+    <h2 className="text-2xl font-bold text-[#4f3267] tracking-wide">
+      Recent Reviews
+    </h2>
     <button
-      onClick={() => setCustomising(!customising)}
-      className="Product-Weight Product-Customise bg-gradient-to-r bg-[#581C87] text-white rounded-lg px-4 py-2 text-sm font-semibold shadow-md transition hover:bg-[#481b6a]"
+      className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-500 text-white px-5 py-2 text-sm md:text-base rounded-full font-medium transition duration-300"
+      onClick={() => setShowReviewBox(true)}
     >
-      {customising ? "HIDE OPTIONS" : "CUSTOMISE"}
+      WRITE A REVIEW
     </button>
   </div>
 
-  {/* Customise Options */}
-  {customising && (
-    <div className="flex flex-wrap gap-3 mt-2">
-      {sizeOptions.map((size) => (
-        <button
-          key={size}
-          onClick={() => setSelectedSize(size)}
-          className={`px-4 py-2 rounded-md border transition font-medium text-sm ${
-            selectedSize === size
-              ? "bg-purple-600 text-white border-purple-600"
-              : "bg-white text-gray-700 border-gray-300 hover:border-purple-500"
-          }`}
+  {/* Loading/Error */}
+  {loading && <p className="text-gray-500 text-sm">Loading reviews...</p>}
+  {error && <p className="text-red-500 text-sm">{error}</p>}
+
+  {/* Review List */}
+  {reviews.length > 0 ? (
+    <div className="grid gap-4">
+      {reviews.map((review) => (
+        <div
+          key={review._id}
+          className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
         >
-          {size}
-        </button>
+          {/* Header Row */}
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3">
+            <div>
+              <p className="font-semibold text-gray-800 text-sm">{review.userName}</p>
+              <p className="text-xs text-gray-500 mt-0.5">
+                {new Date(review.createdAt).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+            {/* Stars */}
+            <div className="flex mt-2 sm:mt-0">
+              {[...Array(5)].map((_, i) => (
+                <svg
+                  key={i}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill={
+                    i < Math.round(review.reviewRating)
+                      ? "url(#starGradient)"
+                      : "#E5E7EB"
+                  }
+                  className="w-5 h-5"
+                >
+                  <defs>
+                    <linearGradient id="starGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#facc15" />
+                      <stop offset="100%" stopColor="#fb923c" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 .587l3.668 7.57L24 9.748l-6 5.852L19.335 24 12 20.015 4.665 24 6 15.6 0 9.748l8.332-1.591z" />
+                </svg>
+              ))}
+            </div>
+          </div>
+
+          {/* Content */}
+          <div>
+            <h3 className="text-sm font-medium text-[#4f3267] mb-1">
+              {review.reviewTitle}
+            </h3>
+            <p className="text-sm text-gray-600 whitespace-pre-line">
+              {review.reviewComment}
+            </p>
+          </div>
+        </div>
       ))}
     </div>
+  ) : (
+    <p className="text-gray-500 text-sm mt-4">No reviews available.</p>
   )}
 </div>
 
 
-      {/* Action Buttons */}
-      <div className="flex items-center space-x-4">
-      <div className="button-AddToCart" data-tooltip={"₹"+productItems.ProductPrice}>
-     <div onClick={() => addToCart(productItems)} className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center">
-    
-    <div className="text-AddCart-Feild flex flex-row gap-2 cursor-pointer">   
-        <span className="material-symbols-outlined cursor-pointer">
-            shopping_cart
-        </span>
-        ADD TO CART
-    </div>
-    <span className="icon-AddTo-Cart cursor-pointer">
-    <span className="material-symbols-outlined cursor-pointer">
-            shopping_cart
-        </span>
-    </span>
-  </div>
-</div>
 
-     
-      </div>
-    </div>
-
-        </div>
-      </div>
-
-      <div className="reviews-container w-full">
-        <div className="review-WriteReview flex flex-row ">
-        <h2 className="reviews-title">Recent Reviews</h2>
-        <button 
-        className="Customer-Write-Review bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-500 text-white px-4 py-1 rounded-lg flex items-center"
-        onClick={() => setShowReviewBox(true)}
-        >
-          WRITE A REVIEW
-        </button>
-
-        </div>
-
-          {/* Display loading message */}
-          {loading && <p className="text-gray-500">Loading reviews...</p>}
-
-{/* Display error message */}
-{error && <p className="text-red-500">{error}</p>}
-        
-{reviews.length > 0 ? (
-  reviews.map((review) => (
-    <div key={review._id} className="review">
-      <div className="review-header">
-        <div className="review-Auther-Time flex flex-col">
-          <span className="review-author">{review.userName}</span>
-          <span className="review-date">
-          {new Date(review.createdAt).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })}
-</span>
-
-        </div>
-      </div>
-      <div className="review-stars flex">{renderStars(review.reviewRating)}</div>
-      <div className="reviewTitle-txt">
-        <h3 className="review-title">{review.reviewTitle}</h3>
-        <p className="review-content flex flex-col">{review.reviewComment}</p>
-      </div>
-    </div>
-  ))
-) : (
-  <p className="text-gray-500">No reviews available.</p>
-)}
-
-    </div>
-  
   {showEditPopUp && (
-  <EditProductDetails
-    ring={currentProduct}
-    onClose={() => setShowEditPopUp(false)}
-    refreshData={fetchUpdatedProduct} // pass this here
-  />
-)}
+    <EditProductDetails
+      ring={currentProduct}
+      onClose={() => setShowEditPopUp(false)}
+      refreshData={fetchUpdatedProduct}
+    />
+  )}
+</>
 
-
-    </>
   )
 }
 

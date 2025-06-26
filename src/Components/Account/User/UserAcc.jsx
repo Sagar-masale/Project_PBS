@@ -5,7 +5,7 @@ import './UserAcc.css';
 import EditUser from './EditUser';
 import ProfileContext from '../../Context/ProfileContext';
 import RegisterContext from '../../Context/RegisterContext';
-
+import toast from 'react-hot-toast';
 function UserAcc() {
 
   const [isLoadingUserAcc, setIsLoadingUserAcc] = useState(false); 
@@ -45,7 +45,8 @@ function UserAcc() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setLogout(true);
-    setLogoutNotify(true);
+    toast.success("You have been logged out successfully.");
+
     navigate('/');
   }, 2000);
 
