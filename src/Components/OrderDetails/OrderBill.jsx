@@ -1,39 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ringIg1 from "../../../public/RingImgs/imgR19M1.jpg";
-import ringIg2 from "../../../public/RingImgs/imgR20M1.jpg";
-import "./OrderBill.css"
-import billLogo1 from "../../../public/billLogo2.png"
+import "./OrderBill.css";
+import billLogo1 from "../../../public/billLogo2.png";
 
-const OrderBill = ({selectedOrder}) => {
-  const orderBillDetails = {
-    orderId: "0123123123",
-    customerName: "Sagar",
-    totalAmount: 2400,
-    shippingCharges: 100,
-    shippingAddress: "No - 10 A, Street Name, Area Name, City Name, State Name, Country.",
-    billingAddress: "No - 10 A, Street Name, Area Name, City Name, State Name, Country.",
-    items: [
-      {
-        name: "Women’s Running Shoe",
-        quantity: 1,
-        color: "Blue",
-        size: "M",
-        deliveryDate: "13/07/2020",
-        price: 1200,
-        image: ringIg1,
-      },
-      {
-        name: "Men’s Running Shoe",
-        quantity: 1,
-        color: "Black",
-        size: "M",
-        deliveryDate: "18/07/2020",
-        price: 1200,
-        image: ringIg2,
-      },
-    ],
-  };
-
+const OrderBill = ({ selectedOrder }) => {
   const [orderStatusInfo, setOrderStatusInfo] = useState("...");
   const [orderStatusTitle, setOrderStatusTitle] = useState("...");
 
@@ -42,28 +11,16 @@ const OrderBill = ({selectedOrder}) => {
 
     switch (selectedOrder.orderStatus) {
       case "Pending":
-        setOrderStatusInfo(
-          "Thank you for your order! Your order is currently pending and is being processed. We will notify you once it is confirmed."
-        );
-        setOrderStatusTitle(
-          "Your Order is Being Processed"
-        );
+        setOrderStatusInfo("Thank you for your order! Your order is currently pending and being processed. We will notify you once it is confirmed.");
+        setOrderStatusTitle("Your Order is Being Processed");
         break;
       case "Canceled":
-        setOrderStatusInfo(
-          "We regret to inform you that your order has been canceled. If this was unintentional or you need further assistance, please contact our support team."
-        );
-        setOrderStatusTitle(
-          "Your Order Has Been Canceled"
-        );
+        setOrderStatusInfo("We regret to inform you that your order has been canceled. If this was unintentional, please contact our support team.");
+        setOrderStatusTitle("Your Order Has Been Canceled");
         break;
       case "Success":
-        setOrderStatusInfo(
-          "Thank you for your order. Your purchase has been successfully processed. Please find below the receipt for your records."
-        );
-        setOrderStatusTitle(
-          "Your Order Has Been Confirmed!"
-        );
+        setOrderStatusInfo("Thank you! Your purchase has been successfully processed. Please find the receipt below.");
+        setOrderStatusTitle("Your Order Has Been Confirmed!");
         break;
       default:
         setOrderStatusInfo("Loading...");
@@ -71,113 +28,104 @@ const OrderBill = ({selectedOrder}) => {
     }
   }, [selectedOrder?.orderStatus]);
 
-  if (!orderBillDetails) {
-    return <p className="text-center text-red-500">Order data is missing!</p>;
-  }
-
-
-  const totalOrderPrice = selectedOrder?.orderDetails?.reduce((acc, order, orderIndex) => {
-    const quantity = selectedOrder.products?.[orderIndex]?.orderQuantity || 1;
-    const totalPrice = order.ProductPrice * quantity;
-    return acc + totalPrice;
-  }, 0); 
-  
-  return (
-    <div className="max-w-2xl mx-auto bg-white  shadow-lg rounded-xl p-8">
-      {/* Header */}
-      <div className="flex justify-between items-center border-b pb-4">
-        <img src={billLogo1} alt="PBS" className="w-[110px]" />
-        <p className="text-gray-600 text-sm">
-          Order No : <span className="font-semibold">{selectedOrder._id || "0000000000"}</span>
-        </p>
-      </div>
-
-      {/* Order Confirmation */}
-      <div className="mt-6">
-        <h1 className="text-xl font-bold text-gray-900">#! {orderStatusTitle} </h1>
-        <p className="text-black  mt-2">
-          Hi <h2 className="BillerName font-semibold text-[#432a58]">{selectedOrder.userId.fullName || "Customer"},</h2>
-          {orderStatusInfo}
-        </p>
-      </div>
-
-      {/* Order Details */}
-      {selectedOrder?.orderDetails?.length > 0 ? (
-        <div className="mt-6 border rounded-lg p-4">
-          <div className="flex justify-between text-gray-700 font-semibold border-b pb-2">
-            <p>Order Details</p>
-            <p>Date</p>
-            <p>Price</p>
-          </div>
-
-          {selectedOrder?.orderDetails?.map((order, orderIndex) => {
-      const quantity = selectedOrder.products?.[orderIndex]?.orderQuantity || 1;
-      const totalPrice = order.ProductPrice * quantity;
+  const totalOrderPrice = selectedOrder?.orderDetails?.reduce((acc, order, index) => {
+    const quantity = selectedOrder.products?.[index]?.orderQuantity || 1;
+    return acc + order.ProductPrice * quantity;
+  }, 0);
 
   return (
-    <div key={orderIndex} className="flex justify-between items-center border-b py-4">
-      <div className="flex items-center gap-4">
-        <img
-          src={order.ProductImages?.[0] || "/default-image.jpg"} // Show only the first image
-          alt={`Product Image ${orderIndex}`}
-          className="w-16 h-16 object-cover rounded"
-        />
-        <div className="w-[150px]">
-          <p className="font-semibold text-[14px]">{order.ProductName}</p>
-          <p className="text-sm text-gray-600">Qty: {quantity}</p>
-          <p className="text-sm text-gray-600">Gram: {order.size || "10g"}</p>
-        </div>
-      </div>
-      <p className="text-gray-600 relative right-10">{new Date(selectedOrder.createdAt).toLocaleDateString()}</p>
-      <p className="text-gray-900 font-semibold">₹{totalPrice}</p>
+<div className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 sm:p-10 border border-gray-200">
+  {/* Header */}
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-6">
+    <img src={billLogo1} alt="PBS" className="w-32 mb-4 sm:mb-0" />
+    <div className="text-left sm:text-right">
+      <p className="text-xs text-gray-500">Order No:</p>
+      <p className="text-sm font-bold text-gray-800">{selectedOrder._id || "0000000000"}</p>
+      <p className="text-xs text-gray-500">{new Date(selectedOrder.createdAt).toLocaleDateString()}</p>
     </div>
-  );
-})}
+  </div>
 
+  {/* Status */}
+  <div className="mt-6">
+    <h2 className="text-xl font-semibold text-[#432a58]">#{orderStatusTitle}</h2>
+    <p className="text-sm text-gray-700 mt-1">
+      Hi <span className="font-semibold">{selectedOrder.userId.fullName || "Customer"}</span>, {orderStatusInfo}
+    </p>
+  </div>
 
+  {/* Order Details */}
+  {selectedOrder?.orderDetails?.length > 0 ? (
+    <div className="mt-8">
+      <h3 className="text-md font-semibold text-gray-800 mb-4 border-b pb-2">Order Items</h3>
+      <div className="flex flex-col gap-6">
+        {selectedOrder.orderDetails.map((order, index) => {
+          const quantity = selectedOrder.products?.[index]?.orderQuantity || 1;
+          const totalPrice = order.ProductPrice * quantity;
 
-
-          {/* Price Summary */}
-          <div className="mt-4 space-y-2 text-right">
-            <p className="text-gray-700">
-              Total : <span className="font-semibold">₹ { totalOrderPrice.toFixed(2) || 0}</span>
-            </p>
-            <p className="text-gray-700">
-              Save : <span className="font-semibold">₹ { (totalOrderPrice - selectedOrder.totalAmount ).toFixed(2) || 0}</span>
-            </p>
-            <p className="text-lg font-bold text-gray-900">
-              Grand Total : ₹ {selectedOrder.totalAmount?.toFixed(2) || 0}
-            </p>
-          </div>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 mt-4">No items in the order.</p>
-      )}
-
-      {/* Billing Address */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-      
-        <div className="bg-white p-4 rounded-lg">
-          <h4 className="font-semibold text-gray-900">Billing Address:</h4>
-          <p className="text-gray-600">
-            {selectedOrder.userId.addressLine1 || "Not available"},
-            <br /> { selectedOrder.userId.addressLine2 }, {selectedOrder.userId.city} <br /> 
-            {selectedOrder.userId.zipCode}
-            </p>
-        </div>
+          return (
+            <div key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-4 gap-4">
+              <div className="flex gap-4">
+                <img
+                  src={order.ProductImages?.[0] || "/default-image.jpg"}
+                  alt="Product"
+                  className="w-20 h-20 object-cover rounded border"
+                />
+                <div>
+                  <p className="text-sm font-medium">{order.ProductName}</p>
+                  <p className="text-xs text-gray-500">Qty: {quantity} | Gram: {order.size || "10g"}</p>
+                </div>
+              </div>
+              <p className="text-sm font-semibold text-gray-800 text-right sm:text-left">
+                ₹{totalPrice}
+              </p>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Footer */}
-      <p className="mt-6 text-gray-700 text-sm text-center">
-        Hope to see you soon, <br /> <span className="font-semibold">PBS Gold Team</span>
-      </p>
-      <p className="mt-2 text-center text-sm text-blue-600 cursor-pointer">
-        Need help? Contact our Support Team
-      </p>
+      {/* Totals */}
+      <div className="mt-6 text-right space-y-1 border-t pt-4">
+        <p className="text-sm text-gray-700">
+          Total: <span className="font-semibold">₹{totalOrderPrice?.toFixed(2) || 0}</span>
+        </p>
+        <p className="text-sm text-gray-700">
+          Discount: <span className="font-semibold text-green-600">₹{(totalOrderPrice - selectedOrder.totalAmount)?.toFixed(2) || 0}</span>
+        </p>
+        <p className="text-lg font-bold text-gray-900">
+          Grand Total: ₹{selectedOrder.totalAmount?.toFixed(2) || 0}
+        </p>
+      </div>
     </div>
+  ) : (
+    <p className="text-sm text-gray-500 mt-6 text-center">No items in this order.</p>
+  )}
+
+  {/* Billing Info */}
+  <div className="mt-8 p-4 border rounded-md bg-gray-50">
+    <h4 className="text-sm font-semibold text-gray-900 mb-2">Billing Address</h4>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      {selectedOrder.userId.addressLine1 || "Not available"},
+      <br />
+      {selectedOrder.userId.addressLine2}, {selectedOrder.userId.city}
+      <br />
+      {selectedOrder.userId.zipCode}
+    </p>
+  </div>
+
+  {/* Footer */}
+  <div className="text-center mt-8 border-t pt-4">
+    <p className="text-sm text-gray-700">
+      Thank you for shopping with us! <br />
+      <span className="font-semibold text-[#432a58]">– PBS Gold Team</span>
+    </p>
+    <p className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer">
+      Need help? Contact our Support Team
+    </p>
+  </div>
+</div>
+
+
   );
-}
+};
 
 export default OrderBill;
-
-

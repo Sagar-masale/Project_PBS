@@ -83,7 +83,7 @@ const OrderDetail = () => {
   return (
     <>
     {showInvoice ? (
-          <div className="Order-Bill-Generate bg-[#a4a4a460] w-full h-full z-[99] fixed top-0 overflow-y-scroll p-24">
+          <div className="Order-Bill-Generate bg-[#a4a4a460] w-full h-full z-[99] fixed top-0 overflow-y-scroll py-24">
           <OrderBill selectedOrder={showInvoice} />
           </div>
     ):(null)}
