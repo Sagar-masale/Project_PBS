@@ -30,6 +30,10 @@ function ItemDetails() {
   const { userData } = useContext(ProfileContext);
   const { reviews, setReviews } = useContext(ReviewContext);
 
+  const [isImageViewerOpen, setIsImageViewerOpen] = useState(false);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+
   const sizeOptions = [
     "13 (52.8 mm)",
     "14 (54.0 mm)",
@@ -146,6 +150,14 @@ useEffect(() => {
 if (!product) {
   return <div className="text-center text-gray-500 mt-20">Loading product details...</div>;
 }
+const openImageViewer = (index) => {
+  setActiveImageIndex(index);
+  setIsImageViewerOpen(true);
+};
+
+const closeImageViewer = () => {
+  setIsImageViewerOpen(false);
+};
 
     
   return (
@@ -161,15 +173,67 @@ if (!product) {
       />
     </div>
   )}
+{isImageViewerOpen && (
+
+<>
+  {/* Overlay Container */}
+  <div className="fixed inset-0 z-50 backdrop-blur-sm mt-18 pt-40 bg-white  bg-opacity-80 flex items-center justify-center px-4 py-6 overflow-y-auto">
+
+    {/* Close Arrow */}
+    <button
+      onClick={closeImageViewer}
+      className="absolute top-[120px] left-4 md:top-20 md:left-6 text-purple-800 text-3xl md:text-4xl z-50 hover:scale-110 transition duration-300"
+      aria-label="Close"
+    >
+      ←
+    </button>
+
+    {/* Image Viewer Content */}
+    <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-8 w-full max-w-6xl mx-auto mt-auto">
+      
+      {/* Thumbnails */}
+      <div className="flex md:flex-col gap-3 overflow-auto max-w-full md:max-w-[120px]">
+        {product.ProductImages.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            onClick={() => setActiveImageIndex(index)}
+            className={`w-20 h-20 object-cover rounded-lg border-2 cursor-pointer ${
+              activeImageIndex === index ? "border-purple-700" : "border-transparent"
+            }`}
+            alt={`thumb-${index}`}
+          />
+        ))}
+      </div>
+
+      {/* Main Image */}
+      <div className="flex-1 flex justify-center items-center">
+        <img
+          src={product.ProductImages[activeImageIndex]}
+          alt="Selected Product"
+          className="max-h-[80vh] w-auto object-contain rounded-lg shadow-md"
+        />
+      </div>
+    </div>
+  </div>
+</>
+
+)}
+
+
+
+
 
   <div className="ItemDetails-Container rounded-lg">
     <div className="gap-8 Left-Side-Product-Details">
       <div className="flex flex-col items-center">
-        <img
-          src={currentImage}
-          alt="ProductImage"
-          className="ProductMain-Image mb-4"
-        />
+      <img
+        src={currentImage}
+        alt="ProductImage"
+        className="ProductMain-Image mb-4 cursor-pointer"
+        onClick={() => openImageViewer(0)}
+      />
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 mt-4">
           {product.ProductImages?.map((thumb, index) => (
             <div
@@ -180,6 +244,7 @@ if (!product) {
                 src={thumb}
                 alt={`Thumbnail ${index + 1}`}
                 className="w-full h-full object-cover"
+                onClick={() => openImageViewer(index)}
               />
             </div>
           ))}

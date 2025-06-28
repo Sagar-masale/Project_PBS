@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./OrderBill.css";
-import billLogo1 from "../../../public/billLogo2.png";
+import {X, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
-const OrderBill = ({ selectedOrder }) => {
+const OrderBill = ({ selectedOrder, handleClose, invoiceRef  }) => {
   const [orderStatusInfo, setOrderStatusInfo] = useState("...");
   const [orderStatusTitle, setOrderStatusTitle] = useState("...");
 
@@ -33,11 +35,52 @@ const OrderBill = ({ selectedOrder }) => {
     return acc + order.ProductPrice * quantity;
   }, 0);
 
+const handleDownload = async () => {
+  if (!invoiceRef?.current) return;
+  const buttonsToHide = invoiceRef.current.querySelectorAll('.download-hide');
+  buttonsToHide.forEach(btn => btn.style.display = 'none');
+const canvas = await html2canvas(invoiceRef.current, {
+  scale: 5,       // 🔁 Better than 1, smaller than 2 — keeps text sharp
+  useCORS: true,    // ✅ Enable cross-origin image capture
+  allowTaint: false,
+});
+const imgData = canvas.toDataURL("image/jpeg", 0.92); // ✅ High-quality JPEG with good compression
+
+const pdf = new jsPDF("p", "mm", "a4");
+const width = pdf.internal.pageSize.getWidth();
+const height = (canvas.height * width) / canvas.width;
+
+pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+pdf.save("PBS_Invoice.pdf");
+buttonsToHide.forEach(btn => btn.style.display = '');
+};
+
+
   return (
-<div className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 sm:p-10 border border-gray-200">
-  {/* Header */}
+<div ref={invoiceRef} className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 sm:p-10 border border-gray-200">
+     <button
+  onClick={handleClose}
+  className="absolute top-10 right-10 text-gray-500 hover:text-purple-800 text-2xl font-bold download-hide"
+>
+  <X />
+</button>
+
+<button
+  onClick={handleDownload}
+  className="absolute top-10 right-20 text-gray-500 hover:text-purple-800 text-2xl font-bold download-hide"
+  title="Download Invoice"
+>
+  <Download />
+</button>
+
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-6">
-    <img src={billLogo1} alt="PBS" className="w-32 mb-4 sm:mb-0" />
+<img 
+  src="/WebLogo/PBS_LOGO.png" 
+  alt="PBS" 
+  className="w-20 sm:w-24 md:w-28 max-w-full h-auto mb-4 sm:mb-0"
+/>
+
+
     <div className="text-left sm:text-right">
       <p className="text-xs text-gray-500">Order No:</p>
       <p className="text-sm font-bold text-gray-800">{selectedOrder._id || "0000000000"}</p>
@@ -73,6 +116,7 @@ const OrderBill = ({ selectedOrder }) => {
                 <div>
                   <p className="text-sm font-medium">{order.ProductName}</p>
                   <p className="text-xs text-gray-500">Qty: {quantity} | Gram: {order.size || "10g"}</p>
+                  <p className="text-xs text-gray-500">Dec: {order.ProductDescription} </p>
                 </div>
               </div>
               <p className="text-sm font-semibold text-gray-800 text-right sm:text-left">

@@ -17,7 +17,7 @@ import MainPage3rdPhn from '../images/Home3Phn.png';
 import MangalSutraImg from '../images/Mangalsutra.jpg';
 import BanglesImg from '../images/Bangles.jpg';
 import ChainsImg from '../images/Chains.jpg';
-
+import About from '../About_PBS/About';
 
 
 function Home({
@@ -76,121 +76,229 @@ function Home({
     return(
         <>
 
- <div className="img-slide">
- 
+<div className="w-full overflow-hidden relative" id="Category-Move">
+  <div
+    id="carouselExampleAutoplaying"
+    className="carousel slide"
+    data-bs-ride="carousel"
+  >
+    {/* Carousel Inner */}
+    <div className="carousel-inner">
+      {/* Slide 1 */}
+      <div className="carousel-item active">
+        <picture>
+          <source media="(max-width: 480px)" srcSet={MainPagePhn} />
+          <img
+            src={MainPage}
+            alt="MainPage"
+            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+          />
+        </picture>
+      </div>
 
- <div
-  id="carouselExampleAutoplaying"
-  className="SlideImagesBox carousel slide"
-  data-bs-ride="carousel"
->
-  <div className="carousel-inner ImageSlide-Carousel-Inner">
-    <div className="carousel-item active">
-    <picture>
-    <source media="(max-width: 480px)" srcSet={MainPagePhn} />
-    <img
-        src={MainPage}
-        className="d-block w-100 h-[90vh] object-fill"
-        alt="MainPage"
-      />
-    </picture>
+      {/* Slide 2 */}
+      <div className="carousel-item">
+        <picture>
+          <source media="(max-width: 480px)" srcSet={MainPage2ndPhn} />
+          <img
+            src={MainPage2nd}
+            alt="MainPage2"
+            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+          />
+        </picture>
+      </div>
 
+      {/* Slide 3 */}
+      <div className="carousel-item">
+        <picture>
+          <source media="(max-width: 480px)" srcSet={MainPage3rdPhn} />
+          <img
+            src={MainPage3rd}
+            alt="MainPage3"
+            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+          />
+        </picture>
+      </div>
     </div>
-    <div className="carousel-item">
-    <picture>
-    <source media="(max-width: 480px)" srcSet={MainPage2ndPhn} />
-      <img
-        src={MainPage2nd}
-        className="d-block w-100 h-[90vh] object-fill"
-        alt="..."
-      />
-     </picture>
-    </div>
-    <div className="carousel-item">
-    <picture>
-    <source media="(max-width: 480px)" srcSet={MainPage3rdPhn} />
-      <img
-        src={MainPage3rd}
-        className="d-block w-100 h-[90vh] object-fill"
-        alt="..."
-      />
-      </picture>
-    </div>
+
+    {/* Previous Button */}
+    <button
+      className="carousel-control-prev absolute top-1/2 left-2 -translate-y-1/2 z-10"
+      type="button"
+      data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="prev"
+    >
+      <span className="material-symbols-outlined text-white text-3xl">
+        chevron_left
+      </span>
+    </button>
+
+    {/* Next Button */}
+    <button
+      className="carousel-control-next absolute top-1/2 right-2 -translate-y-1/2 z-10"
+      type="button"
+      data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="next"
+    >
+      <span className="material-symbols-outlined text-white text-3xl">
+        chevron_right
+      </span>
+    </button>
   </div>
-  <button
-    className="carousel-control-prev w-40"
-    type="button"
-    data-bs-target="#carouselExampleAutoplaying"
-    data-bs-slide="prev"
-  >
-    <span className="material-symbols-outlined Carousel-Arrows">
-      chevron_left
-    </span>
-  </button>
-  <button
-    className="carousel-control-next w-40"
-    type="button"
-    data-bs-target="#carouselExampleAutoplaying"
-    data-bs-slide="next"
-  >
-    <span className="material-symbols-outlined Carousel-Arrows">
-      chevron_right
-    </span>
-  </button>
 </div>
-
-   </div>
+      
    <div className="shop-category Category-List-First-Box  flex flex-col justify-center items-center">
-<h2 className="shop-c">Choose Your Category</h2><br/>
-<p className="instruction">Find Your Favorites – We’ve Got Every Category Covered!</p><br/>
+<div className="text-center px-4 sm:px-6 lg:px-8 py-6">
+  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#4f3267]">
+    Choose Your Category
+  </h2>
 
-<div className="image-lists Category-List-First" id="Category-Move">
-     <Link to="/Ring-Page" className="list-items items1"><div className="list-item1 HomeList-Items" ><div className="items-background"><img src='./RingImgs/imgR2.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle1}</h6></div> </div></Link> 
-     <Link to="/Earrings-Page" className="list-items items2"><div className="list-item2 HomeList-Items" ><div className="items-background"><img src='./Erraings/imgR3.jpg' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle2}</h6></div> </div></Link> 
-     <Link to="/Pendants-Page" className="list-items items3"><div className="list-item3 HomeList-Items" ><div className="items-background"><img src='./Pendants/MainPendant.webp' className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle3}</h6></div> </div></Link> 
-     <Link to="/Mangalsutra-Page" className="list-items items4"><div className="list-item4 HomeList-Items" ><div className="items-background"><img src={MangalSutraImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle4}</h6></div> </div></Link> 
-     <Link to="/Bangles-Page" className="list-items items5"><div className="list-item5 HomeList-Items" ><div className="items-background"><img src={BanglesImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle5}</h6></div> </div></Link> 
-     <Link to="/Chains-Page" className="list-items items6"><div className="list-item6 HomeList-Items" ><div className="items-background"><img src={ChainsImg} className="shop-category-images shop-category-img1"/></div><div className="card-title"><h6 className="card-title-name">{CatTitle6}</h6></div> </div></Link> 
-     
+  <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-xl mx-auto">
+    Find Your Favorites – We’ve Got Every Category Covered!
+  </p>
 </div>
-{/* <img src={LineImg} className="line"/> */}
+
+
+<div
+  id="Category-Move"
+  className="w-full px-4 sm:px-6 py-8"
+  style={{ paddingLeft: window.innerWidth >= 1024 ? "30px" : "", paddingRight: window.innerWidth >= 1024 ? "30px" : "" }}
+>
+
+
+
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    {/* Ring */}
+    <Link to="/Ring-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src="./RingImgs/imgR2.jpg"
+          alt="Rings"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle1}</h6>
+        </div>
+      </div>
+    </Link>
+
+    {/* Earrings */}
+    <Link to="/Earrings-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src="./Erraings/imgR3.jpg"
+          alt="Earrings"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle2}</h6>
+        </div>
+      </div>
+    </Link>
+
+    {/* Pendants */}
+    <Link to="/Pendants-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src="./Pendants/MainPendant.webp"
+          alt="Pendants"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle3}</h6>
+        </div>
+      </div>
+    </Link>
+
+    {/* Mangalsutra */}
+    <Link to="/Mangalsutra-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src={MangalSutraImg}
+          alt="Mangalsutra"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle4}</h6>
+        </div>
+      </div>
+    </Link>
+
+    {/* Bangles */}
+    <Link to="/Bangles-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src={BanglesImg}
+          alt="Bangles"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle5}</h6>
+        </div>
+      </div>
+    </Link>
+
+    {/* Chains */}
+    <Link to="/Chains-Page" className="block group">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img
+          src={ChainsImg}
+          alt="Chains"
+          className="w-full h-32 sm:h-40 object-cover"
+        />
+        <div className="text-center py-2">
+          <h6 className="text-sm font-medium text-[#4f3267]">{CatTitle6}</h6>
+        </div>
+      </div>
+    </Link>
+  </div>
+</div>
+
 </div>
 
 
 {/* Collection */}
-    <div className="bg-white ">
-      <div className="mx-auto l px-4 sm:px-6 lg:px-8 w-full">
-        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32 ">
-          <h2 className="Collection-Name text-2xl font-bold text-[#4f3267]">Collections</h2>
+<div className="bg-white py-12">
+  <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+    <div className="text-left">
+      <h2 className="Collection-Name text-2xl font-bold text-[#4f3267]">Collections</h2>
+    </div>
 
-          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0 ">
-            {Collections.map((Collections) => (
-              <div key={Collections.id} className="group relative">
-                <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                  <img
-                    alt={Collections.imageAlt}
-                    src={Collections.CollectionImgs}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <h3 className="mt-6 text-sm text-gray-500">
-                  <Link to={Collections.href}>
-                    <span className="absolute inset-0" />
-                    {Collections.nameCollectionImgTitle}
-                  </Link>
-                </h3>
-                <p className="text-base font-semibold text-gray-900">{Collections.description}</p>
-              </div>
-            ))}
+    <div className="mt-10 grid grid-cols-1 gap-y-10 gap-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3 lg:gap-4">
+      {Collections.map((collection) => (
+        <div key={collection.id} className="group relative">
+          <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-100">
+            <img
+              src={collection.CollectionImgs}
+              alt={collection.imageAlt}
+              className="h-[200px] w-full object-cover object-center transition duration-300 ease-in-out group-hover:scale-105"
+            />
+          </div>
+          <div className="mt-4 text-left">
+            <h3 className="text-sm text-gray-700">
+              <Link to={collection.href}>
+                <span aria-hidden="true" className="absolute inset-0" />
+                {collection.nameCollectionImgTitle}
+              </Link>
+            </h3>
+            <p className="mt-1 text-base font-semibold text-gray-900">
+              {collection.description}
+            </p>
           </div>
         </div>
-      </div>
+      ))}
     </div>
+  </div>
+</div>
+
 
     {/* Wedding Section */}
     
     <div className="bg-white">
      <WeddingProducts/>
+    </div>
+        <div className="bg-white">
+     <About/>
     </div>
     
         </>

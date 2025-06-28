@@ -144,7 +144,7 @@ const handleInputFocus = () => {
                     className="flex items-center justify-between px-3 py-2 cursor-pointer text-sm hover:bg-purple-50 hover:shadow-sm transition-colors duration-150 ease-in-out group"
                   >
                     <div className="flex items-center gap-3">
-                      <Search className="w-4 h-4 text-purple-600" />
+                      <Search className="w-4 h-4 text-purple-900" />
                       <span>{item.ProductName}</span>
                     </div>
                     <span className="material-symbols-outlined text-gray-400 group-hover:text-purple-600 text-base rotate-[320deg]">

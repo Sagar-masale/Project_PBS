@@ -34,35 +34,43 @@ function WeddingProducts() {
   
   return (
     <>
-            <div className="mb-4 ml-6 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
-          <div className="flex items-center gap-12">
-            <h2 className="text-2xl font-bold text-[#4f3267] lg:text-3xl ">Wedding</h2>
-          </div>
-   
-        </div>
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8 p-4">
-      
-  {weddingProducts.map((product) => (
-    <a
-      key={product.id}
-      href="#"
-      className={`group relative  flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg ${product.span}`}
-    >
-      <img
-        src={product.img}
-        loading="lazy"
-        alt={product.name || "Wedding Jewelry"}
-        className="absolute inset-0 h-full w-full object-center  transition duration-200 group-hover:scale-110"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
-      {product.name && (
-        <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
-          {product.name}
-        </span>
-      )}
-    </a>
-  ))}
+<div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+  {/* Heading */}
+  <div className="mb-10 text-left">
+    <h2 className="text-2xl sm:text-3xl font-bold text-[#4f3267]">Wedding Collection</h2>
+    <p className="text-sm text-gray-500 mt-2">Explore elegant wedding jewelry</p>
+  </div>
+
+  {/* Responsive Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 lg:gap-4">
+    {weddingProducts.map((product) => (
+      <div
+        key={product.id}
+        className="relative group rounded-xl overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition duration-300"
+      >
+        {/* Image */}
+        <img
+          src={product.img}
+          alt={product.name || "Wedding Product"}
+          loading="lazy"
+          className="h-56 sm:h-64 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
+
+        {/* Product Name */}
+        {product.name && (
+          <span className="absolute bottom-3 left-4 text-white text-sm sm:text-base font-semibold z-10">
+            {product.name}
+          </span>
+        )}
+      </div>
+    ))}
+  </div>
 </div>
+
+
 
     </>
   )

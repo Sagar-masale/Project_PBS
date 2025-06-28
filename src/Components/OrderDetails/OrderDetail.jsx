@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
 import "./OrderDetail.css"
@@ -7,6 +7,7 @@ import OrderBill from "./OrderBill";
 
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
+  const invoiceContainerRef = useRef(null);
 
   useEffect(() => {
     if (userData?.userOrders?.length > 0) {
@@ -76,16 +77,25 @@ const OrderDetail = () => {
   const [showInvoice , setShowInvoice] = useState(false);
   
   
-  
- 
+  const handleShowInvoice = (order) => {
+  setShowInvoice(order);
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // ⬆️ Scroll to top only on open
+};
+
+
  
 
   return (
     <>
     {showInvoice ? (
-          <div className="Order-Bill-Generate bg-[#a4a4a460] w-full h-full z-[99] fixed top-0 overflow-y-scroll py-24">
-          <OrderBill selectedOrder={showInvoice} />
-          </div>
+<div className="relative max-w-4xl mx-auto bg-white p-4 sm:p-6 md:p-8">
+  <OrderBill
+    selectedOrder={showInvoice}
+    handleClose={() => setShowInvoice(null)}
+    invoiceRef={invoiceContainerRef} // 🔁 pass ref here
+  />
+</div>
+
     ):(null)}
     {userData ? (
       <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
@@ -98,15 +108,7 @@ const OrderDetail = () => {
 
             </h2>
            
-            <span 
-            className="text-blue-500 hover:underline cursor-pointer"
-            onClick={() => {
-              console.log("Clicked Order Details:", order);
-              setShowInvoice(order);
-            }}
-          >
-            View invoice →
-          </span>
+        <button onClick={() => handleShowInvoice(order)}>View Invoice</button>
 
           
           </div>
