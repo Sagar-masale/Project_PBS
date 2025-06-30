@@ -56,7 +56,6 @@ const FingerRings=()=>{
 <div className="ResComponent">
     {
       rings.map((ring)=>{
-        
 
         return(
           

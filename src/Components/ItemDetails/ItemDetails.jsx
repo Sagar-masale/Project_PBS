@@ -24,6 +24,7 @@ function ItemDetails() {
   const [currentProduct, setCurrentProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+const [productType, setProductType] = useState("");
 
   const { productItems, addToCart } = useContext(CartContext);
   const { adminData } = useContext(AdminContext);
@@ -44,11 +45,15 @@ function ItemDetails() {
 
 useEffect(() => {
   const loadProduct = async () => {
-    if (productItems) {
-      setProduct(productItems);
-      setCurrentImage(productItems.ProductImages?.[0] || "");
-    } else {
-      // List of all category-specific endpoints
+    if (productItems && productItems._id === id) {
+  setProduct(productItems);
+  setCurrentImage(productItems.ProductImages?.[0] || "");
+
+  // Derive product type from ProductCategory
+  if (productItems.ProductCategory) {
+    setProductType(productItems.ProductCategory.toLowerCase()); // e.g., "Ring" => "ring"
+  }
+}  else {
       const endpoints = [
         "get-productBy-id",
         "get-earringBy-id",
@@ -58,37 +63,35 @@ useEffect(() => {
         "get-chainBy-id",
       ];
 
-      let found = false;
-
       for (const endpoint of endpoints) {
         try {
           const response = await axios.get(
             `https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}?productId=${id}`
           );
 
-          const data = response.data.message.product;
-          if (data) {
-            console.log(`Fetched from ${endpoint}:`, data);
-            setProduct(data);
-            setCurrentImage(data.ProductImages?.[0] || "");
-            found = true;
-            break; // Exit the loop if data is found
-          }
+         
+           const data = response.data?.message?.product || response.data?.product || null;
+         if (data) {
+        setProduct(data);
+        setCurrentImage(data.ProductImages?.[0] || "");
+
+        const type = endpoint.split("-")[1]; // e.g., "earring"
+        setProductType(type);
+        return;
+      }
         } catch (err) {
-          // Continue trying next endpoint silently
+          // silent
         }
       }
 
-      if (!found) {
-        console.error("Product not found in any category.");
-        // Optionally navigate to 404 or show error message
-        // navigate("/");
-      }
+      console.error("Product not found in any category.");
+      setProduct(null);
     }
   };
 
-  loadProduct();
+  if (id) loadProduct();
 }, [id, productItems]);
+
 
 
 
@@ -129,6 +132,10 @@ useEffect(() => {
 
   const GetProductDetailsForUpdate = (item) => {
     setCurrentProduct(item);
+    console.log("Currentttt: ",currentProduct)
+          setProductType(item.ProductCategory); // treat "product" as "ring"
+        console.log("typeee: ",productType);
+     
     setShowEditPopUp(true);
   };
 
@@ -453,13 +460,16 @@ const closeImageViewer = () => {
 
 
 
-  {showEditPopUp && (
-    <EditProductDetails
-      ring={currentProduct}
-      onClose={() => setShowEditPopUp(false)}
-      refreshData={fetchUpdatedProduct}
-    />
-  )}
+{showEditPopUp && (
+<EditProductDetails
+  product={currentProduct}
+  productType={productType}
+  onClose={() => setShowEditPopUp(false)}
+  refreshData={fetchUpdatedProduct}
+/>
+
+)}
+
 </>
 
   )

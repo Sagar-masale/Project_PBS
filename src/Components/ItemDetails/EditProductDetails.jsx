@@ -3,27 +3,37 @@ import ProductContext from "../Context/ProductContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function EditProductDetails({ ring, onClose, refreshData  }) {
-  const {setRingProductData} = useContext(ProductContext);
-  const [ringData, setRingData] = useState({
+function EditProductDetails({ product, productType, onClose, refreshData }) {
+  const {
+    setRingProductData,
+    setEarringProductData,
+    setBangleProductData,
+    setChainProductData,
+    setPendantProductData,
+    setMangalsutraProductData,
+  } = useContext(ProductContext);
+
+  const [productData, setProductData] = useState({
     ProductName: "",
+    ProductGender: "",
     ProductDescription: "",
     ProductPrice: "",
   });
 
   useEffect(() => {
-    if (ring) {
-      setRingData({
-        ProductName: ring.ProductName,
-        ProductDescription: ring.ProductDescription,
-        ProductPrice: ring.ProductPrice,
+    if (product) {
+      setProductData({
+        ProductName: product.ProductName || "",
+        ProductGender: product.ProductGender || "",
+        ProductDescription: product.ProductDescription || "",
+        ProductPrice: product.ProductPrice || "",
       });
     }
-  }, [ring]);
+  }, [product]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setRingData((prev) => ({
+    setProductData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -31,44 +41,86 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete("https://backend-pbs-coo6.onrender.com/api/v1/products/delete-ring", {
-        data: { id: ring._id },
+      const endpoint = `delete-${productType.toLowerCase()}`;
+      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+        data: { id: product._id },
       });
-      toast.success("Ring deleted successfully");
-          setRingProductData((prevRings) =>
-      prevRings.map((item) =>
-        item._id === ring._id ? { ...item, ...ringData } : item
-      )
-    );
+
+      toast.success(`${productType} deleted successfully`);
+
+      // Optionally update context (or use refreshData)
       onClose();
-      setTimeout(() => {
-      window.location.reload();
-    }, 100); 
       refreshData && refreshData();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (error) {
-      toast.error("Failed to delete ring");
+      toast.error(`Failed to delete ${productType}`);
     }
   };
 
   const handleUpdate = async () => {
     try {
-      await axios.put("https://backend-pbs-coo6.onrender.com/api/v1/products/update-ring", {
-        id: ring._id,
-        ...ringData,
-      });
-      toast.success("Product updated successfully");
-         setRingProductData((prevRings) =>
-      prevRings.map((item) =>
-        item._id === ring._id ? { ...item, ...ringData } : item
-      )
-    );
-      onClose(); 
-       setTimeout(() => {
-      window.location.reload();
-    }, 100); 
+      const endpointMap = {
+        rings: "update-ring",
+        earrings: "update-earring",
+        bangles: "update-bangle",
+        chains: "update-chain",
+        pendants: "update-pendant",
+        mangalsutra: "update-mangalsutra",
+      };
 
+      const endpoint = endpointMap[productType.toLowerCase()];
+      if (!endpoint) {
+        toast.error("Invalid product type");
+        return;
+      }
+
+      await axios.put(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+        id: product._id,
+        ...productData,
+      });
+
+      toast.success(`${productType} updated successfully`);
+
+      // Update specific product context
+      const updater = (prev) =>
+        prev.map((item) =>
+          item._id === product._id ? { ...item, ...productData } : item
+        );
+
+      switch (productType.toLowerCase()) {
+        case "rings":
+          setRingProductData(updater);
+          break;
+        case "earrings":
+          setEarringProductData(updater);
+          break;
+        case "bangles":
+          setBangleProductData(updater);
+          break;
+        case "chains":
+          setChainProductData(updater);
+          break;
+        case "pendants":
+          setPendantProductData(updater);
+          break;
+        case "mangalsutras":
+          setMangalsutraProductData(updater);
+          break;
+        default:
+          break;
+      }
+
+      onClose();
+      refreshData && refreshData();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (err) {
-      toast.error("Failed to update ring");
+      toast.error(`Failed to update ${productType}`);
     }
   };
 
@@ -76,17 +128,17 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-[99999] flex justify-center items-center">
       <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Update products</h2>
+          <h2 className="text-xl font-bold">Update {productType}</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-black">
             ✕
           </button>
         </div>
 
         <div className="mb-2">
-          <label className="font-semibold text-sm">Ring ID:</label>
+          <label className="font-semibold text-sm">Product ID:</label>
           <input
             type="text"
-            value={ring._id}
+            value={product._id}
             disabled
             className="w-full p-2 border rounded bg-gray-100 text-sm"
           />
@@ -97,18 +149,18 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
           <input
             type="text"
             name="ProductName"
-            value={ringData.ProductName}
+            value={productData.ProductName}
             onChange={handleInputChange}
             className="w-full p-2 border rounded text-sm"
           />
         </div>
 
-         <div className="mb-2">
+        <div className="mb-2">
           <label className="font-semibold text-sm">Product Gender:</label>
           <input
             type="text"
             name="ProductGender"
-            value={ringData.ProductGender}
+            value={productData.ProductGender}
             onChange={handleInputChange}
             className="w-full p-2 border rounded text-sm"
           />
@@ -118,20 +170,18 @@ function EditProductDetails({ ring, onClose, refreshData  }) {
           <label className="font-semibold text-sm">Description:</label>
           <textarea
             name="ProductDescription"
-            value={ringData.ProductDescription}
+            value={productData.ProductDescription}
             onChange={handleInputChange}
             className="w-full p-2 border rounded text-sm"
           />
         </div>
-
-        
 
         <div className="mb-4">
           <label className="font-semibold text-sm">Price (₹):</label>
           <input
             type="number"
             name="ProductPrice"
-            value={ringData.ProductPrice}
+            value={productData.ProductPrice}
             onChange={handleInputChange}
             className="w-full p-2 border rounded text-sm"
           />

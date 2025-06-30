@@ -239,7 +239,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
         <Link to={'/'} className='Logo-Shop cursor-pointer'>
           <div>
           <p
-            className="text-xl Web_Logo sm:text-3xl md:text-4xl text-[#4F3267] tracking-wide"
+            className="text-xl Web_Logo sm:text-3xl md:text-3xl text-[#4F3267] tracking-wide"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             PBSalegaon
