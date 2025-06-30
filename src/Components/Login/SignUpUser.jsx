@@ -6,7 +6,7 @@ import EmailAuth from "../AuthontiCations/EmailAuth";
 import { Link } from "react-router-dom";
 import {X} from 'lucide-react';
 import { useNavigate } from "react-router-dom";
-
+import {Mail} from 'lucide-react'
 function SignUpUser({onSwitchToLogin}) {
   const [email, setEmail] = useState("");
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
@@ -82,12 +82,16 @@ function SignUpUser({onSwitchToLogin}) {
   return (
     
     <>
-<div className="Login-Main-Container bg-gradient-to-br from-purple-100 via-white to-pink-100 w-full h-fit min-h-screen flex justify-center  px-4 " style={{alignItems:'center'}}>
+<div
+  className="Login-Main-Container bg-gradient-to-br from-[#f3e5f5] to-[#fde2e4] w-full min-h-screen flex justify-center items-center px-4"
+>
+
+
   <div className="SignUp-Pass-Container w-full max-w-lg  flex justify-center">
 
     {/* Email Verification Stage */}
         {!isEmailSubmitted ? (
-          <div className="EmailVerificationContainer">
+          <div className="  ">
           
           <section class="flex justify-center items-center">
             <button
@@ -108,26 +112,8 @@ function SignUpUser({onSwitchToLogin}) {
 
         
         <form onSubmit={handleEmailSubmit} className="flex flex-col items-center gap-4">
-          <div className="input-wrapper">
-            <svg 
-              className="icon" 
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 24 24"
-            >
-              <g data-name="Layer 2">
-                <g data-name="inbox">
-                  <rect 
-                    width="24" 
-                    height="24" 
-                    transform="rotate(180 12 12)" 
-                    opacity="0"
-                  ></rect>
-                  <path
-                    d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"
-                  ></path>
-                </g>
-              </g>
-            </svg>
+          <div className="input-wrapper rounded-lg px-4">
+            <Mail className="text-purple-900"/>
             <input 
               type="email" 
               name="email" 
@@ -137,13 +123,13 @@ function SignUpUser({onSwitchToLogin}) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button 
-              type="submit"
-              className="Subscribe-btn"
-            >
-             
-              Submit
-            </button>
+          <button
+            type="submit"
+            className="px-4 py-2 text-sm sm:text-base font-medium bg-[#4f3267] text-white rounded-md shadow hover:bg-[#3d2657] transition-all duration-200"
+          >
+            Submit
+          </button>
+
           </div>
         </form>
       </div>

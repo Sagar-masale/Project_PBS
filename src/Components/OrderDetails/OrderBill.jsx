@@ -37,30 +37,37 @@ const OrderBill = ({ selectedOrder, handleClose, invoiceRef  }) => {
 
 const handleDownload = async () => {
   if (!invoiceRef?.current) return;
+
   const buttonsToHide = invoiceRef.current.querySelectorAll('.download-hide');
   buttonsToHide.forEach(btn => btn.style.display = 'none');
-const canvas = await html2canvas(invoiceRef.current, {
-  scale: 5,       // 🔁 Better than 1, smaller than 2 — keeps text sharp
-  useCORS: true,    // ✅ Enable cross-origin image capture
-  allowTaint: false,
-});
-const imgData = canvas.toDataURL("image/jpeg", 0.92); // ✅ High-quality JPEG with good compression
 
-const pdf = new jsPDF("p", "mm", "a4");
-const width = pdf.internal.pageSize.getWidth();
-const height = (canvas.height * width) / canvas.width;
+  const canvas = await html2canvas(invoiceRef.current, {
+    scale: 2,
+    useCORS: true,
+    allowTaint: false,
+    windowWidth: 1024, // simulate full screen
+  });
 
-pdf.addImage(imgData, "JPEG", 0, 0, width, height);
-pdf.save("PBS_Invoice.pdf");
-buttonsToHide.forEach(btn => btn.style.display = '');
+  const imgData = canvas.toDataURL("image/jpeg", 0.92);
+  const pdf = new jsPDF("p", "mm", "a4");
+  const width = pdf.internal.pageSize.getWidth();
+  const height = (canvas.height * width) / canvas.width;
+
+  pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+  pdf.save("PBS_Invoice.pdf");
+
+  buttonsToHide.forEach(btn => btn.style.display = '');
 };
 
 
   return (
-<div ref={invoiceRef} className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 sm:p-10 border border-gray-200">
+<div
+  ref={invoiceRef}
+  className="bg-white mx-auto invoice-container w-full  p-6 rounded-lg shadow-md print:max-w-none print:shadow-none print:p-0"
+>
      <button
   onClick={handleClose}
-  className="absolute top-10 right-10 text-gray-500 hover:text-purple-800 text-2xl font-bold download-hide"
+  className="absolute top-10 right-10  text-gray-500 hover:text-purple-800 text-2xl font-bold download-hide"
 >
   <X />
 </button>
@@ -76,8 +83,8 @@ buttonsToHide.forEach(btn => btn.style.display = '');
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-6">
 <img 
   src="/WebLogo/PBS_LOGO.png" 
-  alt="PBS" 
-  className="w-20 sm:w-24 md:w-28 max-w-full h-auto mb-4 sm:mb-0"
+  alt="PBS Logo" 
+  className="w-16 sm:w-20 md:w-24 max-w-[120px] h-auto mb-4 sm:mb-0"
 />
 
 

@@ -8,13 +8,25 @@ const Footer = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-8 md:gap-8 py-10 max-w-sm mx-auto sm:max-w-3xl lg:max-w-full">
             <div className="col-span-full mb-10 lg:col-span-2 lg:mb-0">
-              <div className="Fotter-Title-Box flex align-items-center">
-                <span className="material-symbols-outlined font-bold text-4xl">
-                  progress_activity
-                </span>
-                <span className="Footer-Pbs-Name ml-5 text-2xl">
-                  PBS
-                </span>
+              <div className="Fotter-Title-Box flex align-items-center gap-2">
+              <div className="flex items-center justify-center">
+                <img 
+                  src="./WebLogo/PBS_LOGO.png" 
+                  alt="PBS Logo" 
+                  className="w-12 sm:w-20 md:w-22 h-auto object-contain"
+                />
+              </div>
+
+        <Link to={'/'} className='cursor-pointer'>
+          <div>
+          <p
+            className="text-xl Web_Logo sm:text-3xl md:text-4xl text-[#4F3267] tracking-wide"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            PBSalegaon
+          </p>
+        </div>
+        </Link>
               </div>
               <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-left lg:text-left">
                 Have any query? Please contact us. Our team is here to assist

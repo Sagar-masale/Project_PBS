@@ -15,7 +15,7 @@ import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
 import CartContext from '../Context/CartContext';
 import AdminContext from '../Context/AdminContext';
-
+import {Store, Gem, Heart, ShoppingCart, UserRound, AlignJustify} from 'lucide-react';
 
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
@@ -138,7 +138,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
       id : 1,
       name: 'STORE',
       slug: '/Store-Deatils',
-      logo: 'add_business',
+      logo: <Store />,
       active: true,
     } ,
     {
@@ -153,7 +153,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
         : accLogoName
         ? '/UserAcc'
         : '/',
-      logo: 'person',
+      logo: <UserRound />,
       active: isMobile ? false : true, // Hide ACCOUNT on mobile
       
     },
@@ -161,21 +161,21 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
       id : 3,
       name: 'DIAMONDS',
       slug: '/Diamond-Details',
-      logo: 'diamond',
+      logo: <Gem />,
       active: true,
     } ,
     {
       id : 4,
       name: 'WISHLIST',
       slug: '/WishList-Deatils',
-      logo: 'favorite',
+      logo: <Heart />,
       active: true,
     } ,
     {
       id : 5,
       name: 'CART',
       slug: '/Cart-Deatils',
-      logo: 'shopping_cart',
+      logo: <ShoppingCart />,
       itemCount: cartLength,
       active: true,
     } ,
@@ -228,13 +228,24 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
         <SuccessMessage/>
         <ErrorMessage/>
         <NetworkErr/>
-        <div className="custome-bar" onClick={SliderMove}>
-          <span className="material-symbols-outlined menu-items">menu</span>
+        <div
+          className="custome-bar pl-2 pt-[5px] sm:p-3 cursor-pointer rounded-md hover:bg-gray-200 transition"
+          onClick={SliderMove}
+        >
+          <span className="material-symbols-outlined menu-items text-2xl sm:text-3xl text-[#4F3267]  ">
+            <AlignJustify  className='text-[#4F3267] manu-icon'/>
+          </span>
         </div>
-
-        <div className="Logo-Shop">
-          <p className="logo">PBS</p>
+        <Link to={'/'} className='Logo-Shop cursor-pointer'>
+          <div>
+          <p
+            className="text-xl Web_Logo sm:text-3xl md:text-4xl text-[#4F3267] tracking-wide"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            PBSalegaon
+          </p>
         </div>
+        </Link>
 
         <div className="w-3/6 Search_Feald search-container-one relative">
           <SearchBar />
@@ -258,13 +269,16 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
                     {item.itemCount}
                   </div>
                 )}
+                <span
+                  className="top-logo nav-Logos flex flex-col items-center text-[10px] sm:text-sm text-center cursor-pointer gap-[2px]"
+                >
+                  <span className="text-base sm:text-xl">
+                    {item.logo}
+                  </span>
+                  <span className="logo-name text-gray-700">{item.name}</span>
+                </span>
 
-              <span className="material-symbols-outlined top-logo nav-Logos flex flex-col text-center cursor-pointer"
-              
-              >
-              {item.logo}
-              <span className="logo-name"> {item.name} </span>
-            </span>
+
               </li>
             ) : null
           )}

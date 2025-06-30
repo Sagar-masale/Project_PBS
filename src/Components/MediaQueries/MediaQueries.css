@@ -62,8 +62,7 @@
         .nav-link-logos {
             gap: 11%;
             width: 180px;
-            margin-right: 20px;
-            margin-top: 2%;
+            margin-top: 10px;
             margin-left: auto;
         }
         .top-logo {
@@ -327,7 +326,9 @@
         }
     }  */
     @media screen and (max-width:500px  ){
-     
+        .Web_Logo{
+            font-weight: 500;
+        }
     }
     @media screen and (max-width:425px  ){
         .Login-Main-Container{

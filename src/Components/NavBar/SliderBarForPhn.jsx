@@ -3,16 +3,17 @@ import Loading from '../PageLoader/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../Context/ProfileContext';
 import RegisterContext from '../Context/RegisterContext';
+import toast from 'react-hot-toast';
 import './SliderBarForPhn.css';
 import '../Login/LoginUsingPass.css';
 import '../Login/LoginUsingOtp.css';
-
+import {MoveLeft} from 'lucide-react';
 
 function SliderBarForPhn() {
   const [loginLogoutTitle, setLoginLogoutTitle] = useState('');
   const [userName, setUserName] = useState('');
   const { userData, setUserData } = useContext(ProfileContext);
-  const { setLogout, setLogoutNotify } = useContext(RegisterContext);
+  const { setLogout } = useContext(RegisterContext);
   const navigate = useNavigate();
 
   // Set user information based on context
@@ -65,7 +66,7 @@ function SliderBarForPhn() {
      localStorage.removeItem("accessToken");
      localStorage.removeItem("refreshToken");
      setLogout(true);
-     setLogoutNotify(true);
+     toast.success("You have been logged out successfully.");
      navigate('/');
    }, 3000);
  
@@ -98,9 +99,7 @@ function SliderBarForPhn() {
   const toggleClass = (selector, className) => {
     document.querySelector(selector)?.classList.toggle(className);
   };
-  const CloseLoginBox = () => {
-    toggleClass('.LoginOtpBox', 'LoginOtpBoxShow');
-  };
+
 
   return (
     
@@ -112,7 +111,7 @@ function SliderBarForPhn() {
           <div className="flex items-center justify-between">
             <h2 className='SliderBar-PbsLogo'>PBS</h2>
             <span className="material-symbols-outlined Slider-Bar-Exit" onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
-              arrow_back
+             <MoveLeft />
             </span>
           </div>
 

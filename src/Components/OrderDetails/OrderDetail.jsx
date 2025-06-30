@@ -88,7 +88,7 @@ const OrderDetail = () => {
   return (
     <>
     {showInvoice ? (
-<div className="relative max-w-4xl mx-auto bg-white p-4 sm:p-6 md:p-8">
+<div className="relative  max-w-4xl mx-auto bg-white p-4 sm:p-6 md:p-8">
   <OrderBill
     selectedOrder={showInvoice}
     handleClose={() => setShowInvoice(null)}
