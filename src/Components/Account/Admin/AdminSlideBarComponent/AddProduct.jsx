@@ -13,7 +13,9 @@ function AddProduct() {
   const [formData, setFormData] = useState({
     ProductName: "",
     ProductCategory: "",
-    ProductPrice: "",
+    metalType: "", 
+    weightInGrams: "", 
+    makingCharges: "",
     ProductQty: "",
     ProductGender: "",
     ProductDescription: "",
@@ -41,9 +43,9 @@ function AddProduct() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (isNaN(formData.ProductPrice) || isNaN(formData.ProductQty)) {
-      toast.error("Price and Quantity must be valid numbers.");
-      return;
+    if (isNaN(formData.ProductQty) || formData.weightInGrams <=0 ) {
+      toast.error("Product Weight and Quantity must be valid numbers.");
+      return false;
     }
 
     setLoading(true);
@@ -51,7 +53,10 @@ function AddProduct() {
     const data = new FormData();
     data.append("ProductName", formData.ProductName);
     data.append("ProductCategory", formData.ProductCategory);
-    data.append("ProductPrice", Number(formData.ProductPrice));
+    data.append("metalType", formData.metalType.toLowerCase());
+
+    data.append("weightInGrams", Number(formData.weightInGrams));
+    data.append("makingCharges", Number(formData.makingCharges));
     data.append("ProductQty", Number(formData.ProductQty));
     data.append("ProductGender", formData.ProductGender);
     data.append("ProductDescription", formData.ProductDescription);
@@ -90,7 +95,9 @@ function AddProduct() {
       setFormData({
         ProductName: "",
         ProductCategory: "",
-        ProductPrice: "",
+        metalType: "", 
+        weightInGrams: "", 
+        makingCharges: "",
         ProductQty: "",
         ProductGender: "",
         ProductDescription: "",
@@ -100,6 +107,8 @@ function AddProduct() {
       fileInputRef.current.value = null;
     } catch (error) {
       console.error("Error adding product:", error.response?.data || error.message);
+      console.log("Error here");
+      
       toast.error("Failed to add product. Please try again.");
     } finally {
       setLoading(false);
@@ -214,13 +223,39 @@ function AddProduct() {
                         </select>
                       </div>
                       <div className="mb-4">
+                        <label className="block font-medium mb-2">Product Metal Type (gold/silver)</label>
+                        <input
+                          type="text"
+                          name="metalType"
+                          value={formData.metalType}
+                          onChange={handleInputChange}
+                          className="w-full border-gray-300 bg-[#0B1739] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Enter product price"
+                          required
+                        />
+                      </div>
+                      <div className="mb-4">
                         <label className="block font-medium mb-2">
-                          Product Price
+                          Product weightInGrams
                         </label>
                         <input
                           type="number"
-                          name="ProductPrice"
-                          value={formData.ProductPrice}
+                          name="weightInGrams"
+                          value={formData.weightInGrams}
+                          onChange={handleInputChange}
+                          className="w-full border-gray-300 bg-[#0B1739] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Enter product price"
+                          required
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label className="block font-medium mb-2">
+                          Product makingCharges
+                        </label>
+                        <input
+                          type="number"
+                          name="makingCharges"
+                          value={formData.makingCharges}
                           onChange={handleInputChange}
                           className="w-full border-gray-300 bg-[#0B1739] rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Enter product price"

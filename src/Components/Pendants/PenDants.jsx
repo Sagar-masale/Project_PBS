@@ -6,17 +6,16 @@ import CartContext from "../Context/CartContext.js";
 
 const Pendants = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setPendantProductData } = useContext(ProductContext);
-
+  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
   const [pendants, setPendants] = useState([]);
 
   useEffect(() => {
     const fetchPendantData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-pendants");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-pendants");
         setPendantProductData(response.data.message.pendants)
         setPendants(response.data.message.pendants);
       } catch (error) {
@@ -37,7 +36,29 @@ const Pendants = () => {
     navigate(`/ItemDetails/${pendant._id}`);
   };
 
-  console.log("Pendant Data is ", pendants);
+    useEffect(() => {
+  const fetchRates = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
+      setMetalRates(response.data);
+      console.log("Ratee",response.data);
+      (response.data);
+    } catch (err) {
+      console.error("Error fetching metal rates", err);
+    }
+  };
+  fetchRates();
+}, []);
+
+
+const calculateFinalPrice = (pendant) => {
+  const { gold, silver } = metalRates;
+  const metalRate = pendant.metalType  === "silver" ? silver : gold;
+
+  const price = (pendant.weightInGrams * metalRate) + pendant.makingCharges;
+  return Math.round(price);
+};
+
 
   return (
     <>
@@ -80,7 +101,7 @@ const Pendants = () => {
                   <h4 className="Card-Title">{pendant.ProductName}</h4>
                   <div className="Card-Price">
                     <span className="Doller">₹</span>
-                    <span className="Price-Rate">{pendant.ProductPrice}</span>
+                    <span className="Price-Rate">{calculateFinalPrice(pendant)} /-</span>
                   </div>
                   <span className="Gender-Name">
                   {pendant.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span>

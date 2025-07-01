@@ -6,7 +6,7 @@ import CartContext from "../Context/CartContext.js";
 
 const Chains = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setChainProductData } = useContext(ProductContext);
@@ -16,7 +16,7 @@ const Chains = () => {
   useEffect(() => {
     const fetchChainsData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-chains");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-chains");
         setChainProductData(response.data.message.chains);
         setChains(response.data.message.chains);
       } catch (error) {
@@ -37,7 +37,28 @@ const Chains = () => {
     navigate(`/ItemDetails/${chain._id}`);
   };
 
+    useEffect(() => {
+  const fetchRates = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
+      setMetalRates(response.data);
+      console.log("Ratee",response.data);
+      (response.data);
+    } catch (err) {
+      console.error("Error fetching metal rates", err);
+    }
+  };
+  fetchRates();
+}, []);
 
+
+const calculateFinalPrice = (chain) => {
+  const { gold, silver } = metalRates;
+  const metalRate = chain.metalType  === "silver" ? silver : gold;
+
+  const price = (chain.weightInGrams * metalRate) + chain.makingCharges;
+  return Math.round(price);
+};
   return (
     <>
       <div className="ResComponent">
@@ -79,7 +100,7 @@ const Chains = () => {
                   <h4 className="Card-Title">{chain.ProductName}</h4>
                   <div className="Card-Price">
                     <span className="Doller">₹</span>
-                    <span className="Price-Rate">{chain.ProductPrice}</span>
+                    <span className="Price-Rate">{calculateFinalPrice(chain)} /-</span>
                   </div>
                   <span className="Gender-Name">
                   {chain.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span>

@@ -17,6 +17,7 @@ import UserAcc from './Components/Account/User/UserAcc.jsx'
 // Admin
 import AdminAcc from './Components/Account/Admin/AdminAcc.jsx';
 import AllUsers from './Components/Account/Admin/AdminSlideBarComponent/AllUsers.jsx';
+import Pricing_Setting from './Components/Account/Admin/AdminSlideBarComponent/Pricing_Setting.jsx';
 import WishList from './Components/WishList/WishList.jsx';
 import CheckOut from './Components/CheckOut/CheckOut.jsx';
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
@@ -63,6 +64,7 @@ const App = () => {
         CatTitle6="Classic Chains"
         />} />
         <Route path="/login_admin" element={<><AdminLogin /></>} />
+        <Route path="/Pricing_Setting" element={<><Pricing_Setting /></>} />
         <Route path="/pricing" element={<><Pricing /></>} />
         <Route path="/support" element={<><Customer_Support /></>} />
         <Route path="/privacy" element={<><Privacy_Policy /></>} />

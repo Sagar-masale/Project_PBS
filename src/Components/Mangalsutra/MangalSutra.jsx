@@ -6,11 +6,10 @@ import CartContext from "../Context/CartContext.js";
 
 const MangalSutra = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setMangalSutraProductData } = useContext(ProductContext);
-
+  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
   const [mangalSutras, setMangalSutras] = useState([]);
 
   useEffect(() => {
@@ -37,7 +36,29 @@ const MangalSutra = () => {
     navigate(`/ItemDetails/${mangalSutra._id}`);
   };
 
-  console.log("MangalSutra Data is ", mangalSutras);
+    useEffect(() => {
+  const fetchRates = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
+      setMetalRates(response.data);
+      console.log("Ratee",response.data);
+      (response.data);
+    } catch (err) {
+      console.error("Error fetching metal rates", err);
+    }
+  };
+  fetchRates();
+}, []);
+
+
+const calculateFinalPrice = (mangalSutra) => {
+  const { gold, silver } = metalRates;
+  const metalRate = mangalSutra.metalType  === "silver" ? silver : gold;
+
+  const price = (mangalSutra.weightInGrams * metalRate) + mangalSutra.makingCharges;
+  return Math.round(price);
+};
+
 
   return (
     <>
@@ -80,7 +101,7 @@ const MangalSutra = () => {
                   <h4 className="Card-Title">{mangalSutra.ProductName}</h4>
                   <div className="Card-Price">
                     <span className="Doller">₹</span>
-                    <span className="Price-Rate">{mangalSutra.ProductPrice}</span>
+                    <span className="Price-Rate">{calculateFinalPrice(mangalSutra)} /-</span>
                   </div>
                   <span className="Gender-Name">
                   {mangalSutra.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span>
