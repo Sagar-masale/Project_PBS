@@ -3,13 +3,14 @@ import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
 import { useNavigate, useLocation } from 'react-router-dom';
 import CartContext from "../Context/CartContext.js";
+import MetalContext from "../Context/MetalRateContext.js";
 
 const Pendants = () => {
   const navigate = useNavigate();
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setPendantProductData } = useContext(ProductContext);
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [pendants, setPendants] = useState([]);
 
   useEffect(() => {
@@ -35,29 +36,6 @@ const Pendants = () => {
     setProductItems(pendant)    
     navigate(`/ItemDetails/${pendant._id}`);
   };
-
-    useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
-
-
-const calculateFinalPrice = (pendant) => {
-  const { gold, silver } = metalRates;
-  const metalRate = pendant.metalType  === "silver" ? silver : gold;
-
-  const price = (pendant.weightInGrams * metalRate) + pendant.makingCharges;
-  return Math.round(price);
-};
 
 
   return (

@@ -3,10 +3,11 @@ import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
 import { useNavigate, useLocation } from 'react-router-dom';
 import CartContext from "../Context/CartContext.js";
+import MetalContext from "../Context/MetalRateContext.js";
 
 const Chains = () => {
   const navigate = useNavigate();
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setChainProductData } = useContext(ProductContext);
@@ -37,28 +38,7 @@ const Chains = () => {
     navigate(`/ItemDetails/${chain._id}`);
   };
 
-    useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
 
-
-const calculateFinalPrice = (chain) => {
-  const { gold, silver } = metalRates;
-  const metalRate = chain.metalType  === "silver" ? silver : gold;
-
-  const price = (chain.weightInGrams * metalRate) + chain.makingCharges;
-  return Math.round(price);
-};
   return (
     <>
       <div className="ResComponent">

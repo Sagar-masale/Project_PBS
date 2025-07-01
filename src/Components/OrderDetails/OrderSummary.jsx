@@ -6,7 +6,7 @@ import CartContext from '../Context/CartContext';
 function OrderSummary({subTotal = "0"}) {
   const { calculateCartSummary } = useContext(CartContext);
   const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
-  // console.log("dess",calculateCartSummary);
+
 
   const [couponCode, setCouponCode] = useState('');
   const [extraDiscount, setExtraDiscount] = useState(0);

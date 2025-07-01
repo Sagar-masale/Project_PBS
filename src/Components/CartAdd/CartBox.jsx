@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CartContext from '../Context/CartContext';
-
+import MetalContext from '../Context/MetalRateContext';
 function CartBox({ closeCart }) { // Receive closeCart function as a prop
   const { addToCart, cartItems } = useContext(CartContext);
   const [hover, setHover] = useState(false);
-
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   // Initialize current image with the first image in ProductImages or an empty string
   const [currentImage, setCurrentImage] = useState(cartItems?.ProductImages?.[0] || '');
 
@@ -60,7 +60,7 @@ function CartBox({ closeCart }) { // Receive closeCart function as a prop
                     <h2 className="text-2xl font-bold text-gray-900">{cartItems.ProductName}</h2>
 
                     <section className="mt-2">
-                      <p className="text-2xl text-gray-900">₹ {cartItems.ProductPrice}</p>
+                      <p className="text-2xl text-gray-900">₹ {calculateFinalPrice(cartItems)}</p>
                     </section>
 
                     {/* Thumbnail image selection */}

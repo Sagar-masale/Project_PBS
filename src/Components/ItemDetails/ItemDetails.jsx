@@ -11,6 +11,8 @@ import './ItemDetails.css';
 import moreIcon from "../../../public/menu.png";
 import toast, { Toaster } from 'react-hot-toast';
 
+import MetalContext from '../Context/MetalRateContext';
+
 function ItemDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function ItemDetails() {
   const [currentProduct, setCurrentProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-const [productType, setProductType] = useState("");
+  const [productType, setProductType] = useState("");
 
   const { productItems, addToCart } = useContext(CartContext);
   const { adminData } = useContext(AdminContext);
@@ -34,6 +36,7 @@ const [productType, setProductType] = useState("");
   const [isImageViewerOpen, setIsImageViewerOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
   const sizeOptions = [
     "13 (52.8 mm)",
@@ -165,6 +168,9 @@ const openImageViewer = (index) => {
 const closeImageViewer = () => {
   setIsImageViewerOpen(false);
 };
+
+
+
 
     
   return (
@@ -299,9 +305,9 @@ const closeImageViewer = () => {
 
         <div className="mb-2">
           <h2 className="ProductPrice text-2xl font-bold">
-            ₹{product.ProductPrice}{" "}
+            ₹{calculateFinalPrice(product)}{" "}
             <span className="line-through text-gray-500 text-lg">
-              {product.ProductPrice + 3000}
+              {calculateFinalPrice(product) + 3000}
             </span>
           </h2>
           <p className="text-gray-500 text-sm">(MRP Inclusive of all taxes)</p>

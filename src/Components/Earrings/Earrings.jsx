@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
-
+import MetalContext from "../Context/MetalRateContext.js";
 
 import { useNavigate, useLocation } from 'react-router-dom';
 import CartContext from "../Context/CartContext.js";
@@ -11,7 +11,7 @@ const Earrings = () => {
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setEarringProductData } = useContext(ProductContext);
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [earrings, setEarrings] = useState([]);
 
   useEffect(() => {
@@ -38,28 +38,6 @@ const Earrings = () => {
     navigate(`/ItemDetails/${earring._id}`);
   };
 
-    useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
-
-
-const calculateFinalPrice = (earring) => {
-  const { gold, silver } = metalRates;
-  const metalRate = earring.metalType  === "silver" ? silver : gold;
-
-  const price = (earring.weightInGrams * metalRate) + earring.makingCharges;
-  return Math.round(price);
-};
 
 
   return (

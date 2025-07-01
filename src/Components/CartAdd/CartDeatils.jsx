@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import ClearCartConfirm from './ClearCartConfirm';
 import OrderSummary from '../OrderDetails/OrderSummary';
 import { useNavigate } from 'react-router-dom';
-
+import MetalContext from '../Context/MetalRateContext';
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
   const { calculateCartSummary } = useContext(CartContext);
@@ -16,7 +16,7 @@ function CartDeatils() {
   const {userData} = useContext(ProfileContext)
   const {adminData} = useContext(AdminContext)
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
-  
+    const { metalRates, calculateFinalPrice } = useContext(MetalContext);
    
   const [openCheckout, setOpenCheckout] = useState(false);
   const handleClearCart = () => {
@@ -121,7 +121,7 @@ function CartDeatils() {
            <p className="text-base sm:text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
 
            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
-           <p className="cart-Price text-2xl text-black mt-2">₹ {item.ProductPrice}</p>
+           <p className="cart-Price text-2xl text-black mt-2">₹ {calculateFinalPrice(item)}</p>
 
           
             <span className="remove-WishList-Box flex mt-2">

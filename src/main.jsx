@@ -11,6 +11,7 @@ import CartContextProvider from './Components/Context/CartContextProvider.jsx'
 import AdminContextProvider from './Components/Context/AdminContextProvider.jsx'
 import ProductContextProvider from './Components/Context/ProductContextProvider.jsx'
 import ReviewContextProvider from './Components/Context/ReviewContextProvider.jsx'
+import MetalRateProvider from './Components/Context/MetalContextProvider.jsx'
 
 const GlobalLayout = ({ children }) => (
   <>
@@ -22,6 +23,7 @@ const GlobalLayout = ({ children }) => (
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+              <MetalRateProvider>
     <ReviewContextProvider>
     <ProductContextProvider>
    <RegisterContextProvider>
@@ -39,5 +41,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </RegisterContextProvider>
    </ProductContextProvider>
     </ReviewContextProvider>
+              </MetalRateProvider>
   </React.StrictMode>
 )

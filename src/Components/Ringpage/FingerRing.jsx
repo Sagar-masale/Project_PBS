@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
-
+import MetalContext from "../Context/MetalRateContext.js";
 import './FingerRings.css';
 import { useNavigate, useLocation  } from 'react-router-dom';
 // import Ringsdata from './RingData.jsx';
@@ -17,12 +17,9 @@ const FingerRings=()=>{
 
   // ProductContext
   const { setRingProductData } = useContext(ProductContext);
-
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
-
   const [rings, setRings] = useState([]);
 
-
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
 
   useEffect(() => {
@@ -48,30 +45,7 @@ const FingerRings=()=>{
     navigate(`/ItemDetails/${ring._id}`);
   }
 
-  useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
 
-
-const calculateFinalPrice = (ring) => {
-  const { gold, silver } = metalRates;
-  const metalRate = ring.metalType  === "silver" ? silver : gold;
-
-  const price = (ring.weightInGrams * metalRate) + ring.makingCharges;
-  return Math.round(price);
-};
-
-  
   return (
     <>
    
@@ -111,7 +85,7 @@ const calculateFinalPrice = (ring) => {
                   {/* <p className="Product-Price">{ring.ProductDescription}</p> */}
                   <div className="Card-Price">
                       <span className="Doller">₹</span>
-                      <span className="Price-Rate">{calculateFinalPrice(ring)} /-</span>
+                      <span className="Price-Rate">{calculateFinalPrice(ring)}</span>
 
                   </div>
                       <span className="Gender-Name"> {ring.ProductGender || "Women & Men"} <span className="Between-Line-Gender">|</span></span>

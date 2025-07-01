@@ -3,19 +3,20 @@ import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
 import { useNavigate, useLocation } from 'react-router-dom';
 import CartContext from "../Context/CartContext.js";
+import MetalContext from "../Context/MetalRateContext.js";
 
 const MangalSutra = () => {
   const navigate = useNavigate();
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setMangalSutraProductData } = useContext(ProductContext);
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [mangalSutras, setMangalSutras] = useState([]);
 
   useEffect(() => {
     const fetchMangalSutraData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-mangalsutra");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-mangalsutra");
         setMangalSutraProductData(response.data.message.mangalsutras)
         setMangalSutras(response.data.message.mangalsutras);
       } catch (error) {
@@ -36,28 +37,6 @@ const MangalSutra = () => {
     navigate(`/ItemDetails/${mangalSutra._id}`);
   };
 
-    useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
-
-
-const calculateFinalPrice = (mangalSutra) => {
-  const { gold, silver } = metalRates;
-  const metalRate = mangalSutra.metalType  === "silver" ? silver : gold;
-
-  const price = (mangalSutra.weightInGrams * metalRate) + mangalSutra.makingCharges;
-  return Math.round(price);
-};
 
 
   return (

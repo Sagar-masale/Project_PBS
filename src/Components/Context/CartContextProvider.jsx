@@ -2,11 +2,11 @@ import React, {useState ,useEffect, useContext } from "react";
 import ProfileContext from "./ProfileContext";
 import CartContext from "./CartContext";
 import toast from 'react-hot-toast';
-
+import MetalContext from "./MetalRateContext";
 
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
-
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [cartItems, setCartItems] = useState([]);
   const [productItems, setProductItems] = useState("");
 
@@ -38,7 +38,7 @@ const CartContextProvider = ({children}) => {
             document.querySelector(selector).classList.toggle(className);
           };
           const addToCart = (product) => {
-            if (!product || !product._id || !product.ProductPrice) {
+            if (!product || !product._id || !product) {
                 console.error("Invalid product data:", product);
                 return;
             }
@@ -94,26 +94,28 @@ const CartContextProvider = ({children}) => {
       toast.success("All items removed from your cart.");
     };
     
+const calculateCartSummary = () => {
+  if (!cart || cart.length === 0) {
+    return { totalPrice: 0, totalDiscount: 0, discountedTotal: 0 };
+  }
 
-    const calculateCartSummary = () => {
-      const totalPrice = cart.reduce((total, item) => total + item.ProductPrice * item.quantity, 0);
-    
-      // Apply ₹400 discount if totalPrice > 60000
-      const discount = totalPrice > 100000 ? 400 : 0;
-    
-      const itemBasedDiscount = cart.reduce((discountSum, item) => {
-        if (item.quantity > 2) {
-          return discountSum + 50; // Example: ₹50 discount per item if quantity > 2
-        }
-        return discountSum;
-      }, 0);
-    
-      const totalDiscount = discount + itemBasedDiscount;
-      const discountedTotal = totalPrice - totalDiscount;
-    
-      return { totalPrice, totalDiscount, discountedTotal };
-    };
-    
+  const totalPrice = cart.reduce((total, item) => {
+    const price = calculateFinalPrice(item) || 0;
+    return total + price * (item.quantity || 1);
+  }, 0);
+
+  const flatDiscount = totalPrice > 100000 ? 400 : 0;
+
+  const itemBasedDiscount = cart.reduce((sum, item) => {
+    return sum + (item.quantity > 2 ? 50 : 0);
+  }, 0);
+
+  const totalDiscount = flatDiscount + itemBasedDiscount;
+  const discountedTotal = totalPrice - totalDiscount;
+
+  return { totalPrice, totalDiscount, discountedTotal };
+};
+
 
 
 

@@ -3,19 +3,20 @@ import axios from "axios";
 import ProductContext from "../Context/ProductContext.js";
 import { useNavigate, useLocation } from 'react-router-dom';
 import CartContext from "../Context/CartContext.js";
+import MetalContext from "../Context/MetalRateContext.js";
 
 const Bangles = () => {
   const navigate = useNavigate();
   const { setCartItems } = useContext(CartContext);
   const { setProductItems } = useContext(CartContext);
   const { setBangleProductData } = useContext(ProductContext);
-  const [metalRates, setMetalRates] = useState({ gold: 0, silver: 0 });
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [bangles, setBangles] = useState([]);
 
   useEffect(() => {
     const fetchBanglesData = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/products/All-bangles");
+        const response = await axios.get("http://localhost:8000/api/v1/products/All-bangles");
         setBangleProductData(response.data.message.bangles);
         setBangles(response.data.message.bangles);
       } catch (error) {
@@ -36,28 +37,6 @@ const Bangles = () => {
     navigate(`/ItemDetails/${bangle._id}`);
   };
 
-    useEffect(() => {
-  const fetchRates = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
-      setMetalRates(response.data);
-      console.log("Ratee",response.data);
-      (response.data);
-    } catch (err) {
-      console.error("Error fetching metal rates", err);
-    }
-  };
-  fetchRates();
-}, []);
-
-
-const calculateFinalPrice = (bangle) => {
-  const { gold, silver } = metalRates;
-  const metalRate = bangle.metalType  === "silver" ? silver : gold;
-
-  const price = (bangle.weightInGrams * metalRate) + bangle.makingCharges;
-  return Math.round(price);
-};
 
 
   return (
