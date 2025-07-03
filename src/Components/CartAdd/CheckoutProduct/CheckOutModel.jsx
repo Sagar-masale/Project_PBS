@@ -9,7 +9,8 @@ import MetalContext from "../../Context/MetalRateContext";
 const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(ProfileContext);
-  const { cart } = useContext(CartContext);
+  const { cart, calculateCartSummary } = useContext(CartContext);
+  const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
   const [errors, setErrors] = useState({});
   const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [formData, setFormData] = useState({
@@ -91,7 +92,9 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
 
     const orderData = {
       userId: userData._id,
-      totalAmount: formData.totalAmount,
+      totalAmount: totalPrice,
+      discount:totalDiscount,
+      totalAmountWithDiscount: discountedTotal,
       orderQuantity: cart.length,
       products: cart.map((item) => ({
         productId: item._id,

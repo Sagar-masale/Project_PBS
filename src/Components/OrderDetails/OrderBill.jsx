@@ -142,10 +142,10 @@ const handleDownload = async () => {
           Total: <span className="font-semibold">₹{selectedOrder.totalAmount?.toFixed(2) || 0}</span>
         </p>
         <p className="text-sm text-gray-700">
-          Discount: <span className="font-semibold text-green-600">₹{(totalOrderPrice - selectedOrder.totalAmount)?.toFixed(2) || 0}</span>
+          Discount: <span className="font-semibold text-green-600">₹{(selectedOrder.discount)?.toFixed(2) || 0}</span>
         </p>
         <p className="text-lg font-bold text-gray-900">
-          Grand Total: ₹{selectedOrder.totalAmount?.toFixed(2) || 0}
+          Grand Total: ₹{selectedOrder.totalAmountWithDiscount?.toFixed(2) || 0}
         </p>
       </div>
     </div>
