@@ -5,13 +5,13 @@ import { ImSpinner8 } from "react-icons/im";
 import ProfileContext from "../../Context/ProfileContext";
 import CartContext from "../../Context/CartContext";
 import toast from "react-hot-toast";
-
+import MetalContext from "../../Context/MetalRateContext";
 const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(ProfileContext);
   const { cart } = useContext(CartContext);
   const [errors, setErrors] = useState({});
-
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -96,11 +96,12 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
       products: cart.map((item) => ({
         productId: item._id,
         orderQuantity: item.quantity,
+        price:calculateFinalPrice(item)
       })),
     };
 
     const response = await axios.post(
-      "https://backend-pbs-coo6.onrender.com/api/v1/orders/add-order",
+      "http://localhost:8000/api/v1/orders/add-order",
       orderData,
       { headers: { "Content-Type": "application/json" } }
     );

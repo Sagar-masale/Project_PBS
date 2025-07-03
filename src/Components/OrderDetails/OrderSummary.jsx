@@ -53,7 +53,7 @@ function OrderSummary({subTotal = "0"}) {
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Discount</span>
-          <span className="discount font-medium">- ₹ {(totalDiscount + extraDiscount).toFixed(2)}</span>
+          <span className="discount font-medium">- ₹ {(totalDiscount).toFixed(2)}</span>
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-gray-600">Delivery Charge</span>
@@ -63,7 +63,7 @@ function OrderSummary({subTotal = "0"}) {
         </div>
         <div className="flex justify-between mt-4 border-t pt-4">
           <span className="text-lg font-semibold">TOTAL (Incl. of all Taxes.)</span>
-          <span className="text-lg font-bold text-gray-900">₹ {(discountedTotal - extraDiscount).toFixed(2)}</span>
+          <span className="text-lg font-bold text-gray-900">₹ {(discountedTotal).toFixed(2)}</span>
         </div>
       </div>
 

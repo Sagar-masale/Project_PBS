@@ -110,7 +110,8 @@ const handleDownload = async () => {
       <div className="flex flex-col gap-6">
         {selectedOrder.orderDetails.map((order, index) => {
           const quantity = selectedOrder.products?.[index]?.orderQuantity || 1;
-          const totalPrice = order.ProductPrice * quantity;
+          const totalPrice = selectedOrder.products?.[index]?.price * quantity;
+          const price = selectedOrder.products?.[index]?.price;
 
           return (
             <div key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-4 gap-4">
@@ -124,6 +125,7 @@ const handleDownload = async () => {
                   <p className="text-sm font-medium">{order.ProductName}</p>
                   <p className="text-xs text-gray-500">Qty: {quantity} | Gram: {order.size || "10g"}</p>
                   <p className="text-xs text-gray-500">Dec: {order.ProductDescription} </p>
+                  <p className="text-xs font-medium">Prise: {price} </p>
                 </div>
               </div>
               <p className="text-sm font-semibold text-gray-800 text-right sm:text-left">
@@ -137,7 +139,7 @@ const handleDownload = async () => {
       {/* Totals */}
       <div className="mt-6 text-right space-y-1 border-t pt-4">
         <p className="text-sm text-gray-700">
-          Total: <span className="font-semibold">₹{totalOrderPrice?.toFixed(2) || 0}</span>
+          Total: <span className="font-semibold">₹{selectedOrder.totalAmount?.toFixed(2) || 0}</span>
         </p>
         <p className="text-sm text-gray-700">
           Discount: <span className="font-semibold text-green-600">₹{(totalOrderPrice - selectedOrder.totalAmount)?.toFixed(2) || 0}</span>

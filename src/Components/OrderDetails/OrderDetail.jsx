@@ -3,11 +3,12 @@ import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
 import "./OrderDetail.css"
 import OrderBill from "./OrderBill";
-
+import MetalContext from "../Context/MetalRateContext";
 
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
   const invoiceContainerRef = useRef(null);
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
   useEffect(() => {
     if (userData?.userOrders?.length > 0) {
@@ -23,7 +24,7 @@ const OrderDetail = () => {
   
     try {
       console.log("Fetching orders for IDs:", orderIds);
-      const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
+      const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
       console.error("Error fetching orders:", error.response ? error.response.data : error.message);
@@ -140,7 +141,7 @@ const OrderDetail = () => {
                   : "Product Name"}
               </h3>
 
-              <p className="text-gray-700">Price: {orderInfo.ProductPrice?.toFixed(2) || "0.00"}</p>
+              <p className="text-gray-700">Price: {order.products[index]?.price  || "0.00"}</p>
               <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity  || "0.00"}</p>
               <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
               <p className="text-gray-600">
@@ -196,52 +197,7 @@ const OrderDetail = () => {
         )}
 
       {/* Billing & Payment Section */}
-      <div className="bg-gray-100 p-6 rounded-lg mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Billing Address */}
-          <div>
-            <h4 className="text-lg font-semibold">Billing address</h4>
-            <p className="text-gray-600">{orderData?.[0]?.userId?.addressLine1 || "Address not available"},</p>
-            <p className="text-gray-600"> {orderData?.[0]?.userId?.addressLine2} </p>
-            <p className="text-gray-600"> {orderData?.[0]?.userId?.state} </p>
-            <p className="text-gray-600"> {orderData?.[0]?.userId?.zipCode} </p>
-          </div>
-
-
-          {/* Payment Information */}
-          <div className="OrderDetail w-full">
-            <h4 className="text-lg font-semibold">Payment information</h4>
-            <div className="flex items-center gap-2">
-              <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">VISA</span>
-              <p className="text-gray-600">not available</p>
-            </div>
-            <p className="text-gray-600">not available</p>
-          </div>
-
-          {/* Order Summary */}
-          <div>
-          <h4 className="text-lg font-semibold">Order Summary</h4>
-          <div className="flex justify-between text-gray-600">
-            <span>Subtotal</span>
-            <span>{subTotalProductAmount.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between text-gray-600">
-            <span>Tax</span>
-            <span>{orderData?.[0]?.tax?.toFixed(2) || "0.00"}</span>
-          </div>
-          <div className="flex justify-between text-gray-600">
-            <span>Save</span>
-            <span>{(subTotalProductAmount - totalProductAmount).toFixed(2) || "0.00"}</span>
-          </div>
-          <div className="flex justify-between font-semibold mt-2">
-            <span>Order Total</span>
-            <span className="text-blue-600">
-              {totalProductAmount.toFixed(2)}
-            </span>
-          </div>
-        </div>
-        </div>
-      </div>
+   
     </div>
           ) : (
             <div className="ErrDiv w-full h-96 flex justify-center align-items-center">

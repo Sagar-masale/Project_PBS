@@ -106,11 +106,7 @@ const calculateCartSummary = () => {
 
   const flatDiscount = totalPrice > 100000 ? 400 : 0;
 
-  const itemBasedDiscount = cart.reduce((sum, item) => {
-    return sum + (item.quantity > 2 ? 50 : 0);
-  }, 0);
-
-  const totalDiscount = flatDiscount + itemBasedDiscount;
+  const totalDiscount = flatDiscount;
   const discountedTotal = totalPrice - totalDiscount;
 
   return { totalPrice, totalDiscount, discountedTotal };
