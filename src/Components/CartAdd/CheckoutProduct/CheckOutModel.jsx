@@ -12,7 +12,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   const { cart, calculateCartSummary } = useContext(CartContext);
   const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
   const [errors, setErrors] = useState({});
-  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
+  const { metalRates } = useContext(MetalContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,7 +26,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     country: "",
     totalAmount: ProductTotalAmt,
   });
-
+    console.log("Metal response in check",metalRates);
   // ✅ Check if profile is complete before showing the form
   useEffect(() => {
     const requiredFields = [
@@ -87,23 +87,49 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  console.log("Cart Data",cart)
   const addOrder = async () => {
     if (!cart.length) throw new Error("Cart is empty");
 
+    // const orderData = {
+    //   userId: userData._id,
+    //   totalAmount: totalPrice,
+    //   discount:totalDiscount,
+    //   totalAmountWithDiscount: discountedTotal,
+    //   orderQuantity: cart.length,
+    //   products: cart.map((item) => ({
+    //     productId: item._id,
+    //     orderProductSize: item.selectedSize,
+    //     orderProductWeight:item.selectedWeight,
+    //     orderQuantity: item.quantity,
+    //     price:calculateFinalPrice(item)
+    //   })),
+    // };
     const orderData = {
-      userId: userData._id,
-      totalAmount: totalPrice,
-      discount:totalDiscount,
-      totalAmountWithDiscount: discountedTotal,
-      orderQuantity: cart.length,
-      products: cart.map((item) => ({
-        productId: item._id,
-        orderProductSize: item.selectedSize,
-        orderProductWeight:item.selectedWeight,
-        orderQuantity: item.quantity,
-        price:calculateFinalPrice(item)
-      })),
+  userId: userData._id,
+  totalAmount: totalPrice,
+  discount: totalDiscount,
+  totalAmountWithDiscount: discountedTotal,
+  orderQuantity: cart.length,
+  products: cart.map((item) => {
+    const metalPrice =
+       item.metalType  === "gold"
+        ? metalRates.gold
+        : item.metalType === "silver"
+        ? metalRates.silver
+        : 0;
+
+    return {
+      productId: item._id,
+      orderProductSize: item.selectedSize,
+      orderProductWeight: item.selectedWeight,
+      orderQuantity: item.quantity,
+      price: item.finalPrice,
+      mackingCharges:item.makingCharges,
+      orderedProductPrice: metalPrice,
     };
+  }),
+};
 
     const response = await axios.post(
       "http://localhost:8000/api/v1/orders/add-order",

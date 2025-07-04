@@ -221,7 +221,7 @@ const sizeWeightMap = {
 };
 const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFinalPrice(product);
 
-console.log("Product", product);
+console.log("Producttttt", product);
 
     
   return (

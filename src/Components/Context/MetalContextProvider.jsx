@@ -11,6 +11,8 @@ import axios from "axios";
       try {
         const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
         setMetalRates(response.data);
+    
+        
       } catch (err) {
         console.error("Error fetching metal rates", err);
       }
@@ -23,7 +25,15 @@ import axios from "axios";
   const calculateFinalPrice = (product) => {
     const { gold, silver } = metalRates;
     const rate = product?.metalType === "silver" ? silver : gold;
-    return Math.round((product?.weightInGrams || 0) * rate + (product?.makingCharges || 0));
+   const weight = product?.weightInGrams;
+const metalRate = rate || 0; // metal rate per gram
+const makingChargePerGram = product?.makingCharges || 0;
+
+const totalPrice = Math.round((metalRate + makingChargePerGram) * weight);
+console.log("in metal ",totalPrice);
+
+return totalPrice;
+
   };
 
   return (

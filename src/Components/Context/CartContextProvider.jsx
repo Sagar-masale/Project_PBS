@@ -109,9 +109,10 @@ const calculateCartSummary = () => {
 
   const totalDiscount = flatDiscount;
   const discountedTotal = totalPrice - totalDiscount;
-
+console.log("Price details:, ",totalPrice);
   return { totalPrice, totalDiscount, discountedTotal };
 };
+
 
 
 
