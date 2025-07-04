@@ -120,8 +120,9 @@ function CartDeatils() {
          <div className="pr-8 sm:pr-5">
            <p className="text-base sm:text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
 
-           <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : 3.473 g</p>
-           <p className="cart-Price text-2xl text-black mt-2">₹ {calculateFinalPrice(item)}</p>
+           <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : {item.selectedWeight}</p> 
+            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Size : {item.selectedSize}</p> 
+           <p className="cart-Price text-2xl text-black mt-2">₹ {item.finalPrice || calculateFinalPrice(item)}</p>
 
           
             <span className="remove-WishList-Box flex mt-2">

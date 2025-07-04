@@ -21,7 +21,7 @@ function ItemDetails() {
   const [showEditPopUp, setShowEditPopUp] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
   const [customising, setCustomising] = useState(false);
-  const [selectedSize, setSelectedSize] = useState("13 (52.8 mm)");
+  const [selectedSize, setSelectedSize] = useState("0");
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [currentProduct, setCurrentProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,13 +38,9 @@ function ItemDetails() {
 
   const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
-  const sizeOptions = [
-    "13 (52.8 mm)",
-    "14 (54.0 mm)",
-    "15 (55.5 mm)",
-    "16 (57.0 mm)",
-    "17 (58.5 mm)"
-  ];
+  const [selectedWeight, setSelectedWeight] = useState(null);
+  const [calculatedPrice, setCalculatedPrice] = useState(null);
+
 
 useEffect(() => {
   const loadProduct = async () => {
@@ -69,7 +65,7 @@ useEffect(() => {
       for (const endpoint of endpoints) {
         try {
           const response = await axios.get(
-            `https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}?productId=${id}`
+            `http://localhost:8000/api/v1/products/${endpoint}?productId=${id}`
           );
 
          
@@ -102,7 +98,7 @@ useEffect(() => {
     if (!product?._id) return;
     try {
       const response = await axios.get(
-        `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
+        `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
       );
       const reviewData = response.data.data;
       setReviews(reviewData);
@@ -144,7 +140,7 @@ useEffect(() => {
 
   const fetchUpdatedProduct = async () => {
     try {
-      const response = await axios.get(`https://backend-pbs-coo6.onrender.com/api/v1/products/get-productBy-id?productId=${product._id}`);
+      const response = await axios.get(`http://localhost:8000/api/v1/products/get-productBy-id?productId=${product._id}`);
       const updatedProduct = response.data.product;
       setCurrentProduct(updatedProduct);
       setCurrentImage(updatedProduct.ProductImages[0]);
@@ -170,7 +166,62 @@ const closeImageViewer = () => {
 };
 
 
+  const sizeOptionsMap = {
+    Rings: ["13 (52.8 mm)", "14 (54.0 mm)", "15 (55.5 mm)", "16 (57.0 mm)", "17 (58.5 mm)"],
+    Bangles: ["2-2 (6.67 cm)", "2-4 (6.99 cm)", "2-6 (7.19 cm)", "2-8 (7.49 cm)", "2-10 (7.78 cm)"],
+    Chains: ["16 inches", "18 inches", "20 inches", "22 inches"],
+    Earrings: ["Mini Pair", "Standard Pair", "Large Pair"],
+    Pendants: ["Small", "Medium", "Large"],
+    Mangalsutra: ["16 inches", "18 inches", "20 inches"] // optional sizes
+  };
 
+  const sizeOptions = sizeOptionsMap[product?.ProductCategory] || [];
+
+
+
+console.log("Cate: ",product.ProductCategory);
+
+const sizeWeightMap = {
+  Rings: {
+    "13 (52.8 mm)": 2.5,
+    "14 (54.0 mm)": 3.0,
+    "15 (55.5 mm)": 3.5,
+    "16 (57.0 mm)": 4.0,
+    "17 (58.5 mm)": 4.5,
+  },
+  Bangles: {
+    "2-2 (6.67 cm)": 10,
+    "2-4 (6.99 cm)": 12,
+    "2-6 (7.19 cm)": 14,
+    "2-8 (7.49 cm)": 16,
+    "2-10 (7.78 cm)": 18,
+  },
+  Chains: {
+    "16 inches": 8,
+    "18 inches": 10,
+    "20 inches": 12,
+    "22 inches": 14,
+  },
+  Mangalsutra: {
+    "16 inches": 5,
+    "18 inches": 6,
+    "20 inches": 7,
+    "22 inches": 8,
+  },
+  Earrings: {
+    "Standard Pair": 4, 
+    "Large Pair": 6,
+    "Mini Pair": 2.5
+  },
+  Pendants: {
+    "Small": 3,
+    "Medium": 4.5,
+    "Large": 6
+  }
+};
+const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFinalPrice(product);
+
+console.log("Product", product);
 
     
   return (
@@ -304,12 +355,13 @@ const closeImageViewer = () => {
         </div>
 
         <div className="mb-2">
-          <h2 className="ProductPrice text-2xl font-bold">
-            ₹{calculateFinalPrice(product)}{" "}
-            <span className="line-through text-gray-500 text-lg">
-              {calculateFinalPrice(product) + 3000}
-            </span>
-          </h2>
+        <h2 className="ProductPrice text-2xl font-bold">
+          ₹{calculatedPrice || calculateFinalPrice(product)}{" "}
+          <span className="line-through text-gray-500 text-lg">
+            ₹{(calculatedPrice || calculateFinalPrice(product)) + 3000}
+          </span>
+        </h2>
+
           <p className="text-gray-500 text-sm">(MRP Inclusive of all taxes)</p>
         </div>
 
@@ -326,7 +378,10 @@ const closeImageViewer = () => {
           <div className="flex gap-2 flex-wrap">
             <div className="Product-Weight border rounded-lg p-2 px-4 flex items-center gap-2">
               <p className="text-gray-600">Weight:</p>
-              <p className="font-semibold">{selectedSize}</p>
+              <p className="font-semibold">
+                {selectedWeight || product.weightInGrams}
+              </p>
+
             </div>
 
             <button
@@ -336,35 +391,57 @@ const closeImageViewer = () => {
               {customising ? "HIDE OPTIONS" : "CUSTOMISE"}
             </button>
           </div>
+{customising && sizeOptions.length === 0 && (
+  <p className="text-sm text-gray-600 mt-2">Free size – no selection required.</p>
+)}
 
-          {customising && (
-            <div className="flex flex-wrap gap-3 mt-2">
-              {sizeOptions.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`px-4 py-2 rounded-md border transition font-medium text-sm ${
-                    selectedSize === size
-                      ? "bg-purple-600 text-white border-purple-600"
-                      : "bg-white text-gray-700 border-gray-300 hover:border-purple-500"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          )}
+{customising && sizeOptions.length > 0 && (
+  <div className="flex flex-wrap gap-3 mt-2">
+    {sizeOptions.map((size) => (
+<button
+  key={size}
+  onClick={() => {
+    setSelectedSize(size);
+
+    const weight = sizeWeightMap[product.ProductCategory]?.[size] || product.weightInGrams || 1;
+    setSelectedWeight(weight);
+
+    const price = calculateFinalPrice({
+      ...product,
+      weightInGrams: weight
+    });
+    setCalculatedPrice(price);
+  }}
+>
+  {size}
+</button>
+
+    ))}
+  </div>
+)}
+
         </div>
 
         <div className="flex items-center space-x-4">
           <div
             className="button-AddToCart"
-            data-tooltip={"₹" + product.ProductPrice}
+            data-tooltip={`₹${priceToDisplay}`}
+
           >
             <div
-              onClick={() => addToCart(product)}
+              onClick={() =>
+              addToCart({
+                ...product,
+                selectedWeight: selectedWeight || product.weightInGrams,
+                selectedSize: selectedSize || "Default",
+                finalPrice: priceToDisplay // calculatedPrice or fallback
+              })
+            }
+
               className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center"
             >
+             
+              
               <div className="text-AddCart-Feild flex flex-row gap-2 cursor-pointer">
                 <span className="material-symbols-outlined cursor-pointer">
                   shopping_cart

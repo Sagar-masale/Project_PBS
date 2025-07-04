@@ -98,6 +98,8 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
       orderQuantity: cart.length,
       products: cart.map((item) => ({
         productId: item._id,
+        orderProductSize: item.selectedSize,
+        orderProductWeight:item.selectedWeight,
         orderQuantity: item.quantity,
         price:calculateFinalPrice(item)
       })),

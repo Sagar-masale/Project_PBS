@@ -143,6 +143,8 @@ const OrderDetail = () => {
 
               <p className="text-gray-700">Price: {order.products[index]?.price  || "0.00"}</p>
               <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity  || "0.00"}</p>
+              <p className="text-gray-700">Size: {order.products[index]?.orderProductSize  || "0.00"}</p>
+              <p className="text-gray-700">Weight: {order.products[index]?.orderProductWeight  || "0.00"}</p>
               <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
               <p className="text-gray-600">
                 {orderInfo.ProductDescription

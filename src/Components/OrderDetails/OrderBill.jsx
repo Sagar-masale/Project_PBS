@@ -34,6 +34,7 @@ const OrderBill = ({ selectedOrder, handleClose, invoiceRef  }) => {
     const quantity = selectedOrder.products?.[index]?.orderQuantity || 1;
     return acc + order.ProductPrice * quantity;
   }, 0);
+  
 
 const handleDownload = async () => {
   if (!invoiceRef?.current) return;
@@ -110,9 +111,9 @@ const handleDownload = async () => {
       <div className="flex flex-col gap-6">
         {selectedOrder.orderDetails.map((order, index) => {
           const quantity = selectedOrder.products?.[index]?.orderQuantity || 1;
-          const totalPrice = selectedOrder.products?.[index]?.price * quantity;
           const price = selectedOrder.products?.[index]?.price;
-
+          const totalPrice = selectedOrder.products?.[index]?.price * quantity;
+          const productWeight = selectedOrder.products?.[index]?.orderProductWeight || 0;
           return (
             <div key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-4 gap-4">
               <div className="flex gap-4">
@@ -123,9 +124,9 @@ const handleDownload = async () => {
                 />
                 <div>
                   <p className="text-sm font-medium">{order.ProductName}</p>
-                  <p className="text-xs text-gray-500">Qty: {quantity} | Gram: {order.size || "10g"}</p>
+                  <p className="text-xs text-gray-500">Qty: {quantity} | Gram: {productWeight}</p>
                   <p className="text-xs text-gray-500">Dec: {order.ProductDescription} </p>
-                  <p className="text-xs font-medium">Prise: {price} </p>
+                  <p className="text-xs font-medium">Price: {price} </p>
                 </div>
               </div>
               <p className="text-sm font-semibold text-gray-800 text-right sm:text-left">

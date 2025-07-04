@@ -100,7 +100,8 @@ const calculateCartSummary = () => {
   }
 
   const totalPrice = cart.reduce((total, item) => {
-    const price = calculateFinalPrice(item) || 0;
+    const price = item.finalPrice || calculateFinalPrice(item) || 0;
+
     return total + price * (item.quantity || 1);
   }, 0);
 
