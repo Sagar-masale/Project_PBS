@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import IntroAnimation from './Components/IntroAnimation.jsx';
 import ScrollToTop from './Components/ScrollToTop.jsx';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import CartBox from './Components/CartAdd/CartBox.jsx';
@@ -44,6 +45,7 @@ const App = () => {
   const isAuthPage = location.pathname === '/login';
   return (
     <>
+    <IntroAnimation />
     <Toaster position="top-left" />
         <ScrollToTop/>
          {isAuthPage ? (
