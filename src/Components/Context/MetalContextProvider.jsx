@@ -37,7 +37,7 @@ useEffect(() => {
 };
   // shared calculation function
   const ProductCouponCode = (code) => {
-    console.log("Saved Delivery Code:", code);
+    // console.log("Saved Delivery Code:", code);
     setCouponCode(code);
     
   };
@@ -53,7 +53,7 @@ const metalRate = rate || 0; // metal rate per gram
 const makingChargePerGram = product?.makingCharges || 0;
 
 const totalPrice = Math.round((metalRate + makingChargePerGram) * weight);
-console.log("in metal ",totalPrice);
+// console.log("in metal ",totalPrice);
 
 return totalPrice;
 

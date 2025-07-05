@@ -131,9 +131,9 @@ useEffect(() => {
 
   const GetProductDetailsForUpdate = (item) => {
     setCurrentProduct(item);
-    console.log("Currentttt: ",currentProduct)
+    // console.log("Currentttt: ",currentProduct)
           setProductType(item.ProductCategory); // treat "product" as "ring"
-        console.log("typeee: ",productType);
+        // console.log("typeee: ",productType);
      
     setShowEditPopUp(true);
   };
@@ -149,9 +149,6 @@ useEffect(() => {
     }
   };
 
-  const renderStars = (count) => {
-    return "★".repeat(count) + "☆".repeat(5 - count);
-  };
 
 if (!product) {
   return <div className="text-center text-gray-500 mt-20">Loading product details...</div>;
@@ -179,7 +176,7 @@ const closeImageViewer = () => {
 
 
 
-console.log("Cate: ",product.ProductCategory);
+// console.log("Cate: ",product.ProductCategory);
 
 const sizeWeightMap = {
   Rings: {
@@ -221,7 +218,7 @@ const sizeWeightMap = {
 };
 const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFinalPrice(product);
 
-console.log("Producttttt", product);
+// console.log("Producttttt", product);
 
     
   return (

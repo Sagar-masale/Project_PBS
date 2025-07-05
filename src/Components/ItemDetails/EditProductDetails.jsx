@@ -27,6 +27,9 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
         ProductGender: product.ProductGender || "",
         ProductDescription: product.ProductDescription || "",
         ProductPrice: product.ProductPrice || "",
+        makingCharges: product.makingCharges || "" ,
+        weightInGrams: product.weightInGrams || "",
+        metalType: product.metalType || "",
       });
     }
   }, [product]);
@@ -42,7 +45,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
   const handleDelete = async () => {
     try {
       const endpoint = `delete-${productType.toLowerCase()}`;
-      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+      await axios.delete(`http://localhost:8000/api/v1/products/${endpoint}`, {
         data: { id: product._id },
       });
 
@@ -59,6 +62,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
       toast.error(`Failed to delete ${productType}`);
     }
   };
+console.log("Product Data:",productData);
 
   const handleUpdate = async () => {
     try {
@@ -77,7 +81,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
         return;
       }
 
-      await axios.put(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+      await axios.put(`http://localhost:8000/api/v1/products/${endpoint}`, {
         id: product._id,
         ...productData,
       });
@@ -125,84 +129,116 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[99999] flex justify-center items-center">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Update {productType}</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-black">
-            ✕
-          </button>
-        </div>
-
-        <div className="mb-2">
-          <label className="font-semibold text-sm">Product ID:</label>
-          <input
-            type="text"
-            value={product._id}
-            disabled
-            className="w-full p-2 border rounded bg-gray-100 text-sm"
-          />
-        </div>
-
-        <div className="mb-2">
-          <label className="font-semibold text-sm">Product Name:</label>
-          <input
-            type="text"
-            name="ProductName"
-            value={productData.ProductName}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded text-sm"
-          />
-        </div>
-
-        <div className="mb-2">
-          <label className="font-semibold text-sm">Product Gender:</label>
-          <input
-            type="text"
-            name="ProductGender"
-            value={productData.ProductGender}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded text-sm"
-          />
-        </div>
-
-        <div className="mb-2">
-          <label className="font-semibold text-sm">Description:</label>
-          <textarea
-            name="ProductDescription"
-            value={productData.ProductDescription}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded text-sm"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="font-semibold text-sm">Price (₹):</label>
-          <input
-            type="number"
-            name="ProductPrice"
-            value={productData.ProductPrice}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded text-sm"
-          />
-        </div>
-
-        <div className="flex justify-between">
-          <button
-            onClick={handleUpdate}
-            className="bg-[#4f3267] hover:bg-[#432a58] text-white px-4 py-2 rounded"
-          >
-            Update
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+<div className="fixed inset-0  bg-opacity-60 z-[99999] flex items-center justify-center px-4">
+  <div className="bg-white rounded-2xl w-full max-w-md sm:max-w-lg p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
+    <div className="flex justify-between items-center mb-4">
+      <h2 className="text-xl font-bold text-[#4f3267]">Update {productType}</h2>
+      <button onClick={onClose} className="text-gray-500 hover:text-black text-xl font-bold">
+        ✕
+      </button>
     </div>
+
+    {/* Product ID */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Product ID:</label>
+      <input
+        type="text"
+        value={product._id}
+        disabled
+        className="w-full p-2 border rounded bg-gray-100 text-sm"
+      />
+    </div>
+
+    {/* Product Name */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Product Name:</label>
+      <input
+        type="text"
+        name="ProductName"
+        value={productData.ProductName}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+      />
+    </div>
+
+    {/* Gender */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Product Gender:</label>
+      <input
+        type="text"
+        name="ProductGender"
+        value={productData.ProductGender}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+      />
+    </div>
+
+    {/* Description */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Description:</label>
+      <textarea
+        name="ProductDescription"
+        value={productData.ProductDescription}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+        rows={3}
+      />
+    </div>
+
+    {/* Making Charges */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Making Charges (per gram):</label>
+      <input
+        type="number"
+        name="makingCharges"
+        value={productData.makingCharges}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+      />
+    </div>
+
+    {/* Product Weight */}
+    <div className="mb-3">
+      <label className="font-medium text-sm block mb-1">Product Weight (g):</label>
+      <input
+        type="number"
+        name="weightInGrams"
+        value={productData.weightInGrams}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+      />
+    </div>
+
+    {/* Metal Type */}
+    <div className="mb-4">
+      <label className="font-medium text-sm block mb-1">Product Metal Type:</label>
+      <input
+        type="text"
+        name="metalType"
+        value={productData.metalType}
+        onChange={handleInputChange}
+        className="w-full p-2 border rounded text-sm"
+      />
+    </div>
+
+    {/* Buttons */}
+    <div className="flex justify-between mt-6">
+      <button
+        onClick={handleUpdate}
+        className="bg-[#4f3267] hover:bg-[#3e264e] text-white px-5 py-2 rounded-md font-semibold transition duration-200"
+      >
+        Update
+      </button>
+      <button
+        onClick={handleDelete}
+        className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md font-semibold transition duration-200"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
   );
 }
 
