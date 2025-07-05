@@ -37,10 +37,7 @@ function AdminSlideBar() {
       <div className="w-64 slideBar-AdminPanel p-6 flex flex-col justify-between sticky top-0 h-screen overflow-auto">
         <div className="slideBarBox">
           <h1 className="text-2xl font-bold text-white mb-6">ControlHub</h1>
-          <div className="searchAdminBox SlideBar-Logos-Active flex w-full pl-2 adminSearch-Box">
-            <span className="material-symbols-outlined adminSearchLogo">search</span>
-            <input type="text" placeholder="Search for..." className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0" />
-          </div>
+
           <nav className="mt-8 space-y-4">
             {SlideBarItems.map((SlideBarItem) => (
               <div

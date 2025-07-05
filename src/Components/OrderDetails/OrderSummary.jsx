@@ -2,29 +2,52 @@ import React from 'react'
 import './OrderSummary.css'
 import { useContext, useState } from 'react';
 import CartContext from '../Context/CartContext';
-
-function OrderSummary({subTotal = "0"}) {
+import toast from 'react-hot-toast';
+import MetalContext from '../Context/MetalRateContext';
+function OrderSummary() {
   const { calculateCartSummary } = useContext(CartContext);
   const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
-
+  const { ProductCouponCode, generateDeliveryCode } = useContext(MetalContext);
 
   const [couponCode, setCouponCode] = useState('');
   const [extraDiscount, setExtraDiscount] = useState(0);
+const [couponAppliedMsg, setCouponAppliedMsg] = useState('');
+const [deliveryCode, setDeliveryCode] = useState("Not Applicable");
+
+const handleApplyCoupon = () => {
+  if (couponCode.trim().toLowerCase() === 'welcomepbs') {
+    // Just generate code for delivery verification
+    const randomCode = Math.floor(1000 + Math.random() * 9000);
+    setDeliveryCode(randomCode);
+    ProductCouponCode(randomCode)
+    // Show success toast and message
+    toast.success("Coupon accepted! Will be used on making charges at final billing.");
+    setCouponAppliedMsg(
+      "✅ Coupon applied! This discount will be applied on making charges when you collect the product from our store. " +
+      "Please remember your delivery verification code below — it will be required at the time of pickup."
+    );
 
 
-  const handleApplyCoupon = () => {
-    
-    
-    if (couponCode === 'welcomepbs') {
-      setExtraDiscount(500)
-      // console.log(extraDiscount);
-    } else {
-      setExtraDiscount(0)
-    }
-  };
+  } else {
+    setDeliveryCode(null);
+    setCouponAppliedMsg("❌ Invalid coupon code.");
+    toast.error("Invalid coupon code");
+  }
+};
+
     const deliveryCharge = 0; // FREE
   return (
     <>
+    {couponAppliedMsg && (
+  <p className="text-sm mt-2 text-green-700">{couponAppliedMsg}</p>
+)}
+
+{deliveryCode && (
+  <p className="text-sm text-purple-700 font-semibold mt-1">
+    Your Coupon Code: <span className="font-bold">{deliveryCode}</span>
+  </p>
+)}
+
      <div className="p-10 relative OrderSummary-MainContainer rounded-md ">
       <div className="">
         <h2 className="text-xl font-bold text-gray-800">Enter Code</h2>

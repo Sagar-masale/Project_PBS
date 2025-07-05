@@ -137,190 +137,211 @@ function AdminAcc() {
 
   return (
     <>
-    {selectedOrder && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center p-4">
-        <div className="bg-white p-6 rounded-lg shadow-lg text-black w-[80%] h-[70%] overflow-auto">
-          <h2 className="text-2xl font-bold mb-6 border-b pb-2">Order Details</h2>
+{selectedOrder && (
+  <div className="absolute inset-0 z-50  bg-opacity-10 flex justify-center align-items-center ">
+    <div className="bg-white w-full mt-40 flex flex-col max-w-5xl max-h-[70vh] overflow-y-auto rounded-2xl shadow-purple-2xl border p-8">
+      <h2 className="text-3xl font-bold text-purple-800 border-b pb-4 mb-6">Order Details</h2>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="border-r pr-6">
-              <h3 className="text-lg font-semibold mb-3">Products: {selectedOrder.products.length} </h3>
-              {selectedOrder.productDetails.map((product, index) => (
-                <div key={index} className="flex items-center space-x-4 mb-4 bg-gray-100 p-3 rounded-lg">
-                  <img src={product.ProductImages[0]} alt={product.ProductName} className="w-20 h-20 object-cover rounded" />
-                  <div>
-                    <p className="font-semibold">{product.ProductName}</p>
-                    
-                    <p className="text-sm text-gray-600">Qty: {selectedOrder.products[index]?.orderQuantity || 'N/A'}</p>
-
-                    <p className="text-green-600 font-bold">{product.ProductPrice}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-gray-100 w-full p-6 rounded-lg shadow-md">
-  <h3 className="text-lg font-semibold mb-4 text-gray-800">Customer Details</h3>
-  
-  <div className="grid grid-cols-1 gap-5">
-    <div>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Name:</strong> {selectedOrder.userId.fullName}</p>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Phone:</strong> {selectedOrder.userId.phoneNumber}</p>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Email:</strong> {selectedOrder.userId.email}</p>
-    </div>
-    
-    <div>
-      <p className="text-gray-700  w-[70%]"><strong className="font-semibold text-gray-900">Address:</strong> {selectedOrder.userId.addressLine1}</p>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">State:</strong> {selectedOrder.userId.state}</p>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">City:</strong> {selectedOrder.userId.city}</p>
-      <p className="text-gray-700"><strong className="font-semibold text-gray-900">Zip Code:</strong> {selectedOrder.userId.zipCode}</p>
-    </div>
-  </div>
-</div>
-
-          </div>
-
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-lg font-semibold text-left">
-              Total Amount: <span className="text-green-600">{(selectedOrder.totalAmount).toFixed(2)}</span>
-            </p>
-
-            <div className="mt-4">
-              <label className="block mb-2 font-semibold text-gray-700">Update Status:</label>
-              <select
-                className="w-[20%] p-2 border rounded focus:ring-2 focus:ring-purple-500"
-                value={updatedStatus}
-                onChange={(e) => setUpdatedStatus(e.target.value)}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Product Details */}
+        <div>
+          <h3 className="text-xl font-semibold mb-4 text-gray-800">
+            Products ({selectedOrder.products.length})
+          </h3>
+          <div className="space-y-4">
+            {selectedOrder.productDetails.map((product, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-3 rounded-lg bg-gray-50 border hover:shadow-sm"
               >
-                <option value="Pending">Pending</option>
-                <option value="Success">Success</option>
-                <option value="Canceled">Canceled</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-3 mt-4">
-            <button onClick={closeEditPopup} className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400">
-              Cancel
-            </button>
-            <button onClick={confirmUpdate} className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">
-              Confirm Update
-            </button>
+                <img
+                  src={product.ProductImages[0]}
+                  alt={product.ProductName}
+                  className="w-20 h-20 object-cover rounded-md border"
+                />
+                <div>
+                  <p className="font-semibold text-gray-900">{product.ProductName}</p>
+                  <p className="text-sm text-gray-600">
+                    Qty: {selectedOrder.products[index]?.orderQuantity || 'N/A'}
+                  </p>
+                  <p className="text-sm text-purple-700 font-medium">
+                    ₹{selectedOrder.totalAmountWithDiscount}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Coupon: {selectedOrder.products[index]?.ProductCouponCode || 'N/A'}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>  
+
+        {/* Customer Info */}
+        <div className="bg-purple-50 p-6 rounded-xl border border-purple-200 shadow-sm">
+          <h3 className="text-xl font-semibold mb-4 text-purple-900">Customer Details</h3>
+          <div className="space-y-2 text-sm text-gray-700">
+            <p><span className="font-semibold text-gray-900">Name:</span> {selectedOrder.userId.fullName}</p>
+            <p><span className="font-semibold text-gray-900">Phone:</span> {selectedOrder.userId.phoneNumber}</p>
+            <p><span className="font-semibold text-gray-900">Email:</span> {selectedOrder.userId.email}</p>
+            <hr className="my-2" />
+            <p><span className="font-semibold text-gray-900">Address:</span> {selectedOrder.userId.addressLine1}</p>
+            <p><span className="font-semibold text-gray-900">State:</span> {selectedOrder.userId.state}</p>
+            <p><span className="font-semibold text-gray-900">City:</span> {selectedOrder.userId.city}</p>
+            <p><span className="font-semibold text-gray-900">Zip Code:</span> {selectedOrder.userId.zipCode}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Order Summary */}
+      <div className="mt-8 bg-gray-100 border border-gray-200 rounded-xl p-6">
+        <div className="flex justify-between items-center">
+          <h4 className="text-lg font-semibold text-gray-800">Total Amount</h4>
+          <p className="text-xl font-bold text-green-700">
+            ₹{selectedOrder.totalAmount.toFixed(2)}
+          </p>
+        </div>
+
+        <div className="mt-6">
+          <label className="block mb-2 font-semibold text-gray-700">Update Status:</label>
+          <select
+            className="w-48 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-600"
+            value={updatedStatus}
+            onChange={(e) => setUpdatedStatus(e.target.value)}
+          >
+            <option value="Pending">Pending</option>
+            <option value="Success">Success</option>
+            <option value="Canceled">Canceled</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div className="flex justify-end gap-3 mt-6">
+        <button
+          onClick={closeEditPopup}
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={confirmUpdate}
+          className="bg-purple-700 hover:bg-purple-800 text-white px-5 py-2 rounded-md"
+        >
+          Confirm Update
+        </button>
+      </div>
+    </div>
+  </div>
 )}
 
+
     {adminData ? (
-        <div className="flex  MainContainerAdmin min-h-screen text-white">
+        <div className="flex   MainContainerAdmin min-h-screen text-white">
       
         <AdminSlideBar/>
       
         {/* Main Content */}
-        <div className="flex-1 p-8">
-          {/* Header */}
-          <header className="flex justify-end items-center mb-8">
-          <h2 className="TopSectionName font-bold text-lg mr-auto">Analytics</h2>
-            <img
-              src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
-              alt="Admin"
-              className="w-10 h-10 rounded-full"
-            />
-            <span className="ml-2 text-sm"> {adminName} </span>
-          </header>
-          
-          {/* Dashboard Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {cards.map((card, index) => (
-              <div key={index} className="p-4 Admin-Dashboard-Cards rounded-lg">
-                <h2 className="text-sm text-gray-400">{card.title}</h2>
-                <p className="text-3xl font-bold mt-2">{card.value}</p>
-                <span className={`text-sm ${card.color}`}>{card.change}</span>
-              </div>
-            ))}
-          </div>
-      
-         
-             {/* Orders Table */}
-             <div className="pt-6">
-              <div className="overflow-auto rounded-lg">
-              <tr className="flex justify-between align-items-center">
-                    <h2 className="Status-Name p-4 text-left">Orders Status</h2>
-                    <th className="p-4">
-                    <div className="searchAdminBox SlideBar-Logos-Active flex w-full pl-2 adminSearch-Box">
-                    <span className="material-symbols-outlined ">search</span>
-                    <input
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      type="text"
-                      placeholder="Search for..."
-                      className="w-full adminSearch placeholder-[#AEB9C6] focus:ring-0"
-                    />
+<div className="w-full p-4 sm:p-6">
+  {/* Header */}
+  <header className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+    <h2 className="TopSectionName font-bold text-lg sm:text-xl text-gray-400">Analytics</h2>
+    <div className="flex items-center gap-2">
+      <img
+        src="https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-418179856.jpg"
+        alt="Admin"
+        className="w-10 h-10 rounded-full"
+      />
+      <span className="text-sm">{adminName}</span>
+    </div>
+  </header>
 
-                      </div>
-                    </th>
-              </tr>
-                <table className="w-full table-auto text-sm">
-                  <thead className="orderCol">
-                   
-                    <tr>
-                      <th className="p-4 text-left">Order Id</th>
-                      <th className="p-4 text-left">Client</th>
-                      <th className="p-4 text-left">Date</th>
-                      <th className="p-4 text-left">Status</th>
-                      <th className="p-4 text-left">Country</th>
-                      <th className="p-4 text-left">State</th>
-                      <th className="p-4 text-left">Total</th>
-                      <th className="p-4"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                   
-                  {filteredOrders.length > 0 ? (
-                    filteredOrders.map((order) => (
-                  <tr key={order?._id} className={`orderDetails ${getOrderDetails(order?.orderStatus || "Pending")}`}>
+  {/* Dashboard Cards */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    {cards.map((card, index) => (
+      <div key={index} className="p-4 bg-[#0B1739] shadow rounded-lg">
+        <h2 className="text-sm text-gray-500">{card.title}</h2>
+        <p className="text-2xl font-bold mt-1">{card.value}</p>
+        <span className={`text-sm ${card.color}`}>{card.change}</span>
+      </div>
+    ))}
+  </div>
 
-            <td className="p-4">{order._id}</td>
-            <td className="p-4">
-              <div>
-                <p className="">{order.userId.fullName}</p> {/* Corrected to use name */}
-                <p className="text-gray-400">{order.userId.email}</p>
-              </div>
-            </td>
-            <td className="p-4">{new Date(order.createdAt).toLocaleDateString()}</td>
+  {/* Orders Table */}
+  <div className="pt-4">
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+      <h2 className="text-lg font-semibold text-gray-400">Orders Status</h2>
+      <div className="w-full sm:w-64">
+        <div className="flex items-center border rounded px-2 py-1 bg-[#0B1739] shadow-sm">
+          <span className="material-symbols-outlined text-gray-400">search</span>
+<input
+  onChange={(e) => setSearchQuery(e.target.value)}
+  type="text"
+  placeholder="Search for..."
+  className="w-full pl-2 text-sm text-white bg-transparent border-none outline-none focus:outline-none focus:ring-0"
+/>
 
-            <td className="p-4">
-              <span className={`px-2 py-1 rounded text-xs ${getStatusColor(order.orderStatus) || ""}`}>
-                {order.orderStatus}
-              </span>
-            </td>
-            <td className="p-4">{order.userId.country}</td>
-            <td className="p-4">{order.userId.state}</td>
-            
-            <td className="p-4 font-bold">{order.totalAmount}</td>
-            <td className="p-4 flex space-x-3">
-            <button onClick={() => openEditPopup(order)} className="text-[#8f85fe] hover:text-[#9389ff57]">
-  <span class="material-symbols-outlined">edit</span>
-</button>
-
-              <button onClick={() => handleDelete(order._id)} className="text-[#8f85fe] hover:text-[#9389ff57]  ">
-              <span class="material-symbols-outlined">
-                delete
-              </span>
-              </button>
-            </td>
-            </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="8" className="p-4 text-center text-gray-500">Order not found</td>
-    </tr>
-  )}
-</tbody>
-      
-                </table>
-              </div>
-          </div>
         </div>
+      </div>
+    </div>
+
+    <div className="overflow-x-auto bg-[#08112a] rounded-lg shadow">
+      <table className="min-w-[720px] w-full text-sm text-left whitespace-nowrap">
+        <thead className="bg-[#0B1739] text-white font-medium">
+          <tr>
+            <th className="p-4">Order ID</th>
+            <th className="p-4">Client</th>
+            <th className="p-4">Date</th>
+            <th className="p-4">Status</th>
+            <th className="p-4">Country</th>
+            <th className="p-4">State</th>
+            <th className="p-4">Total</th>
+            <th className="p-4 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredOrders.length > 0 ? (
+            filteredOrders.map((order) => (
+              <tr
+                key={order?._id}
+                className={`border-t ${getOrderDetails(order?.orderStatus || "Pending")}`}
+              >
+                <td className="p-4 text-xs sm:text-sm">{order._id}</td>
+                <td className="p-4">
+                  <p className="font-medium">{order.userId.fullName}</p>
+                  <p className="text-gray-400 text-xs">{order.userId.email}</p>
+                </td>
+                <td className="p-4 text-sm">{new Date(order.createdAt).toLocaleDateString()}</td>
+                <td className="p-4">
+                  <span
+                    className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(order.orderStatus)}`}
+                  >
+                    {order.orderStatus}
+                  </span>
+                </td>
+                <td className="p-4 text-sm">{order.userId.country}</td>
+                <td className="p-4 text-sm">{order.userId.state}</td>
+                <td className="p-4 font-bold text-sm">₹{order.totalAmount}</td>
+                <td className="p-4 flex justify-center gap-2">
+                  <button onClick={() => openEditPopup(order)} className="text-indigo-500 hover:opacity-70">
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <button onClick={() => handleDelete(order._id)} className="text-red-500 hover:opacity-70">
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="8" className="p-4 text-center text-gray-500">Order not found</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
       </div>
     ) : (
     <h1>login admin..</h1>

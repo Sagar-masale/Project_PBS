@@ -3,6 +3,7 @@ import CartContext from '../Context/CartContext';
 import ProfileContext from '../Context/ProfileContext';
 import AdminContext from '../Context/AdminContext';
 import './CartDetails.css'
+import {IndianRupee} from "lucide-react";
 import CheckOutModel from './CheckoutProduct/CheckOutModel';
 import { Link } from 'react-router-dom';
 import ClearCartConfirm from './ClearCartConfirm';
@@ -16,7 +17,7 @@ function CartDeatils() {
   const {userData} = useContext(ProfileContext)
   const {adminData} = useContext(AdminContext)
   const [isClearCartVisible, setisClearCartVisible] = useState(false);
-    const { metalRates, calculateFinalPrice } = useContext(MetalContext);
+  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
    
   const [openCheckout, setOpenCheckout] = useState(false);
   const handleClearCart = () => {
@@ -81,105 +82,109 @@ function CartDeatils() {
 </div>
 
   ) : (
-    <div className='Cart-Main-Container'>
-         <div className=" cart-md-container bg-white-100  ">
+<div className="Cart-Main-Container flex flex-col lg:flex-row lg:h-screen px-4 sm:px-6 lg:px-10 py-4 gap-4">
 
-<div className="cart-md-container-items px-3 sm:px-6 lg:px-8">
 
-  <div className="flex ">
-    <h1 className="text-xl sm:text-2xl mt-0 font-semibold Your-Cart">Your Cart</h1>
+  {/* LEFT - Cart Items */}
+<div className="w-full lg:w-2/3 bg-white rounded-md shadow-sm p-4 sm:p-6 overflow-y-auto scroll-thin-purple">
 
-    <button onClick={ () => setisClearCartVisible(true) } className="clearCartAll rounded-lg mt-0 ml-auto  font-semibold text-white">Clear All</button>
-  </div>
-  {isClearCartVisible && (
-  <ClearCartConfirm
-    onConfirm={handleClearCart}
-    onCancel={() => setisClearCartVisible(false)}
-  />
-)}
-   
-  <div className="mx-auto mt-16 max-w-26">
-    <div className="">
-      <div className="px-4 py-6 sm:px-8 sm:py-10 ">
-        <div className="flow-root ">
-<ul className="-my-20 ul-cartDatas">
-  {cart.map(item => (
-    <li key={item._id} className="flex flex-col space-y-4 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 cart-Item-Box">
 
-     <div className="shrink-0 cart-Image-Box">
-      <img
-        className="cart-Image w-24 h-24 sm:w-32 sm:h-32 rounded-lg object-cover"
-        src={item.ProductImages[0]}
-        alt={item.ProductName}
+    <div className="flex items-center mb-4 ">
+      <h1 className="text-xl sm:text-2xl font-semibold text-[#4f3267]">Your Cart</h1>
+      <button
+        onClick={() => setisClearCartVisible(true)}
+        className="ml-auto bg-[#4f3267] px-3 py-1 rounded-lg font-semibold text-white text-sm sm:text-base"
+      >
+        Clear All
+      </button>
+    </div>
+
+    {isClearCartVisible && (
+      <ClearCartConfirm
+        onConfirm={handleClearCart}
+        onCancel={() => setisClearCartVisible(false)}
       />
+    )}
 
-     </div>
+    <div className="mt-4">
+      <ul className="space-y-6 ">
+        {cart.map((item) => (
+          <li
+            key={item._id}
+            className="flex flex-col sm:flex-row sm:items-start gap-4 border-b pb-4 "
+          >
+            {/* Image */}
+            <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0">
+              <img
+                src={item.ProductImages[0]}
+                alt={item.ProductName}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
 
-     <div className="relative flex flex-1  flex-col justify-between">
-       <div className="sm:col-gap-5 sm:grid sm:grid-cols-2 cart-structrue">
-         <div className="pr-8 sm:pr-5">
-           <p className="text-base sm:text-xl font-semibold" style={{color:"#4f3267"}}>{item.ProductName}</p>
+            {/* Info */}
+            <div className="flex-1">
+              <p className="text-lg font-semibold text-[#4f3267]">{item.ProductName}</p>
+              <p className="text-sm text-gray-500 mt-1">Weight: {item.selectedWeight}</p>
+              <p className="text-sm text-gray-500 mt-1">Size: {item.selectedSize}</p>
+              <p className="text-xl text-[#4f3267] mt-2 flex align-items-center"><IndianRupee width={16} color='black'/> {item.finalPrice || calculateFinalPrice(item)}</p>
 
-           <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Weight : {item.selectedWeight}</p> 
-            <p className="mx-0 mt-1 mb-0 text-sm text-gray-500">Size : {item.selectedSize}</p> 
-           <p className="cart-Price text-2xl text-black mt-2">₹ {item.finalPrice || calculateFinalPrice(item)}</p>
+              {/* Actions */}
+              <div className="flex items-center mt-3 text-[#4f3267] text-sm space-x-4">
+                <div className="flex items-center cursor-pointer" onClick={() => removeFromCart(item._id)}>
+                  <span className="material-symbols-outlined">delete</span>
+                  <span className="ml-1">Remove</span>
+                </div>
+                <span>|</span>
+                <div className="flex items-center cursor-pointer">
+                  <span className="material-symbols-outlined ml-1">favorite</span>
+                  <span className="ml-1">Move to Wishlist</span>
+                </div>
+              </div>
+            </div>
 
-          
-            <span className="remove-WishList-Box flex mt-2">
-            <span className="removeBlock flex cursor-pointer"  onClick={() => removeFromCart(item._id)}>
-            <span class="material-symbols-outlined" style={{color:"#4f3267"}}>delete</span>
-            <p className="cart-Price text-xs sm:text-sm text-black ml-1">Remove</p>
+            {/* Quantity */}
+            <div className="flex items-center sm:flex-col justify-end sm:justify-start">
+              <div className="flex items-center border rounded overflow-hidden text-sm">
+                <button
+                  onClick={() => decrementQuantity(item._id)}
+                  className="bg-gray-200 px-3 py-1 hover:bg-[#4f3267] hover:text-white"
+                >
+                  -
+                </button>
+                <span className="px-4 py-1 bg-gray-100">{item.quantity}</span>
+                <button
+                  onClick={() => incrementQuantity(item._id)}
+                  className="bg-gray-200 px-3 py-1 hover:bg-[#4f3267] hover:text-white"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-            </span> 
-
-            <span className="remove-wishlist-middle ml-3 text-xl font-light">|</span>
-
-            <span className="add-WishList-Block flex cursor-pointer">
-            <span class="material-symbols-outlined ml-2" style={{color:"#4f3267"}}>favorite</span>
-            <p className="cart-Price text-sm text-black ml-1"> Move to Wishlist</p>
-
-
-            </span>
-            </span>
-         </div>
-
-         <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
-          
-
-           <div className="sm:order-1">
-             <div className="mx-auto flex h-8 items-stretch text-gray-600">
-               <button onClick={() => decrementQuantity(item._id)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">-</button>
-               <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item.quantity}</div>
-               <button onClick={() => incrementQuantity(item._id)}  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition  hover:text-white incrementCart-DecCart">+</button>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </li>
-  ))}
- </ul>
- </div>
-
-
-
-     
-
-        </div>
-        <button className='p-3 rounded-lg text-white mt-12 checkOutBtn'
+    {/* Checkout */}
+    <div className="text-right mt-10">
+      <button
+        className="bg-[#4f3267] text-white px-6 py-2 rounded-md font-medium hover:opacity-90"
         onClick={() => setOpenCheckout(true)}
-        >
-          CheckOut
-        </button>
+      >
+        CheckOut
+      </button>
+    </div>
+  </div>
+
+  {/* RIGHT - Order Summary */}
+  <div className="w-full lg:w-1/3">
+    <div>
+      <OrderSummary />
     </div>
   </div>
 </div>
-</div>
-  <div className="OrderSummary-Box w-full ml-auto">
-  <OrderSummary/>
-  </div>
- 
-    </div>
+
     
   )}
 </div>

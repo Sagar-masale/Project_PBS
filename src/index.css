@@ -27,3 +27,29 @@
   size: A4 portrait;
   margin: 0;
 }
+/* Custom scrollbar style */
+.scroll-thin-purple::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scroll-thin-purple::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-thin-purple::-webkit-scrollbar-thumb {
+  background-color: #4F3267;
+  border-radius: 10px;
+}
+
+@keyframes spin-reverse {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 2s linear infinite;
+}

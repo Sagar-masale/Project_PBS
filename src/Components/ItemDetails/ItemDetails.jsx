@@ -391,34 +391,44 @@ console.log("Producttttt", product);
               {customising ? "HIDE OPTIONS" : "CUSTOMISE"}
             </button>
           </div>
+{/* Free Size Message */}
 {customising && sizeOptions.length === 0 && (
-  <p className="text-sm text-gray-600 mt-2">Free size – no selection required.</p>
+  <p className="text-sm text-gray-600 mt-2 italic">Free size – no selection required.</p>
 )}
 
+{/* Size Selector */}
 {customising && sizeOptions.length > 0 && (
   <div className="flex flex-wrap gap-3 mt-2">
-    {sizeOptions.map((size) => (
-<button
-  key={size}
-  onClick={() => {
-    setSelectedSize(size);
+    {sizeOptions.map((size) => {
+      const isSelected = size === selectedSize;
 
-    const weight = sizeWeightMap[product.ProductCategory]?.[size] || product.weightInGrams || 1;
-    setSelectedWeight(weight);
+      return (
+        <button
+          key={size}
+          onClick={() => {
+            setSelectedSize(size);
 
-    const price = calculateFinalPrice({
-      ...product,
-      weightInGrams: weight
-    });
-    setCalculatedPrice(price);
-  }}
->
-  {size}
-</button>
+            const weight = sizeWeightMap[product.ProductCategory]?.[size] || product.weightInGrams || 1;
+            setSelectedWeight(weight);
 
-    ))}
+            const price = calculateFinalPrice({
+              ...product,
+              weightInGrams: weight
+            });
+            setCalculatedPrice(price);
+          }}
+          className={`px-4 py-2 rounded-full border text-sm font-medium transition 
+            ${isSelected 
+              ? 'bg-[#4f3267] text-white border-[#4f3267]' 
+              : 'bg-white text-gray-700 border-gray-300 hover:bg-[#f6eff6] hover:border-[#4f3267]'}`}
+        >
+          {size}
+        </button>
+      );
+    })}
   </div>
 )}
+
 
         </div>
 

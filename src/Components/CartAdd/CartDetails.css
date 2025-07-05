@@ -106,6 +106,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 999999;
 }
 .checkOutBtn:hover{
     background-color: #432a58;

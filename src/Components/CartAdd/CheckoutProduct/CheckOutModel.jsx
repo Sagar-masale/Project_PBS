@@ -12,7 +12,8 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   const { cart, calculateCartSummary } = useContext(CartContext);
   const { totalPrice, totalDiscount, discountedTotal } = calculateCartSummary();
   const [errors, setErrors] = useState({});
-  const { metalRates } = useContext(MetalContext);
+  
+  const { metalRates, refreshMetalRates, couponCode, clearCouponCode  } = useContext(MetalContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -60,7 +61,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
       city: userData.city || "",
       state: userData.state || "",
       postalCode: userData.zipCode || "",
-      country: "",
+      country: userData.country,
       totalAmount: ProductTotalAmt,
     });
   }, [userData, ProductTotalAmt, closeCheckout]);
@@ -90,21 +91,8 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   console.log("Cart Data",cart)
   const addOrder = async () => {
     if (!cart.length) throw new Error("Cart is empty");
+    await refreshMetalRates();
 
-    // const orderData = {
-    //   userId: userData._id,
-    //   totalAmount: totalPrice,
-    //   discount:totalDiscount,
-    //   totalAmountWithDiscount: discountedTotal,
-    //   orderQuantity: cart.length,
-    //   products: cart.map((item) => ({
-    //     productId: item._id,
-    //     orderProductSize: item.selectedSize,
-    //     orderProductWeight:item.selectedWeight,
-    //     orderQuantity: item.quantity,
-    //     price:calculateFinalPrice(item)
-    //   })),
-    // };
     const orderData = {
   userId: userData._id,
   totalAmount: totalPrice,
@@ -125,6 +113,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
       orderProductWeight: item.selectedWeight,
       orderQuantity: item.quantity,
       price: item.finalPrice,
+      ProductCouponCode:couponCode ,
       mackingCharges:item.makingCharges,
       orderedProductPrice: metalPrice,
     };
@@ -139,6 +128,8 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
 
     if (response.data.success) {
       toast.success("Order placed successfully!");
+      clearCouponCode()
+     
     } else {
       throw new Error("Order failed");
     }
@@ -179,6 +170,8 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  console.log("Form Data",formData);
+  
   return (
     <div className="font-sans">
       <div className="bg-white rounded-xl max-w-4xl w-full max-h-[84vh] overflow-y-auto">
@@ -347,17 +340,15 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
                     </div>
                     <div>
                       <label className="text-sm font-medium">Country</label>
-                      <select
+                      <input
+                        type="text"
                         name="country"
                         value={formData.country}
                         onChange={handleInputChange}
                         className={`mt-1 w-full rounded-md border ${
                           errors.country ? "border-red-500" : "border-gray-300"
                         } px-3 py-2`}
-                      >
-                        <option value="">Select Country</option>
-                        <option value="India">India</option>
-                      </select>
+                      />
                       {errors.country && (
                         <p className="text-red-500 text-sm mt-1">{errors.country}</p>
                       )}

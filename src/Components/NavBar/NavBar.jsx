@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useContext } from 'react';
+import React, { useState , useEffect, useContext, useRef } from 'react';
 // Notifications
 import SuccessMessage from '../Notifications/SuccessMessage';
 import ErrorMessage from '../Notifications/ErrorMessage';
@@ -133,6 +133,22 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
 
 
   const navigate = useNavigate();
+  const holdTimer = useRef(null);
+
+   const handleMouseDown = () => {
+    holdTimer.current = setTimeout(() => {
+      navigate('/login_admin'); // Redirect on long press
+    }, 800); // 800ms hold duration
+  };
+
+  const handleMouseUp = () => {
+    clearTimeout(holdTimer.current);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(holdTimer.current);
+  };
+  
   const navItemsLinks=[
     {
       id : 1,
@@ -236,16 +252,24 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
             <AlignJustify  className='text-[#4F3267] manu-icon'/>
           </span>
         </div>
-        <Link to={'/'} className='Logo-Shop cursor-pointer'>
-          <div>
-          <p
-            className="text-xl Web_Logo sm:text-3xl md:text-3xl text-[#4F3267] tracking-wide"
-            style={{ fontFamily: "'Cinzel', serif" }}
-          >
-            PBSalegaon
-          </p>
-        </div>
-        </Link>
+
+    <div
+      className='Logo-Shop cursor-pointer'
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleMouseDown}
+      onTouchEnd={handleMouseUp}
+    >
+      <Link to="/" className="">
+        <p
+          className="text-xl Web_Logo sm:text-3xl md:text-3xl text-[#4F3267] tracking-wide"
+          style={{ fontFamily: "'Cinzel', serif" }}
+        >
+          PBSalegaon
+        </p>
+      </Link>
+    </div>
 
         <div className="w-3/6 Search_Feald search-container-one relative">
           <SearchBar />
