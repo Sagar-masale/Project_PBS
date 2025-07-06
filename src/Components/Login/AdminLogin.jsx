@@ -25,7 +25,7 @@ function AdminLogin() {
         }
   
         // Make the API request with the Authorization header
-        const response = await axios.get('http://localhost:8000/api/v1/admins/current-admin', {
+        const response = await axios.get('https://backend-pbs-coo6.onrender.com/api/v1/admins/current-admin', {
           headers: {
             Authorization: `Bearer ${accessTokenAdmin}`,
           },
@@ -68,7 +68,7 @@ function AdminLogin() {
         const refreshTokenAdmin = localStorage.getItem('refreshTokenAdmin');
         if (!refreshTokenAdmin) throw new Error('No refresh token found');
     
-        const response = await axios.post('http://localhost:8000/api/v1/admins/refresh-token-admin', { refreshTokenAdmin });
+        const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/admins/refresh-token-admin', { refreshTokenAdmin });
         if (response.data?.success) {
           const { accessTokenAdmin, refreshTokenAdmin: newRefreshTokenAdmin } = response.data.data || {};
     
@@ -120,7 +120,7 @@ function AdminLogin() {
   
         // API Call
         const response = await axios.post(
-          "http://localhost:8000/api/v1/admins/login-admin",
+          "https://backend-pbs-coo6.onrender.com/api/v1/admins/login-admin",
           payload
         );
   

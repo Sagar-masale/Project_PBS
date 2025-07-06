@@ -45,7 +45,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
   const handleDelete = async () => {
     try {
       const endpoint = `delete-${productType.toLowerCase()}`;
-      await axios.delete(`http://localhost:8000/api/v1/products/${endpoint}`, {
+      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
         data: { id: product._id },
       });
 
@@ -81,7 +81,7 @@ console.log("Product Data:",productData);
         return;
       }
 
-      await axios.put(`http://localhost:8000/api/v1/products/${endpoint}`, {
+      await axios.put(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
         id: product._id,
         ...productData,
       });
