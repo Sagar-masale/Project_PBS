@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import "./Footer.css";
+import { Instagram, MessageCircle, Facebook  } from "lucide-react";
 const Footer = () => {
   return (
     <>
@@ -52,15 +53,31 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="lg:mx-auto text-left ">
+            <div className="lg:mx-auto text-left">
               <h4 className="text-lg text-gray-900 font-medium mb-7">
                 Products
               </h4>
-              <ul className="text-sm transition-all duration-500">
-                <Link to="/Ring-Page"><li className="mb-6"><span className="text-gray-600 hover:text-gray-900">Rings</span></li></Link>
-                <Link to="/Earrings-Page"><li className="mb-6"><span className="text-gray-600 hover:text-gray-900">Earrings</span></li></Link>
-                <Link to="/Bangles-Page"><li><span className="text-gray-600 hover:text-gray-900">Bangles</span></li></Link>
+              <ul className="text-sm transition-all duration-500 grid grid-cols-2 md:grid-cols-2 gap-y-4">
+                <li>
+                  <Link to="/Ring-Page" className="text-gray-600 hover:text-gray-900 transition">Rings</Link>
+                </li>
+                <li>
+                  <Link to="/Earrings-Page" className="text-gray-600 hover:text-gray-900 transition">Earrings</Link>
+                </li>
+                <li>
+                  <Link to="/Bangles-Page" className="text-gray-600 hover:text-gray-900 transition">Bangles</Link>
+                </li>
+                <li>
+                  <Link to="/Pendants-Page" className="text-gray-600 hover:text-gray-900 transition">Pendants</Link>
+                </li>
+                <li>
+                  <Link to="/Chains-Page" className="text-gray-600 hover:text-gray-900 transition">Chains</Link>
+                </li>
+                <li>
+                  <Link to="/Mangalsutra-Page" className="text-gray-600 hover:text-gray-900 transition">Mangalsutra</Link>
+                </li>
               </ul>
+
             </div>
 
             <div className="lg:mx-auto text-left ">
@@ -74,43 +91,53 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="lg:mx-auto text-left ">
-              <h4 className="text-lg text-gray-900 font-medium mb-7">
-                Subscribe
-              </h4>
-              <p className="text-sm text-gray-500 leading-6 mb-7">
-                Subscribe to get the latest news from us
-              </p>
-              <Link
-                to="/subscribe"
-                className="subscribe-button flex items-center justify-center gap-2 border border-[#4f3267] rounded-full py-3 px-6 lg:mx-0 text-sm text-[#4f3267] font-semibold transition-all duration-500 hover:bg-[#9d6dc5]"
-              >
-                Subscribe
-                <span className="material-symbols-outlined">arrow_right_alt</span>
-              </Link>
-            </div>
+<div className="w-full">
+  <h4 className="text-lg text-gray-900 font-medium mb-7 w-fit">
+  Connect with us
+</h4>
+
+  <div className="flex justify-between w-[75%] md:justify-between ">
+    {/* Facebook */}
+    <a
+      href="https://www.facebook.com/pbsjewellers"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col md:flex-row items-center gap-1 md:gap-3 text-gray-600 font-medium text-sm md:text-base hover:text-[#6a2598] transition"
+    >
+      <Facebook className="w-6 h-6 text-[#581C87]" />
+    </a>
+
+    {/* WhatsApp */}
+    <a
+      href="https://wa.me/917775912356"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col md:flex-row items-center gap-1 md:gap-3 text-gray-600 font-medium text-sm md:text-base hover:text-[#6a2598] transition"
+    >
+      <MessageCircle className="w-6 h-6 text-[#581C87]" />
+    </a>
+
+    {/* Instagram */}
+    <a
+      href="https://www.instagram.com/p.b.salegaon_jewellers_/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col md:flex-row items-center gap-1 md:gap-3 text-gray-600 font-medium text-sm md:text-base hover:text-[#6a2598] transition"
+    >
+      <Instagram className="w-6 h-6 text-[#581C87]" />
+    </a>
+  </div>
+</div>
+
+
+
           </div>
 
           <div className="py-7 border-t border-gray-200">
             <div>
               <span className="text-sm text-gray-500">
-                ©<Link to="/">PBS</Link> 2024, All rights reserved.
+                ©<Link to="/">PBS</Link> 2025, All rights reserved.
               </span>
-<div className=" mt-4 space-x-4 s lg:mt-0">
-  <a
-    href="https://www.instagram.com/p.b.salegaon_jewellers_/"
-    className="relative w-8 h-8 rounded-full transition-all duration-500 flex justify-center items-center  hover:bg-gradient-to-b from-gray-200 to-gray-400"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-<img
-  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"
-  alt="instagram logo"
-  className="w-8 h-8 rounded-full  mix-blend-multiply"
-/>
-
-  </a>
-</div>
 
             </div>
           </div>

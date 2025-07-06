@@ -10,7 +10,7 @@ import EditProductDetails from './EditProductDetails';
 import './ItemDetails.css';
 import moreIcon from "../../../public/menu.png";
 import toast, { Toaster } from 'react-hot-toast';
-
+import { X , Facebook, Instagram, Copy, MessageSquare } from "lucide-react";
 import MetalContext from '../Context/MetalRateContext';
 
 function ItemDetails() {
@@ -40,7 +40,40 @@ function ItemDetails() {
 
   const [selectedWeight, setSelectedWeight] = useState(null);
   const [calculatedPrice, setCalculatedPrice] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
+  const shareUrl = window.location.href;
 
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success("Link copied to clipboard!");
+    } catch (err) {
+      toast.error("Failed to copy link");
+    }
+    setShowOptions(false);
+  };
+
+  const openShare = (platform) => {
+    let url = "";
+
+      switch (platform) {
+        case "whatsapp":
+          url = `https://wa.me/?text=${encodeURIComponent(shareUrl)}`;
+          break;
+        case "facebook":
+          url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+          break;
+        case "instagram":
+          toast.error("Instagram web does not support direct sharing. Please use the app.");
+          return;
+        default:
+          return;
+      }
+
+    window.open(url, "_blank");
+    setShowOptions(false);
+  };
 
 useEffect(() => {
   const loadProduct = async () => {
@@ -349,6 +382,76 @@ const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFin
               {reviews.length} Review{reviews.length !== 1 ? "s" : ""}
             </span>
           </div>
+          <div className="relative ml-auto">
+            {/* Share Icon */}
+            <span
+              className="cursor-pointer ml-auto"
+              onClick={() => setShowOptions(!showOptions)}
+            >
+                <img
+                  src="/share.png"
+                  alt="Share"
+                  className="w-7  md:w-8 md:h-8 lg:w-10 lg:h-10 rotate-1"
+                />
+
+            </span>
+
+            {/* Dropdown */}
+            {showOptions && (
+              <div className="absolute right-0 top-8 w-72 max-w-[90vw] bg-white border rounded-xl shadow-xl z-50 p-4 animate-fadeIn">
+                {/* Header */}
+                <div className="flex justify-between items-center mb-4">
+                                  <h4 className="text-lg font-bold text-[#581C87] tracking-wide mb-2">
+                  Share via
+                </h4>
+
+                  <button
+                    onClick={() => setShowOptions(false)}
+                    className="text-gray-500 hover:text-red-500 text-lg"
+                  >
+                   <X />
+                  </button>
+                </div>
+
+                {/* Share Options */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div
+                    onClick={() => openShare("whatsapp")}
+                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
+                  >
+                    <MessageSquare className="w-5 h-5 text-green-500" />
+                    <span className="text-sm font-medium">WhatsApp</span>
+                  </div>
+
+                  <div
+                    onClick={() => openShare("facebook")}
+                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
+                  >
+                    <Facebook className="w-5 h-5 text-blue-600" />
+                    <span className="text-sm font-medium">Facebook</span>
+                  </div>
+
+                  <div
+                    onClick={() => openShare("instagram")}
+                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
+                  >
+                    <Instagram className="w-5 h-5 text-pink-500" />
+                    <span className="text-sm font-medium">Instagram</span>
+                  </div>
+
+                  <div
+                    onClick={handleCopyLink}
+                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
+                  >
+                    <Copy className="w-5 h-5 text-gray-700" />
+                    <span className="text-sm font-medium">Copy Link</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+
         </div>
 
         <div className="mb-2">
