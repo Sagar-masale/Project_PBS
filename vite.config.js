@@ -7,7 +7,7 @@ export default defineConfig({
     host: '0.0.0.0',  // Allows access from other devices on the same network
     proxy: {
       '/api': {
-        // target: 'http://localhost:8000',  // Your backend URL
+        // target: 'https://backend-pbs-coo6.onrender.com',  // Your backend URL
         target: 'https://backend-pbs-coo6.onrender.com',
         changeOrigin: true,
         secure: false,

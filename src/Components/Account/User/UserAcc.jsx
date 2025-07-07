@@ -88,7 +88,7 @@ const handleCloseEdit = () => {
   
     try {
       console.log("Fetching orders for IDs:", orderIds);
-      const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
+      const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
       console.error("Error fetching orders:", error.response ? error.response.data : error.message);
