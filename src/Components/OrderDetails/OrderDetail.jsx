@@ -3,12 +3,10 @@ import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
 import "./OrderDetail.css"
 import OrderBill from "./OrderBill";
-import MetalContext from "../Context/MetalRateContext";
 
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
   const invoiceContainerRef = useRef(null);
-  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
   useEffect(() => {
     if (userData?.userOrders?.length > 0) {
@@ -33,29 +31,15 @@ const OrderDetail = () => {
   
   const [progressWidths, setProgressWidths] = useState({});
 
-  const [subTotalProductAmount, setSubTotalProductAmount] = useState(0);
   const [totalProductAmount, setTotalProductAmount] = useState(0);
 
   useEffect(() => {
     if (!Array.isArray(orderData)) return; 
   
     
-    const subTotalAmount = orderData.reduce((total, order) => {
-      return total + (order.orderDetails?.reduce((acc, item, index) => {
-        const quantity = order.products?.[index]?.orderQuantity || 0; // Get quantity from order.products
-        return acc + ((item.ProductPrice || 0) * quantity); // Multiply price with quantity
-      }, 0) || 0);
-    }, 0);
-    
-   
-    
+
   
     
-    // const productQty = orderData.reduce((totalQty, order) => {
-    //   return totalQty + (order.products?.reduce((acc, item) => acc + (item.orderQuantity || 0), 0) || 0);
-    // }, 0);
-  
-    setSubTotalProductAmount(subTotalAmount);
     const totalAmount = orderData.reduce((acc, order) => acc + (order.totalAmount || 0), 0);
     setTotalProductAmount(totalAmount);
   
@@ -99,6 +83,8 @@ const OrderDetail = () => {
 
     ):(null)}
     {userData ? (
+      <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
+     {userData ? (
       <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
       {orderData?.length > 0 ? (
       orderData.map((order) => (
@@ -195,6 +181,13 @@ const OrderDetail = () => {
         </div>
           ))
         ) : (
+          <p className="text-center text-gray-500">No orders found.</p>
+        )}
+
+      {/* Billing & Payment Section */}
+   
+    </div>
+          ) : (
           <p className="text-center text-gray-500">No orders found.</p>
         )}
 
