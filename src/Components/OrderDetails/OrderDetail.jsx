@@ -84,6 +84,8 @@ const OrderDetail = () => {
     ):(null)}
     {userData ? (
       <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
+     {userData ? (
+      <div className="w-full mx-auto p-2 bg-white rounded-xl shadow-md">
       {orderData?.length > 0 ? (
       orderData.map((order) => (
         <div key={order._id} className="mb-10 border-b pb-6 Order-Details-Container">
@@ -115,35 +117,31 @@ const OrderDetail = () => {
             </div>
 
             <div className="mt-4 flex gap-4 Order-Details-Info">
-{order?.orderDetails?.map((orderInfo, index) => {
-  if (!orderInfo) return null; // prevent null item from rendering
+          {order?.orderDetails?.map((orderInfo, index) => (
+            <div key={index} className="mb-2">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {orderInfo.ProductName
+                  ? orderInfo.ProductName.split(" ").length > 2
+                    ? orderInfo.ProductName.split(" ").slice(0, 2).join(" ") + "..."
+                    : orderInfo.ProductName
+                  : "Product Name"}
+              </h3>
 
-  return (
-    <div key={index} className="mb-2">
-      <h3 className="text-lg font-semibold text-gray-900">
-        {orderInfo.ProductName
-          ? orderInfo.ProductName.split(" ").length > 2
-            ? orderInfo.ProductName.split(" ").slice(0, 2).join(" ") + "..."
-            : orderInfo.ProductName
-          : "Product Name"}
-      </h3>
+              <p className="text-gray-700">Price: {order.products[index]?.price  || "0.00"}</p>
+              <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity  || "0.00"}</p>
+              <p className="text-gray-700">Size: {order.products[index]?.orderProductSize  || "0.00"}</p>
+              <p className="text-gray-700">Weight: {order.products[index]?.orderProductWeight  || "0.00"}</p>
+              <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
+              <p className="text-gray-600">
+                {orderInfo.ProductDescription
+                  ? orderInfo.ProductDescription.length > 20
+                    ? orderInfo.ProductDescription.slice(0, 20) + "..."
+                    : orderInfo.ProductDescription
+                  : "No description available"}
+              </p>
 
-      <p className="text-gray-700">Price: {order.products[index]?.price || "0.00"}</p>
-      <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity || "0.00"}</p>
-      <p className="text-gray-700">Size: {order.products[index]?.orderProductSize || "0.00"}</p>
-      <p className="text-gray-700">Weight: {order.products[index]?.orderProductWeight || "0.00"}</p>
-      <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
-      <p className="text-gray-600">
-        {orderInfo.ProductDescription
-          ? orderInfo.ProductDescription.length > 20
-            ? orderInfo.ProductDescription.slice(0, 20) + "..."
-            : orderInfo.ProductDescription
-          : "No description available"}
-      </p>
-    </div>
-  );
-})}
-
+            </div>
+          ))}
         </div>
 
   
@@ -183,6 +181,13 @@ const OrderDetail = () => {
         </div>
           ))
         ) : (
+          <p className="text-center text-gray-500">No orders found.</p>
+        )}
+
+      {/* Billing & Payment Section */}
+   
+    </div>
+          ) : (
           <p className="text-center text-gray-500">No orders found.</p>
         )}
 
