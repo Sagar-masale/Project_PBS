@@ -7,26 +7,32 @@ import toast from 'react-hot-toast';
 import './SliderBarForPhn.css';
 import '../Login/LoginUsingPass.css';
 import '../Login/LoginUsingOtp.css';
-import {MoveLeft} from 'lucide-react';
+import {MoveLeft, House, Search, SquareRoundCorner, Heart, Settings2, LogIn, CircleUserRound   } from 'lucide-react';
+import AdminContext from '../Context/AdminContext';
 
 function SliderBarForPhn() {
   const [loginLogoutTitle, setLoginLogoutTitle] = useState('');
   const [userName, setUserName] = useState('');
   const { userData, setUserData } = useContext(ProfileContext);
   const { setLogout } = useContext(RegisterContext);
+  const {adminData} = useContext(AdminContext);
   const navigate = useNavigate();
 
   // Set user information based on context
-  useEffect(() => {
-    if (userData) {
-      setLoginLogoutTitle("Logout");
-      setUserName(userData.fullName?.split(' ')[0] || 'Guest');
-    } else {
-      setLoginLogoutTitle("Login");
-      setUserName('Guest');  // Explicitly set to 'Guest' when no user data
-    }
-  }, [userData]);
-  
+useEffect(() => {
+  if (adminData) {
+    setUserName("Admin");
+    setLoginLogoutTitle("Logout");
+  } else if (userData) {
+    const firstName = userData.fullName?.split(' ')[0] || 'User';
+    setUserName(firstName);
+    setLoginLogoutTitle("Logout");
+  } else {
+    setUserName('Guest');
+    setLoginLogoutTitle("Login");
+  }
+}, [userData, adminData]);
+
 
   // Handle menu click actions
   const menuLinkClick = (item) => {
@@ -78,19 +84,24 @@ function SliderBarForPhn() {
 
   // Menu items configuration
   const menuLinks = [
-    { id: 1, name: 'Home', slug: '/', logo: 'home', active: true },
-    { id: 2, name: 'Search', slug: '/search', logo: 'search', active: true },
-    { id: 3, name: 'Chat', slug: '/chat', logo: 'chat', active: true },
-    { id: 4, name: 'Orders', slug: '/Order-Details', logo: 'orders', active: true },
-    { id: 5, name: 'Wishlist', slug: '/wishlist-details', logo: 'favorite', active: true },
-    { id: 6, name: 'Settings', slug: '/settings', logo: 'settings', active: true },
-	{ 
-		id: 7, 
-		name: loginLogoutTitle,
-		slug: userData ? '/' : '/login',   
-		logo: 'login', 
-		active: true 
-	  },
+    { id: 1, name: 'Home', slug: '/', logo: <House />, active: true },
+    { id: 2, name: 'Search', slug: '/search', logo: <Search />, active: true },
+    { id: 4, name: 'Orders', slug: '/Order-Details', logo: <SquareRoundCorner />, active: true },
+    { id: 5, name: 'Wishlist', slug: '/wishlist-details', logo: <Heart />, active: true },
+    { 
+      id: 6, 
+      name: 'Settings', 
+      slug: adminData ? '/AdminAcc' : (userData ? '/' : '/login'), 
+      logo: <Settings2 />, 
+      active: true },
+    { 
+      id: 7, 
+      name: adminData ? 'Admin Logged In' : loginLogoutTitle,
+      slug: adminData ? '/AdminAcc' : (userData ? '/' : '/login'),   
+      logo: <LogIn />, 
+      active: true 
+    }
+
   ];
 
   // console.log('udata',userData);
@@ -109,29 +120,21 @@ function SliderBarForPhn() {
       <div className="space-y-3">
         <div className="SliderBar-Color-Box w-full">
           <div className="flex items-center justify-between">
-            <h2 className='SliderBar-PbsLogo'>PBS</h2>
+                  <Link to="/" className="">
+                    <p
+                      className="text-xl Web_Logo sm:text-3xl md:text-3xl text-[#4F3267] tracking-wide"
+                      style={{ fontFamily: "'Cinzel', serif" }}
+                    >
+                      PBSalegaon
+                    </p>
+                  </Link>
             <span className="material-symbols-outlined Slider-Bar-Exit" onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
              <MoveLeft />
             </span>
           </div>
 
           {/* Search bar */}
-          <form onSubmit={(e) => e.preventDefault()} className="SlideBar">
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center py-4">
-                <button type="submit" className="p-2">
-                  <span className="material-symbols-outlined Slider-Bar-Search text-3xl">search</span>
-                </button>
-              </span>
-              <input
-                type="search"
-                onChange={(e) => setUserName(e.target.value)}
-                name="Search"
-                placeholder="Search..."
-                className="search w-full py-2 pl-10 text-sm rounded-md"
-              />
-            </div>
-          </form>
+
         </div>
 
         {/* Menu items */}
@@ -149,21 +152,20 @@ function SliderBarForPhn() {
         </div>
 
         {/* User Profile */}
-        <Link to='/UserAcc' onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
-          <div className="flex items-center pl-2 space-x-4 Profile-Box">
-            <img
-              src="https://www.pngitem.com/pimgs/m/130-1300253_female-user-icon-png-download-user-image-color.png"
-              alt="User"
-              className="w-12 h-12 rounded-lg"
-            />
-            <div>
-              <h2 className="text-lg font-semibold">Hi {userName || 'Guest'}</h2>
-              <span className="flex items-center space-x-1">
-                <button className="text-xs hover:underline">View profile</button>
-              </span>
-            </div>
-          </div>
-        </Link>
+<Link to={adminData ? '/AdminAcc' : '/UserAcc'} onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
+  <div className="flex items-center pl-2 space-x-4 Profile-Box">
+    <CircleUserRound className='rounded-lg w-10 h-9 ml-1' color='#581C87 ' />
+<div>
+  <h2 className="text-xl font-bold text-[#581C87]">Hello, {userName || 'Guest'} 👋</h2>
+  <div className="mt-1">
+    <button className="text-sm text-[#581C87] hover:underline font-medium">
+      View Profile
+    </button>
+  </div>
+</div>
+
+  </div>
+</Link>
       </div>
     </div>
    </>
