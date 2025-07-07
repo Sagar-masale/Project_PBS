@@ -3,12 +3,10 @@ import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
 import "./OrderDetail.css"
 import OrderBill from "./OrderBill";
-import MetalContext from "../Context/MetalRateContext";
 
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
   const invoiceContainerRef = useRef(null);
-  const { metalRates, calculateFinalPrice } = useContext(MetalContext);
 
   useEffect(() => {
     if (userData?.userOrders?.length > 0) {
@@ -33,29 +31,15 @@ const OrderDetail = () => {
   
   const [progressWidths, setProgressWidths] = useState({});
 
-  const [subTotalProductAmount, setSubTotalProductAmount] = useState(0);
   const [totalProductAmount, setTotalProductAmount] = useState(0);
 
   useEffect(() => {
     if (!Array.isArray(orderData)) return; 
   
     
-    const subTotalAmount = orderData.reduce((total, order) => {
-      return total + (order.orderDetails?.reduce((acc, item, index) => {
-        const quantity = order.products?.[index]?.orderQuantity || 0; // Get quantity from order.products
-        return acc + ((item.ProductPrice || 0) * quantity); // Multiply price with quantity
-      }, 0) || 0);
-    }, 0);
-    
-   
-    
+
   
     
-    // const productQty = orderData.reduce((totalQty, order) => {
-    //   return totalQty + (order.products?.reduce((acc, item) => acc + (item.orderQuantity || 0), 0) || 0);
-    // }, 0);
-  
-    setSubTotalProductAmount(subTotalAmount);
     const totalAmount = orderData.reduce((acc, order) => acc + (order.totalAmount || 0), 0);
     setTotalProductAmount(totalAmount);
   
@@ -131,31 +115,35 @@ const OrderDetail = () => {
             </div>
 
             <div className="mt-4 flex gap-4 Order-Details-Info">
-          {order?.orderDetails?.map((orderInfo, index) => (
-            <div key={index} className="mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">
-                {orderInfo.ProductName
-                  ? orderInfo.ProductName.split(" ").length > 2
-                    ? orderInfo.ProductName.split(" ").slice(0, 2).join(" ") + "..."
-                    : orderInfo.ProductName
-                  : "Product Name"}
-              </h3>
+{order?.orderDetails?.map((orderInfo, index) => {
+  if (!orderInfo) return null; // prevent null item from rendering
 
-              <p className="text-gray-700">Price: {order.products[index]?.price  || "0.00"}</p>
-              <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity  || "0.00"}</p>
-              <p className="text-gray-700">Size: {order.products[index]?.orderProductSize  || "0.00"}</p>
-              <p className="text-gray-700">Weight: {order.products[index]?.orderProductWeight  || "0.00"}</p>
-              <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
-              <p className="text-gray-600">
-                {orderInfo.ProductDescription
-                  ? orderInfo.ProductDescription.length > 20
-                    ? orderInfo.ProductDescription.slice(0, 20) + "..."
-                    : orderInfo.ProductDescription
-                  : "No description available"}
-              </p>
+  return (
+    <div key={index} className="mb-2">
+      <h3 className="text-lg font-semibold text-gray-900">
+        {orderInfo.ProductName
+          ? orderInfo.ProductName.split(" ").length > 2
+            ? orderInfo.ProductName.split(" ").slice(0, 2).join(" ") + "..."
+            : orderInfo.ProductName
+          : "Product Name"}
+      </h3>
 
-            </div>
-          ))}
+      <p className="text-gray-700">Price: {order.products[index]?.price || "0.00"}</p>
+      <p className="text-gray-700">Qty: {order.products[index]?.orderQuantity || "0.00"}</p>
+      <p className="text-gray-700">Size: {order.products[index]?.orderProductSize || "0.00"}</p>
+      <p className="text-gray-700">Weight: {order.products[index]?.orderProductWeight || "0.00"}</p>
+      <p className="text-gray-700">Total: {order.totalAmount || "0.00"}</p>
+      <p className="text-gray-600">
+        {orderInfo.ProductDescription
+          ? orderInfo.ProductDescription.length > 20
+            ? orderInfo.ProductDescription.slice(0, 20) + "..."
+            : orderInfo.ProductDescription
+          : "No description available"}
+      </p>
+    </div>
+  );
+})}
+
         </div>
 
   
