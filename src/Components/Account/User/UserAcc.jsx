@@ -1,16 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../PageLoader/Loading';
 import './UserAcc.css';
 import EditUser from './EditUser';
 import ProfileContext from '../../Context/ProfileContext';
+import OrderBill from '../../OrderDetails/OrderBill';
+import axios from 'axios';
 import RegisterContext from '../../Context/RegisterContext';
 import toast from 'react-hot-toast';
 function UserAcc() {
 
+  const { orderData, setOrderData } = useContext(ProfileContext);
+  const invoiceContainerRef = useRef(null);
   const [isLoadingUserAcc, setIsLoadingUserAcc] = useState(false); 
   const [isEditing, setIsEditing] = useState(false);
-
+  const [showInvoice , setShowInvoice] = useState(false);
     useEffect(() => {
       if (isLoadingUserAcc) {
         document.body.style.overflow = 'hidden'; // Disable scroll
@@ -31,7 +35,7 @@ function UserAcc() {
 
   console.log("UserData with order", userData);
 
-  const { setLogout, setLogoutNotify } = useContext(RegisterContext);
+  const { setLogout } = useContext(RegisterContext);
 
 
 
@@ -66,10 +70,43 @@ const handleCloseEdit = () => {
 };
 
 
+  const handleShowInvoice = (order) => {
+  setShowInvoice(order);
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // ⬆️ Scroll to top only on open
+};
 
-
+  useEffect(() => {
+    if (userData?.userOrders?.length > 0) {
+      fetchOrdersByIds(userData.userOrders);
+    }
+  }, [userData?.userOrders]);
+    const fetchOrdersByIds = async (orderIds) => {
+    if (!Array.isArray(orderIds) || orderIds.length === 0) {
+      console.error("Invalid orderIds:", orderIds);
+      return;
+    }
+  
+    try {
+      console.log("Fetching orders for IDs:", orderIds);
+      const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
+      setOrderData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error.response ? error.response.data : error.message);
+    }
+  };
+  
   return (
     <>
+        {showInvoice ? (
+<div className="relative  max-w-4xl mx-auto bg-white p-4 sm:p-6 md:p-8">
+  <OrderBill
+    selectedOrder={showInvoice}
+    handleClose={() => setShowInvoice(null)}
+    invoiceRef={invoiceContainerRef} // 🔁 pass ref here
+  />
+</div>
+
+    ):(null)}
     {isLoadingUserAcc && <Loading />}
     <div>{isEditing && <EditUser onCloseEditComponent={handleCloseEdit} />}</div>
     {userData?(
@@ -122,43 +159,58 @@ const handleCloseEdit = () => {
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <h3 className="text-sm/6 font-medium text-gray-900">About</h3>
                 <span className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero dicta labore suscipit at itaque nulla dolores commodi laudantium deleniti consequatur?
+                  In your account, you can view and update personal details, track orders, manage preferences, and access features like Terms & Conditions, Privacy Policy, and more.
                 </span>
               </div>
       
-              <div className=" py-6 sm:grid sm:grid-cols-3">
-                <h3 className="text-sm/6 font-medium text-gray-900">Order Data</h3>
-                <span className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                    <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
-                      <div className="flex w-0 flex-1 items-center">
-                        <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                          <span className="truncate font-medium">Download your complete order history for your records.</span>
-                          <span className="shrink-0 text-gray-400">2.4mb</span>
-                        </div>
-                      </div>
-                      <div className="ml-4 shrink-0">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          Download
-                        </a>
-                      </div>
-                    </li>
-                    <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
-                      <div className="flex w-0 flex-1 items-center">
-                        <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                          <span className="truncate font-medium">Save your order details with one click.</span>
-                          <span className="shrink-0 text-gray-400">4.5mb</span>
-                        </div>
-                      </div>
-                      <div className="ml-4 shrink-0">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          Download
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </span>
-              </div>
+<div className="py-6">
+  <h3 className="text-sm font-semibold text-gray-900 mb-4">Order Data & Downloads</h3>
+
+  {orderData && orderData.length > 0 ? (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {orderData.map((order, index) => {
+        const firstProduct = order?.orderDetails?.[0]; // only first product
+        const imageUrl =
+          firstProduct?.ProductImages?.[0] || "/default-image.jpg";
+
+        return (
+          <div
+            key={order._id || index}
+            className="flex items-start p-4 border rounded-lg shadow-sm hover:shadow-md transition"
+          >
+            <img
+              src={imageUrl}
+              alt="Product"
+              className="w-20 h-20 object-cover rounded"
+            />
+
+            <div className="ml-4 flex-1">
+              <p className="font-medium text-gray-900">
+                Order #{order.orderId || order._id?.slice(-5)}
+              </p>
+
+              <p className="text-sm text-gray-500">
+                {firstProduct?.ProductName || "Unnamed Product"} (
+                {order.quantity} pcs) — ₹{order.totalAmount}
+              </p>
+
+              <p className="text-xs text-gray-400">
+                Placed on: {new Date(order.createdAt).toLocaleDateString()}
+              </p>
+
+            <button onClick={() => handleShowInvoice(order)}
+              className='text-sm font-semibold text-purple-700 hover:underline mt-1 inline-block'
+              >View Invoice</button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <p className="text-sm text-gray-500">No orders found yet.</p>
+  )}
+</div>
+
             </dl>
           </div>
         </div>

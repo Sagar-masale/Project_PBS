@@ -24,7 +24,6 @@ import '../MediaQueries/MediaQueries.css';
 
 
 function NavBar() {
-  const [UserSearchValue, setUserSearchValue] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   // cartLemgth
   const { cart } = useContext(CartContext);
