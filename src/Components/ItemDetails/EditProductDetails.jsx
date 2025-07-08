@@ -142,7 +142,7 @@ const sendProductToAllUser = async () => {
   if (!isConfirmed) return;
 
   try {
-    const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
+    const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
     const users = response.data.data; // Adjust if necessary
 
     const productUrl = `http://localhost:5173/ItemDetails/${product._id}`;
@@ -156,7 +156,7 @@ const sendProductToAllUser = async () => {
       emails: users.map((u) => u.email),
     };
 
-    await axios.post("http://localhost:8000/api/v1/admins/send-product-email", payload);
+    await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/admins/send-product-email", payload);
     toast.success("Product successfully sent to all users!");
   } catch (error) {
     toast.error("Failed to send product to users.");
