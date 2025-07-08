@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import './SliderBarForPhn.css';
 import '../Login/LoginUsingPass.css';
 import '../Login/LoginUsingOtp.css';
-import {MoveLeft, House, Search, SquareRoundCorner, Heart, Settings2, LogIn, CircleUserRound   } from 'lucide-react';
+import {MoveLeft, House, Search, Package, Heart, Settings2, LogIn, CircleUserRound   } from 'lucide-react';
 import AdminContext from '../Context/AdminContext';
 
 function SliderBarForPhn() {
@@ -86,7 +86,7 @@ useEffect(() => {
   const menuLinks = [
     { id: 1, name: 'Home', slug: '/', logo: <House />, active: true },
     { id: 2, name: 'Search', slug: '/search', logo: <Search />, active: true },
-    { id: 4, name: 'Orders', slug: '/Order-Details', logo: <SquareRoundCorner />, active: true },
+    { id: 4, name: 'Orders', slug: '/Order-Details', logo: <Package />, active: true },
     { id: 5, name: 'Wishlist', slug: '/wishlist-details', logo: <Heart />, active: true },
     { 
       id: 6, 

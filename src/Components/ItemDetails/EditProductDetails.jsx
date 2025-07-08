@@ -42,26 +42,29 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
     }));
   };
 
-  const handleDelete = async () => {
-    try {
-      const endpoint = `delete-${productType.toLowerCase()}`;
-      await axios.delete(`http://localhost:8000/api/v1/products/${endpoint}`, {
-        data: { id: product._id },
-      });
+const handleDelete = async () => {
+  const confirmed = window.confirm(`Are you sure you want to delete this ${productType}?`);
+  if (!confirmed) return;
 
-      toast.success(`${productType} deleted successfully`);
+  try {
+    const endpoint = `delete-${productType.toLowerCase()}`;
+    await axios.delete(`http://localhost:8000/api/v1/products/${endpoint}`, {
+      data: { id: product._id },
+    });
 
-      // Optionally update context (or use refreshData)
-      onClose();
-      refreshData && refreshData();
+    toast.success(`${productType} deleted successfully`);
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    } catch (error) {
-      toast.error(`Failed to delete ${productType}`);
-    }
-  };
+    onClose();
+    refreshData && refreshData();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  } catch (error) {
+    toast.error(`Failed to delete ${productType}`);
+  }
+};
+
 console.log("Product Data:",productData);
 
   const handleUpdate = async () => {
