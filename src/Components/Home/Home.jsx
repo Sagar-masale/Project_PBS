@@ -15,7 +15,9 @@ import MainPage3rd from '../images/Home3.png';
 import MainPage3rdPhn from '../images/Home3Phn.png';
 
 import MangalSutraImg from '../images/Mangalsutra.jpg';
+import RingImage from '../images/RingImage.jpg';
 import BanglesImg from '../images/Bangles.jpg';
+import PendantImg from '../images/PendantImage.jpg';
 import ChainsImg from '../images/Chains.jpg';
 import About from '../About_PBS/About';
 
@@ -172,7 +174,7 @@ function Home({
     <Link to="/Ring-Page" className="block group">
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src="./RingImgs/imgR2.jpg"
+          src={RingImage}
           alt="Rings"
           className="w-full h-32 sm:h-40 object-cover"
         />
@@ -186,7 +188,7 @@ function Home({
     <Link to="/Earrings-Page" className="block group">
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src="./Erraings/imgR3.jpg"
+          src="./Erraings/imgR4M1.jpg"
           alt="Earrings"
           className="w-full h-32 sm:h-40 object-cover"
         />
@@ -200,7 +202,7 @@ function Home({
     <Link to="/Pendants-Page" className="block group">
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src="./Pendants/MainPendant.webp"
+          src={PendantImg}
           alt="Pendants"
           className="w-full h-32 sm:h-40 object-cover"
         />
@@ -228,7 +230,7 @@ function Home({
     <Link to="/Bangles-Page" className="block group">
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src={BanglesImg}
+          src="./Bangles/imgR4m1.jpg"
           alt="Bangles"
           className="w-full h-32 sm:h-40 object-cover"
         />
@@ -242,7 +244,7 @@ function Home({
     <Link to="/Chains-Page" className="block group">
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src={ChainsImg}
+          src="./Chains/chainImage.png"
           alt="Chains"
           className="w-full h-32 sm:h-40 object-cover"
         />

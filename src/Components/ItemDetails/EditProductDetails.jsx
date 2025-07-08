@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ProductContext from "../Context/ProductContext";
 import axios from "axios";
+import {SendToBack} from "lucide-react";
 import toast from "react-hot-toast";
 
 function EditProductDetails({ product, productType, onClose, refreshData }) {
@@ -18,6 +19,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
     ProductGender: "",
     ProductDescription: "",
     ProductPrice: "",
+    ProductImages:""
   });
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
         makingCharges: product.makingCharges || "" ,
         weightInGrams: product.weightInGrams || "",
         metalType: product.metalType || "",
+        
       });
     }
   }, [product]);
@@ -131,11 +134,48 @@ console.log("Product Data:",productData);
     }
   };
 
+const sendProductToAllUser = async () => {
+  const isConfirmed = window.confirm(
+    `Are you sure you want to send this product to all users via email?\n\nThis action will notify every registered customer.`
+  );
+
+  if (!isConfirmed) return;
+
+  try {
+    const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
+    const users = response.data.data; // Adjust if necessary
+
+    const productUrl = `http://localhost:5173/ItemDetails/${product._id}`;
+
+    const payload = {
+      subject: "🆕 New Product Launch at PBS Jewellers!",
+      productName: product.ProductName,
+      productDescription: product.ProductDescription,
+      ProductImage: product?.ProductImages?.[0],
+      productUrl,
+      emails: users.map((u) => u.email),
+    };
+
+    await axios.post("http://localhost:8000/api/v1/admins/send-product-email", payload);
+    toast.success("Product successfully sent to all users!");
+  } catch (error) {
+    toast.error("Failed to send product to users.");
+    console.error(error);
+  }
+};
+
+
+
   return (
 <div className="fixed inset-0  bg-opacity-60 z-[99999] flex items-center justify-center px-4">
   <div className="bg-white rounded-2xl w-full max-w-md sm:max-w-lg p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
     <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-bold text-[#4f3267]">Update {productType}</h2>
+      <button
+       onClick={sendProductToAllUser}
+       className="ml-auto mr-4 text-gray-500 hover:text-black text-xl font-bold">
+        <SendToBack />
+      </button>
       <button onClick={onClose} className="text-gray-500 hover:text-black text-xl font-bold">
         ✕
       </button>

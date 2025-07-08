@@ -35,7 +35,7 @@ const Footer = () => {
                 personalized support and guidance.
               </p>
               <Link
-                to="/contact"
+                to="/support"
                 className="py-2.5 px-5 h-9 block bg-[#4f3267] rounded-full shadow-sm text-xs text-white mx-auto transition-all duration-500 hover:bg-[#432a58] lg:mx-0"
               >
                 Contact us

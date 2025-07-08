@@ -3,31 +3,37 @@ import wed from './wed1.png'
 import wed1 from './wed2.webp';
 import wed2 from './wed3.png';
 import wed3 from './wed4.png';
+import { useNavigate } from 'react-router-dom';
 function WeddingProducts() {
+  const navigate = useNavigate();
   const weddingProducts = [
     {
       id: 1,
       name: "Mangalsutra",
       img: wed1,
-      span: "md:col-span-1 md:h-80"
+      span: "md:col-span-1 md:h-80",
+      slug:"/Mangalsutra-Page"
     },
     {
       id: 2,
       name: "Forest Grace Set",
       img: wed2,
-      span: "md:col-span-2 md:h-80"
+      span: "md:col-span-2 md:h-80",
+      slug:"/Pendants-Page"
     },
     {
       id: 3,
       name: "Celestial Promise",
       img: wed3,
-      span: "md:col-span-2 md:h-96"
+      span: "md:col-span-2 md:h-96",
+      slug:"/Ring-Page"
     },
     {
       id: 4,
       name: "Solitaire Ring",
       img: wed,
-      span: "md:h-full"
+      span: "md:h-full",
+      slug:"/Ring-Page"
     },
     
   ];
@@ -46,6 +52,7 @@ function WeddingProducts() {
     {weddingProducts.map((product) => (
       <div
         key={product.id}
+        onClick={()=>{navigate(product.slug)}}
         className="relative group rounded-xl overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition duration-300"
       >
         {/* Image */}

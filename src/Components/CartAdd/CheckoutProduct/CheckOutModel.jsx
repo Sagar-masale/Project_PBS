@@ -111,7 +111,7 @@ console.log("Cart Product:",item);
 
     return {
       productId: item._id,
-      orderProductSize: item.selectedSize,
+      orderProductSize: item.selectedSize || "Default",
       orderProductWeight: item.selectedWeight,
       orderQuantity: item.quantity,
       ProductName:item.ProductName,

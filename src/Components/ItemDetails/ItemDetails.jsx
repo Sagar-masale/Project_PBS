@@ -21,7 +21,7 @@ function ItemDetails() {
   const [showEditPopUp, setShowEditPopUp] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
   const [customising, setCustomising] = useState(false);
-  const [selectedSize, setSelectedSize] = useState("0");
+  const [selectedSize, setSelectedSize] = useState("Default");
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [currentProduct, setCurrentProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,6 +53,7 @@ function ItemDetails() {
     }
     setShowOptions(false);
   };
+
 
   const openShare = (platform) => {
     let url = "";
@@ -202,7 +203,7 @@ const closeImageViewer = () => {
     Chains: ["16 inches", "18 inches", "20 inches", "22 inches"],
     Earrings: ["Mini Pair", "Standard Pair", "Large Pair"],
     Pendants: ["Small", "Medium", "Large"],
-    Mangalsutra: ["16 inches", "18 inches", "20 inches"] // optional sizes
+    Mangalsutra: ["16 inches", "18 inches", "20 inches"] 
   };
 
   const sizeOptions = sizeOptionsMap[product?.ProductCategory] || [];
@@ -253,6 +254,10 @@ const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFin
 
 // console.log("Producttttt", product);
 
+
+if(selectedSize==0){
+  setSelectedSize("Default");
+}
     
   return (
 <>
@@ -354,7 +359,7 @@ const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFin
             <img
               src={moreIcon}
               alt="More options about product for admin"
-              className="w-8"
+              className="w-8 cursor-pointer"
               onClick={() => GetProductDetailsForUpdate(product)}
             />
           )}
@@ -476,11 +481,15 @@ const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFin
 
         <div className="flex flex-col gap-2 text-sm mb-4">
           <div className="flex gap-2 flex-wrap">
-            <div className="Product-Weight border rounded-lg p-2 px-4 flex items-center gap-2">
+            <div className="Product-Weight border rounded-lg p-2 px-4 flex flex-col items-center gap-2">
               <p className="text-gray-600">Weight:</p>
               <p className="font-semibold">
-                {selectedWeight || product.weightInGrams}
+                {selectedWeight || product.weightInGrams}{" "}
+                <span className="text-gray-700 ">
+                  ({selectedSize !== "0" ? selectedSize : "Default"})
+                </span>
               </p>
+
 
             </div>
 
