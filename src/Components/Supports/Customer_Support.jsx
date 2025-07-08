@@ -1,77 +1,68 @@
-import React, { useState } from 'react'
+import React from "react";
+import { Phone, Mail, MapPin, MessageSquareText } from "lucide-react";
 
 function Customer_Support() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    query: ''
-  })
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Thank you for reaching out. Customer support service is currently in development and under testing.')
-    setFormData({ name: '', email: '', query: '' })
-  }
+  const handleWhatsAppChat = () => {
+    const message = encodeURIComponent("Hello! I need help.");
+    window.open(`https://wa.me/917775912356?text=${message}`, "_blank");
+  };
 
   return (
-    <div className="bg-purple-50 min-h-screen flex items-center justify-center p-6 sm:p-10">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md p-6 sm:p-10 text-[#4f3267]">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center">Customer Support</h1>
-        <p className="text-sm sm:text-base mb-6 text-center">
-          Need help or have a question? Please fill out the form below and we’ll get back to you.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block mb-1 font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
+    <div className="bg-[#f6eff6] min-h-screen flex items-center justify-center px-4 py-10">
+      <div className="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* WhatsApp Chat */}
+        <div
+          onClick={handleWhatsAppChat}
+          className="bg-white hover:shadow-lg cursor-pointer transition rounded-2xl p-6 border text-center"
+        >
+          <div className="flex justify-center mb-3">
+            <MessageSquareText className="w-6 h-6 text-green-500" />
           </div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Chat with us</h3>
+          <p className="text-sm text-gray-500">Chat on WhatsApp anytime</p>
+          <p className="text-sm text-purple-700 mt-2 font-medium">Click to open</p>
+        </div>
 
-          <div>
-            <label className="block mb-1 font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
+        {/* Email */}
+        <div className="bg-white hover:shadow-lg rounded-2xl p-6 border text-center">
+          <div className="flex justify-center mb-3">
+            <Mail className="w-6 h-6 text-purple-500" />
           </div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Email us</h3>
+          <p className="text-sm text-gray-500">We're happy to help</p>
+          <p className="text-sm text-purple-700 mt-2 font-medium">supportpbs@gmail.com</p>
+        </div>
 
-          <div>
-            <label className="block mb-1 font-medium">Your Query</label>
-            <textarea
-              name="query"
-              required
-              rows="4"
-              value={formData.query}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
-            ></textarea>
+        {/* Visit us */}
+        <div className="bg-white hover:shadow-lg rounded-2xl p-6 border text-center">
+          <div className="flex justify-center mb-3">
+            <MapPin className="w-6 h-6 text-red-500" />
           </div>
-
-          <button
-            type="submit"
-            className="w-full bg-[#4f3267] text-white rounded-lg p-3 font-medium text-sm sm:text-base hover:bg-[#3d2750] transition"
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Visit us</h3>
+          <p className="text-sm text-gray-500">Our store location</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d361.59301664203775!2d75.91071312526216!3d17.678403135562405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc5da6275becae5%3A0x20f85ce7258a4a12!2sKanna%20Chowk%2C%20Solapur%2C%20Maharashtra%20413002!5e1!3m2!1sen!2sin!4v1751267238754!5m2!1sen!2sin"
+            target="_blank"
+            width={100}
+            rel="noopener noreferrer"
+            className="text-sm w-full text-purple-700 mt-2 font-medium underline inline-block"
           >
-            Submit
-          </button>
-        </form>
+            View on Google Maps
+          </iframe>
+        </div>
+
+        {/* Call us */}
+        <div className="bg-white hover:shadow-lg rounded-2xl p-6 border text-center">
+          <div className="flex justify-center mb-3">
+            <Phone className="w-6 h-6 text-blue-500" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Call us</h3>
+          <p className="text-sm text-gray-500">Mon–Sat, 10am–6pm</p>
+          <p className="text-sm text-purple-700 mt-2 font-medium">+91 77759 12356</p>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Customer_Support
+export default Customer_Support;

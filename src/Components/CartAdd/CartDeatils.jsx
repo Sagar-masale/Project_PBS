@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import ClearCartConfirm from './ClearCartConfirm';
 import OrderSummary from '../OrderDetails/OrderSummary';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import MetalContext from '../Context/MetalRateContext';
 function CartDeatils() {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useContext(CartContext);
@@ -29,6 +30,19 @@ function CartDeatils() {
     navigate('/login');
   }
 
+  const addToWishlist = (item) => {
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  const alreadyAdded = wishlist.find(w => w._id === item._id);
+  if (!alreadyAdded) {
+    const expiry = Date.now() + 15 * 24 * 60 * 60 * 1000; // 15 days in ms
+    wishlist.push({ ...item, expiry });
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    toast.success("Added to wishlist. It will expire after 15 days.");
+  } else {
+    toast("Item is already in wishlist.");
+  }
+};
 
   
   return (
@@ -53,6 +67,7 @@ function CartDeatils() {
       src="./Cart/empty-cart.png"
       alt="empty-cart"
       className="w-28 h-28 sm:w-40 sm:h-40 object-contain"
+      
     />
   </div>
 
@@ -111,20 +126,23 @@ function CartDeatils() {
         {cart.map((item) => (
           <li
             key={item._id}
-            className="flex flex-col sm:flex-row sm:items-start gap-4 border-b pb-4 "
+            className="flex flex-col sm:flex-row sm:items-start gap-4 border-b pb-4"
           >
             {/* Image */}
-            <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0 cursor-pointer">
               <img
                 src={item.ProductImages[0]}
                 alt={item.ProductName}
                 className="w-full h-full object-cover rounded-lg"
+                onClick={() => navigate(`/ItemDetails/${item._id}`)}
               />
             </div>
 
             {/* Info */}
             <div className="flex-1">
-              <p className="text-lg font-semibold text-[#4f3267]">{item.ProductName}</p>
+              <p className="text-lg font-semibold text-[#4f3267] cursor-pointer hover:underline" 
+              onClick={() => navigate(`/ItemDetails/${item._id}`)}
+              >{item.ProductName}</p>
               <p className="text-sm text-gray-500 mt-1">Weight: {item.selectedWeight}</p>
               <p className="text-sm text-gray-500 mt-1">Size: {item.selectedSize}</p>
               <p className="text-xl text-[#4f3267] mt-2 flex align-items-center"><IndianRupee width={16} color='black'/> {item.finalPrice || calculateFinalPrice(item)}</p>
@@ -136,10 +154,11 @@ function CartDeatils() {
                   <span className="ml-1">Remove</span>
                 </div>
                 <span>|</span>
-                <div className="flex items-center cursor-pointer">
+                <div className="flex items-center cursor-pointer" onClick={() => addToWishlist(item)}>
                   <span className="material-symbols-outlined ml-1">favorite</span>
                   <span className="ml-1">Move to Wishlist</span>
                 </div>
+
               </div>
             </div>
 
