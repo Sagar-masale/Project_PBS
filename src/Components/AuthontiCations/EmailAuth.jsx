@@ -30,7 +30,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         setMessage("");
 
         try {
-            const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/send-otp", { email });
+            const response = await axios.post("http://localhost:8000/api/v1/auth/send-otp", { email });
             setMessage(response.data.message || `OTP sent to ${email}`);
             toast.success("OTP sent successfully");
             setStep("verify"); 
@@ -48,7 +48,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         setMessage("");  // Clear previous messages
     
         try {
-            const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/verify-otp", { email, otp });
+            const response = await axios.post("http://localhost:8000/api/v1/auth/verify-otp", { email, otp });
     
             setIsVerified(true);
     
@@ -88,86 +88,107 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
 
     return (
         <>
-            <div className="Auth-Container flex justify-content-center align-items-center  w-full h-[85vh]">
-                <div className="Otp-Box flex flex-col items-center p-6 bg-white shadow-lg rounded-xl mb-30  h-[fit-content]">
-                    <span className="material-symbols-outlined relative ml-auto cursor-pointer" onClick={closeEmailAuth}>
-                        close
-                    </span>
-                    <h2 className="text-xl font-semibold text-gray-800">OTP Verification</h2>
+<div className="w-full h-[85vh] flex justify-center items-center  px-4">
+  <div className="w-full max-w-sm sm:max-w-md bg-white rounded-2xl flex flex-col justify-center align-items-center shadow-xl p-6 sm:p-8 relative">
+    {/* Close Icon */}
+    <button
+      onClick={closeEmailAuth}
+      className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+    >
+      <span className="material-symbols-outlined text-lg">close</span>
+    </button>
 
-                    {isVerified ? (
-                        <SuccessAnimation /> // Show success animation
-                    ) : step === "send" ? (
-                        <div className="w-full text-center">
-                            <p className="text-sm text-gray-600 mt-2">{decriptionOfEmailVerify} <span className="importantDec text-[#ef3333]">{decriptionOfEmailVerifyImp}</span> </p>
-                            <p className="text-lg font-semibold text-[#4f3267]">{maskEmail(email)}</p>
-                            
-                            <button 
-                                onClick={sendOTP} 
-                                disabled={loading}
-                                className="mt-4 mb-3 bg-[#4f3267] text-white py-2 px-6 rounded-lg hover:bg-[#432a58] transition duration-200 flex items-center justify-center w-full"
-                            >
-                                {loading ? <Loading /> : "Send OTP"}
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="w-full text-center">
-                            <p className="text-sm text-gray-600 mt-2">Enter the OTP sent to your email:</p>
-                            <div className="flex justify-center space-x-2 my-4">
-                                {[...Array(6)].map((_, index) => (
-                                    <input
-                                        key={index}
-                                        type="text"
-                                        maxLength="1"
-                                        inputMode="numeric"
-                                        value={otp[index] || ""}
-                                        onChange={(e) => {
-                                            let newOtp = otp.split("");
-                                            newOtp[index] = e.target.value.replace(/[^0-9]/g, "");
-                                            setOtp(newOtp.join(""));
-                                            if (e.target.value && index < 5) {
-                                                document.getElementById(`otp-input-${index + 1}`).focus();
-                                            }
-                                        }}
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Backspace") {
-                                                let newOtp = otp.split("");
-                                                newOtp[index] = "";
-                                                setOtp(newOtp.join(""));
-                                                if (index > 0) {
-                                                    document.getElementById(`otp-input-${index - 1}`).focus();
-                                                }
-                                            }
-                                        }}
-                                        id={`otp-input-${index}`}
-                                        className="otpInput-Box  text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900"
-                                    />
-                                ))}
-                            </div>
-                            
-                            <button 
-                                onClick={verifyOTP} 
-                                disabled={loading}
-                                className="bg-[#4f3267] text-white py-2 px-6 rounded-lg hover:bg-[#432a58] transition duration-200 flex items-center justify-center w-full"
-                            >
-                                {loading ? <Loading /> : "Verify OTP"}
-                            </button>
-                        </div>
-                    )}
+    {/* Title */}
+    <h2 className="text-xl sm:text-2xl font-bold text-center text-[#4f3267] mb-4">
+      OTP Verification
+    </h2>
 
-                        {message && (
-                        <motion.p 
-                        className="mt-3 text-sm text-gray-700"
-                        initial={{ scale: 0, opacity: 0 }}  // Start small
-                        animate={{ scale: 1, opacity: 1 }}  // Grow to normal size
-                        exit={{ scale: 0, opacity: 0 }}     // Shrink back
-                        transition={{ duration: 0.5 }}      // Speed of animation
-                    >
-                        {message}
-                    </motion.p>
-                        )}
-                </div>
-            </div>
+    {/* Success or OTP Steps */}
+    {isVerified ? (
+      <SuccessAnimation />
+    ) : step === "send" ? (
+      <div className="text-center">
+        <p className="text-sm text-gray-600">
+          {decriptionOfEmailVerify}{" "}
+          <span className="text-[#ef3333] font-semibold">
+            {decriptionOfEmailVerifyImp}
+          </span>
+        </p>
+        <p className="text-base sm:text-lg font-semibold text-[#4f3267] mt-2">
+          {maskEmail(email)}
+        </p>
+
+        <button
+          onClick={sendOTP}
+          disabled={loading}
+          className="mt-5 bg-[#4f3267] text-white font-medium py-2 px-6 rounded-lg hover:bg-[#432a58] transition w-full"
+        >
+          {loading ? <Loading /> : "Send OTP"}
+        </button>
+      </div>
+    ) : (
+      <div className="text-center">
+        <p className="text-sm text-gray-600 mb-3">Enter the OTP sent to your email:</p>
+
+        {/* OTP Inputs */}
+        <div className="flex justify-center gap-2 mb-4">
+          {[...Array(6)].map((_, index) => (
+            <input
+              key={index}
+              type="text"
+              maxLength="1"
+              inputMode="numeric"
+              value={otp[index] || ""}
+              onChange={(e) => {
+                let newOtp = otp.split("");
+                newOtp[index] = e.target.value.replace(/[^0-9]/g, "");
+                setOtp(newOtp.join(""));
+                if (e.target.value && index < 5) {
+                  document.getElementById(`otp-input-${index + 1}`).focus();
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  let newOtp = otp.split("");
+                  newOtp[index] = "";
+                  setOtp(newOtp.join(""));
+                  if (index > 0) {
+                    document.getElementById(`otp-input-${index - 1}`).focus();
+                  }
+                }
+              }}
+              id={`otp-input-${index}`}
+              className="w-10 h-10 sm:w-12 sm:h-12 border text-center text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f3267]"
+            />
+          ))}
+        </div>
+
+        {/* Verify Button */}
+        <button
+          onClick={verifyOTP}
+          disabled={loading}
+          className="bg-[#4f3267] text-white font-medium py-2 px-6 rounded-lg hover:bg-[#432a58] transition w-full"
+        >
+          {loading ? <Loading /> : "Verify OTP"}
+        </button>
+      </div>
+    )}
+
+    {/* Message Feedback */}
+    {message && (
+      <motion.p
+        className="mt-4 text-sm text-gray-700 text-center"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0, opacity: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        {message}
+      </motion.p>
+    )}
+  </div>
+</div>
+
         </>
     );
 };

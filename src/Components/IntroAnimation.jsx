@@ -3,15 +3,27 @@ import "./IntroAnimation.css";
 
 const IntroAnimation = () => {
   const [exit, setExit] = useState(false);
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = useState(true);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setExit(true), 3000); // trigger exit
-    const timer2 = setTimeout(() => setHide(true), 4000); // remove after exit
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
+    const lastShown = localStorage.getItem("introShownAt");
+    const now = Date.now();
+
+    if (!lastShown || now - parseInt(lastShown, 10) > 5 * 60 * 1000) {
+      // Show animation
+      setHide(false);
+
+      const timer1 = setTimeout(() => setExit(true), 3000); // start exit after 3s
+      const timer2 = setTimeout(() => {
+        setHide(true); // hide animation
+        localStorage.setItem("introShownAt", Date.now().toString());
+      }, 4000); // fully hide after 4s
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
+    }
   }, []);
 
   if (hide) return null;

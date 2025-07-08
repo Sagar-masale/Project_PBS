@@ -107,7 +107,7 @@ const refreshAccessToken = async () => {
     }
     return false;
   } catch (error) {
-    console.error('Error refreshing token:', error);
+
     localStorage.clear();  // Clear tokens on error
     setAccessToken('');    // Reset state
     return false;
@@ -184,12 +184,12 @@ const refreshAccessToken = async () => {
           setShowForgotText(false);
         }
         
-        setRegisterErrStatus(err.response.data?.message || 'An error occurred');
+        toast.error(err.response.data?.message || 'An error occurred');
       } else {
         console.error('Unexpected Error:', err.message);
         // alert('An unexpected error occurred. Please try again.');
         CloseLoginBox();
-        setRegisterErrStatus('An unexpected error occurred.');
+        toast.error('An unexpected error occurred.');
       }
     } finally {
       setIsLoading(false); // Stop the loading spinner regardless of success or failure
