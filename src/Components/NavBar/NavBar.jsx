@@ -15,7 +15,7 @@ import RegisterContext from '../Context/RegisterContext';
 import ProfileContext from '../Context/ProfileContext';
 import CartContext from '../Context/CartContext';
 import AdminContext from '../Context/AdminContext';
-import {Store, Gem, Heart, ShoppingCart, UserRound, AlignJustify} from 'lucide-react';
+import {Store, Gem, ShoppingCart, UserRound, AlignJustify, Home, Package, Heart, Bell, User} from 'lucide-react';
 
 import LoginUsingOtp from '../Login/LoginUsingOtp';
 import LoginUsingPass from '../Login/LoginUsingPass';
@@ -330,63 +330,59 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
       
 
       </div>
-      <div className="input NavMore-Items absolute right-0 z-2">
-<Link to="/" onClick={ShowNavMoreSec}>
-<span  className="value">
-  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
-   home
-  </span>
-    Home
-  </span>
-</Link>
-<Link>
-<span className="value">
-  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
-  mode_comment
-  </span>
-    Chat
-  </span>
-</Link>
-<Link to="/Order-Details" onClick={ShowNavMoreSec}>
-<span className="value">
-<span className="material-symbols-outlined MoreOpt-Logos font-bold">
-  orders
-  </span>
-    Orders
-  </span>
-</Link>
- <Link>
- <span className="value">
- <span className="material-symbols-outlined MoreOpt-Logos font-bold">
-  favorite
-  </span>
-    Wishlist
-  </span>
- </Link>
-<Link>
-<span className="value">
-<span className="material-symbols-outlined MoreOpt-Logos font-bold">
-  Notifications
-  </span>
-    Notifications
-  </span>
-</Link>
-  <Link   
-      to={
+<div className="input NavMore-Items absolute right-0 z-2 space-y-2">
+  <Link
+    to="/"
+    onClick={ShowNavMoreSec}
+    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
+  >
+    <Home size={20} />
+    <span className="font-medium">Home</span>
+  </Link>
+
+  <Link
+    to="/Order-Details"
+    onClick={ShowNavMoreSec}
+    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
+  >
+    <Package size={20} />
+    <span className="font-medium">Orders</span>
+  </Link>
+
+  <Link
+    to="/wishlist"
+    onClick={ShowNavMoreSec}
+    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
+  >
+    <Heart size={20} />
+    <span className="font-medium">Wishlist</span>
+  </Link>
+
+  <Link
+    to="/notifications"
+    onClick={ShowNavMoreSec}
+    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
+  >
+    <Bell size={20} />
+    <span className="font-medium">Notifications</span>
+  </Link>
+
+  <Link
+    to={
       accessToken
-      ? "/UserAcc"
-      : adminData
-      ? "/AdminAcc"
-      : "/loginPage"
-  } onClick={handleAccountClick}>
-  <span className="value">
-  <span className="material-symbols-outlined MoreOpt-Logos font-bold">
-  account_circle
-  </span>
-    Account
-  </span>
+        ? "/UserAcc"
+        : adminData
+        ? "/AdminAcc"
+        : "/loginPage"
+    }
+    onClick={handleAccountClick}
+    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
+  >
+    <User size={20} />
+    <span className="font-medium">Account</span>
   </Link>
 </div>
+
       <div className="AdminLoginBox fixed  w-full  overflow-auto">
         <AdminLogin />
       </div>

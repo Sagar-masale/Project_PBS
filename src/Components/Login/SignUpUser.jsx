@@ -45,7 +45,9 @@ function SignUpUser({onSwitchToLogin}) {
       .then((response) => {
         if (response.data.success) {
           setRegisterStatus(response.data.success);
-          navigate('/login');
+          closeEmailAuthBox();
+          onSwitchToLogin();
+          navigate('/');
           CloseSignUpBox();
         } else {
           alert(response.data.message || "Registration failed. Please try again.");
@@ -83,7 +85,7 @@ function SignUpUser({onSwitchToLogin}) {
     
     <>
 <div
-  className="Login-Main-Container bg-gradient-to-br from-[#f3e5f5] to-[#fde2e4] w-full min-h-screen flex justify-center items-center px-4"
+  className="Login-Main-Container bg-gradient-to-br  w-full min-h-screen flex justify-center items-center px-4"
 >
 
 
@@ -135,15 +137,15 @@ function SignUpUser({onSwitchToLogin}) {
       </div>
       
         ) : !isEmailVerified ? (
-          <div className="EmailAuth-Component absolute w-100 top-0 h-full   bg-[#d7a8fe3d]">
-          <EmailAuth 
-          enteredEmail={email} 
+      <div className="absolute top-0 left-0 w-full h-full  z-10 flex justify-center items-center">
+        <EmailAuth
+          enteredEmail={email}
           onOtpVerified={handleOtpVerified}
-          decriptionOfEmailVerify=" We've sent a one-time password (OTP) to your email. Enter it below to verify your account." 
+          closeEmailAuth={closeEmailAuthBox}
+          decriptionOfEmailVerify="We've sent a one-time password (OTP) to your email. Enter it below to verify your account."
           decriptionOfEmailVerifyImp="If you don’t see it, check your spam folder and mark our emails as safe."
-          closeEmailAuth={closeEmailAuthBox} 
-          />
-          </div>
+        />
+      </div>
         ) : (
           <div className="LeftSide-Block-Login relative rounded-l-lg bg-white">
       <Link to={'/'}>

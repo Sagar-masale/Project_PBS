@@ -99,7 +99,7 @@ function Home({
       {/* Slide 2 */}
       <div className="carousel-item">
         <picture>
-          <source media="(max-width: 480px)" srcSet={MainPage2ndPhn} />
+          <source media="(max-width: 500px)" srcSet={MainPage2ndPhn} />
           <img
             src={MainPage2nd}
             alt="MainPage2"
@@ -111,7 +111,7 @@ function Home({
       {/* Slide 3 */}
       <div className="carousel-item">
         <picture>
-          <source media="(max-width: 480px)" srcSet={MainPage3rdPhn} />
+          <source media="(max-width: 480px) (height: 300px)" srcSet={MainPage3rdPhn} />
           <img
             src={MainPage3rd}
             alt="MainPage3"

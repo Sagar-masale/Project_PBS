@@ -88,6 +88,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+
   console.log("Cart Data",cart)
   const addOrder = async () => {
     if (!cart.length) throw new Error("Cart is empty");
@@ -106,12 +107,15 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
         : item.metalType === "silver"
         ? metalRates.silver
         : 0;
+console.log("Cart Product:",item);
 
     return {
       productId: item._id,
       orderProductSize: item.selectedSize,
       orderProductWeight: item.selectedWeight,
       orderQuantity: item.quantity,
+      ProductName:item.ProductName,
+      ProductImages:item.ProductImages,
       price: item.finalPrice,
       ProductCouponCode:couponCode ,
       mackingCharges:item.makingCharges,

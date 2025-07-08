@@ -3,6 +3,7 @@ import axios from 'axios';
 import Loading from '../../PageLoader/Loading';
 import ProfileContext from '../../Context/ProfileContext';
 import EmailAuth from '../../AuthontiCations/EmailAuth';
+
 import './EditUser.css';
 
 const EditUser = ({onCloseEditComponent}) => {
@@ -131,7 +132,7 @@ const EditUser = ({onCloseEditComponent}) => {
                   value={formData.addressLine1}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#432a58] focus:border-[#432a58] block w-full p-2.5"
-                  placeholder={userData.addressLine1 || "solapur"}
+                  placeholder={userData.addressLine1 || "eg. solapur"}
                 />
               </div>
               <div>
@@ -145,7 +146,7 @@ const EditUser = ({onCloseEditComponent}) => {
                   value={formData.addressLine2}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#432a58] focus:border-[#432a58] block w-full p-2.5"
-                  placeholder={userData.addressLine2 || "Apartment, suite, etc. (optional)"}
+                  placeholder={userData.addressLine2 || "eg. Apartment, suite, etc. (optional)"}
                 />
               </div>
               <div>
