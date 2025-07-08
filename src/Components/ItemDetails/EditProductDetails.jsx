@@ -42,18 +42,9 @@ function EditProductDetails({ product, productType, onClose, refreshData }) {
     }));
   };
 
-<<<<<<< HEAD
-  const handleDelete = async () => {
-    try {
-      const endpoint = `delete-${productType.toLowerCase()}`;
-      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
-        data: { id: product._id },
-      });
-=======
 const handleDelete = async () => {
   const confirmed = window.confirm(`Are you sure you want to delete this ${productType}?`);
   if (!confirmed) return;
->>>>>>> master
 
   try {
     const endpoint = `delete-${productType.toLowerCase()}`;

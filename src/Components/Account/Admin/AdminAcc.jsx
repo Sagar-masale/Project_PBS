@@ -122,18 +122,6 @@ function AdminAcc() {
     }
   };
 
-<<<<<<< HEAD
-  const handleDelete = async (orderId) => {
-    try {
-      await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/orders/deleteOrder`, {
-        data: { orderId },
-      });
-      setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
-    } catch (error) {
-      console.error("Error deleting order:", error.response ? error.response.data : error.message);
-    }
-  };
-=======
 const handleDelete = async (orderId) => {
   const confirmed = window.confirm("Are you sure you want to delete this order?");
   if (!confirmed) return;
@@ -148,7 +136,6 @@ const handleDelete = async (orderId) => {
   }
 };
 
->>>>>>> master
   
 
 
