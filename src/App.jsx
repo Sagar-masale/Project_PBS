@@ -35,7 +35,7 @@ import TermsAndConditions from './Components/Supports/TermsAndConditions.jsx';
 import Pricing from './Components/Pricing/Pricing.jsx';
 import Privacy_Policy from './Components/Supports/Privacy_Policy.jsx';
 import Customer_Support from './Components/Supports/Customer_Support.jsx';
-
+import Reviews from './Components/ProductReviews/Reviews.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -91,6 +91,7 @@ const App = () => {
         <Route path="/Add-Products" element={<AddProduct/>}/>
         <Route path="/Order-Details" element={<OrderDetail/>}/>
         <Route path="/Bill-Details" element={<OrderBill/>}/>
+        <Route path="/AllReviews" element={<Reviews/>}/>
       </Routes>
         )
         }

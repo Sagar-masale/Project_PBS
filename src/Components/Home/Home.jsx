@@ -16,9 +16,8 @@ import MainPage3rdPhn from '../images/Home3Phn.png';
 
 import MangalSutraImg from '../images/Mangalsutra.jpg';
 import RingImage from '../images/RingImage.jpg';
-import BanglesImg from '../images/Bangles.jpg';
 import PendantImg from '../images/PendantImage.jpg';
-import ChainsImg from '../images/Chains.jpg';
+
 import About from '../About_PBS/About';
 
 
@@ -93,7 +92,8 @@ function Home({
           <img
             src={MainPage}
             alt="MainPage"
-            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+            className="w-full h-auto sm:h-[80vh] lg:h-[90vh] object-contain"
+
           />
         </picture>
       </div>
@@ -101,11 +101,12 @@ function Home({
       {/* Slide 2 */}
       <div className="carousel-item">
         <picture>
-          <source media="(max-width: 500px)" srcSet={MainPage2ndPhn} />
+          <source media="(max-width: 480px)" srcSet={MainPage2ndPhn} />
           <img
             src={MainPage2nd}
             alt="MainPage2"
-            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+            className="w-full h-auto sm:h-[80vh] lg:h-[90vh] object-contain"
+
           />
         </picture>
       </div>
@@ -113,11 +114,12 @@ function Home({
       {/* Slide 3 */}
       <div className="carousel-item">
         <picture>
-          <source media="(max-width: 480px) (height: 300px)" srcSet={MainPage3rdPhn} />
+          <source media="(max-width: 480px)" srcSet={MainPage3rdPhn} />
           <img
             src={MainPage3rd}
-            alt="MainPage3"
-            className="w-full object-cover h-[60vh] sm:h-[80vh] lg:h-[90vh]"
+            alt="MainPage2"
+            className="w-full h-auto sm:h-[80vh] lg:h-[90vh] object-contain"
+
           />
         </picture>
       </div>

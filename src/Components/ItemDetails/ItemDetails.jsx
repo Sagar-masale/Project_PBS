@@ -252,7 +252,7 @@ const sizeWeightMap = {
 };
 const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFinalPrice(product);
 
-// console.log("Producttttt", product);
+console.log("Producttttt", product);
 
 
 if(selectedSize==0){
@@ -268,6 +268,7 @@ if(selectedSize==0){
       <CustomerReviews
         closeReviewBox={() => setShowReviewBox(false)}
         productId={product._id}
+        productImage = {product.ProductImages[0] }
         refreshReviews={fetchReviews}
       />
     </div>

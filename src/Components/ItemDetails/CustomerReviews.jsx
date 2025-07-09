@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FaStar } from 'react-icons/fa';
 import ProfileContext from "../Context/ProfileContext";
 
-const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
+const CustomerReviews = ({ closeReviewBox, productId, productImage, refreshReviews  }) => {
   const { userData } = useContext(ProfileContext);
   
   // Initial state for new review
@@ -15,7 +15,8 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
     reviewRating: 0, 
     reviewComment: '', 
     userId: userData?._id || '',  
-    productId: productId || ''  
+    productId: productId || '' ,
+    productImage: productImage || ''
   });
 
   const currentDate = new Date().toLocaleDateString();
@@ -29,6 +30,7 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
     const reviewData = {
       userId: userData?._id || '',
       productId: productId || '',
+      productImage: productImage || '',
       userName: newReview.userName,
       reviewTitle: newReview.reviewTitle,
       reviewRating: newReview.reviewRating,
@@ -51,7 +53,8 @@ const CustomerReviews = ({ closeReviewBox, productId, refreshReviews  }) => {
         reviewRating: 0, 
         reviewComment: '', 
         userId: userData?._id || '', 
-        productId: productId || '' 
+        productId: productId || '' ,
+        productImage: productImage || ''
       });
   
       closeReviewBox();
