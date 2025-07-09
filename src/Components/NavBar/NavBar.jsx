@@ -320,12 +320,63 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     
       </div>
 
-      <div className="nav-item flex flex-row  justify-center">
-        <span  className="nav-item-name one-itemc cursor-pointer">JEWELLERY</span>
-        <span  className="nav-item-name cursor-pointer">COLLECTIONS</span>
-        <span  className="nav-item-name cursor-pointer">WEDDING</span>
-        <span  className="nav-item-name cursor-pointer">REVIEWS</span>
-        <span  className="nav-item-name cursor-pointer">GIFTING</span>
+      <div className="nav-item flex flex-row justify-center mt-14 sm:mt-20">
+
+        <span
+  className="nav-item-name one-itemc cursor-pointer"
+  onClick={() =>
+    window.scrollTo({
+      top: 600, // Scroll to top
+      behavior: "smooth",
+    })
+  }
+>
+  CATEGORY
+</span>
+
+<span
+  className="nav-item-name cursor-pointer"
+  onClick={() =>
+    window.scrollTo({
+      top: window.innerHeight * 1.5, // 30% of screen
+      behavior: "smooth",
+    })
+  }
+>
+  COLLECTIONS
+</span>
+
+<span
+  className="nav-item-name cursor-pointer"
+  onClick={() =>
+    window.scrollTo({
+      top: window.innerHeight * 2.1, // 60% of screen
+      behavior: "smooth",
+    })
+  }
+>
+  WEDDING
+</span>
+
+<span
+  className="nav-item-name cursor-pointer"
+  onClick={() =>navigate("/AllReviews")}
+>
+  REVIEWS
+</span>
+
+<span
+  className="nav-item-name cursor-pointer"
+  onClick={() =>
+    window.scrollTo({
+      top: window.innerHeight * 1.2, // 120%
+      behavior: "smooth",
+    })
+  }
+>
+  GIFTING
+</span>
+
         <span  onClick={ShowNavMoreSec}  className="nav-item-name  cursor-pointer">MORE</span>
       
 
@@ -350,7 +401,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
   </Link>
 
   <Link
-    to="/wishlist"
+    to="/WishList-Deatils"
     onClick={ShowNavMoreSec}
     className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
   >
@@ -358,14 +409,6 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     <span className="font-medium">Wishlist</span>
   </Link>
 
-  <Link
-    to="/notifications"
-    onClick={ShowNavMoreSec}
-    className="flex items-center gap-2 text-gray-800 hover:text-purple-700 transition-all"
-  >
-    <Bell size={20} />
-    <span className="font-medium">Notifications</span>
-  </Link>
 
   <Link
     to={
