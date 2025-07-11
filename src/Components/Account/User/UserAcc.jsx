@@ -33,7 +33,7 @@ function UserAcc() {
 
   const { userData, setUserData } = useContext(ProfileContext);
 
-  console.log("UserData with order", userData);
+
 
   const { setLogout } = useContext(RegisterContext);
 
@@ -49,7 +49,7 @@ function UserAcc() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setLogout(true);
-    toast.success("You have been logged out successfully.");
+    toast.success("You have been logged out successfully.",{ duration: 2000 });
 
     navigate('/');
   }, 2000);
@@ -87,7 +87,7 @@ const handleCloseEdit = () => {
     }
   
     try {
-      console.log("Fetching orders for IDs:", orderIds);
+
       const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {

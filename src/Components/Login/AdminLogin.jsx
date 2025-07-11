@@ -112,7 +112,7 @@ function AdminLogin() {
         } else if (/^\d{10}$/.test(emailOrPhoneAdmin)) {
           payload.adminPhoneNumber = emailOrPhoneAdmin; // Valid phone number
         } else {
-          toast.error("Please enter a valid email or phone number.");
+          toast.error("Please enter a valid email or phone number.",{ duration: 2000 });
           return;
         }
   
@@ -131,14 +131,14 @@ function AdminLogin() {
           localStorage.setItem("refreshTokenAdmin", refreshToken);
   
           setAccessTokenAdmin(accessToken);
-          toast.success('Admin Loggedin successfull');
+          toast.success('Admin Loggedin successfull',{ duration: 2000 });
 
           window.location.href = "/AdminAcc";
         } else {
-          toast.error(response.data.message);
+          toast.error(response.data.message,{ duration: 2000 });
         }
       } catch (err) {
-        toast.error(err.response?.data?.message || err.message);
+        toast.error(err.response?.data?.message || err.message,{ duration: 2000 });
       } finally {
         // setIsLoading(false); // Stop loading spinner
       }

@@ -58,7 +58,7 @@ const CustomerReviews = ({ closeReviewBox, productId, productImage, refreshRevie
       });
   
       closeReviewBox();
-      toast.success("Review submitted successfully!");
+      toast.success("Review submitted successfully!",{ duration: 2000 });
 
     } catch (error) {
       console.error('Error submitting review:', error);

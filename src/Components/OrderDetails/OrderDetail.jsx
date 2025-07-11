@@ -80,13 +80,13 @@ const handleCancleOrder = async (order) => {
       withCredentials: true,
     });
 
-    toast.success("Order cancelled successfully");
+    toast.success("Order cancelled successfully",{ duration: 2000 });
 
     // ✅ Remove the cancelled order from state
     setOrderData(prev => prev.filter(o => o._id !== order._id));
   } catch (error) {
     console.error(error);
-    toast.error(error.response?.data?.message || "Failed to cancel order");
+    toast.error(error.response?.data?.message || "Failed to cancel order",{ duration: 2000 });
   }
 };
 

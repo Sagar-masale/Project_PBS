@@ -11,7 +11,7 @@ function Pricing_Setting() {
     const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8000/api/v1/admins/set-metal-rate", { gold, silver });
-    toast.success("Metal rates updated");
+    toast.success("Metal rates updated",{ duration: 2000 });
   };
 
   return (

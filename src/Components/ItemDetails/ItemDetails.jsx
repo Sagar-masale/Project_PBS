@@ -47,9 +47,9 @@ function ItemDetails() {
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
-      toast.success("Link copied to clipboard!");
+      toast.success("Link copied to clipboard!",{ duration: 2000 });
     } catch (err) {
-      toast.error("Failed to copy link");
+      toast.error("Failed to copy link",{ duration: 2000 });
     }
     setShowOptions(false);
   };
@@ -158,7 +158,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (!userData && showReviewBox) {
-      toast.error("Please log in to write a review.");
+      toast.error("Please log in to write a review.",{ duration: 2000 });
       setShowReviewBox(false);
     }
   }, [showReviewBox, userData]);
@@ -250,6 +250,22 @@ const sizeWeightMap = {
     "Large": 6
   }
 };
+
+const handleAddToCart = () => {
+  if (!userData?._id) {
+    toast.error("Please log in to add items to your cart.",{ duration: 2000 });
+    navigate("/login");
+    return;
+  }
+
+  addToCart({
+    ...product,
+    selectedWeight: selectedWeight || product.weightInGrams,
+    selectedSize: selectedSize || "Default",
+    finalPrice: priceToDisplay,
+  });
+};
+
 const priceToDisplay = calculatedPrice !== null ? calculatedPrice : calculateFinalPrice(product);
 
 console.log("Producttttt", product);
@@ -549,14 +565,7 @@ if(selectedSize==0){
 
           >
             <div
-              onClick={() =>
-              addToCart({
-                ...product,
-                selectedWeight: selectedWeight || product.weightInGrams,
-                selectedSize: selectedSize || "Default",
-                finalPrice: priceToDisplay // calculatedPrice or fallback
-              })
-            }
+             onClick={handleAddToCart}
 
               className="button-wrapper-AddTo-Cart bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold py-2 px-4 rounded-lg flex items-center"
             >

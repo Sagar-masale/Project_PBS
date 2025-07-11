@@ -25,7 +25,6 @@ function LoginUsingPass({onSwitchToSignup}) {
   
 
   // setProfile Context
-  const {setRegisterErrStatus, setLoginNotify} = useContext(RegisterContext)
   const { userData, setUserData } = useContext(ProfileContext);
   const [isLoading, setIsLoading] = useState(false); 
   const navigate = useNavigate();
@@ -158,7 +157,7 @@ const refreshAccessToken = async () => {
   
         
         setAccessToken(accessToken);
-        toast.success("Login successful!");
+        toast.success("Login successful!", { duration: 2000 });
   
         setEmailOrPhone('');
         setPassword('');
@@ -167,7 +166,7 @@ const refreshAccessToken = async () => {
         navigate('/');
 
       } else {
-        toast.error(response.data.message || 'Login failed. Please try again.');
+        toast.error(response.data.message || 'Login failed. Please try again.',{ duration: 2000 });
         
         
       }
@@ -184,12 +183,12 @@ const refreshAccessToken = async () => {
           setShowForgotText(false);
         }
         
-        toast.error(err.response.data?.message || 'An error occurred');
+        toast.error(err.response.data?.message || 'An error occurred',{ duration: 2000 });
       } else {
         console.error('Unexpected Error:', err.message);
         // alert('An unexpected error occurred. Please try again.');
         CloseLoginBox();
-        toast.error('An unexpected error occurred.');
+        toast.error('An unexpected error occurred.',{ duration: 2000 });
       }
     } finally {
       setIsLoading(false); // Stop the loading spinner regardless of success or failure
