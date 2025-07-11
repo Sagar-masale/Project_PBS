@@ -69,6 +69,8 @@ const OrderDetail = () => {
 
 
 const handleCancleOrder = async (order) => {
+  console.log("Order:", order);
+  
   const confirmDelete = window.confirm("Are you sure you want to cancel this order?");
   if (!confirmDelete) return;
 
@@ -128,7 +130,8 @@ const handleCancleOrder = async (order) => {
                 })}
               </p>
             </div>
-            <div className="flex sm:mt-0 ml-auto gap-2">
+            <div className="flex flex-col-reverse sm:flex-row-reverse sm:mt-0 ml-auto gap-2">
+
               <button
                 onClick={() => handleCancleOrder(order)}
                 disabled={order.orderStatus === "Canceled"}
