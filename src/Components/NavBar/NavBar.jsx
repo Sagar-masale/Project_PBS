@@ -191,7 +191,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     {
       id : 3,
       name: 'DIAMONDS',
-      slug: '/Diamond-Details',
+      slug: '/',
       logo: <Gem />,
       active: true,
     } ,
