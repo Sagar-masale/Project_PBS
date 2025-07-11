@@ -4,7 +4,8 @@ import SuccessMessage from '../Notifications/SuccessMessage';
 import ErrorMessage from '../Notifications/ErrorMessage';
 import NetworkErr from '../Notifications/NetworkErr';
 import SearchBar from '../SearchBar/SearchBar';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import ChatWithUs from '../Chat/ChatWithUs';
 import SliderBarForPhn from './SliderBarForPhn';
 import AdminLogin from '../Login/AdminLogin';
@@ -35,12 +36,27 @@ function NavBar() {
 
   // registerContext
   const {registerStatus, registerErrStatus, networkErrStatus} = useContext(RegisterContext)
-
+  const location = useLocation();
   const [showSuccess, setShowSuccess] = useState(false);
   const [showUnSuccess, setShowUnSuccess] = useState(false);
   const [showNetErrSuccess, setShowNetErrSuccess] = useState(false);
 
-  
+  const scrollToSection = (offsetY) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        window.scrollTo({
+          top: offsetY,
+          behavior: "smooth",
+        });
+      }, 200); // Delay after navigate to ensure DOM is ready
+    } else {
+      window.scrollTo({
+        top: offsetY,
+        behavior: "smooth",
+      });
+    }
+  };
   useEffect(() => {
     if (registerStatus || registerErrStatus || networkErrStatus) {
       const timer = setTimeout(() => {
@@ -213,6 +229,7 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
   };
 
     const handleClick = (item) => {
+
       if (item.id === 2) {
         if (accLogoName) {
           navigate(item.slug);   // Go to user account if logged in
@@ -320,67 +337,49 @@ const [accLogoAdmin, setAccLogoAdmin] = useState('');
     
       </div>
 
-      <div className="nav-item flex flex-row justify-center mt-14 sm:mt-20">
+ <div className="nav-item flex flex-row justify-center mt-14 sm:mt-20">
+      <span
+        className="nav-item-name one-itemc cursor-pointer"
+        onClick={() => scrollToSection(600)}
+      >
+        CATEGORY
+      </span>
 
-        <span
-  className="nav-item-name one-itemc cursor-pointer"
-  onClick={() =>
-    window.scrollTo({
-      top: 600, // Scroll to top
-      behavior: "smooth",
-    })
-  }
->
-  CATEGORY
-</span>
+      <span
+        className="nav-item-name cursor-pointer"
+        onClick={() => scrollToSection(window.innerHeight * 1.5)}
+      >
+        COLLECTIONS
+      </span>
 
-<span
-  className="nav-item-name cursor-pointer"
-  onClick={() =>
-    window.scrollTo({
-      top: window.innerHeight * 1.5, // 30% of screen
-      behavior: "smooth",
-    })
-  }
->
-  COLLECTIONS
-</span>
+      <span
+        className="nav-item-name cursor-pointer"
+        onClick={() => scrollToSection(window.innerHeight * 2.1)}
+      >
+        WEDDING
+      </span>
 
-<span
-  className="nav-item-name cursor-pointer"
-  onClick={() =>
-    window.scrollTo({
-      top: window.innerHeight * 2.1, // 60% of screen
-      behavior: "smooth",
-    })
-  }
->
-  WEDDING
-</span>
+      <span
+        className="nav-item-name cursor-pointer"
+        onClick={() => navigate("/AllReviews")}
+      >
+        REVIEWS
+      </span>
 
-<span
-  className="nav-item-name cursor-pointer"
-  onClick={() =>navigate("/AllReviews")}
->
-  REVIEWS
-</span>
+      <span
+        className="nav-item-name cursor-pointer"
+        onClick={() => scrollToSection(window.innerHeight * 1.2)}
+      >
+        GIFTING
+      </span>
 
-<span
-  className="nav-item-name cursor-pointer"
-  onClick={() =>
-    window.scrollTo({
-      top: window.innerHeight * 1.2, // 120%
-      behavior: "smooth",
-    })
-  }
->
-  GIFTING
-</span>
-
-        <span  onClick={ShowNavMoreSec}  className="nav-item-name  cursor-pointer">MORE</span>
-      
-
-      </div>
+      <span
+        className="nav-item-name cursor-pointer"
+        onClick={ShowNavMoreSec}
+      >
+        MORE
+      </span>
+    </div>
 <div className="input NavMore-Items absolute right-0 z-2 space-y-2">
   <Link
     to="/"

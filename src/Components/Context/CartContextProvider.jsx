@@ -3,7 +3,6 @@ import ProfileContext from "./ProfileContext";
 import CartContext from "./CartContext";
 import toast from 'react-hot-toast';
 import MetalContext from "./MetalRateContext";
-
 const CartContextProvider = ({children}) => {
   const {userData} = useContext(ProfileContext)
   const { metalRates, calculateFinalPrice } = useContext(MetalContext);

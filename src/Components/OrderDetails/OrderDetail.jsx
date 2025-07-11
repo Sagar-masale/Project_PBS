@@ -3,7 +3,7 @@ import axios from "axios";
 import ProfileContext from "../Context/ProfileContext";
 import "./OrderDetail.css"
 import OrderBill from "./OrderBill";
-
+import toast from "react-hot-toast";
 const OrderDetail = () => {
   const { userData, orderData, setOrderData } = useContext(ProfileContext);
   const invoiceContainerRef = useRef(null);
@@ -68,6 +68,27 @@ const OrderDetail = () => {
 };
 
 
+const handleCancleOrder = async (order) => {
+  const confirmDelete = window.confirm("Are you sure you want to cancel this order?");
+  if (!confirmDelete) return;
+
+  try {
+    const response = await axios.delete("http://localhost:8000/api/v1/orders/deleteOrder", {
+      data: { orderId: order._id },
+      withCredentials: true,
+    });
+
+    toast.success("Order cancelled successfully");
+
+    // ✅ Remove the cancelled order from state
+    setOrderData(prev => prev.filter(o => o._id !== order._id));
+  } catch (error) {
+    console.error(error);
+    toast.error(error.response?.data?.message || "Failed to cancel order");
+  }
+};
+
+
  
 
   return (
@@ -107,7 +128,19 @@ const OrderDetail = () => {
                 })}
               </p>
             </div>
-            <div className=" sm:mt-0 ml-auto">
+            <div className="flex sm:mt-0 ml-auto gap-2">
+              <button
+                onClick={() => handleCancleOrder(order)}
+                disabled={order.orderStatus === "Canceled"}
+                className={`text-sm sm:text-base font-medium transition ${
+                  order.orderStatus === "Canceled"
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-[#4f3267] hover:text-[#3e2554] cursor-pointer"
+                }`}
+              >
+                Cancel Order
+              </button>
+
                 <button
                   onClick={() => handleShowInvoice(order)}
                   className="text-sm sm:text-base text-[#4f3267]  font-medium hover:text-[#3e2554] transition"
