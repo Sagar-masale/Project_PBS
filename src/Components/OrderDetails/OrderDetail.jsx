@@ -128,7 +128,8 @@ const handleCancleOrder = async (order) => {
                 })}
               </p>
             </div>
-            <div className="flex sm:mt-0 ml-auto gap-2">
+            <div className="flex flex-col sm:flex-row sm:mt-0 ml-auto gap-2">
+
               <button
                 onClick={() => handleCancleOrder(order)}
                 disabled={order.orderStatus === "Canceled"}
