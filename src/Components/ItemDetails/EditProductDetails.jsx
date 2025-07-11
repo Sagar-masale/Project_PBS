@@ -145,7 +145,7 @@ const sendProductToAllUser = async () => {
     const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
     const users = response.data.data; // Adjust if necessary
 
-    const productUrl = `http://localhost:5173/ItemDetails/${product._id}`;
+    const productUrl = `https://pbsjewellers.vercel.app/ItemDetails/${product._id}`;
 
     const payload = {
       subject: "🆕 New Product Launch at PBS Jewellers!",
