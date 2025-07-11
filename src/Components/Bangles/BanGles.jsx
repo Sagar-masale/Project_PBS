@@ -20,7 +20,7 @@ const Bangles = () => {
         setBangleProductData(response.data.message.bangles);
         setBangles(response.data.message.bangles);
       } catch (error) {
-        console.error("Error fetching bangles data", error);
+        return;
       }
     };
     fetchBanglesData();
@@ -28,7 +28,6 @@ const Bangles = () => {
 
   const GetInfo = (bangle) => {
     setCartItems(bangle);
-    console.log("AddBangleCart", bangle);
     document.querySelector('.CartBox').classList.toggle('CartBox-Show');
   };
 

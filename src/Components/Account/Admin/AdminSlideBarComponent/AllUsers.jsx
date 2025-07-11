@@ -15,12 +15,9 @@ function AllUsers() {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
-        console.log("API Response:", response.data); // Debugging log
-        setUsers(response.data.data || []); // If users are inside a `users` key
-        console.log("before:",users);
+        setUsers(response.data.data || []);
       } catch (error) {
         setError("Error fetching users. Please try again later.");
-        console.error("Error fetching users:", error);
       } finally {
         setLoading(false);
       }
@@ -34,11 +31,7 @@ function AllUsers() {
   }, [adminData]);
   
   
- 
 
-  // console.log("Users", users);
-
-    // Filter users based on searchQuery
     const filteredUsers = Array.isArray(users)
     ? users.filter((user) =>
         user.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -46,7 +39,7 @@ function AllUsers() {
         user.phoneNumber?.includes(searchQuery)
       )
     : [];
-    // console.log("Users Data:", users);
+  
   
   
 
@@ -59,9 +52,9 @@ function AllUsers() {
   };
 
   function formatDate(dateString) {
-    const options = { day: "2-digit", month: "long", year: "numeric" }; // Example: 21 November 2024
+    const options = { day: "2-digit", month: "long", year: "numeric" }; 
     const date = new Date(dateString);
-    return date.toLocaleDateString(undefined, options); // Adjust `undefined` for locale, e.g., "en-US"
+    return date.toLocaleDateString(undefined, options);
   }
   
 
@@ -71,9 +64,9 @@ function AllUsers() {
         <div className="flex MainContainerAdmin min-h-screen text-white">
           <AdminSlideBar />
 
-          {/* Main Content */}
+        
           <div className="flex-1 p-8">
-            {/* Header */}
+      
             <header className="flex justify-end items-center mb-8">
             <h2 className="TopSectionName font-bold text-lg mr-auto">Users : {users.length} </h2>
               <img
@@ -86,7 +79,7 @@ function AllUsers() {
             
             
 
-            {/* Users Table */}
+           
             <div className="pt-6">
               {loading ? (
                 <p>Loading users...</p>

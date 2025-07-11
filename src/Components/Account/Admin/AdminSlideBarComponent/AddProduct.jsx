@@ -6,6 +6,7 @@ import AdminContext from "../../../Context/AdminContext";
 import AdminSlideBar from "../AdminSlideBar";
 import toast from 'react-hot-toast';
 
+
 function AddProduct() {
   const { adminData } = useContext(AdminContext);
   const adminName = adminData?.data?.adminFullName || "Admin";
@@ -44,7 +45,7 @@ function AddProduct() {
     e.preventDefault();
 
     if (isNaN(formData.ProductQty) || formData.weightInGrams <=0 ) {
-      toast.error("Product Weight and Quantity must be valid numbers.");
+      toast.error("Product Weight and Quantity must be valid numbers.",{ duration: 2000 });
       return false;
     }
 
@@ -61,7 +62,7 @@ function AddProduct() {
     data.append("ProductGender", formData.ProductGender);
     data.append("ProductDescription", formData.ProductDescription);
     data.append("adminId", adminData.data._id);
-    console.log('Form Data:', formData);  // Check if ProductGender has a value
+
 
     images.forEach((image) => {
       data.append("ProductImages", image);
@@ -90,7 +91,7 @@ function AddProduct() {
           },
         }
       );
-      toast.success("Product added successfully!");
+      toast.success("Product added successfully!",{ duration: 2000 });
 
       setFormData({
         ProductName: "",
@@ -106,10 +107,10 @@ function AddProduct() {
       setImages([]);
       fileInputRef.current.value = null;
     } catch (error) {
-      console.error("Error adding product:", error.response?.data || error.message);
-      console.log("Error here");
+     
+
       
-      toast.error("Failed to add product. Please try again.");
+      toast.error("Failed to add product. Please try again.",{ duration: 2000 });
     } finally {
       setLoading(false);
     }

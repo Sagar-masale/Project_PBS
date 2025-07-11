@@ -13,21 +13,18 @@ const CartContextProvider = ({children}) => {
   const [cart, setCart] = useState([]);
 
 
-
-          // Load cart from localStorage on component mount
           useEffect(() => {
             if (userData?._id) {
               const storedCart = JSON.parse(localStorage.getItem(`cart_${userData._id}`));
-              setCart(storedCart || []); // Load the cart for the logged-in user or an empty cart
+              setCart(storedCart || []);
             } else {
-              setCart([]); // Clear the cart UI if no user is logged in
+              setCart([]); 
             }
           }, [userData?._id]);
 
-          // Save cart to localStorage whenever it changes
           useEffect(() => {
             if (cart.length > 0) {
-              //localStorage.setItem('cart', JSON.stringify(cart));
+       
               localStorage.setItem(`cart_${userData._id}`, JSON.stringify(cart));
               
             }
@@ -38,7 +35,7 @@ const CartContextProvider = ({children}) => {
           };
           const addToCart = (product) => {
             if (!product || !product._id || !product) {
-                console.error("Invalid product data:", product);
+              
                 return;
             }
         
@@ -47,7 +44,7 @@ const CartContextProvider = ({children}) => {
                 return; 
             }
         
-            toast.success("Item added to your cart successfully!");
+            toast.success("Item added to your cart successfully!",{ duration: 2000 });
         
             const existingProductIndex = cart.findIndex(item => item._id === product._id);
         
@@ -83,14 +80,14 @@ const CartContextProvider = ({children}) => {
       setCart(updatedCart);
       // Update localStorage after removing item
       localStorage.setItem(`cart_${userData._id}`, JSON.stringify(updatedCart));
-      toast.success("Item removed from your cart.");
+      toast.success("Item removed from your cart.",{ duration: 2000 });
     };
     
     const clearCart = () => {
       setCart([]);
       // Clear the cart from localStorage
       localStorage.removeItem(`cart_${userData._id}`);
-      toast.success("All items removed from your cart.");
+      toast.success("All items removed from your cart.",{ duration: 2000 });
     };
     
 const calculateCartSummary = () => {

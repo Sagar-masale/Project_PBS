@@ -28,7 +28,7 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
       });
       setStep(2);
     } catch (error) {
-      console.error('Error requesting OTP:', error);
+    
       toast.dismiss(loadingToastId);
       toast.error(error.response?.data?.message || 'Failed to send OTP.',{
         duration:3000,
@@ -52,7 +52,7 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
       toast.dismiss(VerifyingToastId);
       onResetSuccess();
     } catch (error) {
-      console.error('Error resetting password:', error);
+   
       toast.dismiss(VerifyingToastId);
       toast.error(error.response?.data?.message || 'Failed to reset password.',{
         duration:3000,

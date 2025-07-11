@@ -11,7 +11,7 @@ function Pricing_Setting() {
     const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/admins/set-metal-rate", { gold, silver });
-    toast.success("Metal rates updated");
+    toast.success("Metal rates updated",{ duration: 2000 });
   };
 
   return (
@@ -21,7 +21,7 @@ function Pricing_Setting() {
       🪙 Update Metal Rates
     </h2>
 
-    {/* Current Rates */}
+
     <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6 text-sm text-purple-800 shadow-smdow">
       <p className="mb-2">
         <span className="font-semibold">Current Gold Rate:</span> ₹{metalRates?.gold || 0} /gram
@@ -31,7 +31,7 @@ function Pricing_Setting() {
       </p>
     </div>
 
-    {/* Form */}
+  
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-purple-800 mb-1">

@@ -37,24 +37,24 @@ useEffect(() => {
       const allResults = await Promise.all(fetchPromises);
       const merged = allResults.flat();
       setAllProducts(merged);
-      console.log("✅ All products loaded:", merged.map(p => p.ProductName));
+     
     } catch (error) {
-      console.error("❌ Error loading products:", error);
+     
       setAllProducts([]); // fallback
     }
   };
 
   fetchAllProducts();
 }, []);
-  // Filter logic
+
 useEffect(() => {
   if (searchTerm.trim().length > 0) {
-    const searchWords = searchTerm.toLowerCase().split(/\s+/); // Split by spaces
+    const searchWords = searchTerm.toLowerCase().split(/\s+/); 
 
     const results = allProducts.filter((item) => {
       const name = item?.ProductName?.toLowerCase() || "";
 
-      return searchWords.every((word) => name.includes(word)); // All words must match
+      return searchWords.every((word) => name.includes(word)); 
     });
 
     setFilteredResults(results);

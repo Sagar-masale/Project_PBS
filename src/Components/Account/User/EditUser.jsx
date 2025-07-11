@@ -3,6 +3,7 @@ import axios from 'axios';
 import Loading from '../../PageLoader/Loading';
 import ProfileContext from '../../Context/ProfileContext';
 import EmailAuth from '../../AuthontiCations/EmailAuth';
+import toast from 'react-hot-toast';
 
 import './EditUser.css';
 
@@ -36,7 +37,7 @@ const EditUser = ({onCloseEditComponent}) => {
 
   const userEditeSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Start loading before making the request
+    setIsLoading(true); 
   
     try {
       const response = await axios.put('https://backend-pbs-coo6.onrender.com/api/v1/users/update-User', formData, {
@@ -49,12 +50,13 @@ const EditUser = ({onCloseEditComponent}) => {
         setUserData(response.data.data)
         setIsLoading(false);      // ✅ Stop loading
         setUpdateUserData(true);
-        onCloseEditComponent();   // ✅ Close form right away
+        onCloseEditComponent(); 
+        toast.success("Updated Successfully!",{duration:3000});
       }
       
     } catch (error) {
       setIsLoading(false); // ✅ Stop loading on error
-      console.error('Error updating user:', error.response?.data?.message || error.message);
+     
       alert(error.response?.data?.message || 'Failed to update user');
     }
   };

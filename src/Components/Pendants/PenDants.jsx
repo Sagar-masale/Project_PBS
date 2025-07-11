@@ -20,7 +20,7 @@ const Pendants = () => {
         setPendantProductData(response.data.message.pendants)
         setPendants(response.data.message.pendants);
       } catch (error) {
-        console.error("Error fetching pendant data", error);
+        return;
       }
     };
     fetchPendantData();
@@ -28,7 +28,7 @@ const Pendants = () => {
 
   const GetInfo = (pendant) => {
     setCartItems(pendant);
-    console.log("AddPendantCart", pendant);
+
     document.querySelector('.CartBox').classList.toggle('CartBox-Show');
   };
 

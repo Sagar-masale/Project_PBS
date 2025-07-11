@@ -55,7 +55,7 @@ const handleDelete = async () => {
       data: { id: product._id },
     });
 
-    toast.success(`${productType} deleted successfully`);
+    toast.success(`${productType} deleted successfully`,{ duration: 2000 });
 
     onClose();
     refreshData && refreshData();
@@ -64,11 +64,10 @@ const handleDelete = async () => {
       window.location.reload();
     }, 100);
   } catch (error) {
-    toast.error(`Failed to delete ${productType}`);
+    toast.error(`Failed to delete ${productType}`,{ duration: 2000 });
   }
 };
 
-console.log("Product Data:",productData);
 
   const handleUpdate = async () => {
     try {
@@ -83,7 +82,7 @@ console.log("Product Data:",productData);
 
       const endpoint = endpointMap[productType.toLowerCase()];
       if (!endpoint) {
-        toast.error("Invalid product type");
+        toast.error("Invalid product type",{ duration: 2000 });
         return;
       }
 
@@ -92,7 +91,7 @@ console.log("Product Data:",productData);
         ...productData,
       });
 
-      toast.success(`${productType} updated successfully`);
+      toast.success(`${productType} updated successfully`,{ duration: 2000 });
 
       // Update specific product context
       const updater = (prev) =>
@@ -130,7 +129,7 @@ console.log("Product Data:",productData);
         window.location.reload();
       }, 100);
     } catch (err) {
-      toast.error(`Failed to update ${productType}`);
+      toast.error(`Failed to update ${productType}`,{ duration: 2000 });
     }
   };
 
@@ -143,7 +142,7 @@ const sendProductToAllUser = async () => {
 
   try {
     const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
-    const users = response.data.data; // Adjust if necessary
+    const users = response.data.data; 
 
     const productUrl = `https://pbsjewellers.vercel.app/ItemDetails/${product._id}`;
 
@@ -157,10 +156,10 @@ const sendProductToAllUser = async () => {
     };
 
     await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/admins/send-product-email", payload);
-    toast.success("Product successfully sent to all users!");
+    toast.success("Product successfully sent to all users!",{ duration: 2000 });
   } catch (error) {
-    toast.error("Failed to send product to users.");
-    console.error(error);
+    toast.error("Failed to send product to users.",{ duration: 2000 });
+
   }
 };
 

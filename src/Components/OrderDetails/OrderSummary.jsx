@@ -11,8 +11,8 @@ function OrderSummary() {
 
   const [couponCode, setCouponCode] = useState('');
   const [extraDiscount, setExtraDiscount] = useState(0);
-const [couponAppliedMsg, setCouponAppliedMsg] = useState('');
-const [deliveryCode, setDeliveryCode] = useState("Not Applicable");
+  const [couponAppliedMsg, setCouponAppliedMsg] = useState('');
+  const [deliveryCode, setDeliveryCode] = useState("Not Applicable");
 
 const handleApplyCoupon = () => {
   if (couponCode.trim().toLowerCase() === 'welcomepbs') {
@@ -21,7 +21,7 @@ const handleApplyCoupon = () => {
     setDeliveryCode(randomCode);
     ProductCouponCode(randomCode)
     // Show success toast and message
-    toast.success("Coupon accepted! Will be used on making charges at final billing.");
+    toast.success("Coupon accepted! Will be used on making charges at final billing.",{ duration: 4000 });
     setCouponAppliedMsg(
       "✅ Coupon applied! This discount will be applied on making charges when you collect the product from our store. " +
       "Please remember your delivery verification code below — it will be required at the time of pickup."
@@ -31,7 +31,7 @@ const handleApplyCoupon = () => {
   } else {
     setDeliveryCode(null);
     setCouponAppliedMsg("❌ Invalid coupon code.");
-    toast.error("Invalid coupon code");
+    toast.error("Invalid coupon code",{ duration: 2000 });
   }
 };
 

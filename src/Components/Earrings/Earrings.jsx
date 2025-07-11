@@ -21,7 +21,7 @@ const Earrings = () => {
         setEarringProductData(response.data.message.earrings)
         setEarrings(response.data.message.earrings);
       } catch (error) {
-        console.error("Error fetching earring data", error);
+        return;
       }
     };
     fetchEarringData();
@@ -29,7 +29,6 @@ const Earrings = () => {
 
   const GetInfo = (earring) => {
     setCartItems(earring);
-    console.log("AddEarringCart", earring);
     document.querySelector('.CartBox').classList.toggle('CartBox-Show');
   };
 

@@ -40,7 +40,7 @@ const CustomerReviews = ({ closeReviewBox, productId, productImage, refreshRevie
     try {
       const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/reviews/add-review', reviewData);
   
-      console.log('Review Submitted Successfully:', response.data);
+
   
       if (response.status === 201) {
         refreshReviews(productId);
@@ -58,10 +58,10 @@ const CustomerReviews = ({ closeReviewBox, productId, productImage, refreshRevie
       });
   
       closeReviewBox();
-      toast.success("Review submitted successfully!");
+      toast.success("Review submitted successfully!",{ duration: 2000 });
 
     } catch (error) {
-      console.error('Error submitting review:', error);
+    
       alert('Failed to submit review. Please try again.');
     }
   };

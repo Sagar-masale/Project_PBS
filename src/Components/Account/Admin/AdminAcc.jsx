@@ -15,17 +15,17 @@ function AdminAcc() {
   const productData = [
     { title: "Save Products", value: 500 },
     { title: "Stock Products", value: 153 },
-    { title: "Sale Products", value: 347, price: 620 }, // Example price per unit
+    { title: "Sale Products", value: 347, price: 620 }, 
   ];
   
-  // Ensure values exist, otherwise default to 0
+
   const totalStock = productData.find((item) => item.title === "Stock Products")?.value || 0;
   const totalSales = productData.find((item) => item.title === "Sale Products")?.value || 0;
   const pricePerUnit = productData.find((item) => item.title === "Sale Products")?.price || 0;
   
   const totalRevenue = totalSales * pricePerUnit;
   
-  // Update the cards array dynamically
+ 
   const cards = [
     { title: "Save Products", value: productData.find((item) => item.title === "Save Products")?.value || 0, change: "2.4%", color: "text-green-400" },
     { title: "Stock Products", value: totalStock, change: "-12.6%", color: "text-red-400" },
@@ -89,14 +89,14 @@ function AdminAcc() {
     setSelectedOrder(order);
   
     setUpdatedStatus(order?.orderStatus || "Pending");
-    console.log("Edit::",order)
+ 
   };
 
   const closeEditPopup = () => setSelectedOrder(null);
 
   const confirmUpdate = async () => {
     if (!selectedOrder || !selectedOrder._id) {
-      console.error("Error: No order selected for update.");
+    
       return;
     }
 
@@ -106,7 +106,7 @@ function AdminAcc() {
         orderStatus: updatedStatus,
       });
 
-      console.log("Update Response:", response.data);
+      
 
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
@@ -118,7 +118,7 @@ function AdminAcc() {
 
       closeEditPopup();
     } catch (error) {
-      console.error("Error updating order:", error.response ? error.response.data : error.message);
+     return;
     }
   };
 
@@ -132,7 +132,7 @@ const handleDelete = async (orderId) => {
     });
     setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
   } catch (error) {
-    console.error("Error deleting order:", error.response ? error.response.data : error.message);
+   return;
   }
 };
 
@@ -147,7 +147,7 @@ const handleDelete = async (orderId) => {
       <h2 className="text-3xl font-bold text-purple-800 border-b pb-4 mb-6">Order Details</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Product Details */}
+   
         <div>
           <h3 className="text-xl font-semibold mb-4 text-gray-800">
             Products ({selectedOrder.products.length})
@@ -180,7 +180,7 @@ const handleDelete = async (orderId) => {
           </div>
         </div>
 
-        {/* Customer Info */}
+     
         <div className="bg-purple-50 p-6 rounded-xl border border-purple-200 shadow-sm">
           <h3 className="text-xl font-semibold mb-4 text-purple-900">Customer Details</h3>
           <div className="space-y-2 text-sm text-gray-700">
@@ -196,7 +196,7 @@ const handleDelete = async (orderId) => {
         </div>
       </div>
 
-      {/* Order Summary */}
+    
       <div className="mt-8 bg-gray-100 border border-gray-200 rounded-xl p-6">
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-semibold text-gray-800">Total Amount</h4>
@@ -219,7 +219,7 @@ const handleDelete = async (orderId) => {
         </div>
       </div>
 
-      {/* Actions */}
+      
       <div className="flex justify-end gap-3 mt-6">
         <button
           onClick={closeEditPopup}
@@ -259,7 +259,7 @@ const handleDelete = async (orderId) => {
     </div>
   </header>
 
-  {/* Dashboard Cards */}
+ 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
     {cards.map((card, index) => (
       <div key={index} className="p-4 bg-[#0B1739] shadow rounded-lg">
@@ -270,19 +270,19 @@ const handleDelete = async (orderId) => {
     ))}
   </div>
 
-  {/* Orders Table */}
+  
   <div className="pt-4">
     <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
       <h2 className="text-lg font-semibold text-gray-400">Orders Status</h2>
       <div className="w-full sm:w-64">
         <div className="flex items-center border rounded px-2 py-1 bg-[#0B1739] shadow-sm">
           <span className="material-symbols-outlined text-gray-400">search</span>
-<input
-  onChange={(e) => setSearchQuery(e.target.value)}
-  type="text"
-  placeholder="Search for..."
-  className="w-full pl-2 text-sm text-white bg-transparent border-none outline-none focus:outline-none focus:ring-0"
-/>
+            <input
+              onChange={(e) => setSearchQuery(e.target.value)}
+              type="text"
+              placeholder="Search for..."
+              className="w-full pl-2 text-sm text-white bg-transparent border-none outline-none focus:outline-none focus:ring-0"
+            />
 
         </div>
       </div>

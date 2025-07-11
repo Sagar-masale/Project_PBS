@@ -27,8 +27,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     country: "",
     totalAmount: ProductTotalAmt,
   });
-    console.log("Metal response in check",metalRates);
-  // ✅ Check if profile is complete before showing the form
+   
   useEffect(() => {
     const requiredFields = [
       userData.fullName,
@@ -45,7 +44,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
     );
 
     if (!isProfileComplete) {
-      toast.error("Please complete your profile before placing an order.");
+      toast.error("Please complete your profile before placing an order.",{ duration: 2000 });
       closeCheckout();
       return;
     }
@@ -89,7 +88,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
   };
 
 
-  console.log("Cart Data",cart)
+
   const addOrder = async () => {
     if (!cart.length) throw new Error("Cart is empty");
     await refreshMetalRates();
@@ -107,7 +106,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
         : item.metalType === "silver"
         ? metalRates.silver
         : 0;
-console.log("Cart Product:",item);
+
 
     return {
       productId: item._id,
@@ -131,7 +130,7 @@ console.log("Cart Product:",item);
     );
 
     if (response.data.success) {
-      toast.success("Order placed successfully!");
+      toast.success("Order placed successfully!",{ duration: 2000 });
       clearCouponCode()
      
     } else {
@@ -163,7 +162,7 @@ console.log("Cart Product:",item);
         totalAmount: ProductTotalAmt,
       });
     } catch (err) {
-      toast.error(err.message || "An error occurred. Please try again.");
+      toast.error(err.message || "An error occurred. Please try again.",{ duration: 2000 });
     } finally {
       setIsLoading(false);
     }
@@ -174,7 +173,7 @@ console.log("Cart Product:",item);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  console.log("Form Data",formData);
+
   
   return (
     <div className="font-sans">

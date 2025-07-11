@@ -13,7 +13,7 @@ function Reviews() {
         const res = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/reviews/getAll-reviews");
         setAllReviews(res.data.data || []);
       } catch (error) {
-        console.error("Failed to fetch all reviews:", error);
+        return;
       }
     };
 

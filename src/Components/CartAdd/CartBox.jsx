@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CartContext from '../Context/CartContext';
 import MetalContext from '../Context/MetalRateContext';
-function CartBox({ closeCart }) { // Receive closeCart function as a prop
+function CartBox({ closeCart }) {
   const { addToCart, cartItems } = useContext(CartContext);
   const [hover, setHover] = useState(false);
   const { metalRates, calculateFinalPrice } = useContext(MetalContext);
-  // Initialize current image with the first image in ProductImages or an empty string
+
   const [currentImage, setCurrentImage] = useState(cartItems?.ProductImages?.[0] || '');
 
-  // Update current image whenever cartItems changes
+ 
   useEffect(() => {
     if (cartItems?.ProductImages) {
-      setCurrentImage(cartItems.ProductImages[0]); // Set the first image as default
+      setCurrentImage(cartItems.ProductImages[0]); 
     }
   }, [cartItems]);
 

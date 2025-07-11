@@ -33,7 +33,7 @@ function UserAcc() {
 
   const { userData, setUserData } = useContext(ProfileContext);
 
-  console.log("UserData with order", userData);
+
 
   const { setLogout } = useContext(RegisterContext);
 
@@ -49,7 +49,7 @@ function UserAcc() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setLogout(true);
-    toast.success("You have been logged out successfully.");
+    toast.success("You have been logged out successfully.",{ duration: 2000 });
 
     navigate('/');
   }, 2000);
@@ -82,16 +82,16 @@ const handleCloseEdit = () => {
   }, [userData?.userOrders]);
     const fetchOrdersByIds = async (orderIds) => {
     if (!Array.isArray(orderIds) || orderIds.length === 0) {
-      console.error("Invalid orderIds:", orderIds);
+      
       return;
     }
   
     try {
-      console.log("Fetching orders for IDs:", orderIds);
+
       const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
-      console.error("Error fetching orders:", error.response ? error.response.data : error.message);
+     return;
     }
   };
   

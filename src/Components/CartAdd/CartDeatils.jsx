@@ -38,9 +38,9 @@ function CartDeatils() {
     const expiry = Date.now() + 15 * 24 * 60 * 60 * 1000; // 15 days in ms
     wishlist.push({ ...item, expiry });
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    toast.success("Added to wishlist. It will expire after 15 days.");
+    toast.success("Added to wishlist. It will expire after 15 days.",{ duration: 2000 });
   } else {
-    toast("Item is already in wishlist.");
+    toast("Item is already in wishlist.",{ duration: 2000 });
   }
 };
 
@@ -71,12 +71,12 @@ function CartDeatils() {
     />
   </div>
 
-  {/* Message */}
+
   <h1 className="text-xl sm:text-3xl font-semibold mb-6" style={{ color: '#4f3267' }}>
     YOUR CART IS EMPTY
   </h1>
 
-  {/* Buttons */}
+
   <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center">
     <Link
       to="/"

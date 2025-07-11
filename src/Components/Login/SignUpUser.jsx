@@ -6,6 +6,7 @@ import EmailAuth from "../AuthontiCations/EmailAuth";
 import { Link } from "react-router-dom";
 import {X} from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import {Mail} from 'lucide-react'
 function SignUpUser({onSwitchToLogin}) {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function SignUpUser({onSwitchToLogin}) {
   const [pbsCondition, setPbsCondition] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setRegisterStatus, setRegisterErrStatus, setNetworkErrStatus } = useContext(RegisterContext);
+
 
   const navigate = useNavigate();
 
@@ -44,7 +45,7 @@ function SignUpUser({onSwitchToLogin}) {
       })
       .then((response) => {
         if (response.data.success) {
-          setRegisterStatus(response.data.success);
+          toast.success("Registered Successfully!", { duration: 3000 });
           closeEmailAuthBox();
           onSwitchToLogin();
           navigate('/');
@@ -56,10 +57,10 @@ function SignUpUser({onSwitchToLogin}) {
       .catch((err) => {
         if (err.response) {
           CloseSignUpBox();
-          setRegisterErrStatus(err.response.data.message);
+          toast.error(err.response.data.message, { duration: 3000 });
         } else if (err.request) {
           
-          setNetworkErrStatus(err.request);
+          toast.error(err.request, { duration: 3000 });
         } else {
           alert("An error occurred. Please try again.");
         }

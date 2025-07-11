@@ -4,7 +4,7 @@ import '../Notifications/ErrorMessage.css';
 
 function ErrorMessage() {
   const { registerErrStatus , setRegisterErrStatus } = useContext(RegisterContext);
-  // console.log("Errrr status", registerErrStatus);
+ 
 
   const [errMessage, setErrMessage] = useState('');
   const [showUnSuccess, setShowUnSuccess] = useState(false);

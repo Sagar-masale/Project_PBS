@@ -19,7 +19,7 @@ function SuccessMessage() {
     setLogoutNotify 
   } = useContext(RegisterContext);
 
-  const { updateUserData, setUpdateUserData } = useContext(ProfileContext);
+
   
   const { adminLoginNotify, setAdminLoginNotify, adminLogoutNotify, setAdminLogoutNotify } = useContext(AdminContext);
   
@@ -41,12 +41,6 @@ function SuccessMessage() {
       setNotifyMessage("Thank you for visiting PB Salegoan Jewellers.");
       setShowSuccess(true);
       setLogoutNotify(false); // Reset logoutNotify after showing the message
-    }else if (updateUserData) {
-      setNotifyTitle("Updated Successfully!");
-      setNotifyMessage("Your changes have been saved.");
-      setShowSuccess(true);
-      setRegisterStatus(false);
-      setUpdateUserData(false);
     }else if (adminLoginNotify) {
       setNotifyTitle("Admin Logged In Successfully");
       setNotifyMessage("Welcome back! You are now logged in to the admin panel.");
@@ -75,7 +69,6 @@ function SuccessMessage() {
     setRegisterStatus, 
     setLoginNotify, 
     setLogoutNotify,
-    updateUserData,
     adminLoginNotify,
     adminLogoutNotify
   ]); // Add setters to dependencies

@@ -21,7 +21,7 @@ const Chains = () => {
         setChainProductData(response.data.message.chains);
         setChains(response.data.message.chains);
       } catch (error) {
-        console.error("Error fetching chains data", error);
+        return;
       }
     };
     fetchChainsData();
@@ -29,7 +29,7 @@ const Chains = () => {
 
   const GetInfo = (chain) => {
     setCartItems(chain);
-    console.log("AddChainCart", chain);
+   
     document.querySelector('.CartBox').classList.toggle('CartBox-Show');
   };
 

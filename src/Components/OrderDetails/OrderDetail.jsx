@@ -16,16 +16,16 @@ const OrderDetail = () => {
 
   const fetchOrdersByIds = async (orderIds) => {
     if (!Array.isArray(orderIds) || orderIds.length === 0) {
-      console.error("Invalid orderIds:", orderIds);
+
       return;
     }
   
     try {
-      console.log("Fetching orders for IDs:", orderIds);
+
       const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
-      console.error("Error fetching orders:", error.response ? error.response.data : error.message);
+      return;
     }
   };
   
@@ -69,7 +69,7 @@ const OrderDetail = () => {
 
 
 const handleCancleOrder = async (order) => {
-  console.log("Order:", order);
+
   
   const confirmDelete = window.confirm("Are you sure you want to cancel this order?");
   if (!confirmDelete) return;
@@ -80,13 +80,13 @@ const handleCancleOrder = async (order) => {
       withCredentials: true,
     });
 
-    toast.success("Order cancelled successfully");
+    toast.success("Order cancelled successfully",{ duration: 2000 });
 
     // ✅ Remove the cancelled order from state
     setOrderData(prev => prev.filter(o => o._id !== order._id));
   } catch (error) {
-    console.error(error);
-    toast.error(error.response?.data?.message || "Failed to cancel order");
+
+    toast.error(error.response?.data?.message || "Failed to cancel order",{ duration: 2000 });
   }
 };
 

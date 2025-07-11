@@ -7,15 +7,15 @@ import './CartDetails.css'
 function ClearCartConfirm({ onConfirm, onCancel }) {
     const { clearCart } = useContext(CartContext);
     const [isLoading, setIsLoading] = useState(false); 
-      // Disable scrolling when loading
+      
   useEffect(() => {
     if (isLoading) {
-      document.body.style.overflow = 'hidden'; // Disable scroll
+      document.body.style.overflow = 'hidden'; 
     } else {
-      document.body.style.overflow = ''; // Enable scroll
+      document.body.style.overflow = ''; 
     }
 
-    // Cleanup on unmount
+ 
     return () => {
       document.body.style.overflow = '';
     };
@@ -26,7 +26,7 @@ function ClearCartConfirm({ onConfirm, onCancel }) {
         
         setTimeout(() => {
             clearCart(); 
-        setIsLoading(false);      // Set loading to false after 3 seconds
+        setIsLoading(false); 
 }, 3000);
     }
   return (

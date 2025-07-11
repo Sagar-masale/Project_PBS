@@ -20,7 +20,7 @@ const MangalSutra = () => {
         setMangalSutraProductData(response.data.message.mangalsutras)
         setMangalSutras(response.data.message.mangalsutras);
       } catch (error) {
-        console.error("Error fetching MangalSutra data", error);
+        return;
       }
     };
     fetchMangalSutraData();
@@ -28,7 +28,7 @@ const MangalSutra = () => {
 
   const GetInfo = (mangalSutra) => {
     setCartItems(mangalSutra);
-    console.log("AddMangalSutraCart", mangalSutra);
+ 
     document.querySelector('.CartBox').classList.toggle('CartBox-Show');
   };
 

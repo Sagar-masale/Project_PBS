@@ -15,12 +15,12 @@ import CartDeatils from './Components/CartAdd/CartDeatils.jsx';
 import ItemsInfo from './Components/ItemsInfo/ItemsInfo.jsx';
 import StoreDetails from './Components/StoreDetails/StoreDetails.jsx';
 import UserAcc from './Components/Account/User/UserAcc.jsx'
-// Admin
+
 import AdminAcc from './Components/Account/Admin/AdminAcc.jsx';
 import AllUsers from './Components/Account/Admin/AdminSlideBarComponent/AllUsers.jsx';
 import Pricing_Setting from './Components/Account/Admin/AdminSlideBarComponent/Pricing_Setting.jsx';
 import WishList from './Components/WishList/WishList.jsx';
-import CheckOut from './Components/CheckOut/CheckOut.jsx';
+
 import OrderSummary from './Components/OrderDetails/OrderSummary.jsx';
 import ItemDetails from './Components/ItemDetails/ItemDetails.jsx';
 import AddProduct from './Components/Account/Admin/AdminSlideBarComponent/AddProduct.jsx';
@@ -41,7 +41,7 @@ const App = () => {
   const location = useLocation();
   const [showSignup, setShowSignup] = useState(false);
 
-  // Check if current path is "/login"
+
   const isAuthPage = location.pathname === '/login';
   return (
     <>
@@ -84,7 +84,7 @@ const App = () => {
         <Route path="/Cart-Deatils" element={<CartDeatils />} />
         <Route path="/UserAcc" element={<UserAcc />} />
         <Route path="/AdminAcc" element={<AdminAcc />} />
-        <Route path="/CheckOut" element={<CheckOut />} />
+      
         <Route path="/OrderSummary" element={<OrderSummary />} />
         <Route path="/ItemDetails/:id" element={<ItemDetails />} />
         <Route path="/AllUsers" element={<AllUsers/>}/>

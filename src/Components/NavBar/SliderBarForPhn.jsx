@@ -72,7 +72,7 @@ useEffect(() => {
      localStorage.removeItem("accessToken");
      localStorage.removeItem("refreshToken");
      setLogout(true);
-     toast.success("You have been logged out successfully.");
+     toast.success("You have been logged out successfully.",{ duration: 2000 });
      navigate('/');
    }, 3000);
  
@@ -87,11 +87,11 @@ useEffect(() => {
     { id: 1, name: 'Home', slug: '/', logo: <House />, active: true },
     { id: 2, name: 'Search', slug: '/search', logo: <Search />, active: true },
     { id: 4, name: 'Orders', slug: '/Order-Details', logo: <Package />, active: true },
-    { id: 5, name: 'Wishlist', slug: '/wishlist-details', logo: <Heart />, active: true },
+    { id: 5, name: 'Wishlist', slug: '/WishList-Deatils', logo: <Heart />, active: true },
     { 
       id: 6, 
-      name: 'Settings', 
-      slug: adminData ? '/AdminAcc' : (userData ? '/' : '/login'), 
+      name: 'Reviews', 
+      slug: '/AllReviews', 
       logo: <Settings2 />, 
       active: true },
     { 
@@ -104,9 +104,9 @@ useEffect(() => {
 
   ];
 
-  // console.log('udata',userData);
+
   
-  // Slider toggle
+  
   const toggleClass = (selector, className) => {
     document.querySelector(selector)?.classList.toggle(className);
   };

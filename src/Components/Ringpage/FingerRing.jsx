@@ -29,7 +29,7 @@ const FingerRings=()=>{
         setRingProductData(response.data.message.rings)
         setRings(response.data.message.rings)
       } catch (error) {
-        console.error("error fetching ring data", error)
+        return;
       }
     };
     fetchRingData();

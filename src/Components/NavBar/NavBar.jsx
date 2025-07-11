@@ -32,7 +32,7 @@ function NavBar() {
   useEffect(() => {
        setCartLength(cart.length);
       }, [cart]);
-      // console.log("cartlength",cartLength);
+   
 
   // registerContext
   const {registerStatus, registerErrStatus, networkErrStatus} = useContext(RegisterContext)
@@ -96,10 +96,6 @@ function NavBar() {
     };
   }, []);
   
-  const UserSearch = (e) => {
-    e.preventDefault();
-    // console.log(UserSearchValue);
-  };
 
   const toggleClass = (selector, className) => {
     document.querySelector(selector).classList.toggle(className);
@@ -116,14 +112,14 @@ function NavBar() {
     toggleClass('.AccountShow', 'AccountShowBlock');
   };
   
-  // profileContext User
+
   const {userData} = useContext(ProfileContext);
   
-  // console.log("userData", userData._id);
+
   
   const [accLogoName, setAccLogoName] = useState(''); 
   useEffect(() => {
-    // console.log("userData updated: ", userData);
+
     if (userData && userData.fullName) {
         setAccLogoName(userData.fullName.split(' ')[0]);
     } else {

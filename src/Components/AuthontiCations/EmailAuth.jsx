@@ -32,10 +32,10 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         try {
             const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/send-otp", { email });
             setMessage(response.data.message || `OTP sent to ${email}`);
-            toast.success("OTP sent successfully");
+            toast.success("OTP sent successfully",{ duration: 2000 });
             setStep("verify"); 
         } catch (error) {
-            toast.error("Error sending OTP");
+            toast.error("Error sending OTP",{ duration: 2000 });
             setMessage(error.response?.data?.message || "Error sending OTP");
         } finally {
             setLoading(false);
@@ -53,7 +53,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
             setIsVerified(true);
     
             setTimeout(() => {
-                toast.success("OTP verified successfully!");
+                toast.success("OTP verified successfully!",{ duration: 2000 });
                 setMessage(response.data.message || "OTP verified successfully!");
             }, 2500);
     
@@ -62,16 +62,16 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
             }, 4500);
     
         } catch (error) {
-            setTimeout(() => {  // Delay error message for 2 seconds
-                toast.error("OTP verification failed!");
+            setTimeout(() => {  
+                toast.error("OTP verification failed!",{ duration: 2000 });
                 setMessage(error.response?.data?.message || "OTP verification failed");
-                setLoading(false);  // Stop loading after showing error
+                setLoading(false); 
             }, 2000);
         }
     };
     
 
-    // Wait for animation to complete before proceeding
+
     useEffect(() => {
         if (isVerified && animationCompleted) {
             onOtpVerified();
