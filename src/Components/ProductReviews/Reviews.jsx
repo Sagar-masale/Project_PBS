@@ -10,7 +10,7 @@ function Reviews() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/reviews/getAll-reviews");
+        const res = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/reviews/getAll-reviews");
         setAllReviews(res.data.data || []);
       } catch (error) {
         return;

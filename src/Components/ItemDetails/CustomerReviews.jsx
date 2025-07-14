@@ -38,7 +38,7 @@ const CustomerReviews = ({ closeReviewBox, productId, productImage, refreshRevie
     };
   
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/reviews/add-review', reviewData);
+      const response = await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/reviews/add-review', reviewData);
   
 
   

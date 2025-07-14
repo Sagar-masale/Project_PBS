@@ -30,7 +30,7 @@ useEffect(() => {
   const fetchAllProducts = async () => {
     try {
       const fetchPromises = categoryEndpoints.map(async ({ url, key }) => {
-        const response = await axios.get(`http://localhost:8000/api/v1/products/${url}`);
+        const response = await axios.get(`https://backend-pbs-coo6.onrender.com/api/v1/products/${url}`);
         return response.data.message?.[key] || [];
       });
 

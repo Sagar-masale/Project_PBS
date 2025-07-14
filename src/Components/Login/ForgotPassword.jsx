@@ -19,7 +19,7 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
 
 
     try {
-      await axios.post('http://localhost:8000/api/v1/auth/request-otp', {
+      await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/auth/request-otp', {
         emailOrPhone,
       });
       toast.dismiss(loadingToastId);
@@ -44,7 +44,7 @@ const ForgotPassword = ({ onResetSuccess, closeForgotEmailBox }) => {
     setIsLoading(true);
     const VerifyingToastId = toast.loading('Verifying OTP...');
     try {
-      await axios.post('http://localhost:8000/api/v1/auth/verify-otp-reset-password', {
+      await axios.post('https://backend-pbs-coo6.onrender.com/api/v1/auth/verify-otp-reset-password', {
         emailOrPhone,
         otp,
         newPassword,
