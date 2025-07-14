@@ -30,7 +30,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         setMessage("");
 
         try {
-            const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/send-otp", { email });
+            const response = await axios.post("http://localhost:8000/api/v1/auth/send-otp", { email });
             setMessage(response.data.message || `OTP sent to ${email}`);
             toast.success("OTP sent successfully",{ duration: 2000 });
             setStep("verify"); 
@@ -48,7 +48,7 @@ const EmailAuth = ({ enteredEmail, closeEmailAuth, onOtpVerified, decriptionOfEm
         setMessage("");  // Clear previous messages
     
         try {
-            const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/auth/verify-otp", { email, otp });
+            const response = await axios.post("http://localhost:8000/api/v1/auth/verify-otp", { email, otp });
     
             setIsVerified(true);
     

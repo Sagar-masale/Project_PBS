@@ -10,7 +10,7 @@ function Pricing_Setting() {
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/admins/set-metal-rate", { gold, silver });
+    await axios.post("http://localhost:8000/api/v1/admins/set-metal-rate", { gold, silver });
     toast.success("Metal rates updated",{ duration: 2000 });
   };
 

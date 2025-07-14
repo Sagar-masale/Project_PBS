@@ -86,7 +86,7 @@ useEffect(() => {
   const menuLinks = [
     { id: 1, name: 'Home', slug: '/', logo: <House />, active: true },
     { id: 2, name: 'Search', slug: '/search', logo: <Search />, active: true },
-    { id: 4, name: 'Orders', slug: '/Order-Details', logo: <Package />, active: true },
+    { id: 4, name: 'Orders', slug: userData ? '/Order-Details' : '/login', logo: <Package />, active: true },
     { id: 5, name: 'Wishlist', slug: '/WishList-Deatils', logo: <Heart />, active: true },
     { 
       id: 6, 
@@ -152,7 +152,17 @@ useEffect(() => {
         </div>
 
         {/* User Profile */}
-<Link to={adminData ? '/AdminAcc' : '/UserAcc'} onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}>
+<Link
+  to={
+    adminData
+      ? '/AdminAcc'
+      : userData
+      ? '/UserAcc'
+      : '/login'
+  }
+  onClick={() => toggleClass('#SliderBar', 'Slider-Bar-In')}
+>
+
   <div className="flex items-center pl-2 space-x-4 Profile-Box">
     <CircleUserRound className='rounded-lg w-10 h-9 ml-1' color='#581C87 ' />
 <div>

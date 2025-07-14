@@ -14,7 +14,7 @@ function AllUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
+        const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
         setUsers(response.data.data || []);
       } catch (error) {
         setError("Error fetching users. Please try again later.");

@@ -124,7 +124,7 @@ const CheckOutModel = ({ ProductTotalAmt, closeCheckout }) => {
 };
 
     const response = await axios.post(
-      "https://backend-pbs-coo6.onrender.com/api/v1/orders/add-order",
+      "http://localhost:8000/api/v1/orders/add-order",
       orderData,
       { headers: { "Content-Type": "application/json" } }
     );

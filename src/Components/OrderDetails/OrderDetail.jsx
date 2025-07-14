@@ -22,7 +22,7 @@ const OrderDetail = () => {
   
     try {
 
-      const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
+      const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
       return;
@@ -75,7 +75,7 @@ const handleCancleOrder = async (order) => {
   if (!confirmDelete) return;
 
   try {
-    const response = await axios.delete("https://backend-pbs-coo6.onrender.com/api/v1/orders/deleteOrder", {
+    const response = await axios.delete("http://localhost:8000/api/v1/orders/deleteOrder", {
       data: { orderId: order._id },
       withCredentials: true,
     });

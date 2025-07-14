@@ -46,7 +46,16 @@ const App = () => {
   return (
     <>
     <IntroAnimation />
-    <Toaster position="top-left" />
+    <Toaster
+      position="top-left"
+      toastOptions={{
+      duration: 3000,
+      style: {
+        pointerEvents: 'none',
+      },
+      }}
+/>
+
         <ScrollToTop/>
          {isAuthPage ? (
         showSignup ? (
@@ -83,8 +92,7 @@ const App = () => {
         <Route path="/WishList-Deatils" element={<WishList />} />
         <Route path="/Cart-Deatils" element={<CartDeatils />} />
         <Route path="/UserAcc" element={<UserAcc />} />
-        <Route path="/AdminAcc" element={<AdminAcc />} />
-      
+        <Route path="/AdminAcc" element={<AdminAcc />} /> 
         <Route path="/OrderSummary" element={<OrderSummary />} />
         <Route path="/ItemDetails/:id" element={<ItemDetails />} />
         <Route path="/AllUsers" element={<AllUsers/>}/>

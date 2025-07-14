@@ -10,7 +10,7 @@ import axios from "axios";
 useEffect(() => {
   const fetchRates = async () => {
     try {
-      const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/metal_prise/metal-rate");
+      const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
       setMetalRates(response.data);
     } catch (err) {
       return;
@@ -28,7 +28,7 @@ useEffect(() => {
 
   const refreshMetalRates = async () => {
   try {
-    const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/metal_prise/metal-rate");
+    const response = await axios.get("http://localhost:8000/api/v1/metal_prise/metal-rate");
     setMetalRates(response.data);
   } catch (err) {
     console.error("Failed to refresh rates", err);

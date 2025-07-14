@@ -51,7 +51,7 @@ const handleDelete = async () => {
 
   try {
     const endpoint = `delete-${productType.toLowerCase()}`;
-    await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+    await axios.delete(`http://localhost:8000/api/v1/products/${endpoint}`, {
       data: { id: product._id },
     });
 
@@ -86,7 +86,7 @@ const handleDelete = async () => {
         return;
       }
 
-      await axios.put(`https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}`, {
+      await axios.put(`http://localhost:8000/api/v1/products/${endpoint}`, {
         id: product._id,
         ...productData,
       });
@@ -141,7 +141,7 @@ const sendProductToAllUser = async () => {
   if (!isConfirmed) return;
 
   try {
-    const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/admins/All-Users");
+    const response = await axios.get("http://localhost:8000/api/v1/admins/All-Users");
     const users = response.data.data; 
 
     const productUrl = `https://pbsjewellers.vercel.app/ItemDetails/${product._id}`;
@@ -155,7 +155,7 @@ const sendProductToAllUser = async () => {
       emails: users.map((u) => u.email),
     };
 
-    await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/admins/send-product-email", payload);
+    await axios.post("http://localhost:8000/api/v1/admins/send-product-email", payload);
     toast.success("Product successfully sent to all users!",{ duration: 2000 });
   } catch (error) {
     toast.error("Failed to send product to users.",{ duration: 2000 });

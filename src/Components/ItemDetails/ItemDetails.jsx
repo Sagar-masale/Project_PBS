@@ -99,7 +99,7 @@ useEffect(() => {
       for (const endpoint of endpoints) {
         try {
           const response = await axios.get(
-            `https://backend-pbs-coo6.onrender.com/api/v1/products/${endpoint}?productId=${id}`
+            `http://localhost:8000/api/v1/products/${endpoint}?productId=${id}`
           );
 
          
@@ -132,7 +132,7 @@ useEffect(() => {
     if (!product?._id) return;
     try {
       const response = await axios.get(
-        `https://backend-pbs-coo6.onrender.com/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
+        `http://localhost:8000/api/v1/reviews/get-reviewBy-productId?productId=${product._id}`
       );
       const reviewData = response.data.data;
       setReviews(reviewData);
@@ -159,6 +159,7 @@ useEffect(() => {
   useEffect(() => {
     if (!userData && showReviewBox) {
       toast.error("Please log in to write a review.",{ duration: 2000 });
+      navigate('/login');
       setShowReviewBox(false);
     }
   }, [showReviewBox, userData]);
@@ -174,7 +175,7 @@ useEffect(() => {
 
   const fetchUpdatedProduct = async () => {
     try {
-      const response = await axios.get(`https://backend-pbs-coo6.onrender.com/api/v1/products/get-productBy-id?productId=${product._id}`);
+      const response = await axios.get(`http://localhost:8000/api/v1/products/get-productBy-id?productId=${product._id}`);
       const updatedProduct = response.data.product;
       setCurrentProduct(updatedProduct);
       setCurrentImage(updatedProduct.ProductImages[0]);

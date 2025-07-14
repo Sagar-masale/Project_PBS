@@ -35,7 +35,7 @@ function AdminAcc() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("https://backend-pbs-coo6.onrender.com/api/v1/orders/getAll-orders");
+        const response = await axios.get("http://localhost:8000/api/v1/orders/getAll-orders");
 
         const sortedOrders = (response.data.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   
@@ -101,7 +101,7 @@ function AdminAcc() {
     }
 
     try {
-      const response = await axios.put("https://backend-pbs-coo6.onrender.com/api/v1/orders/updateOrder", {
+      const response = await axios.put("http://localhost:8000/api/v1/orders/updateOrder", {
         orderId: selectedOrder._id,
         orderStatus: updatedStatus,
       });
@@ -127,7 +127,7 @@ const handleDelete = async (orderId) => {
   if (!confirmed) return;
 
   try {
-    await axios.delete(`https://backend-pbs-coo6.onrender.com/api/v1/orders/deleteOrder`, {
+    await axios.delete(`http://localhost:8000/api/v1/orders/deleteOrder`, {
       data: { orderId },
     });
     setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));

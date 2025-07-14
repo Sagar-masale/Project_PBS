@@ -88,7 +88,7 @@ const handleCloseEdit = () => {
   
     try {
 
-      const response = await axios.post("https://backend-pbs-coo6.onrender.com/api/v1/orders/getUser-order", { orderIds });
+      const response = await axios.post("http://localhost:8000/api/v1/orders/getUser-order", { orderIds });
       setOrderData(response.data.data);
     } catch (error) {
      return;
